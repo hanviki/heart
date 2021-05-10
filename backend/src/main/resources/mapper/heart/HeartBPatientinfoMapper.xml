@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBPatientinfoMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBPatientinfo">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="age" property="age"/>
+                    <result column="gender" property="gender"/>
+                    <result column="height" property="height"/>
+                    <result column="weight" property="weight"/>
+                    <result column="province" property="province"/>
+                    <result column="city" property="city"/>
+                    <result column="area" property="area"/>
+                    <result column="address" property="address"/>
+                    <result column="telphone" property="telphone"/>
+                    <result column="in_check" property="inCheck"/>
+                    <result column="to_check" property="toCheck"/>
+                    <result column="pain_pos" property="painPos"/>
+                    <result column="symptoms" property="symptoms"/>
+                    <result column="other_symptoms" property="otherSymptoms"/>
+                    <result column="emergency" property="emergency"/>
+                    <result column="death_cause" property="deathCause"/>
+                    <result column="death_date" property="deathDate"/>
+                    <result column="emergency_note" property="emergencyNote"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, age, gender, height, weight, province, city, area, address, telphone, in_check, to_check, pain_pos, symptoms, other_symptoms, emergency, death_cause, death_date, emergency_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBPatientinfo" parameterType="cc.mrbird.febs.heart.entity.HeartBPatientinfo">
+        update heart_b_patientinfo
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="age != null">age=#{age},</if>
+<if test="gender != null">gender=#{gender},</if>
+<if test="height != null">height=#{height},</if>
+<if test="weight != null">weight=#{weight},</if>
+<if test="province != null">province=#{province},</if>
+<if test="city != null">city=#{city},</if>
+<if test="area != null">area=#{area},</if>
+<if test="address != null">address=#{address},</if>
+<if test="telphone != null">telphone=#{telphone},</if>
+<if test="inCheck != null">in_check=#{inCheck},</if>
+<if test="toCheck != null">to_check=#{toCheck},</if>
+<if test="painPos != null">pain_pos=#{painPos},</if>
+<if test="symptoms != null">symptoms=#{symptoms},</if>
+<if test="otherSymptoms != null">other_symptoms=#{otherSymptoms},</if>
+<if test="emergency != null">emergency=#{emergency},</if>
+<if test="deathCause != null">death_cause=#{deathCause},</if>
+<if test="deathDate != null">death_date=#{deathDate},</if>
+<if test="emergencyNote != null">emergency_note=#{emergencyNote},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

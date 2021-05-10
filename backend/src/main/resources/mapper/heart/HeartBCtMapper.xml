@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBCtMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBCt">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="file_namect" property="fileNamect"/>
+                    <result column="file_pathct" property="filePathct"/>
+                    <result column="ct_zdmdzj" property="ctZdmdzj"/>
+                    <result column="ct_szdmzj" property="ctSzdmzj"/>
+                    <result column="ct_zdmgzj" property="ctZdmgzj"/>
+                    <result column="ct_xszdmzj" property="ctXszdmzj"/>
+                    <result column="ct_xzzdmzj" property="ctXzzdmzj"/>
+                    <result column="ct_xxzdmzj" property="ctXxzdmzj"/>
+                    <result column="ct_fzdmsdzj" property="ctFzdmsdzj"/>
+                    <result column="ct_fzdmxdzj" property="ctFzdmxdzj"/>
+                    <result column="ct_szdmjqzj" property="ctSzdmjqzj"/>
+                    <result column="ct_zdmgjqzj" property="ctZdmgjqzj"/>
+                    <result column="ct_xsjqzj" property="ctXsjqzj"/>
+                    <result column="ct_xzjqzj" property="ctXzjqzj"/>
+                    <result column="ct_xxjqzj" property="ctXxjqzj"/>
+                    <result column="ct_fsjqzj" property="ctFsjqzj"/>
+                    <result column="ct_fxjqzj" property="ctFxjqzj"/>
+                    <result column="ct_zdmjcfwfx" property="ctZdmjcfwfx"/>
+                    <result column="ct_szjcbl" property="ctSzjcbl"/>
+                    <result column="ct_zdmgjqwz" property="ctZdmgjqwz"/>
+                    <result column="ct_zdxdbl" property="ctZdxdbl"/>
+                    <result column="ct_zdxdjqwz" property="ctZdxdjqwz"/>
+                    <result column="ct_fzdmsdbl" property="ctFzdmsdbl"/>
+                    <result column="ct_fzdmjqwz" property="ctFzdmjqwz"/>
+                    <result column="ct_sdmxjcbl" property="ctSdmxjcbl"/>
+                    <result column="ct_sxjqwz" property="ctSxjqwz"/>
+                    <result column="ct_yfpkwz" property="ctYfpkwz"/>
+                    <result column="ct_yfpkdx" property="ctYfpkdx"/>
+                    <result column="ct_qxhzdsyfzxg" property="ctQxhzdsyfzxg"/>
+                    <result column="ct_wqqxqg" property="ctWqqxqg"/>
+                    <result column="ct_jcljfw" property="ctJcljfw"/>
+                    <result column="ct_zdmjctszx" property="ctZdmjctszx"/>
+                    <result column="ct_jqgxqg" property="ctJqgxqg"/>
+                    <result column="ct_note" property="ctNote"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, file_namect, file_pathct, ct_zdmdzj, ct_szdmzj, ct_zdmgzj, ct_xszdmzj, ct_xzzdmzj, ct_xxzdmzj, ct_fzdmsdzj, ct_fzdmxdzj, ct_szdmjqzj, ct_zdmgjqzj, ct_xsjqzj, ct_xzjqzj, ct_xxjqzj, ct_fsjqzj, ct_fxjqzj, ct_zdmjcfwfx, ct_szjcbl, ct_zdmgjqwz, ct_zdxdbl, ct_zdxdjqwz, ct_fzdmsdbl, ct_fzdmjqwz, ct_sdmxjcbl, ct_sxjqwz, ct_yfpkwz, ct_yfpkdx, ct_qxhzdsyfzxg, ct_wqqxqg, ct_jcljfw, ct_zdmjctszx, ct_jqgxqg, ct_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBCt" parameterType="cc.mrbird.febs.heart.entity.HeartBCt">
+        update heart_b_ct
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="fileNamect != null">file_namect=#{fileNamect},</if>
+<if test="filePathct != null">file_pathct=#{filePathct},</if>
+<if test="ctZdmdzj != null">ct_zdmdzj=#{ctZdmdzj},</if>
+<if test="ctSzdmzj != null">ct_szdmzj=#{ctSzdmzj},</if>
+<if test="ctZdmgzj != null">ct_zdmgzj=#{ctZdmgzj},</if>
+<if test="ctXszdmzj != null">ct_xszdmzj=#{ctXszdmzj},</if>
+<if test="ctXzzdmzj != null">ct_xzzdmzj=#{ctXzzdmzj},</if>
+<if test="ctXxzdmzj != null">ct_xxzdmzj=#{ctXxzdmzj},</if>
+<if test="ctFzdmsdzj != null">ct_fzdmsdzj=#{ctFzdmsdzj},</if>
+<if test="ctFzdmxdzj != null">ct_fzdmxdzj=#{ctFzdmxdzj},</if>
+<if test="ctSzdmjqzj != null">ct_szdmjqzj=#{ctSzdmjqzj},</if>
+<if test="ctZdmgjqzj != null">ct_zdmgjqzj=#{ctZdmgjqzj},</if>
+<if test="ctXsjqzj != null">ct_xsjqzj=#{ctXsjqzj},</if>
+<if test="ctXzjqzj != null">ct_xzjqzj=#{ctXzjqzj},</if>
+<if test="ctXxjqzj != null">ct_xxjqzj=#{ctXxjqzj},</if>
+<if test="ctFsjqzj != null">ct_fsjqzj=#{ctFsjqzj},</if>
+<if test="ctFxjqzj != null">ct_fxjqzj=#{ctFxjqzj},</if>
+<if test="ctZdmjcfwfx != null">ct_zdmjcfwfx=#{ctZdmjcfwfx},</if>
+<if test="ctSzjcbl != null">ct_szjcbl=#{ctSzjcbl},</if>
+<if test="ctZdmgjqwz != null">ct_zdmgjqwz=#{ctZdmgjqwz},</if>
+<if test="ctZdxdbl != null">ct_zdxdbl=#{ctZdxdbl},</if>
+<if test="ctZdxdjqwz != null">ct_zdxdjqwz=#{ctZdxdjqwz},</if>
+<if test="ctFzdmsdbl != null">ct_fzdmsdbl=#{ctFzdmsdbl},</if>
+<if test="ctFzdmjqwz != null">ct_fzdmjqwz=#{ctFzdmjqwz},</if>
+<if test="ctSdmxjcbl != null">ct_sdmxjcbl=#{ctSdmxjcbl},</if>
+<if test="ctSxjqwz != null">ct_sxjqwz=#{ctSxjqwz},</if>
+<if test="ctYfpkwz != null">ct_yfpkwz=#{ctYfpkwz},</if>
+<if test="ctYfpkdx != null">ct_yfpkdx=#{ctYfpkdx},</if>
+<if test="ctQxhzdsyfzxg != null">ct_qxhzdsyfzxg=#{ctQxhzdsyfzxg},</if>
+<if test="ctWqqxqg != null">ct_wqqxqg=#{ctWqqxqg},</if>
+<if test="ctJcljfw != null">ct_jcljfw=#{ctJcljfw},</if>
+<if test="ctZdmjctszx != null">ct_zdmjctszx=#{ctZdmjctszx},</if>
+<if test="ctJqgxqg != null">ct_jqgxqg=#{ctJqgxqg},</if>
+<if test="ctNote != null">ct_note=#{ctNote},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

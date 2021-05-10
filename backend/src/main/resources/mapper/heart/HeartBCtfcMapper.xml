@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBCtfcMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBCtfc">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="file_name" property="fileName"/>
+                    <result column="file_url" property="fileUrl"/>
+                    <result column="ct_date" property="ctDate"/>
+                    <result column="zjwdwz_code" property="zjwdwzCode"/>
+                    <result column="dzj" property="dzj"/>
+                    <result column="szmdzj" property="szmdzj"/>
+                    <result column="zdmgzj" property="zdmgzj"/>
+                    <result column="xzdmsdzj" property="xzdmsdzj"/>
+                    <result column="xzdmsdjqxzzj" property="xzdmsdjqxzzj"/>
+                    <result column="xzdmzdzj" property="xzdmzdzj"/>
+                    <result column="xzdmzdjqzj" property="xzdmzdjqzj"/>
+                    <result column="xzdmxdzj" property="xzdmxdzj"/>
+                    <result column="xzdmxdjqzj" property="xzdmxdjqzj"/>
+                    <result column="fzdmsdzj" property="fzdmsdzj"/>
+                    <result column="fzdmsdjqzj" property="fzdmsdjqzj"/>
+                    <result column="fzdmxdzj" property="fzdmxdzj"/>
+                    <result column="fzdmxdjqzj" property="fzdmxdjqzj"/>
+                    <result column="jdwhkl" property="jdwhkl"/>
+                    <result column="ydwhkl" property="ydwhkl"/>
+                    <result column="szzwxz" property="szzwxz"/>
+                    <result column="gbxz" property="gbxz"/>
+                    <result column="jqzg" property="jqzg"/>
+                    <result column="fqqzg" property="fqqzg"/>
+                    <result column="zsmdzg" property="zsmdzg"/>
+                    <result column="ysmdzg" property="ysmdzg"/>
+                    <result column="zkzzg" property="zkzzg"/>
+                    <result column="ykzzg" property="ykzzg"/>
+                    <result column="rgxgycsm" property="rgxgycsm"/>
+                    <result column="dmlykz" property="dmlykz"/>
+                    <result column="zjycsm" property="zjycsm"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, file_name, file_url, ct_date, zjwdwz_code, dzj, szmdzj, zdmgzj, xzdmsdzj, xzdmsdjqxzzj, xzdmzdzj, xzdmzdjqzj, xzdmxdzj, xzdmxdjqzj, fzdmsdzj, fzdmsdjqzj, fzdmxdzj, fzdmxdjqzj, jdwhkl, ydwhkl, szzwxz, gbxz, jqzg, fqqzg, zsmdzg, ysmdzg, zkzzg, ykzzg, rgxgycsm, dmlykz, zjycsm, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBCtfc" parameterType="cc.mrbird.febs.heart.entity.HeartBCtfc">
+        update heart_b_ctfc
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="fileName != null">file_name=#{fileName},</if>
+<if test="fileUrl != null">file_url=#{fileUrl},</if>
+<if test="ctDate != null">ct_date=#{ctDate},</if>
+<if test="zjwdwzCode != null">zjwdwz_code=#{zjwdwzCode},</if>
+<if test="dzj != null">dzj=#{dzj},</if>
+<if test="szmdzj != null">szmdzj=#{szmdzj},</if>
+<if test="zdmgzj != null">zdmgzj=#{zdmgzj},</if>
+<if test="xzdmsdzj != null">xzdmsdzj=#{xzdmsdzj},</if>
+<if test="xzdmsdjqxzzj != null">xzdmsdjqxzzj=#{xzdmsdjqxzzj},</if>
+<if test="xzdmzdzj != null">xzdmzdzj=#{xzdmzdzj},</if>
+<if test="xzdmzdjqzj != null">xzdmzdjqzj=#{xzdmzdjqzj},</if>
+<if test="xzdmxdzj != null">xzdmxdzj=#{xzdmxdzj},</if>
+<if test="xzdmxdjqzj != null">xzdmxdjqzj=#{xzdmxdjqzj},</if>
+<if test="fzdmsdzj != null">fzdmsdzj=#{fzdmsdzj},</if>
+<if test="fzdmsdjqzj != null">fzdmsdjqzj=#{fzdmsdjqzj},</if>
+<if test="fzdmxdzj != null">fzdmxdzj=#{fzdmxdzj},</if>
+<if test="fzdmxdjqzj != null">fzdmxdjqzj=#{fzdmxdjqzj},</if>
+<if test="jdwhkl != null">jdwhkl=#{jdwhkl},</if>
+<if test="ydwhkl != null">ydwhkl=#{ydwhkl},</if>
+<if test="szzwxz != null">szzwxz=#{szzwxz},</if>
+<if test="gbxz != null">gbxz=#{gbxz},</if>
+<if test="jqzg != null">jqzg=#{jqzg},</if>
+<if test="fqqzg != null">fqqzg=#{fqqzg},</if>
+<if test="zsmdzg != null">zsmdzg=#{zsmdzg},</if>
+<if test="ysmdzg != null">ysmdzg=#{ysmdzg},</if>
+<if test="zkzzg != null">zkzzg=#{zkzzg},</if>
+<if test="ykzzg != null">ykzzg=#{ykzzg},</if>
+<if test="rgxgycsm != null">rgxgycsm=#{rgxgycsm},</if>
+<if test="dmlykz != null">dmlykz=#{dmlykz},</if>
+<if test="zjycsm != null">zjycsm=#{zjycsm},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

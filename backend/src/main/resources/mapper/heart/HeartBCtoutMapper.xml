@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBCtoutMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBCtout">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="fct_file_name" property="fctFileName"/>
+                    <result column="fct_file_path" property="fctFilePath"/>
+                    <result column="fct_zjwdwz" property="fctZjwdwz"/>
+                    <result column="fct_dzj" property="fctDzj"/>
+                    <result column="fct_szmdzj" property="fctSzmdzj"/>
+                    <result column="fct_zdmgzj" property="fctZdmgzj"/>
+                    <result column="fct_xzdmsdzj" property="fctXzdmsdzj"/>
+                    <result column="fct_xzdmsdjqxzzj" property="fctXzdmsdjqxzzj"/>
+                    <result column="fct_xzdmzdzj" property="fctXzdmzdzj"/>
+                    <result column="fct_xzdmzdjqzj" property="fctXzdmzdjqzj"/>
+                    <result column="fct_xzdmxdzj" property="fctXzdmxdzj"/>
+                    <result column="fct_xzdmxdjqzj" property="fctXzdmxdjqzj"/>
+                    <result column="fct_fzdmsdzj" property="fctFzdmsdzj"/>
+                    <result column="fct_fzdmsdjqzj" property="fctFzdmsdjqzj"/>
+                    <result column="fct_fzdmxdzj" property="fctFzdmxdzj"/>
+                    <result column="fct_fzdmxdjqzj" property="fctFzdmxdjqzj"/>
+                    <result column="fct_jdwhkl" property="fctJdwhkl"/>
+                    <result column="fct_ydwhkl" property="fctYdwhkl"/>
+                    <result column="fct_szzwxz" property="fctSzzwxz"/>
+                    <result column="fct_gbxz" property="fctGbxz"/>
+                    <result column="fct_jqzg" property="fctJqzg"/>
+                    <result column="fct_fqqzg" property="fctFqqzg"/>
+                    <result column="fct_zsmdzg" property="fctZsmdzg"/>
+                    <result column="fct_ysmdzg" property="fctYsmdzg"/>
+                    <result column="fct_zkzzg" property="fctZkzzg"/>
+                    <result column="fct_ykzzg" property="fctYkzzg"/>
+                    <result column="fct_rgxgycsm" property="fctRgxgycsm"/>
+                    <result column="fct_dmlykz" property="fctDmlykz"/>
+                    <result column="fct_zjycsm" property="fctZjycsm"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, fct_file_name, fct_file_path, fct_zjwdwz, fct_dzj, fct_szmdzj, fct_zdmgzj, fct_xzdmsdzj, fct_xzdmsdjqxzzj, fct_xzdmzdzj, fct_xzdmzdjqzj, fct_xzdmxdzj, fct_xzdmxdjqzj, fct_fzdmsdzj, fct_fzdmsdjqzj, fct_fzdmxdzj, fct_fzdmxdjqzj, fct_jdwhkl, fct_ydwhkl, fct_szzwxz, fct_gbxz, fct_jqzg, fct_fqqzg, fct_zsmdzg, fct_ysmdzg, fct_zkzzg, fct_ykzzg, fct_rgxgycsm, fct_dmlykz, fct_zjycsm, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBCtout" parameterType="cc.mrbird.febs.heart.entity.HeartBCtout">
+        update heart_b_ctout
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="fctFileName != null">fct_file_name=#{fctFileName},</if>
+<if test="fctFilePath != null">fct_file_path=#{fctFilePath},</if>
+<if test="fctZjwdwz != null">fct_zjwdwz=#{fctZjwdwz},</if>
+<if test="fctDzj != null">fct_dzj=#{fctDzj},</if>
+<if test="fctSzmdzj != null">fct_szmdzj=#{fctSzmdzj},</if>
+<if test="fctZdmgzj != null">fct_zdmgzj=#{fctZdmgzj},</if>
+<if test="fctXzdmsdzj != null">fct_xzdmsdzj=#{fctXzdmsdzj},</if>
+<if test="fctXzdmsdjqxzzj != null">fct_xzdmsdjqxzzj=#{fctXzdmsdjqxzzj},</if>
+<if test="fctXzdmzdzj != null">fct_xzdmzdzj=#{fctXzdmzdzj},</if>
+<if test="fctXzdmzdjqzj != null">fct_xzdmzdjqzj=#{fctXzdmzdjqzj},</if>
+<if test="fctXzdmxdzj != null">fct_xzdmxdzj=#{fctXzdmxdzj},</if>
+<if test="fctXzdmxdjqzj != null">fct_xzdmxdjqzj=#{fctXzdmxdjqzj},</if>
+<if test="fctFzdmsdzj != null">fct_fzdmsdzj=#{fctFzdmsdzj},</if>
+<if test="fctFzdmsdjqzj != null">fct_fzdmsdjqzj=#{fctFzdmsdjqzj},</if>
+<if test="fctFzdmxdzj != null">fct_fzdmxdzj=#{fctFzdmxdzj},</if>
+<if test="fctFzdmxdjqzj != null">fct_fzdmxdjqzj=#{fctFzdmxdjqzj},</if>
+<if test="fctJdwhkl != null">fct_jdwhkl=#{fctJdwhkl},</if>
+<if test="fctYdwhkl != null">fct_ydwhkl=#{fctYdwhkl},</if>
+<if test="fctSzzwxz != null">fct_szzwxz=#{fctSzzwxz},</if>
+<if test="fctGbxz != null">fct_gbxz=#{fctGbxz},</if>
+<if test="fctJqzg != null">fct_jqzg=#{fctJqzg},</if>
+<if test="fctFqqzg != null">fct_fqqzg=#{fctFqqzg},</if>
+<if test="fctZsmdzg != null">fct_zsmdzg=#{fctZsmdzg},</if>
+<if test="fctYsmdzg != null">fct_ysmdzg=#{fctYsmdzg},</if>
+<if test="fctZkzzg != null">fct_zkzzg=#{fctZkzzg},</if>
+<if test="fctYkzzg != null">fct_ykzzg=#{fctYkzzg},</if>
+<if test="fctRgxgycsm != null">fct_rgxgycsm=#{fctRgxgycsm},</if>
+<if test="fctDmlykz != null">fct_dmlykz=#{fctDmlykz},</if>
+<if test="fctZjycsm != null">fct_zjycsm=#{fctZjycsm},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

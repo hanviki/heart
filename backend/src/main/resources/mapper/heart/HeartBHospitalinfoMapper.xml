@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBHospitalinfoMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBHospitalinfo">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="zhusu" property="zhusu"/>
+                    <result column="in_hospital" property="inHospital"/>
+                    <result column="out_hospital" property="outHospital"/>
+                    <result column="in_redirect" property="inRedirect"/>
+                    <result column="death_info" property="deathInfo"/>
+                    <result column="swsj" property="swsj"/>
+                    <result column="in_redirectnote" property="inRedirectnote"/>
+                    <result column="jczd" property="jczd"/>
+                    <result column="gxy" property="gxy"/>
+                    <result column="nyha" property="nyha"/>
+                    <result column="tnb" property="tnb"/>
+                    <result column="mfzhz" property="mfzhz"/>
+                    <result column="other" property="other"/>
+                    <result column="zdmbss" property="zdmbss"/>
+                    <result column="qgzh" property="qgzh"/>
+                    <result column="qtzdgy" property="qtzdgy"/>
+                    <result column="sczdgysj" property="sczdgysj"/>
+                    <result column="zdmjbjzs" property="zdmjbjzs"/>
+                    <result column="xy" property="xy"/>
+                    <result column="hj" property="hj"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, zhusu, in_hospital, out_hospital, in_redirect, death_info, swsj, in_redirectnote, jczd, gxy, nyha, tnb, mfzhz, other, zdmbss, qgzh, qtzdgy, sczdgysj, zdmjbjzs, xy, hj, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBHospitalinfo" parameterType="cc.mrbird.febs.heart.entity.HeartBHospitalinfo">
+        update heart_b_hospitalinfo
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="zhusu != null">zhusu=#{zhusu},</if>
+<if test="inHospital != null">in_hospital=#{inHospital},</if>
+<if test="outHospital != null">out_hospital=#{outHospital},</if>
+<if test="inRedirect != null">in_redirect=#{inRedirect},</if>
+<if test="deathInfo != null">death_info=#{deathInfo},</if>
+<if test="swsj != null">swsj=#{swsj},</if>
+<if test="inRedirectnote != null">in_redirectnote=#{inRedirectnote},</if>
+<if test="jczd != null">jczd=#{jczd},</if>
+<if test="gxy != null">gxy=#{gxy},</if>
+<if test="nyha != null">nyha=#{nyha},</if>
+<if test="tnb != null">tnb=#{tnb},</if>
+<if test="mfzhz != null">mfzhz=#{mfzhz},</if>
+<if test="other != null">other=#{other},</if>
+<if test="zdmbss != null">zdmbss=#{zdmbss},</if>
+<if test="qgzh != null">qgzh=#{qgzh},</if>
+<if test="qtzdgy != null">qtzdgy=#{qtzdgy},</if>
+<if test="sczdgysj != null">sczdgysj=#{sczdgysj},</if>
+<if test="zdmjbjzs != null">zdmjbjzs=#{zdmjbjzs},</if>
+<if test="xy != null">xy=#{xy},</if>
+<if test="hj != null">hj=#{hj},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>
