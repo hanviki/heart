@@ -138,7 +138,19 @@ export default {
       loading: false,
       formItemLayout,
       form: this.$form.createForm(this),
-      heartBPatientinfo: {}
+      heartBPatientinfo: {
+         patientInfo: {},
+        checkInfo: {},
+        csInfo: {},
+        hospitalInfo: {},
+        ctInfo: {},
+        outInfo: {},
+        surgicalInfo: {},
+        surAfterInfo: {},
+        fcInfo: [],
+        fcctInfo: [],
+        fchyInfo: [],
+      }
     }
   },
    components: {
@@ -155,12 +167,22 @@ export default {
       this.$emit('close')
     },
     handleSubmit () {
-      this.form.validateFields((err, values) => {
+       this.$refs.patientInfo.form.validateFields((err, values) => {
         if (!err) {
-          let heartBPatientinfo = this.form.getFieldsValue()
-          heartBPatientinfo.id = this.heartBPatientinfo.id
+          this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields()
+          this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields()
+          this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields()
+          this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields()
+          this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields()
+          this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields()
+          this.heartBPatientinfo.surgicalInfo = this.$refs.surgicalInfo.setFields()
+          this.heartBPatientinfo.checkInfo = this.$refs.surAfterInfo.setFields()
+          this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
+          this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
+          this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
+
           this.$put('heartBPatientinfo', {
-            ...heartBPatientinfo
+            data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {
             this.reset()
             this.$emit('success')

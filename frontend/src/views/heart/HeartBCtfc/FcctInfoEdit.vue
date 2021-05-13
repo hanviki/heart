@@ -11,6 +11,7 @@
         :header="index"
         v-for="(item,index) in listCsfc"
         :key="index+1"
+        :forceRender="true"
       >
         <ctfc-info :ref="'fc'+index" :checkInfo="item"></ctfc-info>
       </a-collapse-panel>
@@ -42,13 +43,14 @@ export default {
        })
     },
     setFields () {
-      for (let i = 0; i < this.listFc.length; i++) {
+     let list =[]
+      for (let i = 0; i < this.listCsfc.length; i++) {
           let name= 'fc'+ i
           console.info(name)
          // console.info(this.$refs[name][0])
-        this.listCsfc.push((this.$refs[name])[0].setFields())
+        list.push((this.$refs[name])[0].setFields())
       }
-      return this.listCsfc
+      return list
     },
      setFormValues (listCsfc) {
       let that =this

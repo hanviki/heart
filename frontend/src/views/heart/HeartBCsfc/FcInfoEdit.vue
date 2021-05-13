@@ -11,6 +11,7 @@
         :header="index"
         v-for="(item,index) in listCsfc"
         :key="index+1"
+        :forceRender="true"
       >
         <csfc-info :ref="'fc'+index" :checkInfo="item"></csfc-info>
       </a-collapse-panel>
