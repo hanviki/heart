@@ -1,14 +1,6 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >3. 检验</a-divider>
-      <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >2.3.1、 心梗三项</a-divider>
       <a-form-item label="肌红蛋白">
         <a-input-number
           placeholder="请输入肌红蛋白"
@@ -230,18 +222,22 @@
 </template>
 
 <script>
-import moment from 'moment'
+
 export default {
   data () {
     return {
       loading: false,
       form: this.$form.createForm(this),
       checkInfo: {},
-      baseId: ''
     }
   },
-  mounted () {
-    this.fetch()
+  props: {
+    checkInfo: {
+      default: {}
+    }
+  },
+   mounted () {
+    this.setFormValues(this.checkInfo)
   },
   methods: {
     setFields () {
@@ -255,15 +251,31 @@ export default {
 
         })
       }
-      this.checkInfo.id= this.baseId
       return this.checkInfo
     },
-    
-    fetch () {
-      this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
-        this.baseId = res.data.data
+     setFormValues ({ ...checkInfo }) {
+      let fields = ['ctDate', 'zjwdwzCode', 'dzj', 'szmdzj', 'zdmgzj', 'xzdmsdzj', 'xzdmsdjqxzzj', 'xzdmzdzj', 'xzdmzdjqzj', 'xzdmxdzj', 'xzdmxdjqzj', 'fzdmsdzj', 'fzdmsdjqzj', 'fzdmxdzj', 'fzdmxdjqzj', 'jdwhkl', 'ydwhkl', 'szzwxz', 'gbxz', 'jqzg', 'fqqzg', 'zsmdzg', 'ysmdzg', 'zkzzg', 'ykzzg', 'rgxgycsm', 'dmlykz', 'zjycsm']
+      let fieldDates = []
+      Object.keys(checkInfo).forEach((key) => {
+        if (fields.indexOf(key) !== -1) {
+          this.form.getFieldDecorator(key)
+          let obj = {}
+          if (fieldDates.indexOf(key) !== -1) {
+            if (checkInfo[key] !== '') {
+              obj[key] = moment(checkInfo[key])
+            }
+            else {
+              obj[key] = ''
+            }
+          } else {
+            obj[key] = checkInfo[key]
+          }
+          this.form.setFieldsValue(obj)
+        }
       })
-    }
+      this.baseId = checkInfo.id
+      this.checkInfo = checkInfo
+    },
   }
 }
 </script>

@@ -135,6 +135,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 const pfOptions = [
   '胸部切口感染',
   '肺部感染',
@@ -180,6 +181,28 @@ export default {
       }
       return this.surgicalInfo
     },
+    setFormValues ({ ...checkInfo }) {
+      let fields = ['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz']
+      let fieldDates = ['shsfDeathDate', 'shsfZcgysj', 'shsfXfjbsj']
+      Object.keys(checkInfo).forEach((key) => {
+        if (fields.indexOf(key) !== -1) {
+          this.form.getFieldDecorator(key)
+          let obj = {}
+          if (fieldDates.indexOf(key) !== -1) {
+            if (checkInfo[key] !== '') {
+              obj[key] = moment(checkInfo[key])
+            }
+            else {
+              obj[key] = ''
+            }
+          } else {
+            obj[key] = checkInfo[key]
+          }
+          this.form.setFieldsValue(obj)
+        }
+      })
+      this.surgicalInfo = checkInfo
+    }
   }
 }
 </script>

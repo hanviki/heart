@@ -26,9 +26,19 @@ export default {
   },
   props: {
     baseId: {
-      default: '235432464565365'
+      default: ''
     }
   },
+  watch: {
+     baseId: function () {
+       if(this.baseId!=''){
+            var _this = this;
+            _this.fetch(_this.baseId)
+        }
+     },
+     immediate:true, // watch侦听操作内的函数会立刻被执行
+     deep: true
+ },
   methods: {
     handleRemove (file) {
       const index = this.fileList.indexOf(file)
@@ -90,12 +100,14 @@ export default {
     fetch (baseId) {
       this.fileList=[]
       this.$get('comFile/getAllFiles/' + baseId).then((r) => {
-        let data = r.data
-        this.fileList = [...data]
+        let data = r.data.data
+        console.info(data)
+        if(data!=null) {
+          this.fileList = [...data]
+        }
       })
     },
     cancelAudit () {
-      console.log(this.fileId)
       this.$emit("setFileId", this.fileId, this.fileUrl)
     },
 

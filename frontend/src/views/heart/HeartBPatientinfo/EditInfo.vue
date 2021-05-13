@@ -1,5 +1,14 @@
 <template>
-  <div style="width:100%">
+  <a-drawer
+    title="修改"
+    :maskClosable="false"
+    width="40%"
+    placement="right"
+    :closable="false"
+    @close="onClose"
+    :visible="editVisiable"
+    style="height: calc(100% - 55px);overflow: auto;padding-bottom: 53px;"
+  >
     <a-affix :offset-top="top">
 
       <a-card
@@ -60,7 +69,7 @@
     <div id="checkInfo">
       <check-info ref="checkInfo"></check-info>
     </div>
-    <div id="csInfo">
+    <!-- <div id="csInfo">
       <cs-info ref="csInfo"></cs-info>
     </div>
     <div id="ctInfo">
@@ -77,7 +86,7 @@
       <fc-info ref="fcInfo"></fc-info>
       <fcct-info ref="fcctInfo"></fcct-info>
       <fchy-info ref="fchyInfo"></fchy-info>
-    </div>
+    </div> -->
 
     <div style="position:fixed;bottom:10px;">
       <a-button
@@ -86,22 +95,22 @@
         :loading="loading"
       >提交</a-button>
     </div>
-  </div>
+  </a-drawer>
 </template>
 
 <script>
 
-import PatientInfo from './PatientInfo'
-import HospitalInfo from '../HeartBHospitalinfo/HospitalInfo'
-import CheckInfo from '../HeartBCheck/CheckInfo'
-import CsInfo from '../HeartBCs/CsInfo'
-import CtInfo from '../HeartBCt/CtInfo'
-import OutInfo from '../HeartBCtout/OutInfo'
-import SurgicalInfo from '../HeartBSurgical/SurgicalInfo'
-import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfo'
-import FcInfo from '../HeartBCsfc/FcInfo'
-import FcctInfo from '../HeartBCtfc/FcctInfo'
-import FchyInfo from '../HeartBHyfc/FchyInfo'
+import PatientInfo from './PatientInfoEdit'
+import HospitalInfo from '../HeartBHospitalinfo/HospitalInfoEdit'
+import CheckInfo from '../HeartBCheck/CheckInfoEdit'
+// import CsInfo from '../HeartBCs/CsInfoEdit'
+// import CtInfo from '../HeartBCt/CtInfoEdit'
+// import OutInfo from '../HeartBCtout/OutInfoEdit'
+// import SurgicalInfo from '../HeartBSurgical/SurgicalInfoEdit'
+// import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit'
+// import FcInfo from '../HeartBCsfc/FcInfoEdit'
+// import FcctInfo from '../HeartBCtfc/FcctInfoEdit'
+// import FchyInfo from '../HeartBHyfc/FchyInfoEdit'
 
 
 export default {
@@ -130,12 +139,20 @@ export default {
       baseId: ''
     }
   },
+  props: {
+    editVisiable: {
+      default: false
+    }
+  },
+  onClose () {
+    this.$emit('close')
+  },
   components: {
-    PatientInfo, HospitalInfo, CheckInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
-    , FcctInfo, FchyInfo
+    PatientInfo, HospitalInfo, CheckInfo//, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
+   // , FcctInfo, FchyInfo
   },
   mounted () {
-    this.targetOffset = (window.innerHeight / 2) -20
+    this.targetOffset = (window.innerHeight / 2) + 10
     this.fetch()
   },
   methods: {
@@ -150,15 +167,15 @@ export default {
         if (!err) {
           this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields()
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields()
-          this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields()
-          this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields()
-          this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields()
-          this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields()
-          this.heartBPatientinfo.surgicalInfo = this.$refs.surgicalInfo.setFields()
-          this.heartBPatientinfo.checkInfo = this.$refs.surAfterInfo.setFields()
-          this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
-          this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
-          this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
+          // this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields()
+          // this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields()
+          // this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields()
+          // this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields()
+          // this.heartBPatientinfo.surgicalInfo = this.$refs.surgicalInfo.setFields()
+          // this.heartBPatientinfo.checkInfo = this.$refs.surAfterInfo.setFields()
+          // this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
+          // this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
+          // this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
 
           this.$post('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
@@ -171,9 +188,21 @@ export default {
         }
       })
     },
-    fetch () {
-      this.$get('comFile/getUid').then(res => {
-        this.baseId = res.data.data
+    fetch (fileNo) {
+      this.$get('heartBPatientinfo/all', { fileNo: fileNo }).then(res => {
+        this.heartBPatientinfo = res.data.data
+        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)
+
+        this.$refs.patientInfo.setFormValues(this.heartBPatientinfo.patientInfo)
+        // this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)
+        // this.$refs.ctInfo.setFormValues(this.heartBPatientinfo.ctInfo)
+        // this.$refs.hospitalInfo.setFormValues(this.heartBPatientinfo.hospitalInfo)
+        // this.$refs.outInfo.setFormValues(this.heartBPatientinfo.outInfo)
+        // this.$refs.surgicalInfo.setFormValues(this.heartBPatientinfo.surgicalInfo)
+        // this.$refs.surAfterInfo.setFormValues(this.heartBPatientinfo.checkInfo)
+        // this.$refs.fcInfo.setFormValues(this.heartBPatientinfo.fcInfo)
+        // this.$refs.fcctInfo.setFormValues(this.heartBPatientinfo.fcctInfo)
+        // this.$refs.fchyInfo.setFormValues(this.heartBPatientinfo.fchyInfo)
       })
     }
   }

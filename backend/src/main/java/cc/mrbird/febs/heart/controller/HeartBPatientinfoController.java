@@ -2,6 +2,7 @@ package cc.mrbird.febs.heart.controller;
 
 import cc.mrbird.febs.common.annotation.Log;
 import cc.mrbird.febs.common.controller.BaseController;
+import cc.mrbird.febs.common.domain.FebsResponse;
 import cc.mrbird.febs.common.domain.router.VueRouter;
 import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.domain.QueryRequest;
@@ -15,6 +16,7 @@ import cn.hutool.Hutool;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +76,72 @@ public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPa
         }
 
 
+    @GetMapping("all")
+    public FebsResponse ListAll(QueryRequest request, String fileNo){
+        LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(HeartBPatientinfo::getFileNo,fileNo);
+        HeartBPatientinfo heartBPatientinfo =this.iHeartBPatientinfoService.getOne(queryWrapper);
+
+        LambdaQueryWrapper<HeartBCheck> queryWrapper2=new LambdaQueryWrapper<>();
+        queryWrapper2.eq(HeartBCheck::getFileNo,fileNo);
+        HeartBCheck checkInfo =this.iHeartBCheckService.getOne(queryWrapper2);
+
+        LambdaQueryWrapper<HeartBCs> queryWrapper3=new LambdaQueryWrapper<>();
+        queryWrapper3.eq(HeartBCs::getFileNo,fileNo);
+        HeartBCs csInfo =this.iHeartBCsService.getOne(queryWrapper3);
+
+
+
+        LambdaQueryWrapper<HeartBCt> queryWrapper5=new LambdaQueryWrapper<>();
+        queryWrapper5.eq(HeartBCt::getFileNo,fileNo);
+        HeartBCt ctInfo =this.iHeartBCtService.getOne(queryWrapper5);
+
+        LambdaQueryWrapper<HeartBCtout> queryWrapper6=new LambdaQueryWrapper<>();
+        queryWrapper6.eq(HeartBCtout::getFileNo,fileNo);
+        HeartBCtout ctOutInfo =this.iHeartBCtoutService.getOne(queryWrapper6);
+
+        LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper7=new LambdaQueryWrapper<>();
+        queryWrapper7.eq(HeartBHospitalinfo::getFileNo,fileNo);
+        HeartBHospitalinfo hospitalinfo =this.iHeartBHospitalinfoService.getOne(queryWrapper7);
+
+
+        LambdaQueryWrapper<HeartBSurgicalafter> queryWrapper8=new LambdaQueryWrapper<>();
+        queryWrapper8.eq(HeartBSurgicalafter::getFileNo,fileNo);
+        HeartBSurgicalafter heartBSurgicalafter =this.iHeartBSurgicalafterService.getOne(queryWrapper8);
+
+        LambdaQueryWrapper<HeartBSurgical> queryWrapper9=new LambdaQueryWrapper<>();
+        queryWrapper9.eq(HeartBSurgical::getFileNo,fileNo);
+        HeartBSurgical heartBSurgical =this.iHeartBSurgicalService.getOne(queryWrapper9);
+
+        LambdaQueryWrapper<HeartBCsfc> queryWrapper4=new LambdaQueryWrapper<>();
+        queryWrapper4.eq(HeartBCsfc::getFileNo,fileNo);
+        List<HeartBCsfc> csfcList =this.iHeartBCsfcService.list(queryWrapper4);
+
+
+        LambdaQueryWrapper<HeartBCtfc> queryWrapper10=new LambdaQueryWrapper<>();
+        queryWrapper10.eq(HeartBCtfc::getFileNo,fileNo);
+        List<HeartBCtfc> ctfcList =this.iHeartBCtfcService.list(queryWrapper10);
+
+        LambdaQueryWrapper<HeartBHyfc> queryWrapper11=new LambdaQueryWrapper<>();
+        queryWrapper11.eq(HeartBHyfc::getFileNo,fileNo);
+        List<HeartBHyfc> heartBHyfcList =this.iHeartBHyfcService.list(queryWrapper11);
+
+        CustomHeart heart =new CustomHeart();
+        heart.setCheckInfo(checkInfo);
+        heart.setCsInfo(csInfo);
+        heart.setCtInfo(ctInfo);
+        heart.setFcctInfo(ctfcList);
+        heart.setFcInfo(csfcList);
+        heart.setHospitalInfo(hospitalinfo);
+        heart.setSurAfterInfo(heartBSurgicalafter);
+        heart.setSurgicalInfo(heartBSurgical);
+        heart.setOutInfo(ctOutInfo);
+        heart.setFchyInfo(heartBHyfcList);
+        heart.setPatientInfo(heartBPatientinfo);
+        return new FebsResponse().data(heart);
+    }
+
+
 @Log("新增/按钮")
 @PostMapping
 public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
@@ -82,11 +150,21 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
 
             JSONObject userJson = JSONObject.parseObject(data);
             CustomHeart heart = JSON.toJavaObject(userJson,CustomHeart.class);
+
+
+
             String fileNo ="";
             if(heart!=null){
-
                 if(heart.getPatientInfo()!=null){
                    HeartBPatientinfo heartBPatientinfo=  heart.getPatientInfo();
+
+                    LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
+                    queryWrapper.eq(HeartBPatientinfo::getFileNo,heartBPatientinfo.getFileNo());
+                    int count= this.iHeartBPatientinfoService.count(queryWrapper);
+                    if(count>0){
+                        throw new FebsException("存在重复的档案号,请重新填写档案号");
+                    }
+
                    heartBPatientinfo.setCreateUserId(currentUser.getUserId());
                    heartBPatientinfo.setUsername(currentUser.getUsername());
                     this.iHeartBPatientinfoService.createHeartBPatientinfo(heartBPatientinfo);

@@ -1,10 +1,9 @@
 <template>
   <div>
     <a-form :form="form">
-       <a-divider orientation="left" style="font-size:14px;">4. 超声</a-divider>
+      {{baseId}}
        <muti-uploadFile :baseId="baseId"></muti-uploadFile>
       <a-form-item
-        
         label="AVR"
       >
         <a-input-number
@@ -15,7 +14,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="MVR"
       >
         <a-input-number
@@ -125,33 +123,59 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      checkInfo: {},
+      csfcInfo:{
+              
+        },
       baseId: ''
     }
   },
   mounted () {
-    this.fetch()
+    this.setFormValues(this.checkInfo)
+  },
+  props: {
+    checkInfo: {
+      default: {}
+    }
   },
    components: {MutiUploadFile} ,
   methods: {
     setFields () {
-      let values = this.form.getFieldsValue(['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
+      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
-            this.checkInfo[_key] = values[_key]
+            this.csfcInfo[_key] = values[_key]
           }
 
         })
       }
-       this.checkInfo.id= this.baseId
-      return this.checkInfo
+      this.csfcInfo.id= this.baseId
+      return this.csfcInfo
     },
-    fetch () {
-       this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
-          this.baseId =res.data.data
-       })
-    }
+    setFormValues ({ ...checkInfo }) {
+      let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
+      let fieldDates = []
+      Object.keys(checkInfo).forEach((key) => {
+        if (fields.indexOf(key) !== -1) {
+          this.form.getFieldDecorator(key)
+          let obj = {}
+          if (fieldDates.indexOf(key) !== -1) {
+            if (checkInfo[key] !== '') {
+              obj[key] = moment(checkInfo[key])
+            }
+            else {
+              obj[key] = ''
+            }
+          } else {
+            obj[key] = checkInfo[key]
+          }
+          this.form.setFieldsValue(obj)
+        }
+      })
+      this.baseId = checkInfo.id
+      this.csfcInfo = checkInfo
+    },
+   
   }
 }
 </script>

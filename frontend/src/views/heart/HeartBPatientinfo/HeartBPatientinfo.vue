@@ -187,12 +187,6 @@ export default {
       let { sortedInfo } = this
       sortedInfo = sortedInfo || {}
       return [{
-        title: '主键自增',
-        dataIndex: 'id'
-      }, {
-        title: '用户帐号',
-        dataIndex: 'username'
-      }, {
         title: '病案号',
         dataIndex: 'fileNo'
       }, {
@@ -211,62 +205,14 @@ export default {
         title: '体重',
         dataIndex: 'weight'
       }, {
-        title: '省',
+        title: '省市区',
         dataIndex: 'province'
-      }, {
-        title: '市',
-        dataIndex: 'city'
-      }, {
-        title: '区',
-        dataIndex: 'area'
       }, {
         title: '详细地址',
         dataIndex: 'address'
       }, {
         title: '联系方式',
         dataIndex: 'telphone'
-      }, {
-        title: '入诊日期和时间',
-        dataIndex: 'inCheck'
-      }, {
-        title: '发病-就诊时间',
-        dataIndex: 'toCheck'
-      }, {
-        title: '疼痛部位',
-        dataIndex: 'painPos'
-      }, {
-        title: '症状和体征',
-        dataIndex: 'symptoms'
-      }, {
-        title: '症状和体征',
-        dataIndex: 'otherSymptoms'
-      }, {
-        title: '急诊转归',
-        dataIndex: 'emergency'
-      }, {
-        title: '死亡原因',
-        dataIndex: 'deathCause'
-      }, {
-        title: '死亡时间',
-        dataIndex: 'deathDate'
-      }, {
-        title: '急诊转归备注',
-        dataIndex: 'emergencyNote'
-      }, {
-        title: '是否删除',
-        dataIndex: 'isDeletemark'
-      }, {
-        title: '创建时间',
-        dataIndex: 'createTime'
-      }, {
-        title: '修改时间',
-        dataIndex: 'modifyTime'
-      }, {
-        title: '创建人',
-        dataIndex: 'createUserId'
-      }, {
-        title: '修改人',
-        dataIndex: 'modifyUserId'
       }, {
         title: '操作',
         dataIndex: 'operation',
@@ -309,7 +255,7 @@ export default {
       this.editVisiable = false
     },
     edit (record) {
-      this.$refs.heartBPatientinfoEdit.setFormValues(record)
+      this.$refs.heartBPatientinfoEdit.fetch(record.fileNo)
       this.editVisiable = true
     },
     batchDelete () {

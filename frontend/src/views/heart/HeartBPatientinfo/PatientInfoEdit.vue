@@ -32,7 +32,7 @@
         />
       </a-form-item>
       <a-form-item label="性别">
-       <a-radio-group   v-decorator="['gender',{initialValue: '0'}, {}]">
+       <a-radio-group   v-decorator="['gender',{initialValue: '0'}]">
     <a-radio value="0">
       男
     </a-radio>
@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import moment from 'moment'
  import area from '../../../utils/chinaarea'
 const plainOptions = ['无/No', '胸前/Front chest', '胸背/Behind chest','腰背/Behind low back','腹部/Abdomen'];
 const symptomsOptions = ['下肢活动异常','下肢感觉异常','晕厥','精神状态异常','心包填塞症','心律失常','心肌缺血','肢体缺血','脑卒中','脊髓缺血','内脏缺血','无']
@@ -168,7 +169,37 @@ export default {
       }
       return this.heartBPatientinfo
     },
-  
+  setFormValues ({ ...checkInfo }) {
+      let fields = ['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote']
+      let fieldDates = ['deathDate']
+      Object.keys(checkInfo).forEach((key) => {
+        if (fields.indexOf(key) !== -1) {
+          this.form.getFieldDecorator(key)
+          let obj = {}
+          if (fieldDates.indexOf(key) !== -1) {
+            if (checkInfo[key] !== '' && checkInfo[key]!=null) {
+              obj[key] = moment(checkInfo[key])
+            }
+            else {
+              obj[key] = ''
+            }
+          } else {
+            if(key=='province' || key =='painPos' || key =='symptoms'){
+              obj[key] =JSON.parse(checkInfo[key])
+            }
+            else if(key =='gender'){
+               obj[key] = checkInfo[key]?'1':'0'
+            }
+            else{
+              obj[key] = checkInfo[key]
+            }
+          }
+          this.form.setFieldsValue(obj)
+        }
+      })
+     // this.baseId = checkInfo.id
+      this.heartBPatientinfo = checkInfo
+    }
   }
 }
 </script>

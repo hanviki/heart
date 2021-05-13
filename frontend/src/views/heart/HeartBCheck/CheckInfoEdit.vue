@@ -241,8 +241,9 @@ export default {
     }
   },
   mounted () {
-    this.fetch()
+
   },
+
   methods: {
     setFields () {
       let values = this.form.getFieldsValue(['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt'])
@@ -255,14 +256,31 @@ export default {
 
         })
       }
-      this.checkInfo.id= this.baseId
+      // this.checkInfo.id= this.baseId
       return this.checkInfo
     },
-    
-    fetch () {
-      this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
-        this.baseId = res.data.data
+    setFormValues ({ ...checkInfo }) {
+      let fields = ['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt']
+      let fieldDates = []
+      Object.keys(checkInfo).forEach((key) => {
+        if (fields.indexOf(key) !== -1) {
+          this.form.getFieldDecorator(key)
+          let obj = {}
+          if (fieldDates.indexOf(key) !== -1) {
+            if (checkInfo[key] !== '') {
+              obj[key] = moment(checkInfo[key])
+            }
+            else {
+              obj[key] = ''
+            }
+          } else {
+            obj[key] = checkInfo[key]
+          }
+          this.form.setFieldsValue(obj)
+        }
       })
+      this.baseId = checkInfo.id
+      this.checkInfo = checkInfo
     }
   }
 }
