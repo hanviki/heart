@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import MenuView from '@/views/common/MenuView'
 import PageView from '@/views/common/PageView'
 import LoginView from '@/views/login/Common'
+import MobileLoginView from '@/views/heart/Mobile/Mobile'
+import dataList from '@/views/heart/HeartBPatientinfo/List'
 import EmptyPageView from '@/views/common/EmptyPageView'
 import HomePageView from '@/views/HomePage'
 import db from 'utils/localstorage'
 import request from 'utils/request'
+import store from '../store'
 
 // 全局Router异常处理
 const originalPush = Router.prototype.push
@@ -22,6 +25,16 @@ let constRouter = [
     component: LoginView
   },
   {
+    path: '/heart/info',
+    name: '数据主表',
+    component: dataList
+  },
+  {
+    path: '/mobile/login',
+    name: '手机登录页',
+    component: MobileLoginView
+  },
+  {
     path: '/index',
     name: '首页',
     redirect: '/home'
@@ -32,7 +45,7 @@ let router = new Router({
   routes: constRouter
 })
 
-const whiteList = ['/login']
+const whiteList = ['/login','/mobile/login', '/heart/info']
 
 let asyncRouter
 
@@ -60,7 +73,12 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    next('/login')
+    if(store.state.setting.isMobile){
+    next('/mobile/login')
+    }
+    else {
+      next('/login')
+    }
   }
 })
 

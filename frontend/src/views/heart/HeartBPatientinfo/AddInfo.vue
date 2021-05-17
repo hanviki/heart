@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%">
+  <div style="width:100%;padding-left:5px;">
     <a-affix :offset-top="top">
 
       <a-card
@@ -139,6 +139,20 @@ export default {
     this.fetch()
   },
   methods: {
+    reset () {
+         this.heartBPatientinfo.checkInfo = {}
+          this.heartBPatientinfo.patientInfo = {}
+          this.heartBPatientinfo.csInfo = {}
+          this.heartBPatientinfo.ctInfo = {}
+          this.heartBPatientinfo.hospitalInfo ={}
+          this.heartBPatientinfo.outInfo = {}
+          this.heartBPatientinfo.surgicalInfo = {}
+          this.heartBPatientinfo.checkInfo ={}
+          this.heartBPatientinfo.fcInfo = []
+          this.heartBPatientinfo.fcctInfo = []
+          this.heartBPatientinfo.fchyInfo = []
+
+    },
     onChange (link) {
       console.log('Anchor:OnChange', link);
     },
@@ -164,7 +178,7 @@ export default {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {
             this.reset()
-            this.$emit('success')
+          //  this.$emit('success')  这里跳转到列表页
           }).catch(() => {
             this.loading = false
           })

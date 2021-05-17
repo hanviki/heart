@@ -75,7 +75,14 @@ public void updateHeartBPatientinfo(HeartBPatientinfo heartBPatientinfo){
 @Transactional
 public void deleteHeartBPatientinfos(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+             ) {
+                HeartBPatientinfo heartBPatientinfo =new HeartBPatientinfo();
+                heartBPatientinfo.setId(id);
+                heartBPatientinfo.setIsDeletemark(0);
+                this.baseMapper.updateHeartBPatientinfo(heartBPatientinfo);
+        }
+       // this.baseMapper.deleteBatchIds(list);
         }
 
 

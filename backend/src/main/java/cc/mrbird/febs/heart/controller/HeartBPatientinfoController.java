@@ -72,6 +72,7 @@ public  IHeartBHospitalinfoService iHeartBHospitalinfoService;
 @GetMapping
 @RequiresPermissions("heartBPatientinfo:view")
 public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPatientinfo){
+    heartBPatientinfo.setIsDeletemark(1);
         return getDataTable(this.iHeartBPatientinfoService.findHeartBPatientinfos(request, heartBPatientinfo));
         }
 
@@ -279,6 +280,7 @@ public void updateHeartBPatientinfo(@Valid String  data)throws FebsException{
                     LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
                     queryWrapper.eq(HeartBPatientinfo::getFileNo,heartBPatientinfo.getFileNo());
                     queryWrapper.ne(HeartBPatientinfo::getId,heartBPatientinfo.getId());
+                    queryWrapper.eq(HeartBPatientinfo::getIsDeletemark,1);
                     int count= this.iHeartBPatientinfoService.count(queryWrapper);
                     if(count>0){
                         throw new FebsException("存在重复的档案号,请重新填写档案号");
