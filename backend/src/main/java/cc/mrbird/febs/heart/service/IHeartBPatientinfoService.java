@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 public interface IHeartBPatientinfoService extends IService<HeartBPatientinfo> {
 
         IPage<HeartBPatientinfo> findHeartBPatientinfos(QueryRequest request, HeartBPatientinfo heartBPatientinfo);
+        IPage<HeartBPatientinfo> findHeartBPatientinfosDept(QueryRequest request, HeartBPatientinfo heartBPatientinfo,String userId);
 
         void createHeartBPatientinfo(HeartBPatientinfo heartBPatientinfo);
 

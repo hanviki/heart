@@ -17,7 +17,10 @@
         key="1"
         tab="个人信息"
       >
-        <patient-info ref="patientInfo"></patient-info>
+        <patient-info 
+          ref="patientInfo"
+          @check="checkFileNo"
+        ></patient-info>
       </a-tab-pane>
       <a-tab-pane
         key="2"
@@ -118,6 +121,7 @@ export default {
       formItemLayout,
       activeKey: '1',
       form: this.$form.createForm(this),
+      validateStatus: '',
       heartBPatientinfo: {
         patientInfo: {},
         checkInfo: {},
@@ -173,10 +177,13 @@ export default {
       this.reset()
       this.$emit('close')
     },
+    checkFileNo (validateStatus) {
+      this.validateStatus = validateStatus
+    },
         handleSubmit () {
-      this.$refs.patientInfo.form.validateFields((err, values) => {
-        if (!err) {
-          this.loading = true
+          this.$refs.patientInfo.handlefileNoBlur()
+        this.$refs.patientInfo.form.validateFields((err, values) => {
+        if (!err && this.validateStatus === 'success') {
           this.heartBPatientinfo = {}
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields() // 个人信息
           this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields() // 住院病历资料
@@ -190,10 +197,6 @@ export default {
           this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields() // CT复查1
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields() // 化验复查
 
-          console.log(this.heartBPatientinfo.checkInfo)
-          console.log(this.heartBPatientinfo.ctInfo)
-          console.log(this.heartBPatientinfo.surAfterInfo)
-          console.log(this.heartBPatientinfo.fchyInfo)
           this.$post('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {

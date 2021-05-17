@@ -2,8 +2,13 @@
   <div>
     <a-form :form="form">
       <a-divider orientation="left" style="font-size:14px;">1.个人信息</a-divider>
-      <a-form-item label="病案号">
+      <a-form-item 
+        label="病案号"
+        :validateStatus="validateStatus"
+        :help="help"
+      >
         <a-input
+        @blur="handlefileNoBlur"
           placeholder="请输入病案号"
           v-decorator="['fileNo', {
             rules: [{ required: true, message: '病案号不能为空!' },{
@@ -145,11 +150,14 @@
  import area from '../../../utils/chinaarea'
 const plainOptions = ['无/No', '胸前/Front chest', '胸背/Behind chest','腰背/Behind low back','腹部/Abdomen'];
 const symptomsOptions = ['下肢活动异常','下肢感觉异常','晕厥','精神状态异常','心包填塞症','心律失常','心肌缺血','肢体缺血','脑卒中','脊髓缺血','内脏缺血','无']
+
 export default {
   data () {
     return {
       loading: false,
       form: this.$form.createForm(this),
+      validateStatus: '',
+      help: '',
       heartBPatientinfo: {},
       options: area,
       plainOptions,
@@ -161,6 +169,28 @@ export default {
       this.loading = false
       this.heartBPatientinfo = {}
       this.form.resetFields()
+    },
+    handlefileNoBlur () {
+      let fileno = this.form.getFieldValue("fileNo")
+      fileno = typeof fileno === "undefined" ? "" : fileno.trim()
+      if (fileno.length) {
+          this.validateStatus = "validating"
+          this.$get(`heartBPatientinfo/check/${fileno}`).then(r => {
+            if (r.data) {
+              this.validateStatus = "success"
+              this.help = ""
+              this.$emit('check',this.validateStatus)
+            } else {
+              this.validateStatus = "error"
+              this.help = "抱歉，该病案号已存在"
+        this.$emit('check',this.validateStatus)
+            }
+          })
+      } else {
+        this.validateStatus = "error"
+        this.$emit('check',this.validateStatus)
+        this.help = "病案号不能为空"
+      }
     },
     setFields () {
       let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote'])

@@ -2,8 +2,10 @@
   <div>
     <a-form :form="form">
       <a-divider orientation="left" style="font-size:14px;">1.个人信息</a-divider>
-      <a-form-item label="病案号">
+      <a-form-item label="病案号" :validateStatus="validateStatus"
+        :help="help">
         <a-input
+        @blur="handlefileNoBlur"
           placeholder="请输入病案号"
           v-decorator="['fileNo', {
             rules: [{ required: true, message: '病案号不能为空!' },{
@@ -154,6 +156,8 @@ export default {
       heartBPatientinfo: {},
       options: area,
       plainOptions,
+      validateStatus: '',
+      help: '',
       symptomsOptions
     }
   },
@@ -173,6 +177,28 @@ export default {
        })
       }
       return this.heartBPatientinfo
+    },
+     handlefileNoBlur () {
+      let fileno = this.form.getFieldValue("fileNo")
+      fileno = typeof fileno === "undefined" ? "" : fileno.trim()
+      if (fileno.length) {
+          this.validateStatus = "validating"
+          this.$get(`heartBPatientinfo/check/${fileno}`,{id: this.heartBPatientinfo.id}).then(r => {
+            if (r.data) {
+              this.validateStatus = "success"
+              this.help = ""
+              this.$emit('check',this.validateStatus)
+            } else {
+              this.validateStatus = "error"
+              this.help = "抱歉，该病案号已存在"
+        this.$emit('check',this.validateStatus)
+            }
+          })
+      } else {
+        this.validateStatus = "error"
+        this.$emit('check',this.validateStatus)
+        this.help = "病案号不能为空"
+      }
     },
   setFormValues ({ ...checkInfo }) {
       let fields = ['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote']

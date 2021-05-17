@@ -1,10 +1,10 @@
 <template>
   <a-drawer
-    title="修改"
+    title="查看资料"
     :maskClosable="false"
     width="80%"
     placement="right"
-    :closable="false"
+    :closable="true"
     @close="onClose"
     :visible="editVisiable"
     style="height: calc(100% - 15px);overflow: auto;"
@@ -92,21 +92,6 @@
         <fchy-info ref="fchyInfo"></fchy-info>
       </a-tab-pane> 
     </a-tabs>
-    <div class="drawer-bootom-button">
-      <a-popconfirm
-        title="确定放弃编辑？"
-        @confirm="onClose"
-        okText="确定"
-        cancelText="取消"
-      >
-        <a-button style="margin-right: .8rem">取消</a-button>
-      </a-popconfirm>
-      <a-button
-        @click="handleSubmit"
-        type="primary"
-        :loading="loading"
-      >提交</a-button>
-    </div>
   </a-drawer>
 </template>
 <script>

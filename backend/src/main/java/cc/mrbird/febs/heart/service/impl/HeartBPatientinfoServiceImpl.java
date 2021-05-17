@@ -58,7 +58,32 @@ public IPage<HeartBPatientinfo> findHeartBPatientinfos(QueryRequest request, Hea
         return null;
         }
         }
-
+        @Override
+        public  IPage<HeartBPatientinfo> findHeartBPatientinfosDept(QueryRequest request, HeartBPatientinfo heartBPatientinfo,String userId){
+                try{
+                        LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
+                        queryWrapper.apply("heart_b_patientinfo.username in (SELECT\n" +
+                                "\tA.USERNAME \n" +
+                                "FROM\n" +
+                                "\tt_user A \n" +
+                                "WHERE\n" +
+                                "\tA.DEPT_ID IN ( SELECT B.AreaID FROM scm_b_userandarea B WHERE B.USERID = {0} ) UNION ALL\n" +
+                                "\tSELECT {1} from DUAL)",userId,heartBPatientinfo.getUsername());
+                        if (StringUtils.isNotBlank(heartBPatientinfo.getFileNo())) {
+                                queryWrapper.eq(HeartBPatientinfo::getFileNo, heartBPatientinfo.getFileNo());
+                        }
+                        if (StringUtils.isNotBlank(heartBPatientinfo.getName())) {
+                                queryWrapper.like(HeartBPatientinfo::getName, heartBPatientinfo.getName());
+                        }
+                        queryWrapper.eq(HeartBPatientinfo::getIsDeletemark, 1);//1是未删 0是已删
+                        Page<HeartBPatientinfo> page=new Page<>();
+                        SortUtil.handlePageSort(request,page,true);
+                        return this.page(page,queryWrapper);
+                }catch(Exception e){
+                        log.error("获取字典信息失败" ,e);
+                        return null;
+                }
+        }
 @Override
 @Transactional
 public void createHeartBPatientinfo(HeartBPatientinfo heartBPatientinfo){

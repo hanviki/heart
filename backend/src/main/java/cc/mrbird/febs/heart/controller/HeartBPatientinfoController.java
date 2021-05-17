@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -72,10 +73,27 @@ public  IHeartBHospitalinfoService iHeartBHospitalinfoService;
 @GetMapping
 @RequiresPermissions("heartBPatientinfo:view")
 public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPatientinfo){
+    User currentUser= FebsUtil.getCurrentUser();
+    heartBPatientinfo.setUsername(currentUser.getUsername());
         return getDataTable(this.iHeartBPatientinfoService.findHeartBPatientinfos(request, heartBPatientinfo));
         }
+    @GetMapping("dept")
+    public Map<String, Object> ListDept(QueryRequest request, HeartBPatientinfo heartBPatientinfo){
+        User currentUser= FebsUtil.getCurrentUser();
+        heartBPatientinfo.setUsername(currentUser.getUsername());
+        return getDataTable(this.iHeartBPatientinfoService.findHeartBPatientinfosDept(request, heartBPatientinfo,currentUser.getUserId().toString()));
+    }
 
-
+    @GetMapping("check/{fileno}")
+    public boolean checkfileNo(@NotBlank(message = "{required}") @PathVariable String fileno ,String id) {
+        LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(HeartBPatientinfo::getFileNo,fileno);
+        if(StringUtils.isNotBlank(id)){
+            queryWrapper.ne(HeartBPatientinfo::getId,id);
+        }
+        int count= this.iHeartBPatientinfoService.count(queryWrapper);
+        return count == 0 ? true : false;
+    }
     @GetMapping("all")
     public FebsResponse ListAll(QueryRequest request, String fileNo){
         LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
