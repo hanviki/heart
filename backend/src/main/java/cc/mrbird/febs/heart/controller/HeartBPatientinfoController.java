@@ -72,7 +72,6 @@ public  IHeartBHospitalinfoService iHeartBHospitalinfoService;
 @GetMapping
 @RequiresPermissions("heartBPatientinfo:view")
 public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPatientinfo){
-    heartBPatientinfo.setIsDeletemark(1);
         return getDataTable(this.iHeartBPatientinfoService.findHeartBPatientinfos(request, heartBPatientinfo));
         }
 
@@ -81,50 +80,61 @@ public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPa
     public FebsResponse ListAll(QueryRequest request, String fileNo){
         LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
         queryWrapper.eq(HeartBPatientinfo::getFileNo,fileNo);
+        queryWrapper.eq(HeartBPatientinfo::getIsDeletemark,1);
         HeartBPatientinfo heartBPatientinfo =this.iHeartBPatientinfoService.getOne(queryWrapper);
 
         LambdaQueryWrapper<HeartBCheck> queryWrapper2=new LambdaQueryWrapper<>();
         queryWrapper2.eq(HeartBCheck::getFileNo,fileNo);
+        queryWrapper2.eq(HeartBCheck::getIsDeletemark,1);
         HeartBCheck checkInfo =this.iHeartBCheckService.getOne(queryWrapper2);
 
         LambdaQueryWrapper<HeartBCs> queryWrapper3=new LambdaQueryWrapper<>();
+        queryWrapper3.eq(HeartBCs::getIsDeletemark,1);
         queryWrapper3.eq(HeartBCs::getFileNo,fileNo);
         HeartBCs csInfo =this.iHeartBCsService.getOne(queryWrapper3);
 
 
 
         LambdaQueryWrapper<HeartBCt> queryWrapper5=new LambdaQueryWrapper<>();
+        queryWrapper5.eq(HeartBCt::getIsDeletemark,1);
         queryWrapper5.eq(HeartBCt::getFileNo,fileNo);
         HeartBCt ctInfo =this.iHeartBCtService.getOne(queryWrapper5);
 
         LambdaQueryWrapper<HeartBCtout> queryWrapper6=new LambdaQueryWrapper<>();
         queryWrapper6.eq(HeartBCtout::getFileNo,fileNo);
+        queryWrapper6.eq(HeartBCtout::getIsDeletemark,1);
         HeartBCtout ctOutInfo =this.iHeartBCtoutService.getOne(queryWrapper6);
 
         LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper7=new LambdaQueryWrapper<>();
         queryWrapper7.eq(HeartBHospitalinfo::getFileNo,fileNo);
+        queryWrapper7.eq(HeartBHospitalinfo::getIsDeletemark,1);
         HeartBHospitalinfo hospitalinfo =this.iHeartBHospitalinfoService.getOne(queryWrapper7);
 
 
         LambdaQueryWrapper<HeartBSurgicalafter> queryWrapper8=new LambdaQueryWrapper<>();
         queryWrapper8.eq(HeartBSurgicalafter::getFileNo,fileNo);
+        queryWrapper8.eq(HeartBSurgicalafter::getIsDeletemark,1);
         HeartBSurgicalafter heartBSurgicalafter =this.iHeartBSurgicalafterService.getOne(queryWrapper8);
 
         LambdaQueryWrapper<HeartBSurgical> queryWrapper9=new LambdaQueryWrapper<>();
         queryWrapper9.eq(HeartBSurgical::getFileNo,fileNo);
+        queryWrapper9.eq(HeartBSurgical::getIsDeletemark,1);
         HeartBSurgical heartBSurgical =this.iHeartBSurgicalService.getOne(queryWrapper9);
 
         LambdaQueryWrapper<HeartBCsfc> queryWrapper4=new LambdaQueryWrapper<>();
         queryWrapper4.eq(HeartBCsfc::getFileNo,fileNo);
+        queryWrapper4.eq(HeartBCsfc::getIsDeletemark,1);
         List<HeartBCsfc> csfcList =this.iHeartBCsfcService.list(queryWrapper4);
 
 
         LambdaQueryWrapper<HeartBCtfc> queryWrapper10=new LambdaQueryWrapper<>();
         queryWrapper10.eq(HeartBCtfc::getFileNo,fileNo);
+        queryWrapper10.eq(HeartBCtfc::getIsDeletemark,1);
         List<HeartBCtfc> ctfcList =this.iHeartBCtfcService.list(queryWrapper10);
 
         LambdaQueryWrapper<HeartBHyfc> queryWrapper11=new LambdaQueryWrapper<>();
         queryWrapper11.eq(HeartBHyfc::getFileNo,fileNo);
+        queryWrapper11.eq(HeartBHyfc::getIsDeletemark,1);
         List<HeartBHyfc> heartBHyfcList =this.iHeartBHyfcService.list(queryWrapper11);
 
         CustomHeart heart =new CustomHeart();
@@ -139,6 +149,7 @@ public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPa
         heart.setOutInfo(ctOutInfo);
         heart.setFchyInfo(heartBHyfcList);
         heart.setPatientInfo(heartBPatientinfo);
+
         return new FebsResponse().data(heart);
     }
 
@@ -152,9 +163,8 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
             JSONObject userJson = JSONObject.parseObject(data);
             CustomHeart heart = JSON.toJavaObject(userJson,CustomHeart.class);
 
-
-
             String fileNo ="";
+            String name ="";
             if(heart!=null){
                 if(heart.getPatientInfo()!=null){
                    HeartBPatientinfo heartBPatientinfo=  heart.getPatientInfo();
@@ -170,12 +180,14 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                    heartBPatientinfo.setUsername(currentUser.getUsername());
                     this.iHeartBPatientinfoService.createHeartBPatientinfo(heartBPatientinfo);
                     fileNo= heartBPatientinfo.getFileNo();
+                    name = heartBPatientinfo.getName();
                 }
                 if(heart.getCheckInfo()!=null){
                     HeartBCheck check= heart.getCheckInfo();
                     check.setCreateUserId(currentUser.getUserId());
                     check.setUsername(currentUser.getUsername());
                     check.setFileNo(fileNo);
+                    check.setName(name);
                     this.iHeartBCheckService.createHeartBCheck(check);
                 }
                 if(heart.getCsInfo()!=null){
@@ -183,12 +195,15 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                     heartBCs.setCreateUserId(currentUser.getUserId());
                     heartBCs.setUsername(currentUser.getUsername());
                     heartBCs.setFileNo(fileNo);
+                    heartBCs.setName(name);
                     this.iHeartBCsService.createHeartBCs(heartBCs);
                 }
                 if(heart.getCtInfo()!=null){
                     HeartBCt heartBCt= heart.getCtInfo();
                     heartBCt.setCreateUserId(currentUser.getUserId());
                     heartBCt.setUsername(currentUser.getUsername());
+                    heartBCt.setFileNo(fileNo);
+                    heartBCt.setName(name);
                     this.iHeartBCtService.createHeartBCt(heartBCt);
                 }
                 if(heart.getHospitalInfo()!=null){
@@ -196,6 +211,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                     heartBHospitalinfo.setCreateUserId(currentUser.getUserId());
                     heartBHospitalinfo.setUsername(currentUser.getUsername());
                     heartBHospitalinfo.setFileNo(fileNo);
+                    heartBHospitalinfo.setName(name);
                     this.iHeartBHospitalinfoService.createHeartBHospitalinfo(heartBHospitalinfo);
                 }
                 if(heart.getOutInfo()!=null){
@@ -203,6 +219,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                     heartBCtout.setCreateUserId(currentUser.getUserId());
                     heartBCtout.setUsername(currentUser.getUsername());
                     heartBCtout.setFileNo(fileNo);
+                    heartBCtout.setName(name);
                     this.iHeartBCtoutService.createHeartBCtout(heartBCtout);
                 }
                 if(heart.getSurAfterInfo()!=null){
@@ -210,6 +227,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                     heartBSurgicalafter.setCreateUserId(currentUser.getUserId());
                     heartBSurgicalafter.setUsername(currentUser.getUsername());
                     heartBSurgicalafter.setFileNo(fileNo);
+                    heartBSurgicalafter.setName(name);
                     this.iHeartBSurgicalafterService.createHeartBSurgicalafter(heartBSurgicalafter);
                 }
                 if(heart.getSurgicalInfo()!=null){
@@ -217,6 +235,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                     heartBSurgical.setCreateUserId(currentUser.getUserId());
                     heartBSurgical.setUsername(currentUser.getUsername());
                     heartBSurgical.setFileNo(fileNo);
+                    heartBSurgical.setName(name);
                     this.iHeartBSurgicalService.createHeartBSurgical(heartBSurgical);
                 }
                 if(heart.getFcctInfo()!=null){
@@ -226,6 +245,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                         item.setCreateUserId(currentUser.getUserId());
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
+                        item.setName(name);
                         this.iHeartBCtfcService.createHeartBCtfc(item);
                     }
 
@@ -237,6 +257,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                         item.setCreateUserId(currentUser.getUserId());
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
+                        item.setName(name);
                         this.iHeartBHyfcService.createHeartBHyfc(item);
                     }
 
@@ -248,6 +269,7 @@ public void addHeartBPatientinfo(@Valid String  data)throws FebsException{
                         item.setCreateUserId(currentUser.getUserId());
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
+                        item.setName(name);
                         this.iHeartBCsfcService.createHeartBCsfc(item);
                     }
 
@@ -280,7 +302,6 @@ public void updateHeartBPatientinfo(@Valid String  data)throws FebsException{
                     LambdaQueryWrapper<HeartBPatientinfo> queryWrapper=new LambdaQueryWrapper<>();
                     queryWrapper.eq(HeartBPatientinfo::getFileNo,heartBPatientinfo.getFileNo());
                     queryWrapper.ne(HeartBPatientinfo::getId,heartBPatientinfo.getId());
-                    queryWrapper.eq(HeartBPatientinfo::getIsDeletemark,1);
                     int count= this.iHeartBPatientinfoService.count(queryWrapper);
                     if(count>0){
                         throw new FebsException("存在重复的档案号,请重新填写档案号");
@@ -479,7 +500,6 @@ public void updateHeartBPatientinfo(@Valid String  data)throws FebsException{
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBPatientinfo:delete")
 public void deleteHeartBPatientinfos(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

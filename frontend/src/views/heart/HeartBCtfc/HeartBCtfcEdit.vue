@@ -238,6 +238,7 @@
         methods: {
             reset () {
                 this.loading = false
+                this.heartBCtfc = []
                 this.form.resetFields()
             },
             onClose () {

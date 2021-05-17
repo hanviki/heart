@@ -1,19 +1,24 @@
 <template>
   <div>
-      <a-divider orientation="left" style="font-size:14px;">3. CT复查</a-divider>
+      <a-divider orientation="left" style="font-size:14px;">3. CT复查a</a-divider>
     <a-button
       icon="plus"
       @click="AddCtfc"
     >
     </a-button>
-    <a-collapse accordion>
+    <a-collapse v-model="activeKey" accordion>
       <a-collapse-panel
         :header="index"
         v-for="(item,index) in listCsfc"
-        :key="index+1"
+        :key="item.id"
         :forceRender="true"
       >
         <ctfc-info :ref="'fc'+index" :checkInfo="item"></ctfc-info>
+         <a-icon
+          slot="extra"
+          type="close"
+          @click="e => handleClick(e,item)"
+        />
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -27,6 +32,7 @@ export default {
       loading: false,
       form: this.$form.createForm(this),
       listFc: ['1'],
+      activeKey: '1',
       baseId: '',
       listCsfc: []
     }
@@ -35,12 +41,31 @@ export default {
     CtfcInfo
   },
   methods: {
+    reset () {
+      this.listCsfc = []
+      this.listFc = ['1']
+      this.activeKey = '1'
+      this.baseId = ''
+    },
     AddCtfc () {
       let that =this
       that.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
            var  baseId =res.data.data
            that.listCsfc.push({id: baseId})
+           this.activeKey = that.listCsfc.length
        })
+    },
+    handleClick (event, item) {
+      event.stopPropagation();
+      let that = this
+      that.$delete('heartBCtfc/' + item.id).then(() => {
+        that.$message.success('删除成功')
+        const index = that.listCsfc.indexOf(item)
+        const newList = that.listCsfc.slice()
+        newList.splice(index, 1)
+        that.listCsfc = newList
+      })
+
     },
     setFields () {
      let list =[]

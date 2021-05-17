@@ -76,7 +76,7 @@
           登录
         </a-button>
       </a-form-item>
-      <div>
+      <!-- <div>
         <a
           style="float: right;margin-left:10px;"
           @click="regist"
@@ -87,7 +87,7 @@
           style="float: right;"
           @click="open"
         >账户查询</a>
-      </div>
+      </div> -->
       <selecte-type
         @close="close"
         @confirm="observe"
@@ -124,7 +124,7 @@ export default {
   computed: {
     
     systemName () {
-      return '武汉协和供应链管理平台'
+      return '协和医院心脏外科管理平台'
     },
     copyright () {
       return this.$store.state.setting.copyright

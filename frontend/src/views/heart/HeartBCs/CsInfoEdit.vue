@@ -125,7 +125,7 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      checkInfo: {},
+      csInfo: {},
       baseId: ''
     }
   },
@@ -134,41 +134,47 @@ export default {
   },
    components: {MutiUploadFile} ,
   methods: {
+    reset () {
+      this.loading = false
+      this.csInfo = {}
+      this.form.resetFields()
+      this.baseId = ''
+    },
     setFields () {
       let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
-            this.checkInfo[_key] = values[_key]
+            this.csInfo[_key] = values[_key]
           }
 
         })
       }
-      // this.checkInfo.id= this.baseId
-      return this.checkInfo
+      // this.csInfo.id= this.baseId
+      return this.csInfo
     },
-    setFormValues ({ ...checkInfo }) {
+    setFormValues ({ ...csInfo }) {
       let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
       let fieldDates = []
-      Object.keys(checkInfo).forEach((key) => {
+      Object.keys(csInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
-              obj[key] = moment(checkInfo[key])
+            if (csInfo[key] !== '') {
+              obj[key] = moment(csInfo[key])
             }
             else {
               obj[key] = ''
             }
           } else {
-            obj[key] = checkInfo[key]
+            obj[key] = csInfo[key]
           }
           this.form.setFieldsValue(obj)
         }
       })
-      this.baseId = checkInfo.id
-      this.checkInfo = checkInfo
+      this.baseId = csInfo.id
+      this.csInfo = csInfo
     }
   }
 }

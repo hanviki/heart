@@ -222,6 +222,11 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.hospitalInfo = {}
+      this.form.resetFields()
+    },
     setFields () {
       let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'swsj', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
       if (typeof values !== 'undefined') {

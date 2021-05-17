@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- *  服务实现类
+ * 住院病历资料 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBHospitalinfoService")
@@ -56,9 +56,7 @@ public IPage<HeartBHospitalinfo> findHeartBHospitalinfos(QueryRequest request, H
 @Override
 @Transactional
 public void createHeartBHospitalinfo(HeartBHospitalinfo heartBHospitalinfo){
-        if(heartBHospitalinfo.getId()==null) {
-                heartBHospitalinfo.setId(UUID.randomUUID().toString());
-        }
+        heartBHospitalinfo.setId(UUID.randomUUID().toString());
         heartBHospitalinfo.setCreateTime(new Date());
         heartBHospitalinfo.setIsDeletemark(1);
         this.save(heartBHospitalinfo);
@@ -75,7 +73,13 @@ public void updateHeartBHospitalinfo(HeartBHospitalinfo heartBHospitalinfo){
 @Transactional
 public void deleteHeartBHospitalinfos(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBHospitalinfo heartBHospitalinfo =new HeartBHospitalinfo();
+        heartBHospitalinfo.setId(id);
+        heartBHospitalinfo.setIsDeletemark(0);
+        this.baseMapper.updateHeartBHospitalinfo(heartBHospitalinfo);
+        }
         }
 
 

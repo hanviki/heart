@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- *  服务实现类
+ * 出院复查CT6 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBCtoutService")
@@ -56,9 +56,7 @@ public IPage<HeartBCtout> findHeartBCtouts(QueryRequest request, HeartBCtout hea
 @Override
 @Transactional
 public void createHeartBCtout(HeartBCtout heartBCtout){
-        if(heartBCtout.getId()==null) {
-                heartBCtout.setId(UUID.randomUUID().toString());
-        }
+        heartBCtout.setId(UUID.randomUUID().toString());
         heartBCtout.setCreateTime(new Date());
         heartBCtout.setIsDeletemark(1);
         this.save(heartBCtout);
@@ -75,7 +73,13 @@ public void updateHeartBCtout(HeartBCtout heartBCtout){
 @Transactional
 public void deleteHeartBCtouts(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBCtout heartBCtout =new HeartBCtout();
+        heartBCtout.setId(id);
+        heartBCtout.setIsDeletemark(0);
+        this.baseMapper.updateHeartBCtout(heartBCtout);
+        }
         }
 
 

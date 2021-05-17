@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- *  服务实现类
+ * 化验复查 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBHyfcService")
@@ -56,9 +56,7 @@ public IPage<HeartBHyfc> findHeartBHyfcs(QueryRequest request, HeartBHyfc heartB
 @Override
 @Transactional
 public void createHeartBHyfc(HeartBHyfc heartBHyfc){
-        if(heartBHyfc.getId()==null) {
-                heartBHyfc.setId(UUID.randomUUID().toString());
-        }
+        heartBHyfc.setId(UUID.randomUUID().toString());
         heartBHyfc.setCreateTime(new Date());
         heartBHyfc.setIsDeletemark(1);
         this.save(heartBHyfc);
@@ -75,7 +73,13 @@ public void updateHeartBHyfc(HeartBHyfc heartBHyfc){
 @Transactional
 public void deleteHeartBHyfcs(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBHyfc heartBHyfc =new HeartBHyfc();
+        heartBHyfc.setId(id);
+        heartBHyfc.setIsDeletemark(0);
+        this.baseMapper.updateHeartBHyfc(heartBHyfc);
+        }
         }
 
 

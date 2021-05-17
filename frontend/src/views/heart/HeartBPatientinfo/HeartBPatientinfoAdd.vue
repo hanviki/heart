@@ -10,7 +10,7 @@
     style="height: calc(100% - 15px);overflow: auto;"
   >
     <a-tabs
-      default-active-key="1"
+      :activeKey = "activeKey"
       @change="callback"
     >
       <a-tab-pane
@@ -90,17 +90,17 @@
   </a-drawer>
 </template>
 <script>
-import PatientInfo from './PatientInfo'
-import HospitalInfo from '../HeartBHospitalinfo/HospitalInfo'
-import CheckInfo from '../HeartBCheck/CheckInfo'
-import CsInfo from '../HeartBCs/CsInfo'
-import CtInfo from '../HeartBCt/CtInfo'
-import OutInfo from '../HeartBCtout/OutInfo'
-import SurgicalInfo from '../HeartBSurgical/SurgicalInfo'
-import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfo'
-import FcInfo from '../HeartBCsfc/FcInfo'
-import FcctInfo from '../HeartBCtfc/FcctInfo'
-import FchyInfo from '../HeartBHyfc/FchyInfo'
+import PatientInfo from './PatientInfo' // 个人信息
+import HospitalInfo from '../HeartBHospitalinfo/HospitalInfo' // 住院病历资料
+import CheckInfo from '../HeartBCheck/CheckInfo' // 检验
+import CsInfo from '../HeartBCs/CsInfo' // 超声
+import CtInfo from '../HeartBCt/CtInfo' // 术前CT
+import OutInfo from '../HeartBCtout/OutInfo' // 出院复查CT
+import SurgicalInfo from '../HeartBSurgical/SurgicalInfo' // 手术
+import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfo' // 术后
+import FcInfo from '../HeartBCsfc/FcInfo' // 超声复查
+import FcctInfo from '../HeartBCtfc/FcctInfo' // CT复查
+import FchyInfo from '../HeartBHyfc/FchyInfo' // 化验复查
 const formItemLayout = {
   labelCol: { span: 3 },
   wrapperCol: { span: 18 }
@@ -116,6 +116,7 @@ export default {
     return {
       loading: false,
       formItemLayout,
+      activeKey: '1',
       form: this.$form.createForm(this),
       heartBPatientinfo: {
         patientInfo: {},
@@ -138,12 +139,35 @@ export default {
   },
   methods: {
     callback (key) {
+      this.activeKey = key
       console.log(key);
     },
     reset () {
       this.loading = false
+      this.activeKey = '1'
       this.heartBPatientinfo = {}
       this.form.resetFields()
+      //子页面清空form表单等.
+      this.$refs.checkInfo.reset()
+      this.$refs.patientInfo.reset()
+      this.$refs.csInfo.reset()
+      this.$refs.ctInfo.reset()
+      this.$refs.hospitalInfo.reset()
+      this.$refs.outInfo.reset()
+      this.$refs.surgicalInfo.reset()
+      this.$refs.surAfterInfo.reset()
+      this.$refs.fcInfo.reset()
+      this.$refs.fcctInfo.reset()
+      this.$refs.fchyInfo.reset()
+    },
+    getId () {
+      setTimeout(() => {
+        this.$refs.csInfo.fetch()
+        this.$refs.ctInfo.fetch()
+        this.$refs.outInfo.fetch()
+        this.$refs.fcInfo.getId()
+        this.$refs.fcctInfo.getId()
+      }, 200);
     },
     onClose () {
       this.reset()
@@ -152,18 +176,24 @@ export default {
         handleSubmit () {
       this.$refs.patientInfo.form.validateFields((err, values) => {
         if (!err) {
-          this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields()
-          this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields()
-          this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields()
-          this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields()
-          this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields()
-          this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields()
-          this.heartBPatientinfo.surgicalInfo = this.$refs.surgicalInfo.setFields()
-          this.heartBPatientinfo.checkInfo = this.$refs.surAfterInfo.setFields()
-          this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
-          this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
-          this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
+          this.loading = true
+          this.heartBPatientinfo = {}
+          this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields() // 个人信息
+          this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields() // 住院病历资料
+          this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields() // 住院病历资料
+          this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields() // 超声1
+          this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields() // 术前CT1
+          this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields() // 出院复查CT1
+          this.heartBPatientinfo.surgicalInfo = this.$refs.surgicalInfo.setFields() // 手术
+          this.heartBPatientinfo.surAfterInfo = this.$refs.surAfterInfo.setFields() // 术后
+          this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields() // 超声复查1
+          this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields() // CT复查1
+          this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields() // 化验复查
 
+          console.log(this.heartBPatientinfo.checkInfo)
+          console.log(this.heartBPatientinfo.ctInfo)
+          console.log(this.heartBPatientinfo.surAfterInfo)
+          console.log(this.heartBPatientinfo.fchyInfo)
           this.$post('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {

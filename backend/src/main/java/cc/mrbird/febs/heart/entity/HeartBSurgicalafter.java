@@ -70,7 +70,7 @@ private static final long serialVersionUID=1L;
      */
         
         @ExcelField(value ="再次气管插管")
-    private BigDecimal shZcqgcg;
+    private String shZcqgcg;
 
     /**
      * 术后ICU停留时间
@@ -98,7 +98,7 @@ private static final long serialVersionUID=1L;
      */
         
         @ExcelField(value ="术后开胸止血")
-    private BigDecimal shShkxzx;
+    private String shShkxzx;
 
     /**
      * 其他再次手术原因
@@ -127,6 +127,15 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="主诉")
     private String shsfZs;
+
+    /**
+     * 随访日期
+     */
+
+    @ExcelField(value ="随访日期", writeConverter = DateConverter.class)
+    private Date shsfDate;
+    private transient String shsfDateFrom;
+    private transient String shsfDateTo;
 
     /**
      * 生存状态

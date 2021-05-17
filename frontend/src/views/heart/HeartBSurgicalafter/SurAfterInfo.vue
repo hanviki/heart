@@ -168,8 +168,13 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.surgicalInfo = {}
+      this.form.resetFields()
+    },
     setFields () {
-      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
+      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs','shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

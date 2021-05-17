@@ -65,7 +65,6 @@ public Map<String, Object> List(QueryRequest request, HeartBCtfc heartBCtfc){
  */
 @Log("新增/按钮")
 @PostMapping
-@RequiresPermissions("heartBCtfc:add")
 public void addHeartBCtfc(@Valid HeartBCtfc heartBCtfc)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -87,7 +86,6 @@ public void addHeartBCtfc(@Valid HeartBCtfc heartBCtfc)throws FebsException{
  */
 @Log("修改")
 @PutMapping
-@RequiresPermissions("heartBCtfc:update")
 public void updateHeartBCtfc(@Valid HeartBCtfc heartBCtfc)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -103,7 +101,6 @@ public void updateHeartBCtfc(@Valid HeartBCtfc heartBCtfc)throws FebsException{
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBCtfc:delete")
 public void deleteHeartBCtfcs(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

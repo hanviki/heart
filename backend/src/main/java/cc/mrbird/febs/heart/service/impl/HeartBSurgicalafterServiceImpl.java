@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- *  服务实现类
+ * 术后 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBSurgicalafterService")
@@ -73,7 +73,13 @@ public void updateHeartBSurgicalafter(HeartBSurgicalafter heartBSurgicalafter){
 @Transactional
 public void deleteHeartBSurgicalafters(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBSurgicalafter heartBSurgicalafter =new HeartBSurgicalafter();
+        heartBSurgicalafter.setId(id);
+        heartBSurgicalafter.setIsDeletemark(0);
+        this.baseMapper.updateHeartBSurgicalafter(heartBSurgicalafter);
+        }
         }
 
 

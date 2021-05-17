@@ -43,6 +43,12 @@ public IPage<HeartBPatientinfo> findHeartBPatientinfos(QueryRequest request, Hea
         if (StringUtils.isNotBlank(heartBPatientinfo.getUsername())) {
         queryWrapper.eq(HeartBPatientinfo::getUsername, heartBPatientinfo.getUsername());
         }
+                if (StringUtils.isNotBlank(heartBPatientinfo.getFileNo())) {
+                        queryWrapper.eq(HeartBPatientinfo::getFileNo, heartBPatientinfo.getFileNo());
+                }
+                if (StringUtils.isNotBlank(heartBPatientinfo.getName())) {
+                        queryWrapper.like(HeartBPatientinfo::getName, heartBPatientinfo.getName());
+                }
         queryWrapper.eq(HeartBPatientinfo::getIsDeletemark, 1);//1是未删 0是已删
         Page<HeartBPatientinfo> page=new Page<>();
         SortUtil.handlePageSort(request,page,true);

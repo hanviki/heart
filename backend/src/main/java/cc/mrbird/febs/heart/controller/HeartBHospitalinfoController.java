@@ -65,7 +65,6 @@ public Map<String, Object> List(QueryRequest request, HeartBHospitalinfo heartBH
  */
 @Log("新增/按钮")
 @PostMapping
-@RequiresPermissions("heartBHospitalinfo:add")
 public void addHeartBHospitalinfo(@Valid HeartBHospitalinfo heartBHospitalinfo)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -87,7 +86,6 @@ public void addHeartBHospitalinfo(@Valid HeartBHospitalinfo heartBHospitalinfo)t
  */
 @Log("修改")
 @PutMapping
-@RequiresPermissions("heartBHospitalinfo:update")
 public void updateHeartBHospitalinfo(@Valid HeartBHospitalinfo heartBHospitalinfo)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -103,7 +101,6 @@ public void updateHeartBHospitalinfo(@Valid HeartBHospitalinfo heartBHospitalinf
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBHospitalinfo:delete")
 public void deleteHeartBHospitalinfos(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

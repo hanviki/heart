@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     systemName () {
-      return '武汉协和供应链管理平台2020'
+      return '协和医院心脏外科管理平台'
     },
     copyright () {
       return this.$store.state.setting.copyright

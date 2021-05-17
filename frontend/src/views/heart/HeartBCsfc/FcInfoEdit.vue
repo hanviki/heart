@@ -1,19 +1,33 @@
 <template>
   <div>
-      <a-divider orientation="left" style="font-size:14px;">2. 超声复查</a-divider>
+    <a-divider
+      orientation="left"
+      style="font-size:14px;"
+    >2. 超声复查</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"
     >
     </a-button>
-    <a-collapse accordion>
+    <a-collapse
+      v-model="activeKey"
+      accordion
+    >
       <a-collapse-panel
         :header="index"
         v-for="(item,index) in listCsfc"
-        :key="index+1"
+        :key="item.id"
         :forceRender="true"
       >
-        <csfc-info :ref="'fc'+index" :checkInfo="item"></csfc-info>
+        <csfc-info
+          :ref="'fc'+index"
+          :checkInfo="item"
+        ></csfc-info>
+        <a-icon
+          slot="extra"
+          type="close"
+          @click="e => handleClick(e,item)"
+        />
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -27,6 +41,7 @@ export default {
       loading: false,
       form: this.$form.createForm(this),
       listFc: [],
+      activeKey: '1',
       baseId: '',
       listCsfc: []
     }
@@ -36,29 +51,45 @@ export default {
   },
   methods: {
     AddCsfc () {
-      let that =this
-      that.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
-           var  baseId =res.data.data
-           that.listCsfc.push({id: baseId})
-       })
+      let that = this
+      that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
+        var baseId = res.data.data
+        that.listCsfc.push({ id: baseId })
+        this.activeKey = that.listCsfc.length
+      })
     },
     reset () {
-      this.baseId =''
+      this.loading = false
+      this.baseId = ''
+      this.activeKey = '1'
       this.listFc = []
       this.listCsfc = []
     },
+    handleClick (event, item) {
+      event.stopPropagation();
+      let that = this
+      that.$delete('heartBCsfc/' + item.id).then(() => {
+        that.$message.success('删除成功')
+        const index = that.listCsfc.indexOf(item)
+        const newList = that.listCsfc.slice()
+        newList.splice(index, 1)
+        that.listCsfc = newList
+      })
+
+    },
     setFields () {
-      for (let i = 0; i < this.listFc.length; i++) {
-          let name= 'fc'+ i
-          console.info(name)
-         // console.info((this.$refs[name])[0])
-        this.listCsfc.push((this.$refs[name])[0].setFields())
+      let list = []
+      for (let i = 0; i < this.listCsfc.length; i++) {
+        let name = 'fc' + i
+        console.info(name)
+        // console.info((this.$refs[name])[0])
+        list.push((this.$refs[name])[0].setFields())
       }
-      return this.listCsfc
+      return list
     },
     setFormValues (listCsfc) {
-      let that =this
-      that.listCsfc =listCsfc
+      let that = this
+      that.listCsfc = listCsfc
     },
   }
 }

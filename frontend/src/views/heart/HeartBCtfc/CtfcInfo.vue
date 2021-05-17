@@ -356,10 +356,16 @@ export default {
     }
   },
   mounted () {
-    this.fetch()
+    // this.fetch()
   },
    components: {MutiUploadFile} ,
   methods: {
+    reset () {
+      this.loading = false
+      this.ctfcInfo = {}
+      this.form.resetFields()
+      this.baseId = ''
+    },
     setFields () {
       let values = this.form.getFieldsValue([ 'ctDate', 'zjwdwzCode', 'dzj', 'szmdzj', 'zdmgzj', 'xzdmsdzj', 'xzdmsdjqxzzj', 'xzdmzdzj', 'xzdmzdjqzj', 'xzdmxdzj', 'xzdmxdjqzj', 'fzdmsdzj', 'fzdmsdjqzj', 'fzdmxdzj', 'fzdmxdjqzj', 'jdwhkl', 'ydwhkl', 'szzwxz', 'gbxz', 'jqzg', 'fqqzg', 'zsmdzg', 'ysmdzg', 'zkzzg', 'ykzzg', 'rgxgycsm', 'dmlykz', 'zjycsm'])
      if (typeof values !== 'undefined') {
@@ -367,7 +373,6 @@ export default {
           if (values[_key] !== undefined) {
             this.ctfcInfo[_key] = values[_key]
           }
-
         })
       }
       this.ctfcInfo.id= this.baseId
@@ -377,6 +382,7 @@ export default {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
           this.baseId =res.data.data
        })
+       console.log('CtfcInfo Id 创建成功.')
     }
   }
 }

@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- *  服务实现类
+ * 检验 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-05-06
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBCheckService")
@@ -56,9 +56,7 @@ public IPage<HeartBCheck> findHeartBChecks(QueryRequest request, HeartBCheck hea
 @Override
 @Transactional
 public void createHeartBCheck(HeartBCheck heartBCheck){
-        if(heartBCheck.getId()==null) {
-                heartBCheck.setId(UUID.randomUUID().toString());
-        }
+        heartBCheck.setId(UUID.randomUUID().toString());
         heartBCheck.setCreateTime(new Date());
         heartBCheck.setIsDeletemark(1);
         this.save(heartBCheck);
@@ -75,7 +73,13 @@ public void updateHeartBCheck(HeartBCheck heartBCheck){
 @Transactional
 public void deleteHeartBChecks(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBCheck heartBCheck =new HeartBCheck();
+        heartBCheck.setId(id);
+        heartBCheck.setIsDeletemark(0);
+        this.baseMapper.updateHeartBCheck(heartBCheck);
+        }
         }
 
 

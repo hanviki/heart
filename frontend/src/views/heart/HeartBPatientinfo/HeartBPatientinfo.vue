@@ -12,7 +12,7 @@
               :sm="24"
             >
               <a-form-item
-                label="名称"
+                label="姓名"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}"
               >
@@ -24,25 +24,11 @@
               :sm="24"
             >
               <a-form-item
-                label="编码"
+                label="档案号"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}"
               >
-                <a-input v-model="queryParams.code" />
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row v-if="advanced">
-            <a-col
-              :md="8"
-              :sm="24"
-            >
-              <a-form-item
-                label="备注"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}"
-              >
-                <a-input v-model="queryParams.comments" />
+                <a-input v-model="queryParams.fileNo" />
               </a-form-item>
             </a-col>
           </a-row>
@@ -137,6 +123,7 @@
     </div>
     <!-- 新增字典 -->
     <heartBPatientinfo-add
+      ref="heartBPatientinfoAdd"
       @close="handleAddClose"
       @success="handleAddSuccess"
       :addVisiable="addVisiable"
@@ -197,7 +184,17 @@ export default {
         dataIndex: 'age'
       }, {
         title: '性别',
-        dataIndex: 'gender'
+        dataIndex: 'gender',
+        customRender: (text, row, index) => {
+          switch (text) {
+            case false:
+              return '男'
+            case true:
+              return '女'
+            default:
+              return text
+          }
+        },
       }, {
         title: '身高',
         dataIndex: 'height'
@@ -245,6 +242,7 @@ export default {
     },
     add () {
       this.addVisiable = true
+      this.$refs.heartBPatientinfoAdd.getId()
     },
     handleEditSuccess () {
       this.editVisiable = false

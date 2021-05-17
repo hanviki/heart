@@ -106,7 +106,7 @@
       >
         <a-input-number
           placeholder="请输入升主动脉直径(mm)"
-          v-decorator="['szdmzj', {}]"
+          v-decorator="['szdmdzj', {}]"
           :precision="0"
           style="width:100%;"
         />
@@ -129,12 +129,18 @@ export default {
     }
   },
   mounted () {
-    this.fetch()
+    // this.fetch()
   },
    components: {MutiUploadFile} ,
   methods: {
+    reset () {
+      this.loading = false
+      this.csfcInfo = {}
+      this.form.resetFields()
+      this.baseId = ''
+    },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
+      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -150,6 +156,7 @@ export default {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
           this.baseId =res.data.data
        })
+       console.log('CsfcInfo Id 创建成功.')
     }
   }
 }

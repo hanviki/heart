@@ -412,9 +412,15 @@ export default {
   },
   components: {MutiUploadFile} ,
   mounted () {
-    this.fetch()
+    // this.fetch()
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.ctInfo = {}
+      this.form.resetFields()
+      this.baseId = ''
+    },
     setFields () {
       let values = this.form.getFieldsValue(['ctZdmdzj', 'ctSzdmzj', 'ctZdmgzj', 'ctXszdmzj', 'ctXzzdmzj', 'ctXxzdmzj', 'ctFzdmsdzj', 'ctFzdmxdzj', 'ctSzdmjqzj', 'ctZdmgjqzj', 'ctXsjqzj', 'ctXzjqzj', 'ctXxjqzj', 'ctFsjqzj', 'ctFxjqzj', 'ctZdmjcfwfx', 'ctSzjcbl', 'ctZdmgjqwz', 'ctZdxdbl', 'ctZdxdjqwz', 'ctFzdmsdbl', 'ctFzdmjqwz', 'ctSdmxjcbl', 'ctSxjqwz', 'ctYfpkwz', 'ctYfpkdx', 'ctQxhzdsyfzxg', 'ctWqqxqg', 'ctJcljfw', 'ctZdmjctszx', 'ctJqgxqg', 'ctNote'])
       if (typeof values !== 'undefined') {

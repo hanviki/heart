@@ -189,6 +189,7 @@
             reset () {
                 this.loading = false
                 this.form.resetFields()
+                this.heartBHospitalinfo = {}
             },
             onClose () {
                 this.reset()

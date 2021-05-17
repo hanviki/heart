@@ -56,16 +56,9 @@ public Map<String, Object> List(QueryRequest request, HeartBCheck heartBCheck){
         return getDataTable(this.iHeartBCheckService.findHeartBChecks(request, heartBCheck));
         }
 
-/**
- * 跳转添加页面
- * @param request
- * @param response
- * @param model
- * @return
- */
+
 @Log("新增/按钮")
 @PostMapping
-@RequiresPermissions("heartBCheck:add")
 public void addHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -87,7 +80,6 @@ public void addHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
  */
 @Log("修改")
 @PutMapping
-@RequiresPermissions("heartBCheck:update")
 public void updateHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -103,7 +95,6 @@ public void updateHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsExceptio
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBCheck:delete")
 public void deleteHeartBChecks(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

@@ -28,7 +28,7 @@ import java.time.LocalDate;
  * </p>
  *
  * @author viki
- * @since 2021-05-06
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBCsService")
@@ -56,9 +56,7 @@ public IPage<HeartBCs> findHeartBCss(QueryRequest request, HeartBCs heartBCs){
 @Override
 @Transactional
 public void createHeartBCs(HeartBCs heartBCs){
-        if(heartBCs.getId()==null) {
-                heartBCs.setId(UUID.randomUUID().toString());
-        }
+        heartBCs.setId(UUID.randomUUID().toString());
         heartBCs.setCreateTime(new Date());
         heartBCs.setIsDeletemark(1);
         this.save(heartBCs);
@@ -75,7 +73,13 @@ public void updateHeartBCs(HeartBCs heartBCs){
 @Transactional
 public void deleteHeartBCss(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBCs heartBCs =new HeartBCs();
+        heartBCs.setId(id);
+        heartBCs.setIsDeletemark(0);
+        this.baseMapper.updateHeartBCs(heartBCs);
+        }
         }
 
 

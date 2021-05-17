@@ -169,8 +169,13 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.surgicalInfo = {}
+      this.form.resetFields()
+    },
     setFields () {
-      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
+      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -182,8 +187,8 @@ export default {
       return this.surgicalInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz']
-      let fieldDates = ['shsfDeathDate', 'shsfZcgysj', 'shsfXfjbsj']
+      let fields = ['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz']
+      let fieldDates = ['shsfDeathDate', 'shsfZcgysj', 'shsfXfjbsj', 'shsfDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)

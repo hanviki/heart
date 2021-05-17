@@ -65,7 +65,6 @@ public Map<String, Object> List(QueryRequest request, HeartBCtout heartBCtout){
  */
 @Log("新增/按钮")
 @PostMapping
-@RequiresPermissions("heartBCtout:add")
 public void addHeartBCtout(@Valid HeartBCtout heartBCtout)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -87,7 +86,6 @@ public void addHeartBCtout(@Valid HeartBCtout heartBCtout)throws FebsException{
  */
 @Log("修改")
 @PutMapping
-@RequiresPermissions("heartBCtout:update")
 public void updateHeartBCtout(@Valid HeartBCtout heartBCtout)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -103,7 +101,6 @@ public void updateHeartBCtout(@Valid HeartBCtout heartBCtout)throws FebsExceptio
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBCtout:delete")
 public void deleteHeartBCtouts(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

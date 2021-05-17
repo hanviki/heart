@@ -144,6 +144,7 @@
             reset () {
                 this.loading = false
                 this.form.resetFields()
+                this.heartBCs = {}
             },
             onClose () {
                 this.reset()

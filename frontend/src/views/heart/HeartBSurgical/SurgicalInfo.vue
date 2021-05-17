@@ -138,6 +138,11 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.surgicalInfo = {}
+      this.form.resetFields()
+    },
     setFields () {
       let values = this.form.getFieldsValue(['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw'])
       if (typeof values !== 'undefined') {

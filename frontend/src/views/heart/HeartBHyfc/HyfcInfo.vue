@@ -232,6 +232,11 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.checkInfo = {}
+      this.form.resetFields()
+    },
     setFields () {
       let values = this.form.getFieldsValue(['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt'])
       if (typeof values !== 'undefined') {

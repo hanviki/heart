@@ -278,6 +278,12 @@ export default {
     this.fetch()
   },
   methods: {
+    reset () {
+        this.loading = false
+        this.ctfcInfo = {}
+        this.form.resetFields()
+        this.baseId = ''
+    },
     setFields () {
       let values = this.form.getFieldsValue(['fctFileName', 'fctFilePath', 'fctZjwdwz', 'fctDzj', 'fctSzmdzj', 'fctZdmgzj', 'fctXzdmsdzj', 'fctXzdmsdjqxzzj', 'fctXzdmzdzj', 'fctXzdmzdjqzj', 'fctXzdmxdzj', 'fctXzdmxdjqzj', 'fctFzdmsdzj', 'fctFzdmsdjqzj', 'fctFzdmxdzj', 'fctFzdmxdjqzj', 'fctJdwhkl', 'fctYdwhkl', 'fctSzzwxz', 'fctGbxz', 'fctJqzg', 'fctFqqzg', 'fctZsmdzg', 'fctYsmdzg', 'fctZkzzg', 'fctYkzzg', 'fctRgxgycsm', 'fctDmlykz', 'fctZjycsm'])
       if (typeof values !== 'undefined') {

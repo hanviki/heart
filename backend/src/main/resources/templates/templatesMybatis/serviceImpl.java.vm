@@ -73,7 +73,13 @@ public void update${entity}(${entity} ${table.entityPath}){
 @Transactional
 public void delete${entity}s(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        ${entity} ${table.entityPath} =new ${entity}();
+        ${table.entityPath}.setId(id);
+        ${table.entityPath}.setIsDeletemark(0);
+        this.baseMapper.update${entity}(${table.entityPath});
+        }
         }
 
 

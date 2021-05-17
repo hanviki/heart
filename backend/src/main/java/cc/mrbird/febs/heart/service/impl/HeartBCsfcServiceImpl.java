@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- *  服务实现类
+ * 超声复查 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBCsfcService")
@@ -56,9 +56,7 @@ public IPage<HeartBCsfc> findHeartBCsfcs(QueryRequest request, HeartBCsfc heartB
 @Override
 @Transactional
 public void createHeartBCsfc(HeartBCsfc heartBCsfc){
-        if(heartBCsfc==null) {
-                heartBCsfc.setId(UUID.randomUUID().toString());
-        }
+        heartBCsfc.setId(UUID.randomUUID().toString());
         heartBCsfc.setCreateTime(new Date());
         heartBCsfc.setIsDeletemark(1);
         this.save(heartBCsfc);
@@ -75,7 +73,13 @@ public void updateHeartBCsfc(HeartBCsfc heartBCsfc){
 @Transactional
 public void deleteHeartBCsfcs(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBCsfc heartBCsfc =new HeartBCsfc();
+        heartBCsfc.setId(id);
+        heartBCsfc.setIsDeletemark(0);
+        this.baseMapper.updateHeartBCsfc(heartBCsfc);
+        }
         }
 
 

@@ -24,11 +24,11 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- * 超声 服务实现类
+ * 术前CT 服务实现类
  * </p>
  *
  * @author viki
- * @since 2021-05-06
+ * @since 2021-05-17
  */
 @Slf4j
 @Service("IHeartBCtService")
@@ -73,7 +73,13 @@ public void updateHeartBCt(HeartBCt heartBCt){
 @Transactional
 public void deleteHeartBCts(String[]Ids){
         List<String> list=Arrays.asList(Ids);
-        this.baseMapper.deleteBatchIds(list);
+        for (String id: list
+        ) {
+        HeartBCt heartBCt =new HeartBCt();
+        heartBCt.setId(id);
+        heartBCt.setIsDeletemark(0);
+        this.baseMapper.updateHeartBCt(heartBCt);
+        }
         }
 
 

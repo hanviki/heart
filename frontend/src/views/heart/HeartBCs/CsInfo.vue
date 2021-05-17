@@ -125,27 +125,33 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      checkInfo: {},
+      csInfo: {},
       baseId: ''
     }
   },
   mounted () {
-    this.fetch()
+    // this.fetch()
   },
    components: {MutiUploadFile} ,
   methods: {
+    reset () {
+      this.loading = false
+      this.csInfo = {}
+      this.form.resetFields()
+      this.baseId = ''
+    },
     setFields () {
       let values = this.form.getFieldsValue(['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
-            this.checkInfo[_key] = values[_key]
+            this.csInfo[_key] = values[_key]
           }
 
         })
       }
-       this.checkInfo.id= this.baseId
-      return this.checkInfo
+       this.csInfo.id= this.baseId
+      return this.csInfo
     },
     fetch () {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {

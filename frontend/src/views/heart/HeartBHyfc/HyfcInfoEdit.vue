@@ -228,7 +228,7 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      checkInfo: {},
+      hyfcInfo: {},
     }
   },
   props: {
@@ -240,21 +240,27 @@ export default {
     this.setFormValues(this.checkInfo)
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.hyfcInfo = {}
+      this.checkInfo = {}
+      this.form.resetFields()
+    },
     setFields () {
       let values = this.form.getFieldsValue(['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt'])
       if (typeof values !== 'undefined') {
 
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
-            this.checkInfo[_key] = values[_key]
+            this.hyfcInfo[_key] = values[_key]
           }
 
         })
       }
-      return this.checkInfo
+      return this.hyfcInfo
     },
      setFormValues ({ ...checkInfo }) {
-      let fields = ['ctDate', 'zjwdwzCode', 'dzj', 'szmdzj', 'zdmgzj', 'xzdmsdzj', 'xzdmsdjqxzzj', 'xzdmzdzj', 'xzdmzdjqzj', 'xzdmxdzj', 'xzdmxdjqzj', 'fzdmsdzj', 'fzdmsdjqzj', 'fzdmxdzj', 'fzdmxdjqzj', 'jdwhkl', 'ydwhkl', 'szzwxz', 'gbxz', 'jqzg', 'fqqzg', 'zsmdzg', 'ysmdzg', 'zkzzg', 'ykzzg', 'rgxgycsm', 'dmlykz', 'zjycsm']
+      let fields = ['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt']
       let fieldDates = []
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
@@ -274,7 +280,7 @@ export default {
         }
       })
       this.baseId = checkInfo.id
-      this.checkInfo = checkInfo
+      this.hyfcInfo = checkInfo
     },
   }
 }

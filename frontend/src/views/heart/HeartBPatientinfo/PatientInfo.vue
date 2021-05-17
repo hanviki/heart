@@ -157,6 +157,11 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.loading = false
+      this.heartBPatientinfo = {}
+      this.form.resetFields()
+    },
     setFields () {
       let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote'])
       if (typeof values !== 'undefined') {

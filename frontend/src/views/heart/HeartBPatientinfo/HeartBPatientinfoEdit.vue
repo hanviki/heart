@@ -10,7 +10,8 @@
     style="height: calc(100% - 15px);overflow: auto;"
   >
     <a-tabs
-      default-active-key="1"
+      @change="callback"
+      :activeKey = "activeKey"
     >
       <a-tab-pane
         key="1"
@@ -110,17 +111,17 @@
 </template>
 <script>
 import moment from 'moment'
-import PatientInfo from './PatientInfoEdit'
-import HospitalInfo from '../HeartBHospitalinfo/HospitalInfoEdit'
-import CheckInfo from '../HeartBCheck/CheckInfoEdit'
- import CsInfo from '../HeartBCs/CsInfoEdit'
-import CtInfo from '../HeartBCt/CtInfoEdit'
- import OutInfo from '../HeartBCtout/OutInfoEdit'
- import SurgicalInfo from '../HeartBSurgical/SurgicalInfoEdit'
- import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit'
- import FcInfo from '../HeartBCsfc/FcInfoEdit'
- import FcctInfo from '../HeartBCtfc/FcctInfoEdit'
- import FchyInfo from '../HeartBHyfc/FchyInfoEdit'
+import PatientInfo from './PatientInfoEdit' // 个人信息
+import HospitalInfo from '../HeartBHospitalinfo/HospitalInfoEdit' // 住院病历资料
+import CheckInfo from '../HeartBCheck/CheckInfoEdit' // 检验
+import CsInfo from '../HeartBCs/CsInfoEdit' // 超声
+import CtInfo from '../HeartBCt/CtInfoEdit' // 术前CT
+import OutInfo from '../HeartBCtout/OutInfoEdit' // 出院复查CT
+import SurgicalInfo from '../HeartBSurgical/SurgicalInfoEdit' // 手术
+import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit' // 术后
+import FcInfo from '../HeartBCsfc/FcInfoEdit' // 超声复查
+import FcctInfo from '../HeartBCtfc/FcctInfoEdit' // CT复查
+import FchyInfo from '../HeartBHyfc/FchyInfoEdit' // 化验复查
 
 const formItemLayout = {
   labelCol: { span: 3 },
@@ -138,6 +139,7 @@ export default {
       loading: false,
       formItemLayout,
       form: this.$form.createForm(this),
+      activeKey: '1',
       heartBPatientinfo: {
          patientInfo: {},
         checkInfo: {},
@@ -160,7 +162,24 @@ export default {
   methods: {
     reset () {
       this.loading = false
+      this.activeKey = '1'
       this.form.resetFields()
+      //子页面清空form表单等.
+      this.$refs.checkInfo.reset()
+      this.$refs.patientInfo.reset()
+      this.$refs.csInfo.reset()
+      this.$refs.ctInfo.reset()
+      this.$refs.hospitalInfo.reset()
+      this.$refs.outInfo.reset()
+      this.$refs.surgicalInfo.reset()
+      this.$refs.surAfterInfo.reset()
+      this.$refs.fcInfo.reset()
+      this.$refs.fcctInfo.reset()
+      this.$refs.fchyInfo.reset()
+    },
+    callback (key) {
+      this.activeKey = key
+      console.log(key);
     },
     onClose () {
       this.reset()
@@ -169,6 +188,7 @@ export default {
     handleSubmit () {
        this.$refs.patientInfo.form.validateFields((err, values) => {
         if (!err) {
+          this.loading = true
           this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields()
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields()
           this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields()
@@ -180,7 +200,7 @@ export default {
           this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
           this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
-
+          debugger
           this.$put('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {
@@ -195,7 +215,7 @@ export default {
     fetch (fileNo) {
       this.$get('heartBPatientinfo/all', { fileNo: fileNo }).then(res => {
         this.heartBPatientinfo = res.data.data
-        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)
+        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)  
 
         this.$refs.patientInfo.setFormValues(this.heartBPatientinfo.patientInfo)
          this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)

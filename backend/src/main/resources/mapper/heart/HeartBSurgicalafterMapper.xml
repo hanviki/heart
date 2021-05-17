@@ -18,6 +18,7 @@
                     <result column="sh_shbfz" property="shShbfz"/>
                     <result column="sh_note" property="shNote"/>
                     <result column="shsf_zs" property="shsfZs"/>
+                    <result column="shsf_date" property="shsfDate"/>
                     <result column="shsf_sczt" property="shsfSczt"/>
                     <result column="shsf_death" property="shsfDeath"/>
                     <result column="shsf_death_date" property="shsfDeathDate"/>
@@ -35,7 +36,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, sh_ljfztqsj, sh_zcqgcg, sh_shicutime, sh_zcicu, sh_zcicutime, sh_shkxzx, sh_qtzcssyy, sh_shbfz, sh_note, shsf_zs, shsf_sczt, shsf_death, shsf_death_date, shsf_xxgzcgy, shsf_zcgysj, shsf_xfjb, shsf_xfjbsj, shsf_qtbfz, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, sh_ljfztqsj, sh_zcqgcg, sh_shicutime, sh_zcicu, sh_zcicutime, sh_shkxzx, sh_qtzcssyy, sh_shbfz, sh_note, shsf_zs,shsf_date, shsf_sczt, shsf_death, shsf_death_date, shsf_xxgzcgy, shsf_zcgysj, shsf_xfjb, shsf_xfjbsj, shsf_qtbfz, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
     </sql>
     <update id="updateHeartBSurgicalafter" parameterType="cc.mrbird.febs.heart.entity.HeartBSurgicalafter">
         update heart_b_surgicalafter
@@ -53,6 +54,7 @@
 <if test="shShbfz != null">sh_shbfz=#{shShbfz},</if>
 <if test="shNote != null">sh_note=#{shNote},</if>
 <if test="shsfZs != null">shsf_zs=#{shsfZs},</if>
+            <if test="shsfDate != null">shsf_date=#{shsfDate},</if>
 <if test="shsfSczt != null">shsf_sczt=#{shsfSczt},</if>
 <if test="shsfDeath != null">shsf_death=#{shsfDeath},</if>
 <if test="shsfDeathDate != null">shsf_death_date=#{shsfDeathDate},</if>
