@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -157,13 +158,13 @@ export default {
     },
     setFormValues ({ ...checkInfo }) {
       let fields = ['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw']
-      let fieldDates = []
+      let fieldDates = ['ssDate', 'ssDateend']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
+            if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
             }
             else {

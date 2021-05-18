@@ -164,53 +164,52 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      surgicalInfo: {},
+      afterSurgicalInfo: {},
       pfOptions
     }
   },
   methods: {
     reset () {
       this.loading = false
-      this.surgicalInfo = {}
+      this.afterSurgicalInfo = {}
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
+      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs','shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
-            this.surgicalInfo[_key] = values[_key]
+            this.afterSurgicalInfo[_key] = values[_key]
           }
-
         })
       }
-      return this.surgicalInfo
+      return this.afterSurgicalInfo
     },
-    setFormValues ({ ...checkInfo }) {
+    setFormValues ({ ...setAfterSurgicalInfo }) {
       let fields = ['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz']
       let fieldDates = ['shsfDeathDate', 'shsfZcgysj', 'shsfXfjbsj', 'shsfDate']
-      Object.keys(checkInfo).forEach((key) => {
+      Object.keys(setAfterSurgicalInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
-              obj[key] = moment(checkInfo[key])
+            if (setAfterSurgicalInfo[key] !== ''&&setAfterSurgicalInfo[key] !== null) {
+              obj[key] = moment(setAfterSurgicalInfo[key])
             }
             else {
               obj[key] = ''
             }
           } else {
             if(key=='shShbfz'){
-              obj[key] =JSON.parse(checkInfo[key])
-            } else {
-              obj[key] =checkInfo[key]
-            }
+              obj[key] =JSON.parse(setAfterSurgicalInfo[key])
+            } else {
+              obj[key] = setAfterSurgicalInfo[key]
+            }
           }
           this.form.setFieldsValue(obj)
         }
       })
-      this.surgicalInfo = checkInfo
+      this.afterSurgicalInfo = setAfterSurgicalInfo
     }
   }
 }

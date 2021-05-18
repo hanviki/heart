@@ -18,7 +18,6 @@
       </a-form-item>
       <a-form-item label="出院日期">
         <a-date-picker
-          showTime
           format='YYYY-MM-DD'
           v-decorator="['outHospital', {}]"
         />
@@ -56,7 +55,6 @@
       </a-form-item>
       <a-form-item label="死亡日期">
         <a-date-picker
-          showTime
           format='YYYY-MM-DD'
           v-decorator="['swsj', {}]"
         />
@@ -118,10 +116,6 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item label="糖尿病">
-        <a-input
-          placeholder="请输入糖尿病"
-          v-decorator="['tnb', {}]"
-        />
         <a-radio-group v-decorator="['tnb', {}]">
           <a-radio value="是">
            是
@@ -176,7 +170,6 @@
       </a-form-item>
       <a-form-item label="上次主动干预时间">
         <a-date-picker
-          showTime
           format='YYYY-MM-DD'
           v-decorator="['sczdgysj', {}]"
         />
@@ -212,7 +205,7 @@
 </template>
 
 <script>
-
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -222,6 +215,7 @@ export default {
     }
   },
   methods: {
+    moment,
     reset () {
       this.loading = false
       this.hospitalInfo = {}
@@ -241,13 +235,13 @@ export default {
     },
     setFormValues ({ ...checkInfo }) {
       let fields = ['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'swsj', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj']
-      let fieldDates = []
+      let fieldDates = ['inHospital', 'outHospital', 'swsj', 'sczdgysj']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
+            if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
             }
             else {

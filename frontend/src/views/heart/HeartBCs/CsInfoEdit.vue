@@ -120,6 +120,7 @@
 
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -134,6 +135,7 @@ export default {
   },
    components: {MutiUploadFile} ,
   methods: {
+    moment,
     reset () {
       this.loading = false
       this.csInfo = {}
@@ -161,7 +163,7 @@ export default {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (csInfo[key] !== '') {
+            if (csInfo[key] !== ''&&csInfo[key] !== null) {
               obj[key] = moment(csInfo[key])
             }
             else {

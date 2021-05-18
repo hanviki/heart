@@ -180,7 +180,6 @@ export default {
           if (values[_key] !== undefined) {
             this.surgicalInfo[_key] = values[_key]
           }
-
         })
       }
       return this.surgicalInfo

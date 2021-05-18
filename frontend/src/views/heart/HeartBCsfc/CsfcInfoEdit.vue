@@ -111,12 +111,19 @@
           style="width:100%;"
         />
       </a-form-item>
+      <a-form-item label="超声检查时间">
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-decorator="['csjcsj', {}]"
+        />
+      </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -138,6 +145,7 @@ export default {
   },
    components: {MutiUploadFile} ,
   methods: {
+    moment,
     reset () {
       this.loading = false
       this.csfcInfo = {}
@@ -145,7 +153,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj'])
+      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -158,14 +166,14 @@ export default {
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj']
-      let fieldDates = []
+      let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj']
+      let fieldDates = ['csjcsj']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
+             if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
             }
             else {

@@ -387,6 +387,7 @@
 
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
+import moment from 'moment'
 const jcOptions = ['右无交界', '左无交界', '左右交界', '无窦', '右窦', '左窦', '右冠', '左冠',
   '无名', '右颈总', '右锁下', '左颈总', '左锁骨下',
   '腹腔干', '肠系膜上', '左肾脉动', '右肾脉动', '左髂脉动', '右髂脉动']
@@ -415,6 +416,7 @@ export default {
    // this.fetch()
   },
   methods: {
+    moment,
     reset () {
       this.loading = false
       this.ctInfo = {}
@@ -442,18 +444,18 @@ export default {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
+            if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
             }
             else {
               obj[key] = ''
             }
           } else {
-            if(key=='ctJcljfw' || key =='ctZdmjctszx'){
-              obj[key] =JSON.parse(checkInfo[key])
-            } else {
-              obj[key] = checkInfo[key]
-            }
+            if(key=='ctJcljfw' || key =='ctZdmjctszx'){
+              obj[key] =JSON.parse(checkInfo[key])
+            } else {
+              obj[key] = checkInfo[key]
+            }
           }
           this.form.setFieldsValue(obj)
         }

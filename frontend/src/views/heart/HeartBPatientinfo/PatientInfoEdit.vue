@@ -202,7 +202,7 @@ export default {
     },
   setFormValues ({ ...checkInfo }) {
       let fields = ['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote']
-      let fieldDates = ['deathDate']
+      let fieldDates = ['inCheck', 'deathDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)

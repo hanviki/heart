@@ -262,6 +262,7 @@
 
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -282,6 +283,7 @@ export default {
   },
   components: { MutiUploadFile },
   methods: {
+    moment,
     reset () {
       this.loading = false
       this.ctfcInfo = {}
@@ -303,13 +305,13 @@ export default {
     },
     setFormValues ({ ...checkInfo }) {
       let fields = ['ctDate', 'zjwdwzCode', 'dzj', 'szmdzj', 'zdmgzj', 'xzdmsdzj', 'xzdmsdjqxzzj', 'xzdmzdzj', 'xzdmzdjqzj', 'xzdmxdzj', 'xzdmxdjqzj', 'fzdmsdzj', 'fzdmsdjqzj', 'fzdmxdzj', 'fzdmxdjqzj', 'jdwhkl', 'ydwhkl', 'szzwxz', 'gbxz', 'jqzg', 'fqqzg', 'zsmdzg', 'ysmdzg', 'zkzzg', 'ykzzg', 'rgxgycsm', 'dmlykz', 'zjycsm']
-      let fieldDates = []
+      let fieldDates = ['ctDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '') {
+           if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
             }
             else {

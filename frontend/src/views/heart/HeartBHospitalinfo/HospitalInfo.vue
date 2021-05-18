@@ -18,7 +18,6 @@
       </a-form-item>
       <a-form-item label="出院日期">
         <a-date-picker
-          showTime
           format='YYYY-MM-DD'
           v-decorator="['outHospital', {}]"
         />
@@ -56,7 +55,6 @@
       </a-form-item>
       <a-form-item label="死亡日期">
         <a-date-picker
-          showTime
           format='YYYY-MM-DD'
           v-decorator="['swsj', {}]"
         />
@@ -118,10 +116,6 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item label="糖尿病">
-        <a-input
-          placeholder="请输入糖尿病"
-          v-decorator="['tnb', {}]"
-        />
         <a-radio-group v-decorator="['tnb', {}]">
           <a-radio value="是">
            是
@@ -176,7 +170,6 @@
       </a-form-item>
       <a-form-item label="上次主动干预时间">
         <a-date-picker
-          showTime
           format='YYYY-MM-DD'
           v-decorator="['sczdgysj', {}]"
         />
