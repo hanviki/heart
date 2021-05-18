@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Param;
 public interface HeartBSurgicalafterMapper extends BaseMapper<HeartBSurgicalafter> {
         void updateHeartBSurgicalafter(HeartBSurgicalafter heartBSurgicalafter);
 
-        @Delete("update heart_b_surgicalafter set IS_DELETEMARK=0 where fileNo=#{fileNo}")
+        @Delete("update heart_b_surgicalafter set IS_DELETEMARK=0 where file_no=#{fileNo}")
         void deleteByFileNo(@Param(value = "fileNo") String fileNo);
         }

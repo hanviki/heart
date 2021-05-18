@@ -201,7 +201,7 @@ export default {
           this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields()
           this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields()
           this.heartBPatientinfo.surgicalInfo = this.$refs.surgicalInfo.setFields()
-          this.heartBPatientinfo.checkInfo = this.$refs.surAfterInfo.setFields()
+          this.heartBPatientinfo.surAfterInfo = this.$refs.surAfterInfo.setFields()
           this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
           this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()

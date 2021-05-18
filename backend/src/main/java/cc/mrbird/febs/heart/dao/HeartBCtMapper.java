@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Param;
 public interface HeartBCtMapper extends BaseMapper<HeartBCt> {
         void updateHeartBCt(HeartBCt heartBCt);
 
-        @Delete("update heart_b_ct set IS_DELETEMARK=0 where fileNo=#{fileNo}")
+        @Delete("update heart_b_ct set IS_DELETEMARK=0 where file_no=#{fileNo}")
         void deleteByFileNo(@Param(value = "fileNo") String fileNo);
         }

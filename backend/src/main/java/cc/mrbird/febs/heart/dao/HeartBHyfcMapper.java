@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Param;
 public interface HeartBHyfcMapper extends BaseMapper<HeartBHyfc> {
         void updateHeartBHyfc(HeartBHyfc heartBHyfc);
 
-        @Delete("update heart_b_hyfc set IS_DELETEMARK=0 where fileNo=#{fileNo}")
+        @Delete("update heart_b_hyfc set IS_DELETEMARK=0 where file_no=#{fileNo}")
         void deleteByFileNo(@Param(value = "fileNo") String fileNo);
         }

@@ -201,7 +201,11 @@ export default {
               obj[key] = ''
             }
           } else {
-            obj[key] = checkInfo[key]
+            if(key=='shShbfz'){
+              obj[key] =JSON.parse(checkInfo[key])
+            } else {
+              obj[key] =checkInfo[key]
+            }
           }
           this.form.setFieldsValue(obj)
         }
