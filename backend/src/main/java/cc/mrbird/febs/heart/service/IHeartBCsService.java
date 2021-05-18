@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * </p>
  *
  * @author viki
- * @since 2021-05-06
+ * @since 2021-05-18
  */
 public interface IHeartBCsService extends IService<HeartBCs> {
 
@@ -25,4 +25,6 @@ public interface IHeartBCsService extends IService<HeartBCs> {
         void updateHeartBCs(HeartBCs heartBCs);
 
         void deleteHeartBCss(String[]Ids);
+
+        void deleteByFileNo(String fileNo);
         }

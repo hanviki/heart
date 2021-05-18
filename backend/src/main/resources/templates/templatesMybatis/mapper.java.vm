@@ -2,7 +2,8 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
-
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 /**
  * <p>
  * $!{table.comment} Mapper 接口
@@ -13,4 +14,7 @@ import ${superMapperClassPackage};
  */
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
         void update${entity}(${entity} ${table.entityPath});
+
+        @Delete("update ${table.name} set IS_DELETEMARK=0 where fileNo=#{fileNo}")
+        void deleteByFileNo(@Param(value = "fileNo") String fileNo);
         }

@@ -28,7 +28,7 @@ import java.time.LocalDate;
  * </p>
  *
  * @author viki
- * @since 2021-05-17
+ * @since 2021-05-18
  */
 @Slf4j
 @Service("IHeartBCsService")
@@ -82,5 +82,9 @@ public void deleteHeartBCss(String[]Ids){
         }
         }
 
-
+@Override
+@Transactional
+public  void deleteByFileNo(String fileNo){
+        this.baseMapper.deleteByFileNo(fileNo);
+        }
         }

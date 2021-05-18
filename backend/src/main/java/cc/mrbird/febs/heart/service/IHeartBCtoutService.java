@@ -10,11 +10,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
  * <p>
- *  服务类
+ * 出院复查CT6 服务类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-18
  */
 public interface IHeartBCtoutService extends IService<HeartBCtout> {
 
@@ -25,4 +25,6 @@ public interface IHeartBCtoutService extends IService<HeartBCtout> {
         void updateHeartBCtout(HeartBCtout heartBCtout);
 
         void deleteHeartBCtouts(String[]Ids);
+
+        void deleteByFileNo(String fileNo);
         }

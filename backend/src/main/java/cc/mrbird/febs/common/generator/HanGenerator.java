@@ -174,12 +174,12 @@ public class HanGenerator {
         // 放置自己项目的 src/main/resources/templates 目录下, 默认名称一下可以不配置，也可以自定义模板名称
         TemplateConfig tc = new TemplateConfig();
         tc.setController("");
-        tc.setService("");
+        tc.setService("/templates/templatesMybatis/service.java.vm");
         tc.setServiceImpl("/templates/templatesMybatis/serviceImpl.java.vm");
         tc.setEntity("");
        // tc.setMapper("/templates/templatesMybatis/mapper.java.vm");
       //  tc.setXml("/templates/templatesMybatis/mapper.xml.vm");
-         tc.setMapper("");
+         tc.setMapper("/templates/templatesMybatis/mapper.java.vm");
          tc.setXml("");
         // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
         mpg.setTemplate(tc);

@@ -82,5 +82,9 @@ public void delete${entity}s(String[]Ids){
         }
         }
 
-
+@Override
+@Transactional
+public  void deleteByFileNo(String fileNo){
+        this.baseMapper.deleteByFileNo(fileNo);
+        }
         }

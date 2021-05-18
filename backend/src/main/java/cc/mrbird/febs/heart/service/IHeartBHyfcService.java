@@ -10,11 +10,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
  * <p>
- *  服务类
+ * 化验复查 服务类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-18
  */
 public interface IHeartBHyfcService extends IService<HeartBHyfc> {
 
@@ -25,4 +25,6 @@ public interface IHeartBHyfcService extends IService<HeartBHyfc> {
         void updateHeartBHyfc(HeartBHyfc heartBHyfc);
 
         void deleteHeartBHyfcs(String[]Ids);
+
+        void deleteByFileNo(String fileNo);
         }

@@ -10,11 +10,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
  * <p>
- *  服务类
+ * 住院病历资料 服务类
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-05-18
  */
 public interface IHeartBHospitalinfoService extends IService<HeartBHospitalinfo> {
 
@@ -25,4 +25,6 @@ public interface IHeartBHospitalinfoService extends IService<HeartBHospitalinfo>
         void updateHeartBHospitalinfo(HeartBHospitalinfo heartBHospitalinfo);
 
         void deleteHeartBHospitalinfos(String[]Ids);
+
+        void deleteByFileNo(String fileNo);
         }
