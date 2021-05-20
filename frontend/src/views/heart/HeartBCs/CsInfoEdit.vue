@@ -2,7 +2,7 @@
   <div>
     <a-form :form="form">
        <a-divider orientation="left" style="font-size:14px;">4. 超声</a-divider>
-       <muti-uploadFile :baseId="baseId"></muti-uploadFile>
+       <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
       <a-form-item
         
         label="AVR"
@@ -122,6 +122,11 @@
 import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
 export default {
+  props: {
+    isEdit: {
+        default: true
+    }
+  },
   data () {
     return {
       loading: false,

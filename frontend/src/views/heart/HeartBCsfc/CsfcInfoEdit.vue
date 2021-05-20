@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form">
-       <muti-uploadFile :baseId="baseId"></muti-uploadFile>
+       <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
       <a-form-item
         label="AVR"
       >
@@ -125,23 +125,25 @@
 import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
 export default {
+  props: {
+    isEdit: {
+      default: true
+    },
+    checkInfo: {
+      default: {}
+    }
+  },
   data () {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      csfcInfo:{
-              
-        },
+      csfcInfo:{     
+      },
       baseId: ''
     }
   },
   mounted () {
     this.setFormValues(this.checkInfo)
-  },
-  props: {
-    checkInfo: {
-      default: {}
-    }
   },
    components: {MutiUploadFile} ,
   methods: {

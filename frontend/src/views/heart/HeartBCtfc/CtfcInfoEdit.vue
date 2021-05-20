@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form">
-      <muti-uploadFile :baseId="baseId"></muti-uploadFile>
+      <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
       <a-form-item label="CT复查时间">
         <a-date-picker v-decorator="[ 'ctDate', {}]" />
       </a-form-item>
@@ -264,6 +264,14 @@
 import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
 export default {
+  props: {
+    checkInfo: {
+      default: {}
+    },
+    isEdit: {
+      default: true
+    }
+  },
   data () {
     return {
       loading: false,
@@ -274,12 +282,6 @@ export default {
   },
   mounted () {
     this.setFormValues(this.checkInfo)
-  },
-
-  props: {
-    checkInfo: {
-      default: {}
-    }
   },
   components: { MutiUploadFile },
   methods: {

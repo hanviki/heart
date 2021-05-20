@@ -56,7 +56,9 @@ public IPage<HeartBCtout> findHeartBCtouts(QueryRequest request, HeartBCtout hea
 @Override
 @Transactional
 public void createHeartBCtout(HeartBCtout heartBCtout){
-        heartBCtout.setId(UUID.randomUUID().toString());
+        if(heartBCtout.getId() ==null) {
+                heartBCtout.setId(UUID.randomUUID().toString());
+        }
         heartBCtout.setCreateTime(new Date());
         heartBCtout.setIsDeletemark(1);
         this.save(heartBCtout);

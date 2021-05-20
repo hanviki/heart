@@ -4,7 +4,7 @@
       
        <a-divider orientation="left" style="font-size:14px;">5. 术前CT</a-divider>
        <a-divider orientation="left" style="font-size:14px;">2.5.1、直径测量</a-divider>
-       <muti-uploadFile :baseId="baseId"></muti-uploadFile>
+       <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
      
       <a-form-item
         
@@ -401,6 +401,11 @@ const zdmOptions = [
   '升主动脉离断'
 ]
 export default {
+  props: {
+    isEdit: {
+        default: true
+    }
+  },
   data () {
     return {
       loading: false,

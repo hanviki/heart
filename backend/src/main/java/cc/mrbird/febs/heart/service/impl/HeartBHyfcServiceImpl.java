@@ -56,7 +56,9 @@ public IPage<HeartBHyfc> findHeartBHyfcs(QueryRequest request, HeartBHyfc heartB
 @Override
 @Transactional
 public void createHeartBHyfc(HeartBHyfc heartBHyfc){
-        heartBHyfc.setId(UUID.randomUUID().toString());
+        if(heartBHyfc.getId() ==null) {
+                heartBHyfc.setId(UUID.randomUUID().toString());
+        }
         heartBHyfc.setCreateTime(new Date());
         heartBHyfc.setIsDeletemark(1);
         this.save(heartBHyfc);

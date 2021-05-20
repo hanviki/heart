@@ -4,6 +4,7 @@
     <a-button
       icon="plus"
       @click="AddCtfc"
+      v-show="isEdit"
     >
     </a-button>
     <a-collapse v-model="activeKey" accordion>
@@ -13,10 +14,11 @@
         :key="item.id"
         :forceRender="true"
       >
-        <ctfc-info :ref="'fc'+index" :checkInfo="item"></ctfc-info>
+        <ctfc-info :ref="'fc'+index" :checkInfo="item" :isEdit="isEdit"></ctfc-info>
          <a-icon
           slot="extra"
           type="close"
+          v-show="isEdit"
           @click="e => handleClick(e,item)"
         />
       </a-collapse-panel>
@@ -27,6 +29,11 @@
       <script>
 import CtfcInfo from './CtfcInfoEdit'
 export default {
+  props: {
+    isEdit: {
+        default: true
+    }
+  },
   data () {
     return {
       loading: false,

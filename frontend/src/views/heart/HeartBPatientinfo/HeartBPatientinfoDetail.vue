@@ -38,21 +38,21 @@
         tab="超声"
         force-render
       >
-        <cs-info ref="csInfo"></cs-info>
+        <cs-info ref="csInfo" :isEdit="false"></cs-info>
       </a-tab-pane>
        <a-tab-pane
         key="5"
         tab="术前CT"
         force-render
       >
-        <ct-info ref="ctInfo"></ct-info>
+        <ct-info ref="ctInfo" :isEdit="false"></ct-info>
       </a-tab-pane>
       <a-tab-pane
         key="6"
         tab="出院复查CT"
         force-render
       >
-        <out-info ref="outInfo"></out-info>
+        <out-info ref="outInfo" :isEdit="false"></out-info>
       </a-tab-pane>
        <a-tab-pane
         key="7"
@@ -75,21 +75,21 @@
         tab="超声复查"
         force-render
       >
-        <fc-info ref="fcInfo"></fc-info>
+        <fc-info ref="fcInfo" :isEdit="false"></fc-info>
       </a-tab-pane> 
       <a-tab-pane
         key="10"
         tab="CT复查"
         force-render
       >
-        <fcct-info ref="fcctInfo"></fcct-info>
+        <fcct-info ref="fcctInfo" :isEdit="false"></fcct-info>
       </a-tab-pane> 
        <a-tab-pane
         key="11"
         tab="化验复查"
         force-render
       >
-        <fchy-info ref="fchyInfo"></fchy-info>
+        <fchy-info ref="fchyInfo" :isEdit="false"></fchy-info>
       </a-tab-pane> 
     </a-tabs>
   </a-drawer>

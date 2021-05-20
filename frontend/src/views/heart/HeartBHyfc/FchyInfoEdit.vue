@@ -4,6 +4,7 @@
     <a-button
       icon="plus"
       @click="AddHyfc"
+      v-show="isEdit"
     >
     </a-button>
     <a-collapse v-model="activeKey" accordion>
@@ -17,6 +18,7 @@
          <a-icon
           slot="extra"
           type="close"
+          v-show="isEdit"
           @click="e => handleClick(e,item)"
         />
       </a-collapse-panel>
@@ -27,6 +29,11 @@
       <script>
 import HyfcInfo from './HyfcInfoEdit'
 export default {
+  props: {
+    isEdit: {
+      default: true
+    }
+  },
   data () {
     return {
       loading: false,

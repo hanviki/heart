@@ -5,7 +5,7 @@
         orientation="left"
         style="font-size:14px;"
       >6. 出院复查CT</a-divider>
-       <muti-uploadFile :baseId="baseId"></muti-uploadFile>
+       <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
       <a-form-item label="支架末端位置(胸椎序号)">
         <a-input
           placeholder="请输入支架末端位置(胸椎序号)"
@@ -265,6 +265,11 @@
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
 export default {
+  props: {
+    isEdit: {
+        default: true
+    }
+  },
   data () {
     return {
       loading: false,

@@ -56,7 +56,9 @@ public IPage<HeartBSurgicalafter> findHeartBSurgicalafters(QueryRequest request,
 @Override
 @Transactional
 public void createHeartBSurgicalafter(HeartBSurgicalafter heartBSurgicalafter){
-        heartBSurgicalafter.setId(UUID.randomUUID().toString());
+        if(heartBSurgicalafter.getId() ==null) {
+                heartBSurgicalafter.setId(UUID.randomUUID().toString());
+        }
         heartBSurgicalafter.setCreateTime(new Date());
         heartBSurgicalafter.setIsDeletemark(1);
         this.save(heartBSurgicalafter);

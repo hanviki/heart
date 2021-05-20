@@ -56,7 +56,9 @@ public IPage<HeartBSurgical> findHeartBSurgicals(QueryRequest request, HeartBSur
 @Override
 @Transactional
 public void createHeartBSurgical(HeartBSurgical heartBSurgical){
-        heartBSurgical.setId(UUID.randomUUID().toString());
+        if(heartBSurgical.getId() ==null) {
+                heartBSurgical.setId(UUID.randomUUID().toString());
+        }
         heartBSurgical.setCreateTime(new Date());
         heartBSurgical.setIsDeletemark(1);
         this.save(heartBSurgical);

@@ -234,7 +234,7 @@ export default {
   props: {
     checkInfo: {
       default: {}
-    }
+    },
   },
    mounted () {
     this.setFormValues(this.checkInfo)

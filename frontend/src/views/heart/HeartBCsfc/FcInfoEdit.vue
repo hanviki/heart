@@ -7,6 +7,7 @@
     <a-button
       icon="plus"
       @click="AddCsfc"
+      v-show="isEdit"
     >
     </a-button>
     <a-collapse
@@ -22,10 +23,12 @@
         <csfc-info
           :ref="'fc'+index"
           :checkInfo="item"
+          :isEdit="isEdit"
         ></csfc-info>
         <a-icon
           slot="extra"
           type="close"
+          v-show="isEdit"
           @click="e => handleClick(e,item)"
         />
       </a-collapse-panel>
@@ -36,6 +39,11 @@
       <script>
 import CsfcInfo from './CsfcInfoEdit.vue'
 export default {
+  props: {
+    isEdit: {
+      default: true
+    }
+  },
   data () {
     return {
       loading: false,
