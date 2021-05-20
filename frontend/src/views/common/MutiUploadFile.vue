@@ -5,9 +5,10 @@
       :remove="handleRemove"
       :beforeUpload="beforeUpload"
       @change="handleChange"
+      :disabled="!isEdit"
     >
-      <a-button>
-        <a-icon type="upload"  /> 选择图片
+      <a-button  v-show="isEdit">
+        <a-icon type="upload" /> 选择图片
       </a-button>
     </a-upload>
 </template>
@@ -27,6 +28,9 @@ export default {
   props: {
     baseId: {
       default: ''
+    },
+    isEdit: {
+      default: true
     }
   },
   watch: {
