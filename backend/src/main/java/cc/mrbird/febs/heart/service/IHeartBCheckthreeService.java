@@ -1,0 +1,30 @@
+package cc.mrbird.febs.heart.service;
+
+import cc.mrbird.febs.heart.entity.HeartBCheckthree;
+import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.List;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import cc.mrbird.febs.common.domain.QueryRequest;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
+/**
+ * <p>
+ * 血气分析 服务类
+ * </p>
+ *
+ * @author viki
+ * @since 2021-05-21
+ */
+public interface IHeartBCheckthreeService extends IService<HeartBCheckthree> {
+
+        IPage<HeartBCheckthree> findHeartBCheckthrees(QueryRequest request, HeartBCheckthree heartBCheckthree);
+
+        void createHeartBCheckthree(HeartBCheckthree heartBCheckthree);
+
+        void updateHeartBCheckthree(HeartBCheckthree heartBCheckthree);
+
+        void deleteHeartBCheckthrees(String[]Ids);
+
+        void deleteByFileNo(String fileNo);
+        }

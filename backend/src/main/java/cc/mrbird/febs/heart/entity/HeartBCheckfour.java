@@ -15,17 +15,17 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 心梗三项
+ * 肝肾功
  * </p>
  *
  * @author viki
  * @since 2021-05-21
  */
 
-@Excel("heart_b_check")
+@Excel("heart_b_checkfour")
 @Data
 @Accessors(chain = true)
-public class HeartBCheck implements Serializable{
+public class HeartBCheckfour implements Serializable{
 
 private static final long serialVersionUID=1L;
 
@@ -58,32 +58,46 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
-     * 肌红蛋白
+     * 血肌肝
      */
         
-        @ExcelField(value ="肌红蛋白")
-    private BigDecimal jhdb;
+        @ExcelField(value ="血肌肝")
+    private BigDecimal xjg;
 
     /**
-     * 肌钙蛋白
+     * ALT
      */
         
-        @ExcelField(value ="肌钙蛋白")
-    private BigDecimal jgdb;
+        @ExcelField(value ="ALT")
+    private BigDecimal alt;
 
     /**
-     * CK-MB
+     * AST
      */
         
-        @ExcelField(value ="CK-MB")
-    private BigDecimal ckmb;
+        @ExcelField(value ="AST")
+    private BigDecimal ast;
 
     /**
-     * 超敏肌钙蛋白（optional）
+     * 总胆红素
      */
         
-        @ExcelField(value ="超敏肌钙蛋白（optional）")
-    private BigDecimal cmjgdb;
+        @ExcelField(value ="总胆红素")
+    private BigDecimal zdhs;
+
+    /**
+     * 直接胆红素
+     */
+        
+        @ExcelField(value ="直接胆红素")
+    private BigDecimal zjdhs;
+
+    /**
+     * 淀粉酶
+     */
+        
+        @ExcelField(value ="淀粉酶")
+    private BigDecimal dfm;
 
     /**
      * 是否删除
@@ -119,7 +133,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     /**
      * 修改人
@@ -127,7 +141,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Integer modifyUserId;
+    private Long modifyUserId;
 
 
 
@@ -139,13 +153,17 @@ private static final long serialVersionUID=1L;
 
     public static final String NAME ="name" ;
 
-    public static final String JHDB ="jhdb" ;
+    public static final String XJG ="xjg" ;
 
-    public static final String JGDB ="jgdb" ;
+    public static final String ALT ="alt" ;
 
-    public static final String CKMB ="ckmb" ;
+    public static final String AST ="ast" ;
 
-    public static final String CMJGDB ="cmjgdb" ;
+    public static final String ZDHS ="zdhs" ;
+
+    public static final String ZJDHS ="zjdhs" ;
+
+    public static final String DFM ="dfm" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

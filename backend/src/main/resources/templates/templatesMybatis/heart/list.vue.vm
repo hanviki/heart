@@ -44,9 +44,9 @@
         </div>
         <div>
             <div class="operator">
-                <a-button v-hasPermission="['heartBCheck:add']" type="primary" ghost @click="add">新增</a-button>
-                <a-button v-hasPermission="['heartBCheck:delete']" @click="batchDelete">删除</a-button>
-                <a-dropdown v-hasPermission="['heartBCheck:export']">
+                <a-button v-hasPermission="['${table.entityPath}:add']" type="primary" ghost @click="add">新增</a-button>
+                <a-button v-hasPermission="['${table.entityPath}:delete']" @click="batchDelete">删除</a-button>
+                <a-dropdown v-hasPermission="['${table.entityPath}:export']">
                     <a-menu slot="overlay">
                         <a-menu-item key="export-data" @click="exportExcel">导出Excel</a-menu-item>
                     </a-menu>
@@ -75,34 +75,34 @@
                     </a-popover>
                 </template>
                 <template slot="operation" slot-scope="text, record">
-                    <a-icon v-hasPermission="['heartBCheck:update']" type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修改"></a-icon>
-                    <a-badge v-hasNoPermission="['heartBCheck:update']" status="warning" text="无权限"></a-badge>
+                    <a-icon v-hasPermission="['${table.entityPath}:update']" type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修改"></a-icon>
+                    <a-badge v-hasNoPermission="['${table.entityPath}:update']" status="warning" text="无权限"></a-badge>
                 </template>
             </a-table>
         </div>
         <!-- 新增字典 -->
-        <heartBCheck-add
+        <${table.entityPath}-add
         @close="handleAddClose"
         @success="handleAddSuccess"
         :addVisiable="addVisiable">
-    </heartBCheck-add>
+    </${table.entityPath}-add>
     <!-- 修改字典 -->
-    <heartBCheck-edit
-    ref="heartBCheckEdit"
+    <${table.entityPath}-edit
+    ref="${table.entityPath}Edit"
     @close="handleEditClose"
     @success="handleEditSuccess"
     :editVisiable="editVisiable">
-</heartBCheck-edit>
+</${table.entityPath}-edit>
 </a-card>
 </template>
 
 <script>
-    import HeartBCheckAdd from './HeartBCheckAdd'
-    import HeartBCheckEdit from './HeartBCheckEdit'
+    import ${entity}Add from './${entity}Add'
+    import ${entity}Edit from './${entity}Edit'
 
     export default {
-        name: 'HeartBCheck',
-        components: {HeartBCheckAdd, HeartBCheckEdit},
+        name: '${entity}',
+        components: {${entity}Add, ${entity}Edit},
         data () {
             return {
                 advanced: false,
@@ -129,46 +129,16 @@
             columns () {
                 let { sortedInfo } = this
                 sortedInfo = sortedInfo || {}
-                return [                    {
-                            title: '主键自增',
-                        dataIndex: 'id'
-                    },                    {
-                            title: '用户帐号',
-                        dataIndex: 'username'
-                    },                    {
-                            title: '病案号',
-                        dataIndex: 'fileNo'
-                    },                    {
-                            title: '姓名',
-                        dataIndex: 'name'
-                    },                    {
-                            title: '肌红蛋白',
-                        dataIndex: 'jhdb'
-                    },                    {
-                            title: '肌钙蛋白',
-                        dataIndex: 'jgdb'
-                    },                    {
-                            title: 'CK-MB',
-                        dataIndex: 'ckmb'
-                    },                    {
-                            title: '超敏肌钙蛋白（optional）',
-                        dataIndex: 'cmjgdb'
-                    },                    {
-                            title: '是否删除',
-                        dataIndex: 'isDeletemark'
-                    },                    {
-                            title: '创建时间',
-                        dataIndex: 'createTime'
-                    },                    {
-                            title: '修改时间',
-                        dataIndex: 'modifyTime'
-                    },                    {
-                            title: '创建人',
-                        dataIndex: 'createUserId'
-                    },                    {
-                            title: '修改人',
-                        dataIndex: 'modifyUserId'
-                    },                    {
+                return [#foreach($field in ${table.fields})
+                    {
+                        #if(${field.comment}=='')
+                            title: '${field.propertyName}',
+                        #else
+                            title: '${field.comment}',
+                        #end
+                        dataIndex: '${field.propertyName}'
+                    },#end
+                    {
                         title: '操作',
                         dataIndex: 'operation',
                         scopedSlots: { customRender: 'operation' },
@@ -210,7 +180,7 @@
                 this.editVisiable = false
             },
             edit (record) {
-                this.$refs.heartBCheckEdit.setFormValues(record)
+                this.$refs.${table.entityPath}Edit.setFormValues(record)
                 this.editVisiable = true
             },
             batchDelete () {
@@ -224,8 +194,8 @@
                     content: '当您点击确定按钮后，这些记录将会被彻底删除',
                     centered: true,
                     onOk () {
-                        let heartBCheckIds = that.selectedRowKeys.join(',')
-                        that.$delete('heartBCheck/' + heartBCheckIds).then(() => {
+                        let ${table.entityPath}Ids = that.selectedRowKeys.join(',')
+                        that.$delete('${table.entityPath}/' + ${table.entityPath}Ids).then(() => {
                             that.$message.success('删除成功')
                                     that.selectedRowKeys = []
                             that.search()
@@ -244,7 +214,7 @@
                     sortField = sortedInfo.field
                     sortOrder = sortedInfo.order
                 }
-                this.$export('heartBCheck/excel', {
+                this.$export('${table.entityPath}/excel', {
                     sortField: sortField,
                     sortOrder: sortOrder,
                     ...this.queryParams
@@ -302,7 +272,7 @@
                     params.pageSize = this.pagination.defaultPageSize
                     params.pageNum = this.pagination.defaultCurrent
                 }
-                this.$get('heartBCheck', {
+                this.$get('${table.entityPath}', {
                     ...params
                 }).then((r) => {
                     let data = r.data

@@ -15,17 +15,17 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 心梗三项
+ * 血常规
  * </p>
  *
  * @author viki
  * @since 2021-05-21
  */
 
-@Excel("heart_b_check")
+@Excel("heart_b_checktwo")
 @Data
 @Accessors(chain = true)
-public class HeartBCheck implements Serializable{
+public class HeartBChecktwo implements Serializable{
 
 private static final long serialVersionUID=1L;
 
@@ -58,32 +58,39 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
-     * 肌红蛋白
+     * 红细胞计数
      */
         
-        @ExcelField(value ="肌红蛋白")
-    private BigDecimal jhdb;
+        @ExcelField(value ="红细胞计数")
+    private BigDecimal hxbjs;
 
     /**
-     * 肌钙蛋白
+     * 血红蛋白
      */
         
-        @ExcelField(value ="肌钙蛋白")
-    private BigDecimal jgdb;
+        @ExcelField(value ="血红蛋白")
+    private BigDecimal xhdb;
 
     /**
-     * CK-MB
+     * 白细胞计数
      */
         
-        @ExcelField(value ="CK-MB")
-    private BigDecimal ckmb;
+        @ExcelField(value ="白细胞计数")
+    private BigDecimal bxbjs;
 
     /**
-     * 超敏肌钙蛋白（optional）
+     * 中性粒细胞百分比
      */
         
-        @ExcelField(value ="超敏肌钙蛋白（optional）")
-    private BigDecimal cmjgdb;
+        @ExcelField(value ="中性粒细胞百分比")
+    private BigDecimal zxlxbbfb;
+
+    /**
+     * 血小板计数
+     */
+        
+        @ExcelField(value ="血小板计数")
+    private BigDecimal xxbjs;
 
     /**
      * 是否删除
@@ -119,7 +126,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     /**
      * 修改人
@@ -127,7 +134,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Integer modifyUserId;
+    private Long modifyUserId;
 
 
 
@@ -139,13 +146,15 @@ private static final long serialVersionUID=1L;
 
     public static final String NAME ="name" ;
 
-    public static final String JHDB ="jhdb" ;
+    public static final String HXBJS ="hxbjs" ;
 
-    public static final String JGDB ="jgdb" ;
+    public static final String XHDB ="xhdb" ;
 
-    public static final String CKMB ="ckmb" ;
+    public static final String BXBJS ="bxbjs" ;
 
-    public static final String CMJGDB ="cmjgdb" ;
+    public static final String ZXLXBBFB ="zxlxbbfb" ;
+
+    public static final String XXBJS ="xxbjs" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

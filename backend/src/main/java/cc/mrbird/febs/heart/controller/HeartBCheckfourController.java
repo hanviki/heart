@@ -6,8 +6,8 @@ import cc.mrbird.febs.common.domain.router.VueRouter;
 import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.domain.QueryRequest;
 
-import cc.mrbird.febs.heart.service.IHeartBCheckService;
-import cc.mrbird.febs.heart.entity.HeartBCheck;
+import cc.mrbird.febs.heart.service.IHeartBCheckfourService;
+import cc.mrbird.febs.heart.entity.HeartBCheckfour;
 
 import cc.mrbird.febs.common.utils.FebsUtil;
 import cc.mrbird.febs.system.domain.User;
@@ -34,26 +34,26 @@ import java.util.Map;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("heartBCheck")
+@RequestMapping("heartBCheckfour")
 
-public class HeartBCheckController extends BaseController{
+public class HeartBCheckfourController extends BaseController{
 
 private String message;
 @Autowired
-public IHeartBCheckService iHeartBCheckService;
+public IHeartBCheckfourService iHeartBCheckfourService;
 
 
 /**
  * 分页查询数据
  *
  * @param bootStrapTable  分页信息
- * @param heartBCheck 查询条件
+ * @param heartBCheckfour 查询条件
  * @return
  */
 @GetMapping
-@RequiresPermissions("heartBCheck:view")
-public Map<String, Object> List(QueryRequest request, HeartBCheck heartBCheck){
-        return getDataTable(this.iHeartBCheckService.findHeartBChecks(request, heartBCheck));
+@RequiresPermissions("heartBCheckfour:view")
+public Map<String, Object> List(QueryRequest request, HeartBCheckfour heartBCheckfour){
+        return getDataTable(this.iHeartBCheckfourService.findHeartBCheckfours(request, heartBCheckfour));
         }
 
 /**
@@ -65,13 +65,13 @@ public Map<String, Object> List(QueryRequest request, HeartBCheck heartBCheck){
  */
 @Log("新增/按钮")
 @PostMapping
-@RequiresPermissions("heartBCheck:add")
-public void addHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
+@RequiresPermissions("heartBCheckfour:add")
+public void addHeartBCheckfour(@Valid HeartBCheckfour heartBCheckfour)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
-    heartBCheck.setUsername(currentUser.getUsername());
-        heartBCheck.setCreateUserId(currentUser.getUserId());
-        this.iHeartBCheckService.createHeartBCheck(heartBCheck);
+    heartBCheckfour.setUsername(currentUser.getUsername());
+        heartBCheckfour.setCreateUserId(currentUser.getUserId());
+        this.iHeartBCheckfourService.createHeartBCheckfour(heartBCheckfour);
         }catch(Exception e){
         message="新增/按钮失败" ;
         log.error(message,e);
@@ -87,12 +87,12 @@ public void addHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
  */
 @Log("修改")
 @PutMapping
-@RequiresPermissions("heartBCheck:update")
-public void updateHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
+@RequiresPermissions("heartBCheckfour:update")
+public void updateHeartBCheckfour(@Valid HeartBCheckfour heartBCheckfour)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
-      heartBCheck.setModifyUserId(currentUser.getUserId());
-        this.iHeartBCheckService.updateHeartBCheck(heartBCheck);
+      heartBCheckfour.setModifyUserId(currentUser.getUserId());
+        this.iHeartBCheckfourService.updateHeartBCheckfour(heartBCheckfour);
         }catch(Exception e){
         message="修改失败" ;
         log.error(message,e);
@@ -103,11 +103,11 @@ public void updateHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsExceptio
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBCheck:delete")
-public void deleteHeartBChecks(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
+@RequiresPermissions("heartBCheckfour:delete")
+public void deleteHeartBCheckfours(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);
-        this.iHeartBCheckService.deleteHeartBChecks(arr_ids);
+        this.iHeartBCheckfourService.deleteHeartBCheckfours(arr_ids);
         }catch(Exception e){
         message="删除失败" ;
         log.error(message,e);
@@ -115,11 +115,11 @@ public void deleteHeartBChecks(@NotBlank(message = "{required}") @PathVariable S
         }
         }
 @PostMapping("excel")
-@RequiresPermissions("heartBCheck:export")
-public void export(QueryRequest request, HeartBCheck heartBCheck, HttpServletResponse response) throws FebsException {
+@RequiresPermissions("heartBCheckfour:export")
+public void export(QueryRequest request, HeartBCheckfour heartBCheckfour, HttpServletResponse response) throws FebsException {
         try {
-        List<HeartBCheck> heartBChecks = this.iHeartBCheckService.findHeartBChecks(request, heartBCheck).getRecords();
-        ExcelKit.$Export(HeartBCheck.class, response).downXlsx(heartBChecks, false);
+        List<HeartBCheckfour> heartBCheckfours = this.iHeartBCheckfourService.findHeartBCheckfours(request, heartBCheckfour).getRecords();
+        ExcelKit.$Export(HeartBCheckfour.class, response).downXlsx(heartBCheckfours, false);
         } catch (Exception e) {
         message = "导出Excel失败";
         log.error(message, e);
@@ -128,8 +128,8 @@ public void export(QueryRequest request, HeartBCheck heartBCheck, HttpServletRes
         }
 
 @GetMapping("/{id}")
-public HeartBCheck detail(@NotBlank(message = "{required}") @PathVariable String id) {
-    HeartBCheck heartBCheck=this.iHeartBCheckService.getById(id);
-        return heartBCheck;
+public HeartBCheckfour detail(@NotBlank(message = "{required}") @PathVariable String id) {
+    HeartBCheckfour heartBCheckfour=this.iHeartBCheckfourService.getById(id);
+        return heartBCheckfour;
         }
         }

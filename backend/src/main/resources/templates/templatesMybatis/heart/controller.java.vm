@@ -1,4 +1,4 @@
-package cc.mrbird.febs.heart.controller;
+package ${package.Controller};
 
 import cc.mrbird.febs.common.annotation.Log;
 import cc.mrbird.febs.common.controller.BaseController;
@@ -6,8 +6,8 @@ import cc.mrbird.febs.common.domain.router.VueRouter;
 import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.domain.QueryRequest;
 
-import cc.mrbird.febs.heart.service.IHeartBCheckService;
-import cc.mrbird.febs.heart.entity.HeartBCheck;
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
 
 import cc.mrbird.febs.common.utils.FebsUtil;
 import cc.mrbird.febs.system.domain.User;
@@ -28,32 +28,32 @@ import java.util.Map;
 
 /**
  *
- * @author viki
- * @since 2021-05-21
+ * @author ${author}
+ * @since ${date}
  */
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("heartBCheck")
+@RequestMapping("${table.entityPath}")
 
-public class HeartBCheckController extends BaseController{
+public class ${table.controllerName} extends BaseController{
 
 private String message;
 @Autowired
-public IHeartBCheckService iHeartBCheckService;
+public ${table.serviceName} i${entity}Service;
 
 
 /**
  * 分页查询数据
  *
  * @param bootStrapTable  分页信息
- * @param heartBCheck 查询条件
+ * @param ${table.entityPath} 查询条件
  * @return
  */
 @GetMapping
-@RequiresPermissions("heartBCheck:view")
-public Map<String, Object> List(QueryRequest request, HeartBCheck heartBCheck){
-        return getDataTable(this.iHeartBCheckService.findHeartBChecks(request, heartBCheck));
+@RequiresPermissions("${table.entityPath}:view")
+public Map<String, Object> List(QueryRequest request, ${entity} ${table.entityPath}){
+        return getDataTable(this.i${entity}Service.find${entity}s(request, ${table.entityPath}));
         }
 
 /**
@@ -65,13 +65,13 @@ public Map<String, Object> List(QueryRequest request, HeartBCheck heartBCheck){
  */
 @Log("新增/按钮")
 @PostMapping
-@RequiresPermissions("heartBCheck:add")
-public void addHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
+@RequiresPermissions("${table.entityPath}:add")
+public void add${entity}(@Valid ${entity} ${table.entityPath})throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
-    heartBCheck.setUsername(currentUser.getUsername());
-        heartBCheck.setCreateUserId(currentUser.getUserId());
-        this.iHeartBCheckService.createHeartBCheck(heartBCheck);
+    ${table.entityPath}.setUsername(currentUser.getUsername());
+        ${table.entityPath}.setCreateUserId(currentUser.getUserId());
+        this.i${entity}Service.create${entity}(${table.entityPath});
         }catch(Exception e){
         message="新增/按钮失败" ;
         log.error(message,e);
@@ -87,12 +87,12 @@ public void addHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
  */
 @Log("修改")
 @PutMapping
-@RequiresPermissions("heartBCheck:update")
-public void updateHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsException{
+@RequiresPermissions("${table.entityPath}:update")
+public void update${entity}(@Valid ${entity} ${table.entityPath})throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
-      heartBCheck.setModifyUserId(currentUser.getUserId());
-        this.iHeartBCheckService.updateHeartBCheck(heartBCheck);
+      ${table.entityPath}.setModifyUserId(currentUser.getUserId());
+        this.i${entity}Service.update${entity}(${table.entityPath});
         }catch(Exception e){
         message="修改失败" ;
         log.error(message,e);
@@ -103,11 +103,11 @@ public void updateHeartBCheck(@Valid HeartBCheck heartBCheck)throws FebsExceptio
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBCheck:delete")
-public void deleteHeartBChecks(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
+@RequiresPermissions("${table.entityPath}:delete")
+public void delete${entity}s(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);
-        this.iHeartBCheckService.deleteHeartBChecks(arr_ids);
+        this.i${entity}Service.delete${entity}s(arr_ids);
         }catch(Exception e){
         message="删除失败" ;
         log.error(message,e);
@@ -115,11 +115,11 @@ public void deleteHeartBChecks(@NotBlank(message = "{required}") @PathVariable S
         }
         }
 @PostMapping("excel")
-@RequiresPermissions("heartBCheck:export")
-public void export(QueryRequest request, HeartBCheck heartBCheck, HttpServletResponse response) throws FebsException {
+@RequiresPermissions("${table.entityPath}:export")
+public void export(QueryRequest request, ${entity} ${table.entityPath}, HttpServletResponse response) throws FebsException {
         try {
-        List<HeartBCheck> heartBChecks = this.iHeartBCheckService.findHeartBChecks(request, heartBCheck).getRecords();
-        ExcelKit.$Export(HeartBCheck.class, response).downXlsx(heartBChecks, false);
+        List<${entity}> ${table.entityPath}s = this.i${entity}Service.find${entity}s(request, ${table.entityPath}).getRecords();
+        ExcelKit.$Export(${entity}.class, response).downXlsx(${table.entityPath}s, false);
         } catch (Exception e) {
         message = "导出Excel失败";
         log.error(message, e);
@@ -128,8 +128,8 @@ public void export(QueryRequest request, HeartBCheck heartBCheck, HttpServletRes
         }
 
 @GetMapping("/{id}")
-public HeartBCheck detail(@NotBlank(message = "{required}") @PathVariable String id) {
-    HeartBCheck heartBCheck=this.iHeartBCheckService.getById(id);
-        return heartBCheck;
+public ${entity} detail(@NotBlank(message = "{required}") @PathVariable String id) {
+    ${entity} ${table.entityPath}=this.i${entity}Service.getById(id);
+        return ${table.entityPath};
         }
         }

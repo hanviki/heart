@@ -1,0 +1,78 @@
+<template>
+    <div>
+        <a-form :form="form">
+            #set ($nuType="Int,Decimal,Double,BigDecimal")
+            #foreach($field in ${table.fields})
+                <a-form-item v-bind="formItemLayout"
+                             label="${field.comment}">
+                    #if (${field.propertyType} =='Date'||${field.propertyType} =='LocalDate')
+                        <a-date-picker v-decorator="[ '${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{}#end]" />
+                    #elseif (${field.propertyType} =='DateTime' ||${field.propertyType} =='LocalDateTime' )
+                        <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ '${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{}#end]" />
+                    #elseif ($nuType.containsKey(${field.propertyType}))
+                        <a-input-number :precision="2"
+                                        style="width:100%;"
+                                        v-decorator="[ '${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{}#end]"/>
+                    #else
+                        <a-input placeholder="请输入${field.comment}" v-decorator="['${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{rules:[{max:100,message:'最长不超过100'}]}#end]" />
+                    #end
+                </a-form-item>
+            #end
+        </a-form>
+    </div>
+</template>
+
+<script>
+    export default {
+        data () {
+            return {
+                loading: false,
+                #[[form: this.$form.createForm(this),]]#
+                csfcInfo:{
+
+                },
+                baseId: ''
+            }
+        },
+        mounted () {
+            // this.fetch()
+        },
+        components: {} ,
+        methods: {
+            reset () {
+                this.loading = false
+                this.csfcInfo = {}
+                this.form.resetFields()
+                this.baseId = ''
+            },
+            setFields () {
+                #set ($i=0)
+                let values = this.form.getFieldsValue([#foreach($field in ${table.fields})
+                    #if(!$cfg.eliminateFileds.contains($field.name) && !${field.keyFlag})
+                        #if($i==1) , #end
+                        '${field.propertyName}'  #set ($i=1) #end
+                #end
+                ])
+                if (typeof values !== 'undefined') {
+                    Object.keys(values).forEach(_key => {
+                        if (values[_key] !== undefined) {
+                        this.csfcInfo[_key] = values[_key]
+                    }
+
+                })
+                }
+                this.csfcInfo.id= this.baseId
+                return this.csfcInfo
+            },
+            fetch () {
+                this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
+                    this.baseId =res.data.data
+                })
+                console.log('CsfcInfo Id 创建成功.')
+            }
+        }
+    }
+</script>
+
+<style>
+</style>

@@ -2,9 +2,9 @@ package cc.mrbird.febs.heart.service.impl;
 
 import cc.mrbird.febs.common.domain.QueryRequest;
 import cc.mrbird.febs.common.utils.SortUtil;
-import cc.mrbird.febs.heart.entity.HeartBCheck;
-import cc.mrbird.febs.heart.dao.HeartBCheckMapper;
-import cc.mrbird.febs.heart.service.IHeartBCheckService;
+import cc.mrbird.febs.heart.entity.HeartBCheckthree;
+import cc.mrbird.febs.heart.dao.HeartBCheckthreeMapper;
+import cc.mrbird.febs.heart.service.IHeartBCheckthreeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -24,27 +24,27 @@ import java.util.UUID;
 import java.time.LocalDate;
 /**
  * <p>
- * 心梗三项 服务实现类
+ * 血气分析 服务实现类
  * </p>
  *
  * @author viki
  * @since 2021-05-21
  */
 @Slf4j
-@Service("IHeartBCheckService")
+@Service("IHeartBCheckthreeService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class HeartBCheckServiceImpl extends ServiceImpl<HeartBCheckMapper, HeartBCheck> implements IHeartBCheckService {
+public class HeartBCheckthreeServiceImpl extends ServiceImpl<HeartBCheckthreeMapper, HeartBCheckthree> implements IHeartBCheckthreeService {
 
 
 @Override
-public IPage<HeartBCheck> findHeartBChecks(QueryRequest request, HeartBCheck heartBCheck){
+public IPage<HeartBCheckthree> findHeartBCheckthrees(QueryRequest request, HeartBCheckthree heartBCheckthree){
         try{
-        LambdaQueryWrapper<HeartBCheck> queryWrapper=new LambdaQueryWrapper<>();
-        if (StringUtils.isNotBlank(heartBCheck.getUsername())) {
-        queryWrapper.eq(HeartBCheck::getUsername, heartBCheck.getUsername());
+        LambdaQueryWrapper<HeartBCheckthree> queryWrapper=new LambdaQueryWrapper<>();
+        if (StringUtils.isNotBlank(heartBCheckthree.getUsername())) {
+        queryWrapper.eq(HeartBCheckthree::getUsername, heartBCheckthree.getUsername());
         }
-        queryWrapper.eq(HeartBCheck::getIsDeletemark, 1);//1是未删 0是已删
-        Page<HeartBCheck> page=new Page<>();
+        queryWrapper.eq(HeartBCheckthree::getIsDeletemark, 1);//1是未删 0是已删
+        Page<HeartBCheckthree> page=new Page<>();
         SortUtil.handlePageSort(request,page,true);
         return this.page(page,queryWrapper);
         }catch(Exception e){
@@ -55,30 +55,30 @@ public IPage<HeartBCheck> findHeartBChecks(QueryRequest request, HeartBCheck hea
 
 @Override
 @Transactional
-public void createHeartBCheck(HeartBCheck heartBCheck){
-        heartBCheck.setId(UUID.randomUUID().toString());
-        heartBCheck.setCreateTime(new Date());
-        heartBCheck.setIsDeletemark(1);
-        this.save(heartBCheck);
+public void createHeartBCheckthree(HeartBCheckthree heartBCheckthree){
+        heartBCheckthree.setId(UUID.randomUUID().toString());
+        heartBCheckthree.setCreateTime(new Date());
+        heartBCheckthree.setIsDeletemark(1);
+        this.save(heartBCheckthree);
         }
 
 @Override
 @Transactional
-public void updateHeartBCheck(HeartBCheck heartBCheck){
-        heartBCheck.setModifyTime(new Date());
-        this.baseMapper.updateHeartBCheck(heartBCheck);
+public void updateHeartBCheckthree(HeartBCheckthree heartBCheckthree){
+        heartBCheckthree.setModifyTime(new Date());
+        this.baseMapper.updateHeartBCheckthree(heartBCheckthree);
         }
 
 @Override
 @Transactional
-public void deleteHeartBChecks(String[]Ids){
+public void deleteHeartBCheckthrees(String[]Ids){
         List<String> list=Arrays.asList(Ids);
         for (String id: list
         ) {
-        HeartBCheck heartBCheck =new HeartBCheck();
-        heartBCheck.setId(id);
-        heartBCheck.setIsDeletemark(0);
-        this.baseMapper.updateHeartBCheck(heartBCheck);
+        HeartBCheckthree heartBCheckthree =new HeartBCheckthree();
+        heartBCheckthree.setId(id);
+        heartBCheckthree.setIsDeletemark(0);
+        this.baseMapper.updateHeartBCheckthree(heartBCheckthree);
         }
         }
 

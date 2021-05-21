@@ -44,9 +44,9 @@
         </div>
         <div>
             <div class="operator">
-                <a-button v-hasPermission="['heartBCheck:add']" type="primary" ghost @click="add">新增</a-button>
-                <a-button v-hasPermission="['heartBCheck:delete']" @click="batchDelete">删除</a-button>
-                <a-dropdown v-hasPermission="['heartBCheck:export']">
+                <a-button v-hasPermission="['heartBChecktwo:add']" type="primary" ghost @click="add">新增</a-button>
+                <a-button v-hasPermission="['heartBChecktwo:delete']" @click="batchDelete">删除</a-button>
+                <a-dropdown v-hasPermission="['heartBChecktwo:export']">
                     <a-menu slot="overlay">
                         <a-menu-item key="export-data" @click="exportExcel">导出Excel</a-menu-item>
                     </a-menu>
@@ -75,34 +75,34 @@
                     </a-popover>
                 </template>
                 <template slot="operation" slot-scope="text, record">
-                    <a-icon v-hasPermission="['heartBCheck:update']" type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修改"></a-icon>
-                    <a-badge v-hasNoPermission="['heartBCheck:update']" status="warning" text="无权限"></a-badge>
+                    <a-icon v-hasPermission="['heartBChecktwo:update']" type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修改"></a-icon>
+                    <a-badge v-hasNoPermission="['heartBChecktwo:update']" status="warning" text="无权限"></a-badge>
                 </template>
             </a-table>
         </div>
         <!-- 新增字典 -->
-        <heartBCheck-add
+        <heartBChecktwo-add
         @close="handleAddClose"
         @success="handleAddSuccess"
         :addVisiable="addVisiable">
-    </heartBCheck-add>
+    </heartBChecktwo-add>
     <!-- 修改字典 -->
-    <heartBCheck-edit
-    ref="heartBCheckEdit"
+    <heartBChecktwo-edit
+    ref="heartBChecktwoEdit"
     @close="handleEditClose"
     @success="handleEditSuccess"
     :editVisiable="editVisiable">
-</heartBCheck-edit>
+</heartBChecktwo-edit>
 </a-card>
 </template>
 
 <script>
-    import HeartBCheckAdd from './HeartBCheckAdd'
-    import HeartBCheckEdit from './HeartBCheckEdit'
+    import HeartBChecktwoAdd from './HeartBChecktwoAdd'
+    import HeartBChecktwoEdit from './HeartBChecktwoEdit'
 
     export default {
-        name: 'HeartBCheck',
-        components: {HeartBCheckAdd, HeartBCheckEdit},
+        name: 'HeartBChecktwo',
+        components: {HeartBChecktwoAdd, HeartBChecktwoEdit},
         data () {
             return {
                 advanced: false,
@@ -142,17 +142,20 @@
                             title: '姓名',
                         dataIndex: 'name'
                     },                    {
-                            title: '肌红蛋白',
-                        dataIndex: 'jhdb'
+                            title: '红细胞计数',
+                        dataIndex: 'hxbjs'
                     },                    {
-                            title: '肌钙蛋白',
-                        dataIndex: 'jgdb'
+                            title: '血红蛋白',
+                        dataIndex: 'xhdb'
                     },                    {
-                            title: 'CK-MB',
-                        dataIndex: 'ckmb'
+                            title: '白细胞计数',
+                        dataIndex: 'bxbjs'
                     },                    {
-                            title: '超敏肌钙蛋白（optional）',
-                        dataIndex: 'cmjgdb'
+                            title: '中性粒细胞百分比',
+                        dataIndex: 'zxlxbbfb'
+                    },                    {
+                            title: '血小板计数',
+                        dataIndex: 'xxbjs'
                     },                    {
                             title: '是否删除',
                         dataIndex: 'isDeletemark'
@@ -210,7 +213,7 @@
                 this.editVisiable = false
             },
             edit (record) {
-                this.$refs.heartBCheckEdit.setFormValues(record)
+                this.$refs.heartBChecktwoEdit.setFormValues(record)
                 this.editVisiable = true
             },
             batchDelete () {
@@ -224,8 +227,8 @@
                     content: '当您点击确定按钮后，这些记录将会被彻底删除',
                     centered: true,
                     onOk () {
-                        let heartBCheckIds = that.selectedRowKeys.join(',')
-                        that.$delete('heartBCheck/' + heartBCheckIds).then(() => {
+                        let heartBChecktwoIds = that.selectedRowKeys.join(',')
+                        that.$delete('heartBChecktwo/' + heartBChecktwoIds).then(() => {
                             that.$message.success('删除成功')
                                     that.selectedRowKeys = []
                             that.search()
@@ -244,7 +247,7 @@
                     sortField = sortedInfo.field
                     sortOrder = sortedInfo.order
                 }
-                this.$export('heartBCheck/excel', {
+                this.$export('heartBChecktwo/excel', {
                     sortField: sortField,
                     sortOrder: sortOrder,
                     ...this.queryParams
@@ -302,7 +305,7 @@
                     params.pageSize = this.pagination.defaultPageSize
                     params.pageNum = this.pagination.defaultCurrent
                 }
-                this.$get('heartBCheck', {
+                this.$get('heartBChecktwo', {
                     ...params
                 }).then((r) => {
                     let data = r.data

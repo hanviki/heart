@@ -15,17 +15,17 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 心梗三项
+ * 血气分析
  * </p>
  *
  * @author viki
  * @since 2021-05-21
  */
 
-@Excel("heart_b_check")
+@Excel("heart_b_checkthree")
 @Data
 @Accessors(chain = true)
-public class HeartBCheck implements Serializable{
+public class HeartBCheckthree implements Serializable{
 
 private static final long serialVersionUID=1L;
 
@@ -58,32 +58,46 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
-     * 肌红蛋白
+     * PH
      */
         
-        @ExcelField(value ="肌红蛋白")
-    private BigDecimal jhdb;
+        @ExcelField(value ="PH")
+    private BigDecimal ph;
 
     /**
-     * 肌钙蛋白
+     * 乳酸
      */
         
-        @ExcelField(value ="肌钙蛋白")
-    private BigDecimal jgdb;
+        @ExcelField(value ="乳酸")
+    private BigDecimal rs;
 
     /**
-     * CK-MB
+     * BE
      */
         
-        @ExcelField(value ="CK-MB")
-    private BigDecimal ckmb;
+        @ExcelField(value ="BE")
+    private BigDecimal be;
 
     /**
-     * 超敏肌钙蛋白（optional）
+     * SO2
      */
         
-        @ExcelField(value ="超敏肌钙蛋白（optional）")
-    private BigDecimal cmjgdb;
+        @ExcelField(value ="SO2")
+    private BigDecimal so2;
+
+    /**
+     * PO2
+     */
+        
+        @ExcelField(value ="PO2")
+    private BigDecimal po2;
+
+    /**
+     * PCO2
+     */
+        
+        @ExcelField(value ="PCO2")
+    private BigDecimal pco2;
 
     /**
      * 是否删除
@@ -119,7 +133,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     /**
      * 修改人
@@ -127,7 +141,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Integer modifyUserId;
+    private Long modifyUserId;
 
 
 
@@ -139,13 +153,17 @@ private static final long serialVersionUID=1L;
 
     public static final String NAME ="name" ;
 
-    public static final String JHDB ="jhdb" ;
+    public static final String PH ="ph" ;
 
-    public static final String JGDB ="jgdb" ;
+    public static final String RS ="rs" ;
 
-    public static final String CKMB ="ckmb" ;
+    public static final String BE ="be" ;
 
-    public static final String CMJGDB ="cmjgdb" ;
+    public static final String SO2 ="so2" ;
+
+    public static final String PO2 ="po2" ;
+
+    public static final String PCO2 ="pco2" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

@@ -15,17 +15,17 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 心梗三项
+ * 凝血功能
  * </p>
  *
  * @author viki
  * @since 2021-05-21
  */
 
-@Excel("heart_b_check")
+@Excel("heart_b_checkfive")
 @Data
 @Accessors(chain = true)
-public class HeartBCheck implements Serializable{
+public class HeartBCheckfive implements Serializable{
 
 private static final long serialVersionUID=1L;
 
@@ -58,32 +58,32 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
-     * 肌红蛋白
+     * D二聚体
      */
         
-        @ExcelField(value ="肌红蛋白")
-    private BigDecimal jhdb;
+        @ExcelField(value ="D二聚体")
+    private BigDecimal d2jt;
 
     /**
-     * 肌钙蛋白
+     * FDP
      */
         
-        @ExcelField(value ="肌钙蛋白")
-    private BigDecimal jgdb;
+        @ExcelField(value ="FDP")
+    private BigDecimal fdp;
 
     /**
-     * CK-MB
+     * PT
      */
         
-        @ExcelField(value ="CK-MB")
-    private BigDecimal ckmb;
+        @ExcelField(value ="PT")
+    private BigDecimal pt;
 
     /**
-     * 超敏肌钙蛋白（optional）
+     * APTT
      */
         
-        @ExcelField(value ="超敏肌钙蛋白（optional）")
-    private BigDecimal cmjgdb;
+        @ExcelField(value ="APTT")
+    private BigDecimal aptt;
 
     /**
      * 是否删除
@@ -119,7 +119,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     /**
      * 修改人
@@ -127,7 +127,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Integer modifyUserId;
+    private Long modifyUserId;
 
 
 
@@ -139,13 +139,13 @@ private static final long serialVersionUID=1L;
 
     public static final String NAME ="name" ;
 
-    public static final String JHDB ="jhdb" ;
+    public static final String D2JT ="d2jt" ;
 
-    public static final String JGDB ="jgdb" ;
+    public static final String FDP ="fdp" ;
 
-    public static final String CKMB ="ckmb" ;
+    public static final String PT ="pt" ;
 
-    public static final String CMJGDB ="cmjgdb" ;
+    public static final String APTT ="aptt" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 
