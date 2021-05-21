@@ -1,40 +1,36 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-form-item
-        v-bind="formItemLayout"
-        label="D二聚体"
-      >
-        <a-input
-          placeholder="请输入D二聚体"
-          v-decorator="['d2jt', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="D二聚体(mg/L)">
+        <a-input-number
+          placeholder="请输入D二聚体(mg/L)"
+          v-decorator="['d2jt', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="FDP"
-      >
-        <a-input
-          placeholder="请输入FDP"
-          v-decorator="['fdp', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="FDP(mg/L)">
+        <a-input-number
+          placeholder="请输入FDP(mg/L)"
+          v-decorator="['fdp', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="PT"
-      >
-        <a-input
-          placeholder="请输入PT"
-          v-decorator="['pt', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="PT(s)">
+        <a-input-number
+          placeholder="请输入PT(s)"
+          v-decorator="['pt', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="APTT"
-      >
-        <a-input
-          placeholder="请输入APTT"
-          v-decorator="['aptt', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="APTT(s)">
+        <a-input-number
+          placeholder="请输入APTT(s)"
+          v-decorator="['aptt', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
     </a-form>

@@ -1,58 +1,56 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-form-item
-        v-bind="formItemLayout"
-        label="血肌肝"
-      >
-        <a-input
-          placeholder="请输入血肌肝"
-          v-decorator="['xjg', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-divider
+        orientation="left"
+        style="font-size:14px;"
+      >2.3.4、肝肾功</a-divider>
+      <a-form-item label="血肌肝umol/L">
+        <a-input-number
+          placeholder="请输入血肌肝umol/L"
+          v-decorator="['xjg', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="ALT"
-      >
-        <a-input
-          placeholder="请输入ALT"
-          v-decorator="['alt', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="ALT(U/L)">
+        <a-input-number
+          placeholder="请输入ALT(U/L)"
+          v-decorator="['alt', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="AST"
-      >
-        <a-input
-          placeholder="请输入AST"
-          v-decorator="['ast', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="AST(U/L)">
+        <a-input-number
+          placeholder="请输入AST(U/L)"
+          v-decorator="['ast', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="总胆红素"
-      >
-        <a-input
-          placeholder="请输入总胆红素"
-          v-decorator="['zdhs', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="总胆红素(umol/L)">
+        <a-input-number
+          placeholder="请输入总胆红素(umol/L)"
+          v-decorator="['zdhs', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="直接胆红素"
-      >
-        <a-input
+      <a-form-item label="直接胆红素(umol/L)">
+        <a-input-number
           placeholder="请输入直接胆红素"
-          v-decorator="['zjdhs', {rules:[{max:100,message:'最长不超过100'}]}]"
+          v-decorator="['zjdhs', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="淀粉酶"
-      >
-        <a-input
-          placeholder="请输入淀粉酶"
-          v-decorator="['dfm', {rules:[{max:100,message:'最长不超过100'}]}]"
+      <a-form-item label="淀粉酶(U)">
+        <a-input-number
+          placeholder="请输入淀粉酶(U)"
+          v-decorator="['dfm', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
     </a-form>

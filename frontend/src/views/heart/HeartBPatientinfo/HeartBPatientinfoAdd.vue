@@ -35,6 +35,10 @@
         force-render
       >
         <check-info ref="checkInfo"></check-info>
+        <checkTwo-info ref="checkTwoInfo"></checkTwo-info>
+        <checkThree-info ref="checkThreeInfo"></checkThree-info>
+        <checkFour-info ref="checkFourInfo"></checkFour-info>
+        <checkFive-info ref="checkFiveInfo"></checkFive-info>
       </a-tab-pane>
       <a-tab-pane
         key="4"
@@ -95,9 +99,13 @@
 <script>
 import PatientInfo from './PatientInfo' // 个人信息
 import HospitalInfo from '../HeartBHospitalinfo/HospitalInfo' // 住院病历资料
-import CheckInfo from '../HeartBCheck/CheckInfo' // 检验
-import CsInfo from '../HeartBCs/CsInfo' // 超声
-import CtInfo from '../HeartBCt/CtInfo' // 术前CT
+import CheckInfo from '../HeartBCheck/HeartBCheckListInfo' // 检验 1
+import CheckTwoInfo from '../HeartBChecktwo/HeartBChecktwoListInfo' // 检验 2
+import CheckThreeInfo from '../HeartBCheckthree/HeartBCheckthreeListInfo' // 检验 3
+import CheckFourInfo from '../HeartBCheckfour/HeartBCheckfourListInfo' // 检验 4
+import CheckFiveInfo from '../HeartBCheckfive/HeartBCheckfiveListInfo' // 检验 5
+import CsInfo from '../HeartBCs/HeartBCsListInfo' // 超声
+import CtInfo from '../HeartBCt/HeartBCtListInfo' // 术前CT
 import OutInfo from '../HeartBCtout/OutInfo' // 出院复查CT
 import SurgicalInfo from '../HeartBSurgical/SurgicalInfo' // 手术
 import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfo' // 术后
@@ -125,6 +133,10 @@ export default {
       heartBPatientinfo: {
         patientInfo: {},
         checkInfo: {},
+        checkTwoInfo: {},
+        checkThreeInfo: {},
+        checkFourInfo: {},
+        checkFiveInfo: {},
         csInfo: {},
         hospitalInfo: {},
         ctInfo: {},
@@ -138,7 +150,7 @@ export default {
     }
   },
   components: {
-    PatientInfo, HospitalInfo, CheckInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
+    PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
     , FcctInfo, FchyInfo
   },
   methods: {
@@ -153,6 +165,10 @@ export default {
       this.form.resetFields()
       //子页面清空form表单等.
       this.$refs.checkInfo.reset()
+      this.$refs.checkTwoInfo.reset()
+      this.$refs.checkThreeInfo.reset()
+      this.$refs.checkFourInfo.reset()
+      this.$refs.checkFiveInfo.reset()
       this.$refs.patientInfo.reset()
       this.$refs.csInfo.reset()
       this.$refs.ctInfo.reset()

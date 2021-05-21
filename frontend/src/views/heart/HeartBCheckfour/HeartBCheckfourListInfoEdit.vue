@@ -1,9 +1,9 @@
 <template>
   <div>
-    <a-divider
-      orientation="left"
-      style="font-size:14px;"
-    >2. 超声复查</a-divider>
+          <a-divider
+        orientation="left"
+        style="font-size:14px;"
+      >2.3.4、肝肾功</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"
@@ -20,11 +20,11 @@
         :key="item.id"
         :forceRender="true"
       >
-        <heartBCheckfour-info
+        <heartBCheckfour-infoEdit
           :ref="'fc'+index"
           :checkInfo="item"
           :isEdit="isEdit"
-        ></heartBCheckfour-info>
+        ></heartBCheckfour-infoEdit>
         <a-icon
           slot="extra"
           type="close"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import HeartBCheckfourInfoEdit from './HeartBCheckfourInfoEdit.vue'
+import HeartBCheckfourInfoEdit from './HeartBCheckfourInfoEdit'
 export default {
   props: {
     isEdit: {

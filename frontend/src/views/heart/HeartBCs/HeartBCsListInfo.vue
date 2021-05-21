@@ -1,36 +1,26 @@
 <template>
   <div>
-          <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >2.3.4、肝肾功</a-divider>
+      <a-divider orientation="left" style="font-size:14px;"> 4. 超声</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"
     >
     </a-button>
-    <a-collapse
-      v-model="activeKey"
-      accordion
-    >
+    <a-collapse v-model="activeKey" accordion>
       <a-collapse-panel
         :header="index"
         v-for="(item,index) in listFc"
         :key="item.toString()"
       >
-        <heartBCheckfour-info :ref="'fc'+item"></heartBCheckfour-info>
-        <a-icon
-          slot="extra"
-          type="close"
-          @click="e => handleClick(e,item)"
-        />
+        <csfc-info :ref="'fc'+item"></csfc-info>
+        <a-icon slot="extra" type="close" @click="e => handleClick(e,item)" />
       </a-collapse-panel>
     </a-collapse>
   </div>
 </template>
-
-<script>
-import HeartBCheckfourInfo from './HeartBCheckfourInfo'
+      
+      <script>
+import CsfcInfo from './HeartBCsInfo'
 export default {
   data () {
     return {
@@ -44,12 +34,12 @@ export default {
     }
   },
   components: {
-    HeartBCheckfourInfo
+    CsfcInfo
   },
   methods: {
     reset () {
       this.loading = false
-      this.baseId = ''
+      this.baseId =''
       this.listCsfc = []
       this.listFc = [1]
       setTimeout(() => {
@@ -62,11 +52,11 @@ export default {
       if (len === 0) {
         len = 1
       } else {
-        len = this.listFc[len - 1] + 1
+        len = this.listFc[len -1] + 1
       }
       this.listFc.push(len)
-      let val = this.listFc[this.listFc.length - 1]
-      let name = this.refName + val
+      let val = this.listFc[this.listFc.length -1]
+      let name= this.refName+ val
       this.activeKey = val
       this.execId(name)
     },
@@ -77,13 +67,13 @@ export default {
     },
     getId () {
       for (let i = 0; i < this.listFc.length; i++) {
-        let name = this.refName + this.listFc[i]
+        let name= this.refName+ this.listFc[i]
         console.info(name)
-
+        // console.info((this.$refs[name])[0])\
         this.execId(name)
       }
     },
-    handleClick (event, item) {
+    handleClick (event,item) {
       event.stopPropagation();
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()
@@ -93,15 +83,16 @@ export default {
     setFields () {
       this.listCsfc = []
       for (let i = 0; i < this.listFc.length; i++) {
-        let name = this.refName + this.listFc[i]
-
+          let name= this.refName+ this.listFc[i]
+          console.info(name)
+         // console.info((this.$refs[name])[0])
         this.listCsfc.push((this.$refs[name])[0].setFields())
       }
       return this.listCsfc
     }
   }
 }
-</script>
-
-<style>
+      </script>
+      
+      <style>
 </style>

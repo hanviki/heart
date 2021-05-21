@@ -119,7 +119,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     /**
      * 修改人
@@ -127,7 +127,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Integer modifyUserId;
+    private Long modifyUserId;
 
 
 

@@ -15,9 +15,13 @@ import java.util.List;
 public class CustomHeart {
     private transient HeartBHospitalinfo hospitalInfo; //个人信息 1
     private transient  HeartBPatientinfo patientInfo; //病人信息表 2
-    private transient  HeartBCheck checkInfo; //检验 3
-    private transient HeartBCs csInfo; //超声 4
-    private transient HeartBCt ctInfo; //术前CT 5
+    private transient  List<HeartBCheck> checkInfo; //检验 3
+    private transient  List<HeartBChecktwo> checkTwoInfo; //检验 3
+    private transient  List<HeartBCheckthree> checkThreeInfo; //检验 3
+    private transient  List<HeartBCheckfour> checkFourInfo; //检验 3
+    private transient  List<HeartBCheckfive> checkFiveInfo; //检验 3
+    private transient List<HeartBCs> csInfo; //超声 4
+    private transient List<HeartBCt> ctInfo; //术前CT 5
     private transient HeartBCtout outInfo; //出院复查CT 6
     private transient HeartBSurgical surgicalInfo; //手术 7
     private transient  HeartBSurgicalafter  surAfterInfo;//术后 8

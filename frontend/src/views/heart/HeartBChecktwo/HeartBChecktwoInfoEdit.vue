@@ -1,49 +1,44 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-form-item
-        v-bind="formItemLayout"
-        label="红细胞计数"
-      >
-        <a-input
+      <a-form-item label="红细胞计数">
+        <a-input-number
           placeholder="请输入红细胞计数"
-          v-decorator="['hxbjs', {rules:[{max:100,message:'最长不超过100'}]}]"
+          v-decorator="['hxbjs', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="血红蛋白"
-      >
-        <a-input
+      <a-form-item label="血红蛋白">
+        <a-input-number
           placeholder="请输入血红蛋白"
-          v-decorator="['xhdb', {rules:[{max:100,message:'最长不超过100'}]}]"
+          v-decorator="['xhdb', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="白细胞计数"
-      >
-        <a-input
+      <a-form-item label="白细胞计数">
+        <a-input-number
           placeholder="请输入白细胞计数"
-          v-decorator="['bxbjs', {rules:[{max:100,message:'最长不超过100'}]}]"
+          v-decorator="['bxbjs', {}]"
+          :precision="2"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="中性粒细胞百分比"
-      >
-        <a-input
+      <a-form-item label="中性粒细胞百分比">
+        <a-input-number
           placeholder="请输入中性粒细胞百分比"
-          v-decorator="['zxlxbbfb', {rules:[{max:100,message:'最长不超过100'}]}]"
+          v-decorator="['zxlxbbfb', {}]"
+          :precision="0"
+          style="width:100%;"
         />
       </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="血小板计数"
-      >
-        <a-input
+      <a-form-item label="血小板计数">
+        <a-input-number
           placeholder="请输入血小板计数"
-          v-decorator="['xxbjs', {rules:[{max:100,message:'最长不超过100'}]}]"
+          v-decorator="['xxbjs', {}]"
+          :precision="0"
+          style="width:100%;"
         />
       </a-form-item>
     </a-form>

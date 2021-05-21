@@ -1,9 +1,9 @@
 <template>
   <div>
-      <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >2.3.5、凝血功能</a-divider>
+    <a-divider
+      orientation="left"
+      style="font-size:14px;"
+    >4. 超声</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"
@@ -20,11 +20,11 @@
         :key="item.id"
         :forceRender="true"
       >
-        <heartBCheckfive-info
+        <csfc-info
           :ref="'fc'+index"
           :checkInfo="item"
           :isEdit="isEdit"
-        ></heartBCheckfive-info>
+        ></csfc-info>
         <a-icon
           slot="extra"
           type="close"
@@ -35,9 +35,9 @@
     </a-collapse>
   </div>
 </template>
-
-<script>
-import HeartBCheckfiveInfo from './HeartBCheckfiveInfoEdit'
+      
+      <script>
+import CsfcInfo from './HeartBCsEdit.vue'
 export default {
   props: {
     isEdit: {
@@ -55,7 +55,7 @@ export default {
     }
   },
   components: {
-    HeartBCheckfiveInfo
+    CsfcInfo
   },
   methods: {
     AddCsfc () {
@@ -89,6 +89,8 @@ export default {
       let list = []
       for (let i = 0; i < this.listCsfc.length; i++) {
         let name = 'fc' + i
+        console.info(name)
+        // console.info((this.$refs[name])[0])
         list.push((this.$refs[name])[0].setFields())
       }
       return list
@@ -99,7 +101,7 @@ export default {
     },
   }
 }
-</script>
-
-<style>
+      </script>
+      
+      <style>
 </style>

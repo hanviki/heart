@@ -1,9 +1,9 @@
 <template>
   <div>
-    <a-divider
-      orientation="left"
-      style="font-size:14px;"
-    >2. 超声复查</a-divider>
+          <a-divider
+        orientation="left"
+        style="font-size:14px;"
+      >2.3.3、血气分析</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"
@@ -20,11 +20,11 @@
         :key="item.id"
         :forceRender="true"
       >
-        <heartBCheckthree-info
+        <heartBCheckthree-infoEdit
           :ref="'fc'+index"
           :checkInfo="item"
           :isEdit="isEdit"
-        ></heartBCheckthree-info>
+        ></heartBCheckthree-infoEdit>
         <a-icon
           slot="extra"
           type="close"

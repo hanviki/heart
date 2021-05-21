@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  *
  * @author viki
- * @since 2021-05-06
+ * @since 2021-05-21
  */
 @Slf4j
 @Validated
@@ -65,6 +65,7 @@ public Map<String, Object> List(QueryRequest request, HeartBCs heartBCs){
  */
 @Log("新增/按钮")
 @PostMapping
+@RequiresPermissions("heartBCs:add")
 public void addHeartBCs(@Valid HeartBCs heartBCs)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -86,6 +87,7 @@ public void addHeartBCs(@Valid HeartBCs heartBCs)throws FebsException{
  */
 @Log("修改")
 @PutMapping
+@RequiresPermissions("heartBCs:update")
 public void updateHeartBCs(@Valid HeartBCs heartBCs)throws FebsException{
         try{
         User currentUser= FebsUtil.getCurrentUser();
@@ -101,6 +103,7 @@ public void updateHeartBCs(@Valid HeartBCs heartBCs)throws FebsException{
 
 @Log("删除")
 @DeleteMapping("/{ids}")
+@RequiresPermissions("heartBCs:delete")
 public void deleteHeartBCss(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

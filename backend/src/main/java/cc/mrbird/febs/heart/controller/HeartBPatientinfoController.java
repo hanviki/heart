@@ -51,6 +51,14 @@ public class HeartBPatientinfoController extends BaseController {
     @Autowired
     public IHeartBCheckService iHeartBCheckService;
     @Autowired
+    public IHeartBChecktwoService iHeartBChecktwoService;
+    @Autowired
+    public IHeartBCheckthreeService iHeartBCheckthreeService;
+    @Autowired
+    public IHeartBCheckfourService iHeartBCheckfourService;
+    @Autowired
+    public IHeartBCheckfiveService iHeartBCheckfiveService;
+    @Autowired
     public IHeartBCsfcService iHeartBCsfcService;
     @Autowired
     public IHeartBCsService iHeartBCsService;
@@ -106,18 +114,39 @@ public class HeartBPatientinfoController extends BaseController {
         LambdaQueryWrapper<HeartBCheck> queryWrapper2 = new LambdaQueryWrapper<>();
         queryWrapper2.eq(HeartBCheck::getFileNo, fileNo);
         queryWrapper2.eq(HeartBCheck::getIsDeletemark, 1);
-        HeartBCheck checkInfo = this.iHeartBCheckService.getOne(queryWrapper2);
+        List<HeartBCheck> checkInfo = this.iHeartBCheckService.list(queryWrapper2);
+
+        LambdaQueryWrapper<HeartBChecktwo> queryWrapper22 = new LambdaQueryWrapper<>();
+        queryWrapper22.eq(HeartBChecktwo::getFileNo, fileNo);
+        queryWrapper22.eq(HeartBChecktwo::getIsDeletemark, 1);
+        List<HeartBChecktwo> checkTwoInfo = this.iHeartBChecktwoService.list(queryWrapper22);
+
+        LambdaQueryWrapper<HeartBCheckthree> queryWrapper23 = new LambdaQueryWrapper<>();
+        queryWrapper23.eq(HeartBCheckthree::getFileNo, fileNo);
+        queryWrapper23.eq(HeartBCheckthree::getIsDeletemark, 1);
+        List<HeartBCheckthree> checkThreeInfo = this.iHeartBCheckthreeService.list(queryWrapper23);
+
+        LambdaQueryWrapper<HeartBCheckfour> queryWrapper24 = new LambdaQueryWrapper<>();
+        queryWrapper24.eq(HeartBCheckfour::getFileNo, fileNo);
+        queryWrapper24.eq(HeartBCheckfour::getIsDeletemark, 1);
+        List<HeartBCheckfour> checkFourInfo = this.iHeartBCheckfourService.list(queryWrapper24);
+
+        LambdaQueryWrapper<HeartBCheckfive> queryWrapper25 = new LambdaQueryWrapper<>();
+        queryWrapper25.eq(HeartBCheckfive::getFileNo, fileNo);
+        queryWrapper25.eq(HeartBCheckfive::getIsDeletemark, 1);
+        List<HeartBCheckfive> checkFiveInfo = this.iHeartBCheckfiveService.list(queryWrapper25);
+
 
         LambdaQueryWrapper<HeartBCs> queryWrapper3 = new LambdaQueryWrapper<>();
         queryWrapper3.eq(HeartBCs::getIsDeletemark, 1);
         queryWrapper3.eq(HeartBCs::getFileNo, fileNo);
-        HeartBCs csInfo = this.iHeartBCsService.getOne(queryWrapper3);
+        List<HeartBCs> csInfo = this.iHeartBCsService.list(queryWrapper3);
 
 
         LambdaQueryWrapper<HeartBCt> queryWrapper5 = new LambdaQueryWrapper<>();
         queryWrapper5.eq(HeartBCt::getIsDeletemark, 1);
         queryWrapper5.eq(HeartBCt::getFileNo, fileNo);
-        HeartBCt ctInfo = this.iHeartBCtService.getOne(queryWrapper5);
+        List<HeartBCt> ctInfo = this.iHeartBCtService.list(queryWrapper5);
 
         LambdaQueryWrapper<HeartBCtout> queryWrapper6 = new LambdaQueryWrapper<>();
         queryWrapper6.eq(HeartBCtout::getFileNo, fileNo);
@@ -158,6 +187,10 @@ public class HeartBPatientinfoController extends BaseController {
 
         CustomHeart heart = new CustomHeart();
         heart.setCheckInfo(checkInfo);
+        heart.setCheckTwoInfo(checkTwoInfo);
+        heart.setCheckThreeInfo(checkThreeInfo);
+        heart.setCheckFourInfo(checkFourInfo);
+        heart.setCheckFiveInfo(checkFiveInfo);
         heart.setCsInfo(csInfo);
         heart.setCtInfo(ctInfo);
         heart.setFcctInfo(ctfcList);
@@ -202,30 +235,93 @@ public class HeartBPatientinfoController extends BaseController {
                     fileNo = heartBPatientinfo.getFileNo();
                     name = heartBPatientinfo.getName();
                 }
+
                 if (heart.getCheckInfo() != null) {
-                    HeartBCheck check = heart.getCheckInfo();
-                    check.setCreateUserId(currentUser.getUserId());
-                    check.setUsername(currentUser.getUsername());
-                    check.setFileNo(fileNo);
-                    check.setName(name);
-                    this.iHeartBCheckService.createHeartBCheck(check);
+                    List<HeartBCheck> heartBCheckList = heart.getCheckInfo();
+                    for (HeartBCheck check : heartBCheckList
+                    ) {
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        this.iHeartBCheckService.createHeartBCheck(check);
+                    }
+
+                }
+                if (heart.getCheckTwoInfo() != null) {
+                    List<HeartBChecktwo> heartBChecktwoList = heart.getCheckTwoInfo();
+                    for (HeartBChecktwo check : heartBChecktwoList
+                    ) {
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        this.iHeartBChecktwoService.createHeartBChecktwo(check);
+                    }
+
+                }
+                if (heart.getCheckThreeInfo() != null) {
+                    List<HeartBCheckthree> heartBCheckthreeList = heart.getCheckThreeInfo();
+                    for (HeartBCheckthree check : heartBCheckthreeList
+                    ) {
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        this.iHeartBCheckthreeService.createHeartBCheckthree(check);
+                    }
+
+                }
+                if (heart.getCheckFourInfo() != null) {
+                    List<HeartBCheckfour> heartBCheckfourList = heart.getCheckFourInfo();
+                    for (HeartBCheckfour check : heartBCheckfourList
+                    ) {
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        this.iHeartBCheckfourService.createHeartBCheckfour(check);
+                    }
+
+                }
+                if (heart.getCheckFiveInfo() != null) {
+                    List<HeartBCheckfive> heartBCheckfiveList = heart.getCheckFiveInfo();
+                    for (HeartBCheckfive check : heartBCheckfiveList
+                    ) {
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        this.iHeartBCheckfiveService.createHeartBCheckfive(check);
+                    }
+
                 }
                 if (heart.getCsInfo() != null) {
-                    HeartBCs heartBCs = heart.getCsInfo();
-                    heartBCs.setCreateUserId(currentUser.getUserId());
-                    heartBCs.setUsername(currentUser.getUsername());
-                    heartBCs.setFileNo(fileNo);
-                    heartBCs.setName(name);
-                    this.iHeartBCsService.createHeartBCs(heartBCs);
+                    List<HeartBCs> heartBCsList = heart.getCsInfo();
+                    for (HeartBCs heartBCs : heartBCsList
+                    ) {
+                        heartBCs.setCreateUserId(currentUser.getUserId());
+                        heartBCs.setUsername(currentUser.getUsername());
+                        heartBCs.setFileNo(fileNo);
+                        heartBCs.setName(name);
+                        this.iHeartBCsService.createHeartBCs(heartBCs);
+                    }
+
                 }
                 if (heart.getCtInfo() != null) {
-                    HeartBCt heartBCt = heart.getCtInfo();
-                    heartBCt.setCreateUserId(currentUser.getUserId());
-                    heartBCt.setUsername(currentUser.getUsername());
-                    heartBCt.setFileNo(fileNo);
-                    heartBCt.setName(name);
-                    this.iHeartBCtService.createHeartBCt(heartBCt);
+                    List<HeartBCt> heartBCtList = heart.getCtInfo();
+                    for (HeartBCt heartBCt : heartBCtList
+                    ) {
+                        heartBCt.setCreateUserId(currentUser.getUserId());
+                        heartBCt.setUsername(currentUser.getUsername());
+                        heartBCt.setFileNo(fileNo);
+                        heartBCt.setName(name);
+                        this.iHeartBCtService.createHeartBCt(heartBCt);
+                    }
+
                 }
+
+
                 if (heart.getHospitalInfo() != null) {
                     HeartBHospitalinfo heartBHospitalinfo = heart.getHospitalInfo();
                     heartBHospitalinfo.setCreateUserId(currentUser.getUserId());
@@ -333,48 +429,136 @@ public class HeartBPatientinfoController extends BaseController {
                     fileNo = heartBPatientinfo.getFileNo();
                 }
                 if (heart.getCheckInfo() != null) {
-                    HeartBCheck check = heart.getCheckInfo();
-                    check.setCreateUserId(currentUser.getUserId());
-                    check.setUsername(currentUser.getUsername());
-                    check.setFileNo(fileNo);
-                    LambdaQueryWrapper<HeartBCheck> queryWrapper_checkInfo = new LambdaQueryWrapper<>();
-                    queryWrapper_checkInfo.eq(HeartBCheck::getFileNo, check.getFileNo());
-                    queryWrapper_checkInfo.eq(HeartBCheck::getIsDeletemark, 1);
-                    int count = this.iHeartBCheckService.count(queryWrapper_checkInfo);
-                    if (count > 0) {
-                        this.iHeartBCheckService.updateHeartBCheck(check);
-                    } else {
-                        this.iHeartBCheckService.createHeartBCheck(check);
+                    List<HeartBCheck> heartBCheckList = heart.getCheckInfo();
+                    for (HeartBCheck check : heartBCheckList
+                    ) {
+                       // HeartBCheck check = heart.getCheckInfo();
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        LambdaQueryWrapper<HeartBCheck> queryWrapper_checkInfo = new LambdaQueryWrapper<>();
+                        queryWrapper_checkInfo.eq(HeartBCheck::getFileNo, check.getFileNo());
+                        queryWrapper_checkInfo.eq(HeartBCheck::getIsDeletemark, 1);
+                        int count = this.iHeartBCheckService.count(queryWrapper_checkInfo);
+                        if (count > 0) {
+                            this.iHeartBCheckService.updateHeartBCheck(check);
+                        } else {
+                            this.iHeartBCheckService.createHeartBCheck(check);
+                        }
                     }
                 }
-                if (heart.getCsInfo() != null) {
-                    HeartBCs heartBCs = heart.getCsInfo();
-                    heartBCs.setCreateUserId(currentUser.getUserId());
-                    heartBCs.setUsername(currentUser.getUsername());
-                    heartBCs.setFileNo(fileNo);
-                    LambdaQueryWrapper<HeartBCs> queryWrapper_HeartBCs = new LambdaQueryWrapper<>();
-                    queryWrapper_HeartBCs.eq(HeartBCs::getFileNo, fileNo);
-                    queryWrapper_HeartBCs.eq(HeartBCs::getIsDeletemark, 1);
-                    int count = this.iHeartBCsService.count(queryWrapper_HeartBCs);
-                    if (count > 0) {
-                        this.iHeartBCsService.updateHeartBCs(heartBCs);
-                    } else {
+                if (heart.getCheckTwoInfo() != null) {
+                    List<HeartBChecktwo> heartBChecktwoList = heart.getCheckTwoInfo();
+                    for (HeartBChecktwo check : heartBChecktwoList
+                    ) {
+                        // HeartBCheck check = heart.getCheckInfo();
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        LambdaQueryWrapper<HeartBChecktwo> queryWrapper_checktwoInfo = new LambdaQueryWrapper<>();
+                        queryWrapper_checktwoInfo.eq(HeartBChecktwo::getFileNo, check.getFileNo());
+                        queryWrapper_checktwoInfo.eq(HeartBChecktwo::getIsDeletemark, 1);
+                        int count = this.iHeartBChecktwoService.count(queryWrapper_checktwoInfo);
+                        if (count > 0) {
+                            this.iHeartBChecktwoService.updateHeartBChecktwo(check);
+                        } else {
+                            this.iHeartBChecktwoService.createHeartBChecktwo(check);
+                        }
+                    }
+                }
+                if (heart.getCheckThreeInfo() != null) {
+                    List<HeartBCheckthree> heartBCheckthreeList = heart.getCheckThreeInfo();
+                    for (HeartBCheckthree check : heartBCheckthreeList
+                    ) {
+                        // HeartBCheck check = heart.getCheckInfo();
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        LambdaQueryWrapper<HeartBCheckthree> queryWrapper_checkthreeInfo = new LambdaQueryWrapper<>();
+                        queryWrapper_checkthreeInfo.eq(HeartBCheckthree::getFileNo, check.getFileNo());
+                        queryWrapper_checkthreeInfo.eq(HeartBCheckthree::getIsDeletemark, 1);
+                        int count = this.iHeartBCheckthreeService.count(queryWrapper_checkthreeInfo);
+                        if (count > 0) {
+                            this.iHeartBCheckthreeService.updateHeartBCheckthree(check);
+                        } else {
+                            this.iHeartBCheckthreeService.createHeartBCheckthree(check);
+                        }
+                    }
+                }
+                if (heart.getCheckFourInfo() != null) {
+                    List<HeartBCheckfour> heartBCheckfourList = heart.getCheckFourInfo();
+                    for (HeartBCheckfour check : heartBCheckfourList
+                    ) {
+                        // HeartBCheck check = heart.getCheckInfo();
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        LambdaQueryWrapper<HeartBCheckfour> queryWrapper_checkfourInfo = new LambdaQueryWrapper<>();
+                        queryWrapper_checkfourInfo.eq(HeartBCheckfour::getFileNo, check.getFileNo());
+                        queryWrapper_checkfourInfo.eq(HeartBCheckfour::getIsDeletemark, 1);
+                        int count = this.iHeartBCheckfourService.count(queryWrapper_checkfourInfo);
+                        if (count > 0) {
+                            this.iHeartBCheckfourService.updateHeartBCheckfour(check);
+                        } else {
+                            this.iHeartBCheckfourService.createHeartBCheckfour(check);
+                        }
+                    }
+                }
+                if (heart.getCheckFiveInfo() != null) {
+                    List<HeartBCheckfive> heartBCheckfiveList = heart.getCheckFiveInfo();
+                    for (HeartBCheckfive check : heartBCheckfiveList
+                    ) {
+                        // HeartBCheck check = heart.getCheckInfo();
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        LambdaQueryWrapper<HeartBCheckfive> queryWrapper_checkfiveInfo = new LambdaQueryWrapper<>();
+                        queryWrapper_checkfiveInfo.eq(HeartBCheckfive::getFileNo, check.getFileNo());
+                        queryWrapper_checkfiveInfo.eq(HeartBCheckfive::getIsDeletemark, 1);
+                        int count = this.iHeartBCheckfiveService.count(queryWrapper_checkfiveInfo);
+                        if (count > 0) {
+                            this.iHeartBCheckfiveService.updateHeartBCheckfive(check);
+                        } else {
+                            this.iHeartBCheckfiveService.createHeartBCheckfive(check);
+                        }
+                    }
+                }
 
-                        this.iHeartBCsService.createHeartBCs(heartBCs);
+                if (heart.getCsInfo() != null) {
+                    List<HeartBCs> heartBCsList = heart.getCsInfo();
+                    for (HeartBCs heartBCs : heartBCsList
+                    ) {
+                      //  HeartBCs heartBCs = heart.getCsInfo();
+                        heartBCs.setCreateUserId(currentUser.getUserId());
+                        heartBCs.setUsername(currentUser.getUsername());
+                        heartBCs.setFileNo(fileNo);
+                        LambdaQueryWrapper<HeartBCs> queryWrapper_HeartBCs = new LambdaQueryWrapper<>();
+                        queryWrapper_HeartBCs.eq(HeartBCs::getFileNo, fileNo);
+                        queryWrapper_HeartBCs.eq(HeartBCs::getIsDeletemark, 1);
+                        int count = this.iHeartBCsService.count(queryWrapper_HeartBCs);
+                        if (count > 0) {
+                            this.iHeartBCsService.updateHeartBCs(heartBCs);
+                        } else {
+
+                            this.iHeartBCsService.createHeartBCs(heartBCs);
+                        }
                     }
                 }
                 if (heart.getCtInfo() != null) {
-                    HeartBCt heartBCt = heart.getCtInfo();
-                    heartBCt.setCreateUserId(currentUser.getUserId());
-                    heartBCt.setUsername(currentUser.getUsername());
-                    LambdaQueryWrapper<HeartBCt> queryWrapper_HeartBCt = new LambdaQueryWrapper<>();
-                    queryWrapper_HeartBCt.eq(HeartBCt::getFileNo, fileNo);
-                    queryWrapper_HeartBCt.eq(HeartBCt::getIsDeletemark, 1);
-                    int count = this.iHeartBCtService.count(queryWrapper_HeartBCt);
-                    if (count > 0) {
-                        this.iHeartBCtService.updateHeartBCt(heartBCt);
-                    } else {
-                        this.iHeartBCtService.createHeartBCt(heartBCt);
+                    List<HeartBCt> heartBCtList = heart.getCtInfo();
+                    for (HeartBCt heartBCt : heartBCtList
+                    ) {
+                        heartBCt.setCreateUserId(currentUser.getUserId());
+                        heartBCt.setUsername(currentUser.getUsername());
+                        LambdaQueryWrapper<HeartBCt> queryWrapper_HeartBCt = new LambdaQueryWrapper<>();
+                        queryWrapper_HeartBCt.eq(HeartBCt::getFileNo, fileNo);
+                        queryWrapper_HeartBCt.eq(HeartBCt::getIsDeletemark, 1);
+                        int count = this.iHeartBCtService.count(queryWrapper_HeartBCt);
+                        if (count > 0) {
+                            this.iHeartBCtService.updateHeartBCt(heartBCt);
+                        } else {
+                            this.iHeartBCtService.createHeartBCt(heartBCt);
+                        }
                     }
                 }
                 if (heart.getHospitalInfo() != null) {
@@ -520,6 +704,10 @@ public class HeartBPatientinfoController extends BaseController {
                 HeartBPatientinfo heartBPatientinfo = this.iHeartBPatientinfoService.getById(id);
                 String fileNo = heartBPatientinfo.getFileNo();
                 this.iHeartBCheckService.deleteByFileNo(fileNo);
+                this.iHeartBChecktwoService.deleteByFileNo(fileNo);
+                this.iHeartBCheckthreeService.deleteByFileNo(fileNo);
+                this.iHeartBCheckfourService.deleteByFileNo(fileNo);
+                this.iHeartBCheckfiveService.deleteByFileNo(fileNo);
                 this.iHeartBHyfcService.deleteByFileNo(fileNo);
                 this.iHeartBCtfcService.deleteByFileNo(fileNo);
                 this.iHeartBSurgicalafterService.deleteByFileNo(fileNo);

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <a-divider
-      orientation="left"
-      style="font-size:14px;"
-    >2. 超声复查</a-divider>
+          <a-divider
+        orientation="left"
+        style="font-size:14px;"
+      >2.3.2 血常规</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"

@@ -1,22 +1,24 @@
 <template>
     <div>
         <a-form :form="form">
-            #set ($nuType="Int,Decimal,Double,BigDecimal")
+            #set ($nuType="Int,Decimal,Double,BigDecimal,Integer")
             #foreach($field in ${table.fields})
-                <a-form-item v-bind="formItemLayout"
-                             label="${field.comment}">
-                    #if (${field.propertyType} =='Date'||${field.propertyType} =='LocalDate')
-                        <a-date-picker v-decorator="[ '${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{}#end]" />
-                    #elseif (${field.propertyType} =='DateTime' ||${field.propertyType} =='LocalDateTime' )
-                        <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ '${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{}#end]" />
-                    #elseif ($nuType.containsKey(${field.propertyType}))
-                        <a-input-number :precision="2"
-                                        style="width:100%;"
-                                        v-decorator="[ '${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{}#end]"/>
-                    #else
-                        <a-input placeholder="请输入${field.comment}" v-decorator="['${field.propertyName}', #if (${field.nullable} =='N')validatorRules.${field.propertyName} #else{rules:[{max:100,message:'最长不超过100'}]}#end]" />
-                    #end
-                </a-form-item>
+                #if(!$cfg.eliminateFileds.contains($field.name)  && !${field.keyFlag})
+                    <a-form-item v-bind="formItemLayout"
+                                 label="${field.comment}">
+                        #if (${field.propertyType} =='Date'||${field.propertyType} =='LocalDate')
+                            <a-date-picker v-decorator="[ '${field.propertyName}', {rules: [{ required: true, message: '${field.comment}不能为空' }] }]" />
+                        #elseif (${field.propertyType} =='DateTime' ||${field.propertyType} =='LocalDateTime' )
+                            <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ '${field.propertyName}', {rules: [{ required: true, message: '${field.comment}不能为空' }] }]" />
+                        #elseif (${nuType.indexOf(${field.propertyType})}!=-1)
+                            <a-input-number :precision="2"
+                                            style="width:100%;"
+                                            v-decorator="[ '${field.propertyName}',{rules: [{ required: true, message: '${field.comment}不能为空' }] }]"/>
+                        #else
+                            <a-input placeholder="请输入${field.comment}" v-decorator="['${field.propertyName}', {rules: [{ required: true, message: '${field.comment}不能为空' }] }]" />
+                        #end
+                    </a-form-item>
+                #end
             #end
         </a-form>
     </div>

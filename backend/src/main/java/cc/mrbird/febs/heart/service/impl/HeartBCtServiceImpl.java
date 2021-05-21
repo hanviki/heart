@@ -28,7 +28,7 @@ import java.time.LocalDate;
  * </p>
  *
  * @author viki
- * @since 2021-05-18
+ * @since 2021-05-21
  */
 @Slf4j
 @Service("IHeartBCtService")
@@ -56,9 +56,7 @@ public IPage<HeartBCt> findHeartBCts(QueryRequest request, HeartBCt heartBCt){
 @Override
 @Transactional
 public void createHeartBCt(HeartBCt heartBCt){
-        if(heartBCt.getId() ==null) {
-                heartBCt.setId(UUID.randomUUID().toString());
-        }
+        heartBCt.setId(UUID.randomUUID().toString());
         heartBCt.setCreateTime(new Date());
         heartBCt.setIsDeletemark(1);
         this.save(heartBCt);
