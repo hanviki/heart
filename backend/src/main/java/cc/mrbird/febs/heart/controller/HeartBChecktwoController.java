@@ -103,7 +103,7 @@ public void updateHeartBChecktwo(@Valid HeartBChecktwo heartBChecktwo)throws Feb
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBChecktwo:delete")
+//@RequiresPermissions("heartBChecktwo:delete")
 public void deleteHeartBChecktwos(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

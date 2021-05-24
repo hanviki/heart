@@ -182,8 +182,8 @@ export default {
     },
     getId () {
       setTimeout(() => {
-        this.$refs.csInfo.fetch()
-        this.$refs.ctInfo.fetch()
+        this.$refs.csInfo.getId()
+        this.$refs.ctInfo.getId()
         this.$refs.outInfo.fetch()
         this.$refs.fcInfo.getId()
         this.$refs.fcctInfo.getId()
@@ -204,6 +204,10 @@ export default {
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields() // 个人信息
           this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields() // 住院病历资料
           this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields() // 住院病历资料
+          this.heartBPatientinfo.checkTwoInfo = this.$refs.checkTwoInfo.setFields()
+          this.heartBPatientinfo.checkThreeInfo = this.$refs.checkThreeInfo.setFields()
+          this.heartBPatientinfo.checkFourInfo = this.$refs.checkFourInfo.setFields()
+          this.heartBPatientinfo.checkFiveInfo = this.$refs.checkFiveInfo.setFields()
           this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields() // 超声1
           this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields() // 术前CT1
           this.heartBPatientinfo.outInfo = this.$refs.outInfo.setFields() // 出院复查CT1

@@ -15,7 +15,7 @@
       accordion
     >
       <a-collapse-panel
-        :header="index"
+        :header="(index + 1)"
         v-for="(item,index) in listCsfc"
         :key="item.id"
         :forceRender="true"
@@ -25,12 +25,17 @@
           :checkInfo="item"
           :isEdit="isEdit"
         ></heartBCheckthree-infoEdit>
-        <a-icon
-          slot="extra"
-          type="close"
-          v-show="isEdit"
-          @click="e => handleClick(e,item)"
-        />
+        <a-popconfirm
+            placement="topLeft" 
+            slot="extra"
+            v-show="isEdit"
+            title="确定要删除吗?"
+            @confirm="e => handleClick(e,item)"
+            okText="确定"
+            cancelText="取消"
+          >
+            <a-icon @click.stop type="close"></a-icon>
+          </a-popconfirm>
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -63,7 +68,7 @@ export default {
       that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
         var baseId = res.data.data
         that.listCsfc.push({ id: baseId })
-        this.activeKey = that.listCsfc.length
+        this.activeKey = baseId
       })
     },
     reset () {
@@ -76,7 +81,7 @@ export default {
     handleClick (event, item) {
       event.stopPropagation();
       let that = this
-      that.$delete('heartBCsfc/' + item.id).then(() => {
+      that.$delete('heartBCheckthree/' + item.id).then(() => {
         that.$message.success('删除成功')
         const index = that.listCsfc.indexOf(item)
         const newList = that.listCsfc.slice()
@@ -96,6 +101,9 @@ export default {
     setFormValues (listCsfc) {
       let that = this
       that.listCsfc = listCsfc
+      if (listCsfc.length > 0) {
+        this.activeKey = listCsfc[0].id
+      }
     },
   }
 }

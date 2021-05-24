@@ -382,7 +382,7 @@ export default {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
           this.baseId =res.data.data
        })
-       console.log('CtfcInfo Id 创建成功.')
+       console.log('CT复查 Id 创建成功.')
     }
   }
 }

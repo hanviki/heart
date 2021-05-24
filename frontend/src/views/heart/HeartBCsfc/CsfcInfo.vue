@@ -5,22 +5,50 @@
       <a-form-item
         label="AVR"
       >
-        <a-input-number
-          placeholder="请输入AVR"
-          v-decorator="['avr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
+        <a-radio-group v-decorator="['avr', {}]">
+          <a-radio value="无">
+            无
+          </a-radio>
+          <a-radio value="微量">
+            微量
+          </a-radio>
+          <a-radio value="少量">
+            少量
+          </a-radio>
+          <a-radio value="少中量">
+            少中量
+          </a-radio>
+          <a-radio value="中大量">
+            中大量
+          </a-radio>
+          <a-radio value="大量">
+            大量
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
       <a-form-item
         label="MVR"
       >
-        <a-input-number
-          placeholder="请输入MVR"
-          v-decorator="['mvr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
+        <a-radio-group v-decorator="['mvr', {}]">
+          <a-radio value="无">
+            无
+          </a-radio>
+          <a-radio value="微量">
+            微量
+          </a-radio>
+          <a-radio value="少量">
+            少量
+          </a-radio>
+          <a-radio value="少中量">
+            少中量
+          </a-radio>
+          <a-radio value="中大量">
+            中大量
+          </a-radio>
+          <a-radio value="大量">
+            大量
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
       <a-form-item
         
@@ -162,7 +190,7 @@ export default {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
           this.baseId =res.data.data
        })
-       console.log('CsfcInfo Id 创建成功.')
+       console.log('超声复查 Id 创建成功.')
     }
   }
 }

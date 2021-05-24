@@ -56,7 +56,9 @@ public IPage<HeartBCheckfour> findHeartBCheckfours(QueryRequest request, HeartBC
 @Override
 @Transactional
 public void createHeartBCheckfour(HeartBCheckfour heartBCheckfour){
-        heartBCheckfour.setId(UUID.randomUUID().toString());
+        if(heartBCheckfour.getId() ==null) {
+                heartBCheckfour.setId(UUID.randomUUID().toString());
+        }
         heartBCheckfour.setCreateTime(new Date());
         heartBCheckfour.setIsDeletemark(1);
         this.save(heartBCheckfour);

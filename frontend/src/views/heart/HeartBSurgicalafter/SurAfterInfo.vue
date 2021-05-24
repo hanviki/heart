@@ -78,12 +78,20 @@
           v-decorator="['shNote',{rules:[{max:20,message:'最长不超过20'}]}]"
         />
       </a-form-item>
+      <a-divider
+        orientation="left"
+        style="font-size:14px;"
+      >术后随访</a-divider>
       <a-form-item label="主诉">
         <a-input
           placeholder="请输入主诉"
           v-decorator="['shsfZs', {rules:[{max:50,message:'最长不超过50'}]}]"
         />
       </a-form-item>
+      <a-divider
+        orientation="left"
+        style="font-size:14px;"
+      >1.生存状态</a-divider>
       <a-form-item label="随访日期">
         <a-date-picker v-decorator="[ 'shsfDate', {}]" />
       </a-form-item>

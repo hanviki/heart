@@ -56,7 +56,9 @@ public IPage<HeartBCheckfive> findHeartBCheckfives(QueryRequest request, HeartBC
 @Override
 @Transactional
 public void createHeartBCheckfive(HeartBCheckfive heartBCheckfive){
-        heartBCheckfive.setId(UUID.randomUUID().toString());
+        if(heartBCheckfive.getId() ==null) {
+                heartBCheckfive.setId(UUID.randomUUID().toString());
+        }
         heartBCheckfive.setCreateTime(new Date());
         heartBCheckfive.setIsDeletemark(1);
         this.save(heartBCheckfive);

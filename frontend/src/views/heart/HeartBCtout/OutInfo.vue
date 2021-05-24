@@ -275,7 +275,7 @@ export default {
   },
    components: {MutiUploadFile} ,
   mounted () {
-    this.fetch()
+    // this.fetch()
   },
   methods: {
     reset () {
@@ -301,6 +301,7 @@ export default {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
           this.baseId =res.data.data
        })
+       console.log('出院复查CT Id 创建成功.')
     }
   }
 }

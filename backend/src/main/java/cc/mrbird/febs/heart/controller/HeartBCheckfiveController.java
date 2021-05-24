@@ -103,7 +103,7 @@ public void updateHeartBCheckfive(@Valid HeartBCheckfive heartBCheckfive)throws 
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBCheckfive:delete")
+//@RequiresPermissions("heartBCheckfive:delete")
 public void deleteHeartBCheckfives(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

@@ -5,22 +5,50 @@
       <a-form-item
         label="AVR"
       >
-        <a-input-number
-          placeholder="请输入AVR"
-          v-decorator="['avr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
+        <a-radio-group v-decorator="['avr', {}]">
+          <a-radio value="无">
+            无
+          </a-radio>
+          <a-radio value="微量">
+            微量
+          </a-radio>
+          <a-radio value="少量">
+            少量
+          </a-radio>
+          <a-radio value="少中量">
+            少中量
+          </a-radio>
+          <a-radio value="中大量">
+            中大量
+          </a-radio>
+          <a-radio value="大量">
+            大量
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
       <a-form-item
         label="MVR"
       >
-        <a-input-number
-          placeholder="请输入MVR"
-          v-decorator="['mvr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
+        <a-radio-group v-decorator="['mvr', {}]">
+          <a-radio value="无">
+            无
+          </a-radio>
+          <a-radio value="微量">
+            微量
+          </a-radio>
+          <a-radio value="少量">
+            少量
+          </a-radio>
+          <a-radio value="少中量">
+            少中量
+          </a-radio>
+          <a-radio value="中大量">
+            中大量
+          </a-radio>
+          <a-radio value="大量">
+            大量
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
       <a-form-item
         
@@ -106,15 +134,9 @@
       >
         <a-input-number
           placeholder="请输入升主动脉直径(mm)"
-          v-decorator="['szdmdzj', {}]"
+          v-decorator="['szdmzj', {}]"
           :precision="0"
           style="width:100%;"
-        />
-      </a-form-item>
-      <a-form-item label="超声检查时间">
-        <a-date-picker
-          format='YYYY-MM-DD'
-          v-decorator="['csjcsj', {}]"
         />
       </a-form-item>
     </a-form>
@@ -146,7 +168,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj'])
+      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -162,7 +184,7 @@ export default {
        this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
           this.baseId =res.data.data
        })
-       console.log('CsfcInfo Id 创建成功.')
+       console.log('超声 Id 创建成功.')
     }
   }
 }

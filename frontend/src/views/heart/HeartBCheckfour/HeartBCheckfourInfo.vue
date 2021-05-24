@@ -65,8 +65,7 @@ export default {
       form: this.$form.createForm(this),
       csfcInfo: {
 
-      },
-      baseId: ''
+      }
     }
   },
   mounted () {
@@ -78,7 +77,6 @@ export default {
       this.loading = false
       this.csfcInfo = {}
       this.form.resetFields()
-      this.baseId = ''
     },
     setFields () {
       let values = this.form.getFieldsValue(['xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm'])
@@ -90,14 +88,7 @@ export default {
 
         })
       }
-      this.csfcInfo.id = this.baseId
       return this.csfcInfo
-    },
-    fetch () {
-      this.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
-        this.baseId = res.data.data
-      })
-      console.log('CsfcInfo Id 创建成功.')
     }
   }
 }

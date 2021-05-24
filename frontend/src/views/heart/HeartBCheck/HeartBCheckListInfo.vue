@@ -1,9 +1,7 @@
 <template>
   <div>
-           <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >2.3.1、 心梗三项</a-divider>
+    <a-divider orientation="left" style="font-size:14px;" >2 检查</a-divider>
+    <a-divider orientation="left" style="font-size:14px;" >2.3.1、 心梗三项</a-divider>
     <a-button
       icon="plus"
       @click="AddCsfc"
@@ -14,16 +12,21 @@
       accordion
     >
       <a-collapse-panel
-        :header="index"
+        :header="(index + 1)"
         v-for="(item,index) in listFc"
         :key="item.toString()"
       >
         <heartBCheck-info :ref="'fc'+item"></heartBCheck-info>
-        <a-icon
-          slot="extra"
-          type="close"
-          @click="e => handleClick(e,item)"
-        />
+         <a-popconfirm
+            placement="topLeft" 
+            slot="extra"
+            title="确定要删除吗?"
+            @confirm="e => handleClick(e,item)"
+            okText="确定"
+            cancelText="取消"
+          >
+            <a-icon @click.stop type="close"></a-icon>
+          </a-popconfirm>
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -83,7 +86,7 @@ export default {
         this.execId(name)
       }
     },
-    handleClick (event, item) {
+    handleClick (event,item) {
       event.stopPropagation();
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()

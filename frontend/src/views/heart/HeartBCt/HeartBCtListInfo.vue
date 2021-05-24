@@ -1,6 +1,6 @@
 <template>
   <div>
-      <a-divider orientation="left" style="font-size:14px;">CT</a-divider>
+    <a-divider orientation="left" style="font-size:14px;">5 术前CT</a-divider>
     <a-button
       icon="plus"
       @click="AddCtfc"
@@ -8,12 +8,21 @@
     </a-button>
     <a-collapse v-model="activeKey" accordion>
       <a-collapse-panel
-        :header="index"
+        :header="(index + 1)"
         v-for="(item,index) in listFc"
         :key="item.toString()"
       >
         <ctfc-info :ref="'fc'+item"></ctfc-info>
-        <a-icon slot="extra" type="close" @click="e => handleClick(e,item)" />
+        <a-popconfirm
+            placement="topLeft" 
+            slot="extra"
+            title="确定要删除吗?"
+            @confirm="e => handleClick(e,item)"
+            okText="确定"
+            cancelText="取消"
+          >
+            <a-icon @click.stop type="close"></a-icon>
+          </a-popconfirm>
       </a-collapse-panel>
     </a-collapse>
   </div>

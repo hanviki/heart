@@ -7,7 +7,6 @@
        <muti-uploadFile :baseId="baseId"></muti-uploadFile>
      
       <a-form-item
-        
         label="主动脉窦直径(mm)"
       >
         <a-input-number

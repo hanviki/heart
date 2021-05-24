@@ -71,6 +71,7 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="CT图片地址")
     private String filePathct;
 
+
     /**
      * 主动脉窦直径
      */

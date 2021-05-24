@@ -31,11 +31,11 @@
         tab="检验"
         force-render
       >
-        <check-info ref="checkInfo"></check-info>
-        <checkTwo-info ref="checkTwoInfo"></checkTwo-info>
-        <checkThree-info ref="checkThreeInfo"></checkThree-info>
-        <checkFour-info ref="checkFourInfo"></checkFour-info>
-        <checkFive-info ref="checkFiveInfo"></checkFive-info>
+        <check-info ref="checkInfo" :isEdit="true"></check-info>
+        <checkTwo-info ref="checkTwoInfo" :isEdit="true"></checkTwo-info>
+        <checkThree-info ref="checkThreeInfo" :isEdit="true"></checkThree-info>
+        <checkFour-info ref="checkFourInfo" :isEdit="true"></checkFour-info>
+        <checkFive-info ref="checkFiveInfo" :isEdit="true"></checkFive-info>
       </a-tab-pane>
      <a-tab-pane
         key="4"
@@ -123,8 +123,8 @@ import CheckThreeInfo from '../HeartBCheckthree/HeartBCheckthreeListInfoEdit' //
 import CheckFourInfo from '../HeartBCheckfour/HeartBCheckfourListInfoEdit' // 检验 4
 import CheckFiveInfo from '../HeartBCheckfive/HeartBCheckfiveListInfoEdit' // 检验 5
 
-import CsInfo from '../HeartBCs/CsInfoEdit' // 超声
-import CtInfo from '../HeartBCt/CtInfoEdit' // 术前CT
+import CsInfo from '../HeartBCs/HeartBCsListInfoEdit' // 超声
+import CtInfo from '../HeartBCt/HeartBCtListInfoEdit' // 术前CT
 import OutInfo from '../HeartBCtout/OutInfoEdit' // 出院复查CT
 import SurgicalInfo from '../HeartBSurgical/SurgicalInfoEdit' // 手术
 import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit' // 术后

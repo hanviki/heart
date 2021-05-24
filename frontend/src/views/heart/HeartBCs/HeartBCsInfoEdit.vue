@@ -5,22 +5,50 @@
       <a-form-item
         label="AVR"
       >
-        <a-input-number
-          placeholder="请输入AVR"
-          v-decorator="['avr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
+        <a-radio-group v-decorator="['avr', {}]">
+          <a-radio value="无">
+            无
+          </a-radio>
+          <a-radio value="微量">
+            微量
+          </a-radio>
+          <a-radio value="少量">
+            少量
+          </a-radio>
+          <a-radio value="少中量">
+            少中量
+          </a-radio>
+          <a-radio value="中大量">
+            中大量
+          </a-radio>
+          <a-radio value="大量">
+            大量
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
       <a-form-item
         label="MVR"
       >
-        <a-input-number
-          placeholder="请输入MVR"
-          v-decorator="['mvr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
+        <a-radio-group v-decorator="['mvr', {}]">
+          <a-radio value="无">
+            无
+          </a-radio>
+          <a-radio value="微量">
+            微量
+          </a-radio>
+          <a-radio value="少量">
+            少量
+          </a-radio>
+          <a-radio value="少中量">
+            少中量
+          </a-radio>
+          <a-radio value="中大量">
+            中大量
+          </a-radio>
+          <a-radio value="大量">
+            大量
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
       <a-form-item
         
@@ -106,15 +134,9 @@
       >
         <a-input-number
           placeholder="请输入升主动脉直径(mm)"
-          v-decorator="['szdmdzj', {}]"
+          v-decorator="['szdmzj', {}]"
           :precision="0"
           style="width:100%;"
-        />
-      </a-form-item>
-      <a-form-item label="超声检查时间">
-        <a-date-picker
-          format='YYYY-MM-DD'
-          v-decorator="['csjcsj', {}]"
         />
       </a-form-item>
     </a-form>
@@ -127,7 +149,7 @@ import moment from 'moment'
 export default {
   props: {
     isEdit: {
-      default: true
+        default: true
     },
     checkInfo: {
       default: {}
@@ -137,60 +159,58 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      csfcInfo:{     
-      },
+      csInfo: {},
       baseId: ''
     }
   },
   mounted () {
-    this.setFormValues(this.checkInfo)
+   this.setFormValues(this.checkInfo)
   },
    components: {MutiUploadFile} ,
   methods: {
     moment,
     reset () {
       this.loading = false
-      this.csfcInfo = {}
+      this.csInfo = {}
       this.form.resetFields()
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj'])
+      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
-            this.csfcInfo[_key] = values[_key]
+            this.csInfo[_key] = values[_key]
           }
 
         })
       }
-      this.csfcInfo.id= this.baseId
-      return this.csfcInfo
+      // this.csInfo.id= this.baseId
+      return this.csInfo
     },
-    setFormValues ({ ...checkInfo }) {
-      let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj']
-      let fieldDates = ['csjcsj']
-      Object.keys(checkInfo).forEach((key) => {
+    setFormValues ({ ...csInfo }) {
+      let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
+      let fieldDates = []
+      Object.keys(csInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-             if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
-              obj[key] = moment(checkInfo[key])
+            if (csInfo[key] !== ''&&csInfo[key] !== null) {
+              obj[key] = moment(csInfo[key])
             }
             else {
               obj[key] = ''
             }
           } else {
-            obj[key] = checkInfo[key]
+            obj[key] = csInfo[key]
           }
           this.form.setFieldsValue(obj)
         }
       })
-      this.baseId = checkInfo.id
-      this.csfcInfo = checkInfo
-    },
-   
+      this.baseId = csInfo.id
+      this.csInfo = csInfo
+    }
   }
 }
 </script>
