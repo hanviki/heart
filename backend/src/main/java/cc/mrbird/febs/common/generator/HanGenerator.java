@@ -66,7 +66,7 @@ public class HanGenerator {
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         //strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"heart_b_shzl","heart_b_shzlxq","heart_b_sqzl"}); // 需要生成的表
+        strategy.setInclude(new String[]{"heart_b_sqzl"}); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
         // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
@@ -145,7 +145,7 @@ public class HanGenerator {
                // return projectPath + "/src/main/resources/" + moduleName + "/" + tableInfo.getEntityName() + "ListIndex.vue";
                 return PageUrl + moduleName + "/" + tableInfo.getEntityName() + "/" + tableInfo.getEntityName() +".vue";
             }
-        });*/
+        });
      //   cfg.setFileOutConfigList(focList);
      //   mpg.setCfg(cfg);
 
@@ -193,7 +193,7 @@ public class HanGenerator {
                 return PageUrl + moduleName + "/" + tableInfo.getEntityName() +"/" + tableInfo.getEntityName() + "Edit.vue";
             }
         });
-
+*/
         //  自定义 xxUpdate.html生成
         focList.add(new FileOutConfig("/templates/templatesMybatis/mapper.java.vm") {
             @Override
@@ -221,9 +221,9 @@ public class HanGenerator {
         // 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，
         // 放置自己项目的 src/main/resources/templates 目录下, 默认名称一下可以不配置，也可以自定义模板名称
         TemplateConfig tc = new TemplateConfig();
-        tc.setController("/templates/templatesMybatis/heart/controller.java.vm");
-        tc.setService("/templates/templatesMybatis/heart/service.java.vm");
-        tc.setServiceImpl("/templates/templatesMybatis/heart/serviceImpl.java.vm");
+        tc.setController("");
+        tc.setService("");
+        tc.setServiceImpl("");
         tc.setEntity("/templates/templatesMybatis/heart/entity.java.vm");
        // tc.setMapper("/templates/templatesMybatis/mapper.java.vm");
       //  tc.setXml("/templates/templatesMybatis/mapper.xml.vm");

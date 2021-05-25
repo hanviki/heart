@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBSqzlMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBSqzl">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="yszt" property="yszt"/>
+                    <result column="pfnm" property="pfnm"/>
+                    <result column="yinshi" property="yinshi"/>
+                    <result column="paibian" property="paibian"/>
+                    <result column="paibian_note" property="paibianNote"/>
+                    <result column="paibian_help" property="paibianHelp"/>
+                    <result column="painiao" property="painiao"/>
+                    <result column="guominshi" property="guominshi"/>
+                    <result column="guominshi_note" property="guominshiNote"/>
+                    <result column="gms_sw" property="gmsSw"/>
+                    <result column="gms_sw_note" property="gmsSwNote"/>
+                    <result column="xiyanshi" property="xiyanshi"/>
+                    <result column="xiyanshi_note" property="xiyanshiNote"/>
+                    <result column="yinjiushi" property="yinjiushi"/>
+                    <result column="manxingbing" property="manxingbing"/>
+                    <result column="manxingbing_note" property="manxingbingNote"/>
+                    <result column="barthel" property="barthel"/>
+                    <result column="braden" property="braden"/>
+                    <result column="yachuang" property="yachuang"/>
+                    <result column="caprini" property="caprini"/>
+                    <result column="pain_time" property="painTime"/>
+                    <result column="pain_score" property="painScore"/>
+                    <result column="pain_hadle" property="painHadle"/>
+                    <result column="pain_hadlenote" property="painHadlenote"/>
+                    <result column="pain_score_again" property="painScoreAgain"/>
+                    <result column="yingyangfxsc" property="yingyangfxsc"/>
+                    <result column="yingyangfxsc_note" property="yingyangfxscNote"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, yszt, pfnm, yinshi, paibian, paibian_note, paibian_help, painiao, guominshi, guominshi_note, gms_sw, gms_sw_note, xiyanshi, xiyanshi_note, yinjiushi, manxingbing, manxingbing_note, barthel, braden, yachuang, caprini, pain_time, pain_score, pain_hadle, pain_hadlenote, pain_score_again, yingyangfxsc, yingyangfxsc_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBSqzl" parameterType="cc.mrbird.febs.heart.entity.HeartBSqzl">
+        update heart_b_sqzl
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="yszt != null">yszt=#{yszt},</if>
+<if test="pfnm != null">pfnm=#{pfnm},</if>
+<if test="yinshi != null">yinshi=#{yinshi},</if>
+<if test="paibian != null">paibian=#{paibian},</if>
+<if test="paibianNote != null">paibian_note=#{paibianNote},</if>
+<if test="paibianHelp != null">paibian_help=#{paibianHelp},</if>
+<if test="painiao != null">painiao=#{painiao},</if>
+<if test="guominshi != null">guominshi=#{guominshi},</if>
+<if test="guominshiNote != null">guominshi_note=#{guominshiNote},</if>
+<if test="gmsSw != null">gms_sw=#{gmsSw},</if>
+<if test="gmsSwNote != null">gms_sw_note=#{gmsSwNote},</if>
+<if test="xiyanshi != null">xiyanshi=#{xiyanshi},</if>
+<if test="xiyanshiNote != null">xiyanshi_note=#{xiyanshiNote},</if>
+<if test="yinjiushi != null">yinjiushi=#{yinjiushi},</if>
+<if test="manxingbing != null">manxingbing=#{manxingbing},</if>
+<if test="manxingbingNote != null">manxingbing_note=#{manxingbingNote},</if>
+<if test="barthel != null">barthel=#{barthel},</if>
+<if test="braden != null">braden=#{braden},</if>
+<if test="yachuang != null">yachuang=#{yachuang},</if>
+<if test="caprini != null">caprini=#{caprini},</if>
+<if test="painTime != null">pain_time=#{painTime},</if>
+<if test="painScore != null">pain_score=#{painScore},</if>
+<if test="painHadle != null">pain_hadle=#{painHadle},</if>
+<if test="painHadlenote != null">pain_hadlenote=#{painHadlenote},</if>
+<if test="painScoreAgain != null">pain_score_again=#{painScoreAgain},</if>
+<if test="yingyangfxsc != null">yingyangfxsc=#{yingyangfxsc},</if>
+<if test="yingyangfxscNote != null">yingyangfxsc_note=#{yingyangfxscNote},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

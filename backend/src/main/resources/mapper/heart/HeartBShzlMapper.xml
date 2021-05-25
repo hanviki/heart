@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBShzlMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBShzl">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="ss_date" property="ssDate"/>
+                    <result column="icu_day" property="icuDay"/>
+                    <result column="icu_again" property="icuAgain"/>
+                    <result column="shishui" property="shishui"/>
+                    <result column="shishui_note" property="shishuiNote"/>
+                    <result column="mohu" property="mohu"/>
+                    <result column="mohu_note" property="mohuNote"/>
+                    <result column="hunshui" property="hunshui"/>
+                    <result column="hunshui_note" property="hunshuiNote"/>
+                    <result column="hunmi" property="hunmi"/>
+                    <result column="hunmi_note" property="hunmiNote"/>
+                    <result column="zhanwang" property="zhanwang"/>
+                    <result column="zhanwang_note" property="zhanwangNote"/>
+                    <result column="yszt_note" property="ysztNote"/>
+                    <result column="ycjxsc" property="ycjxsc"/>
+                    <result column="wcfzsj_day" property="wcfzsjDay"/>
+                    <result column="wcfzsj_hour" property="wcfzsjHour"/>
+                    <result column="wcfzsj_note" property="wcfzsjNote"/>
+                    <result column="pain_score" property="painScore"/>
+                    <result column="rass" property="rass"/>
+                    <result column="gcs" property="gcs"/>
+                    <result column="braden" property="braden"/>
+                    <result column="rgcqdz_hour" property="rgcqdzHour"/>
+                    <result column="cgbw" property="cgbw"/>
+                    <result column="cvc" property="cvc"/>
+                    <result column="lzbw" property="lzbw"/>
+                    <result column="xuetou" property="xuetou"/>
+                    <result column="iabp" property="iabp"/>
+                    <result column="nrs" property="nrs"/>
+                    <result column="cnyy" property="cnyy"/>
+                    <result column="cwyy" property="cwyy"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, ss_date, icu_day, icu_again, shishui, shishui_note, mohu, mohu_note, hunshui, hunshui_note, hunmi, hunmi_note, zhanwang, zhanwang_note, yszt_note, ycjxsc, wcfzsj_day, wcfzsj_hour, wcfzsj_note, pain_score, rass, gcs, braden, rgcqdz_hour, cgbw, cvc, lzbw, xuetou, iabp, nrs, cnyy, cwyy, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+    </sql>
+    <update id="updateHeartBShzl" parameterType="cc.mrbird.febs.heart.entity.HeartBShzl">
+        update heart_b_shzl
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="ssDate != null">ss_date=#{ssDate},</if>
+<if test="icuDay != null">icu_day=#{icuDay},</if>
+<if test="icuAgain != null">icu_again=#{icuAgain},</if>
+<if test="shishui != null">shishui=#{shishui},</if>
+<if test="shishuiNote != null">shishui_note=#{shishuiNote},</if>
+<if test="mohu != null">mohu=#{mohu},</if>
+<if test="mohuNote != null">mohu_note=#{mohuNote},</if>
+<if test="hunshui != null">hunshui=#{hunshui},</if>
+<if test="hunshuiNote != null">hunshui_note=#{hunshuiNote},</if>
+<if test="hunmi != null">hunmi=#{hunmi},</if>
+<if test="hunmiNote != null">hunmi_note=#{hunmiNote},</if>
+<if test="zhanwang != null">zhanwang=#{zhanwang},</if>
+<if test="zhanwangNote != null">zhanwang_note=#{zhanwangNote},</if>
+<if test="ysztNote != null">yszt_note=#{ysztNote},</if>
+<if test="ycjxsc != null">ycjxsc=#{ycjxsc},</if>
+<if test="wcfzsjDay != null">wcfzsj_day=#{wcfzsjDay},</if>
+<if test="wcfzsjHour != null">wcfzsj_hour=#{wcfzsjHour},</if>
+<if test="wcfzsjNote != null">wcfzsj_note=#{wcfzsjNote},</if>
+<if test="painScore != null">pain_score=#{painScore},</if>
+<if test="rass != null">rass=#{rass},</if>
+<if test="gcs != null">gcs=#{gcs},</if>
+<if test="braden != null">braden=#{braden},</if>
+<if test="rgcqdzHour != null">rgcqdz_hour=#{rgcqdzHour},</if>
+<if test="cgbw != null">cgbw=#{cgbw},</if>
+<if test="cvc != null">cvc=#{cvc},</if>
+<if test="lzbw != null">lzbw=#{lzbw},</if>
+<if test="xuetou != null">xuetou=#{xuetou},</if>
+<if test="iabp != null">iabp=#{iabp},</if>
+<if test="nrs != null">nrs=#{nrs},</if>
+<if test="cnyy != null">cnyy=#{cnyy},</if>
+<if test="cwyy != null">cwyy=#{cwyy},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

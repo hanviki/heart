@@ -77,6 +77,12 @@ public class HeartBPatientinfoController extends BaseController {
     public IHeartBSurgicalService iHeartBSurgicalService;
     @Autowired
     public IHeartBHospitalinfoService iHeartBHospitalinfoService;
+    @Autowired
+    public IHeartBShzlService iHeartBShzlService;
+    @Autowired
+    public IHeartBShzlxqService iHeartBShzlxqService;
+    @Autowired
+    public IHeartBSqzlService iHeartBSqzlService;
 
 
     @GetMapping
@@ -186,6 +192,21 @@ public class HeartBPatientinfoController extends BaseController {
         queryWrapper11.eq(HeartBHyfc::getIsDeletemark, 1);
         List<HeartBHyfc> heartBHyfcList = this.iHeartBHyfcService.list(queryWrapper11);
 
+        LambdaQueryWrapper<HeartBShzl> queryWrapper12 = new LambdaQueryWrapper<>();
+        queryWrapper12.eq(HeartBShzl::getFileNo, fileNo);
+        queryWrapper12.eq(HeartBShzl::getIsDeletemark, 1);
+        HeartBShzl heartBShzlList = this.iHeartBShzlService.getOne(queryWrapper12);
+
+        LambdaQueryWrapper<HeartBSqzl> queryWrapper13 = new LambdaQueryWrapper<>();
+        queryWrapper13.eq(HeartBSqzl::getFileNo, fileNo);
+        queryWrapper13.eq(HeartBSqzl::getIsDeletemark, 1);
+        HeartBSqzl heartBSqzlList = this.iHeartBSqzlService.getOne(queryWrapper13);
+
+        LambdaQueryWrapper<HeartBShzlxq> queryWrapper14 = new LambdaQueryWrapper<>();
+        queryWrapper14.eq(HeartBShzlxq::getFileNo, fileNo);
+        queryWrapper14.eq(HeartBShzlxq::getIsDeletemark, 1);
+        List<HeartBShzlxq> heartBShzlxqList = this.iHeartBShzlxqService.list(queryWrapper14);
+
         CustomHeart heart = new CustomHeart();
         heart.setCheckInfo(checkInfo);
         heart.setCheckTwoInfo(checkTwoInfo);
@@ -202,7 +223,9 @@ public class HeartBPatientinfoController extends BaseController {
         heart.setOutInfo(ctOutInfo);
         heart.setFchyInfo(heartBHyfcList);
         heart.setPatientInfo(heartBPatientinfo);
-
+        heart.setShzlInfo(heartBShzlList);
+        heart.setSqzlInfo(heartBSqzlList);
+        heart.setShzlxqsInfo(heartBShzlxqList);
         return new FebsResponse().data(heart);
     }
 
@@ -318,6 +341,68 @@ public class HeartBPatientinfoController extends BaseController {
                         heartBCt.setFileNo(fileNo);
                         heartBCt.setName(name);
                         this.iHeartBCtService.createHeartBCt(heartBCt);
+                    }
+
+                }
+                if (heart.getSqzlInfo() != null) {
+                    HeartBSqzl heartBSqzl = heart.getSqzlInfo();
+                    heartBSqzl.setCreateUserId(currentUser.getUserId());
+                    heartBSqzl.setUsername(currentUser.getUsername());
+                    heartBSqzl.setFileNo(fileNo);
+                    heartBSqzl.setName(name);
+//                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
+//                    int count = this.iHeartBHospitalinfoService.count(queryWrapper_HeartBHospitalinfo);
+//                    if (count > 0) {
+//                        this.iHeartBHospitalinfoService.updateHeartBHospitalinfo(heartBHospitalinfo);
+//                    } else {
+//                        this.iHeartBHospitalinfoService.createHeartBHospitalinfo(heartBHospitalinfo);
+//                    }
+
+                    this.iHeartBSqzlService.createHeartBSqzl(heartBSqzl);
+                }
+                if (heart.getShzlInfo() != null) {
+                    HeartBShzl heartBShzl = heart.getShzlInfo();
+                    heartBShzl.setCreateUserId(currentUser.getUserId());
+                    heartBShzl.setUsername(currentUser.getUsername());
+                    heartBShzl.setFileNo(fileNo);
+                    heartBShzl.setName(name);
+//                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
+//                    int count = this.iHeartBHospitalinfoService.count(queryWrapper_HeartBHospitalinfo);
+//                    if (count > 0) {
+//                        this.iHeartBHospitalinfoService.updateHeartBHospitalinfo(heartBHospitalinfo);
+//                    } else {
+//                        this.iHeartBHospitalinfoService.createHeartBHospitalinfo(heartBHospitalinfo);
+//                    }
+                    if(heartBShzl.getId() == null || heartBShzl.getId().equals("")){
+                        heartBShzl.setId(UUID.randomUUID().toString());
+                    }
+                    this.iHeartBShzlService.createHeartBShzl(heartBShzl);
+                }
+                if (heart.getShzlxqsInfo() != null) {
+                    List<HeartBShzlxq> heartShzlxqsList = heart.getShzlxqsInfo();
+                    for (HeartBShzlxq item : heartShzlxqsList
+                    ) {
+                        item.setCreateUserId(currentUser.getUserId());
+                        item.setUsername(currentUser.getUsername());
+                        item.setFileNo(fileNo);
+                        item.setName(name);
+//                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
+//                        int count = this.iHeartBCtfcService.count(queryWrapper_HeartBCtfc);
+//                        if (count > 0) {
+//                            this.iHeartBCtfcService.updateHeartBCtfc(item);
+//                        } else {
+//                            this.iHeartBCtfcService.createHeartBCtfc(item);
+//                        }
+                        if(item.getId() == null || item.getId().equals("")){
+                            item.setId(UUID.randomUUID().toString());
+                        }
+                        this.iHeartBShzlxqService.createHeartBShzlxq(item);
                     }
 
                 }
@@ -620,6 +705,71 @@ public class HeartBPatientinfoController extends BaseController {
                     }
                     this.iHeartBHospitalinfoService.saveOrUpdate(heartBHospitalinfo);
                 }
+
+                if (heart.getSqzlInfo() != null) {
+                    HeartBSqzl heartBSqzl = heart.getSqzlInfo();
+                    heartBSqzl.setCreateUserId(currentUser.getUserId());
+                    heartBSqzl.setUsername(currentUser.getUsername());
+                    heartBSqzl.setFileNo(fileNo);
+                    heartBSqzl.setName(name);
+//                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
+//                    int count = this.iHeartBHospitalinfoService.count(queryWrapper_HeartBHospitalinfo);
+//                    if (count > 0) {
+//                        this.iHeartBHospitalinfoService.updateHeartBHospitalinfo(heartBHospitalinfo);
+//                    } else {
+//                        this.iHeartBHospitalinfoService.createHeartBHospitalinfo(heartBHospitalinfo);
+//                    }
+                    if(heartBSqzl.getId() == null || heartBSqzl.getId().equals("")){
+                        heartBSqzl.setId(UUID.randomUUID().toString());
+                    }
+                    this.iHeartBSqzlService.saveOrUpdate(heartBSqzl);
+                }
+                if (heart.getShzlInfo() != null) {
+                    HeartBShzl heartBShzl = heart.getShzlInfo();
+                    heartBShzl.setCreateUserId(currentUser.getUserId());
+                    heartBShzl.setUsername(currentUser.getUsername());
+                    heartBShzl.setFileNo(fileNo);
+                    heartBShzl.setName(name);
+//                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
+//                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
+//                    int count = this.iHeartBHospitalinfoService.count(queryWrapper_HeartBHospitalinfo);
+//                    if (count > 0) {
+//                        this.iHeartBHospitalinfoService.updateHeartBHospitalinfo(heartBHospitalinfo);
+//                    } else {
+//                        this.iHeartBHospitalinfoService.createHeartBHospitalinfo(heartBHospitalinfo);
+//                    }
+                    if(heartBShzl.getId() == null || heartBShzl.getId().equals("")){
+                        heartBShzl.setId(UUID.randomUUID().toString());
+                    }
+                    this.iHeartBShzlService.saveOrUpdate(heartBShzl);
+                }
+                if (heart.getShzlxqsInfo() != null) {
+                    List<HeartBShzlxq> heartShzlxqsList = heart.getShzlxqsInfo();
+                    for (HeartBShzlxq item : heartShzlxqsList
+                    ) {
+                        item.setCreateUserId(currentUser.getUserId());
+                        item.setUsername(currentUser.getUsername());
+                        item.setFileNo(fileNo);
+                        item.setName(name);
+//                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
+//                        int count = this.iHeartBCtfcService.count(queryWrapper_HeartBCtfc);
+//                        if (count > 0) {
+//                            this.iHeartBCtfcService.updateHeartBCtfc(item);
+//                        } else {
+//                            this.iHeartBCtfcService.createHeartBCtfc(item);
+//                        }
+                        if(item.getId() == null || item.getId().equals("")){
+                            item.setId(UUID.randomUUID().toString());
+                        }
+                        this.iHeartBShzlxqService.saveOrUpdate(item);
+                    }
+
+                }
                 if (heart.getOutInfo() != null) {
                     HeartBCtout heartBCtout = heart.getOutInfo();
                     heartBCtout.setCreateUserId(currentUser.getUserId());
@@ -788,6 +938,9 @@ public class HeartBPatientinfoController extends BaseController {
                 this.iHeartBCsfcService.deleteByFileNo(fileNo);
                 this.iHeartBCsService.deleteByFileNo(fileNo);
                 this.iHeartBSurgicalService.deleteByFileNo(fileNo);
+                this.iHeartBShzlService.deleteByFileNo(fileNo);
+                this.iHeartBShzlxqService.deleteByFileNo(fileNo);
+                this.iHeartBSqzlService.deleteByFileNo(fileNo);
             }
 
         } catch (Exception e) {

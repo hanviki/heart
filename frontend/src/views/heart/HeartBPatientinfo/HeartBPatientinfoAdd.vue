@@ -2,7 +2,7 @@
   <a-drawer
     title="新增"
     :maskClosable="false"
-    width="80%"
+    width="90%"
     placement="right"
     :closable="false"
     @close="onClose"
@@ -78,6 +78,21 @@
         <fcct-info ref="fcctInfo"></fcct-info>
         <fchy-info ref="fchyInfo"></fchy-info>
       </a-tab-pane>
+      <a-tab-pane
+        key="9"
+        tab="术前资料"
+        force-render
+      >
+       <sqzl-info ref="sqzlInfo"></sqzl-info>
+      </a-tab-pane>
+       <a-tab-pane
+        key="10"
+        tab="术后资料"
+        force-render
+      >
+       <shzl-info ref="shzlInfo"></shzl-info>
+       <shzlxq-info ref="shzlxqsInfo"></shzlxq-info>
+      </a-tab-pane>
     </a-tabs>
     <div class="drawer-bootom-button">
       <a-popconfirm
@@ -112,6 +127,10 @@ import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfo' // 术后
 import FcInfo from '../HeartBCsfc/FcInfo' // 超声复查
 import FcctInfo from '../HeartBCtfc/FcctInfo' // CT复查
 import FchyInfo from '../HeartBHyfc/FchyInfo' // 化验复查
+import ShzlInfo from '../HeartBShzl/HeartBShzlInfo'
+import SqzlInfo from '../HeartBSqzl/HeartBSqzlInfo'
+import ShzlxqInfo from '../HeartBShzlxq/HeartBShzlxqListInfo'
+
 const formItemLayout = {
   labelCol: { span: 3 },
   wrapperCol: { span: 18 }
@@ -146,12 +165,15 @@ export default {
         fcInfo: [],
         fcctInfo: [],
         fchyInfo: [],
+        shzlxqsInfo: [],
+        shzlInfo: {},
+        sqzlInfo: {}
       }
     }
   },
   components: {
     PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
-    , FcctInfo, FchyInfo
+    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo
   },
   methods: {
     callback (key) {
@@ -179,6 +201,9 @@ export default {
       this.$refs.fcInfo.reset()
       this.$refs.fcctInfo.reset()
       this.$refs.fchyInfo.reset()
+      this.$refs.shzlxqsInfo.reset()
+      this.$refs.shzlInfo.reset()
+      this.$refs.sqzlInfo.reset()
     },
     getId () {
       setTimeout(() => {
@@ -216,7 +241,9 @@ export default {
           this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields() // 超声复查1
           this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields() // CT复查1
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields() // 化验复查
-
+          this.heartBPatientinfo.shzlxqsInfo = this.$refs.shzlxqsInfo.setFields() // 超声复查1
+          this.heartBPatientinfo.shzlInfo = this.$refs.shzlInfo.setFields() // CT复查1
+          this.heartBPatientinfo.sqzlInfo = this.$refs.sqzlInfo.setFields() // 化验复查             
           this.$post('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {

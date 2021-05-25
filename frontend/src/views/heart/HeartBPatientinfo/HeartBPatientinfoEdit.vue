@@ -2,7 +2,7 @@
   <a-drawer
     title="修改"
     :maskClosable="false"
-    width="80%"
+    width="90%"
     placement="right"
     :closable="false"
     @close="onClose"
@@ -11,13 +11,16 @@
   >
     <a-tabs
       @change="callback"
-      :activeKey = "activeKey"
+      :activeKey="activeKey"
     >
       <a-tab-pane
         key="1"
         tab="个人信息"
       >
-        <patient-info ref="patientInfo" @check="checkFileNo"></patient-info>
+        <patient-info
+          ref="patientInfo"
+          @check="checkFileNo"
+        ></patient-info>
       </a-tab-pane>
       <a-tab-pane
         key="2"
@@ -31,34 +34,58 @@
         tab="检验"
         force-render
       >
-        <check-info ref="checkInfo" :isEdit="true"></check-info>
-        <checkTwo-info ref="checkTwoInfo" :isEdit="true"></checkTwo-info>
-        <checkThree-info ref="checkThreeInfo" :isEdit="true"></checkThree-info>
-        <checkFour-info ref="checkFourInfo" :isEdit="true"></checkFour-info>
-        <checkFive-info ref="checkFiveInfo" :isEdit="true"></checkFive-info>
+        <check-info
+          ref="checkInfo"
+          :isEdit="true"
+        ></check-info>
+        <checkTwo-info
+          ref="checkTwoInfo"
+          :isEdit="true"
+        ></checkTwo-info>
+        <checkThree-info
+          ref="checkThreeInfo"
+          :isEdit="true"
+        ></checkThree-info>
+        <checkFour-info
+          ref="checkFourInfo"
+          :isEdit="true"
+        ></checkFour-info>
+        <checkFive-info
+          ref="checkFiveInfo"
+          :isEdit="true"
+        ></checkFive-info>
       </a-tab-pane>
-     <a-tab-pane
+      <a-tab-pane
         key="4"
         tab="超声"
         force-render
       >
-        <cs-info ref="csInfo" :isEdit="true"></cs-info>
+        <cs-info
+          ref="csInfo"
+          :isEdit="true"
+        ></cs-info>
       </a-tab-pane>
-       <a-tab-pane
+      <a-tab-pane
         key="5"
         tab="术前CT"
         force-render
       >
-        <ct-info ref="ctInfo" :isEdit="true"></ct-info>
+        <ct-info
+          ref="ctInfo"
+          :isEdit="true"
+        ></ct-info>
       </a-tab-pane>
       <a-tab-pane
         key="6"
         tab="出院复查CT"
         force-render
       >
-        <out-info ref="outInfo" :isEdit="true"></out-info>
+        <out-info
+          ref="outInfo"
+          :isEdit="true"
+        ></out-info>
       </a-tab-pane>
-       <a-tab-pane
+      <a-tab-pane
         key="7"
         tab="手术"
         force-render
@@ -71,30 +98,57 @@
         force-render
       >
         <surAfter-info ref="surAfterInfo"></surAfter-info>
-       
-       <!-- <fchy-info ref="fchyInfo"></fchy-info>-->
-      </a-tab-pane> 
-      <a-tab-pane
+        <fc-info
+          ref="fcInfo"
+          :isEdit="true"
+        ></fc-info>
+        <fcct-info
+          ref="fcctInfo"
+          :isEdit="true"
+        ></fcct-info>
+        <fchy-info
+          ref="fchyInfo"
+          :isEdit="true"
+        ></fchy-info>
+
+        <!-- <fchy-info ref="fchyInfo"></fchy-info>-->
+      </a-tab-pane>
+      <!-- <a-tab-pane
         key="9"
         tab="超声复查"
         force-render
       >
-        <fc-info ref="fcInfo" :isEdit="true"></fc-info>
+       
       </a-tab-pane> 
       <a-tab-pane
         key="10"
         tab="CT复查"
         force-render
       >
-        <fcct-info ref="fcctInfo" :isEdit="true"></fcct-info>
+       
       </a-tab-pane> 
        <a-tab-pane
         key="11"
         tab="化验复查"
         force-render
       >
-        <fchy-info ref="fchyInfo" :isEdit="true"></fchy-info>
-      </a-tab-pane> 
+       
+      </a-tab-pane>  -->
+      <a-tab-pane
+        key="9"
+        tab="术前资料"
+        force-render
+      >
+        <sqzl-info ref="sqzlInfo" :isEdit="true"></sqzl-info>
+      </a-tab-pane>
+      <a-tab-pane
+        key="10"
+        tab="术后资料"
+        force-render
+      >
+        <shzl-info ref="shzlInfo" :isEdit="true"></shzl-info>
+        <shzlxq-info ref="shzlxqsInfo" :isEdit="true"></shzlxq-info>
+      </a-tab-pane>
     </a-tabs>
     <div class="drawer-bootom-button">
       <a-popconfirm
@@ -131,6 +185,9 @@ import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit' // 术后
 import FcInfo from '../HeartBCsfc/FcInfoEdit' // 超声复查
 import FcctInfo from '../HeartBCtfc/FcctInfoEdit' // CT复查
 import FchyInfo from '../HeartBHyfc/FchyInfoEdit' // 化验复查
+import ShzlInfo from '../HeartBShzl/HeartBShzlInfoEdit'
+import SqzlInfo from '../HeartBSqzl/HeartBSqzlInfoEdit'
+import ShzlxqInfo from '../HeartBShzlxq/HeartBShzlxqListInfoEdit'
 
 const formItemLayout = {
   labelCol: { span: 3 },
@@ -151,7 +208,7 @@ export default {
       activeKey: '1',
       validateStatus: '',
       heartBPatientinfo: {
-         patientInfo: {},
+        patientInfo: {},
         checkInfo: {},
         checkTwoInfo: {},
         checkThreeInfo: {},
@@ -166,12 +223,15 @@ export default {
         fcInfo: [],
         fcctInfo: [],
         fchyInfo: [],
+        shzlxqsInfo: [],
+        shzlInfo: {},
+        sqzlInfo: {}
       }
     }
   },
-   components: {
-    PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
-    , FcctInfo, FchyInfo
+  components: {
+    PatientInfo, HospitalInfo, CheckInfo, CheckTwoInfo, CheckThreeInfo, CheckFourInfo, CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
+    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo
   },
   methods: {
     reset () {
@@ -194,6 +254,9 @@ export default {
       this.$refs.fcInfo.reset()
       this.$refs.fcctInfo.reset()
       this.$refs.fchyInfo.reset()
+      this.$refs.shzlxqsInfo.reset()
+      this.$refs.shzlInfo.reset()
+      this.$refs.sqzlInfo.reset()
     },
     callback (key) {
       this.activeKey = key
@@ -207,8 +270,8 @@ export default {
       this.$emit('close')
     },
     handleSubmit () {
-       this.$refs.patientInfo.handlefileNoBlur()
-       this.$refs.patientInfo.form.validateFields((err, values) => {
+      this.$refs.patientInfo.handlefileNoBlur()
+      this.$refs.patientInfo.form.validateFields((err, values) => {
         if (!err && this.validateStatus === 'success') {
           this.loading = true
           this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields()
@@ -226,7 +289,10 @@ export default {
           this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
           this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
-       
+          this.heartBPatientinfo.shzlxqsInfo = this.$refs.shzlxqsInfo.setFields() // 超声复查1
+          this.heartBPatientinfo.shzlInfo = this.$refs.shzlInfo.setFields() // CT复查1
+          this.heartBPatientinfo.sqzlInfo = this.$refs.sqzlInfo.setFields() // 化验复查  
+
           this.$put('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {
@@ -241,22 +307,25 @@ export default {
     fetch (fileNo) {
       this.$get('heartBPatientinfo/all', { fileNo: fileNo }).then(res => {
         this.heartBPatientinfo = res.data.data
-        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)  
-        this.$refs.checkTwoInfo.setFormValues(this.heartBPatientinfo.checkTwoInfo)  
-        this.$refs.checkThreeInfo.setFormValues(this.heartBPatientinfo.checkThreeInfo)  
-        this.$refs.checkFourInfo.setFormValues(this.heartBPatientinfo.checkFourInfo)  
-        this.$refs.checkFiveInfo.setFormValues(this.heartBPatientinfo.checkFiveInfo)  
+        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)
+        this.$refs.checkTwoInfo.setFormValues(this.heartBPatientinfo.checkTwoInfo)
+        this.$refs.checkThreeInfo.setFormValues(this.heartBPatientinfo.checkThreeInfo)
+        this.$refs.checkFourInfo.setFormValues(this.heartBPatientinfo.checkFourInfo)
+        this.$refs.checkFiveInfo.setFormValues(this.heartBPatientinfo.checkFiveInfo)
 
         this.$refs.patientInfo.setFormValues(this.heartBPatientinfo.patientInfo)
-         this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)
-         this.$refs.ctInfo.setFormValues(this.heartBPatientinfo.ctInfo)
-         this.$refs.hospitalInfo.setFormValues(this.heartBPatientinfo.hospitalInfo)
-         this.$refs.outInfo.setFormValues(this.heartBPatientinfo.outInfo)
-         this.$refs.surgicalInfo.setFormValues(this.heartBPatientinfo.surgicalInfo)
-         this.$refs.surAfterInfo.setFormValues(this.heartBPatientinfo.surAfterInfo)
-         this.$refs.fcInfo.setFormValues(this.heartBPatientinfo.fcInfo)
-         this.$refs.fcctInfo.setFormValues(this.heartBPatientinfo.fcctInfo)
-         this.$refs.fchyInfo.setFormValues(this.heartBPatientinfo.fchyInfo)
+        this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)
+        this.$refs.ctInfo.setFormValues(this.heartBPatientinfo.ctInfo)
+        this.$refs.hospitalInfo.setFormValues(this.heartBPatientinfo.hospitalInfo)
+        this.$refs.outInfo.setFormValues(this.heartBPatientinfo.outInfo)
+        this.$refs.surgicalInfo.setFormValues(this.heartBPatientinfo.surgicalInfo)
+        this.$refs.surAfterInfo.setFormValues(this.heartBPatientinfo.surAfterInfo)
+        this.$refs.fcInfo.setFormValues(this.heartBPatientinfo.fcInfo)
+        this.$refs.fcctInfo.setFormValues(this.heartBPatientinfo.fcctInfo)
+        this.$refs.fchyInfo.setFormValues(this.heartBPatientinfo.fchyInfo)
+        this.$refs.shzlxqsInfo.setFormValues(this.heartBPatientinfo.shzlxqsInfo)
+        this.$refs.shzlInfo.setFormValues(this.heartBPatientinfo.shzlInfo)
+        this.$refs.sqzlInfo.setFormValues(this.heartBPatientinfo.sqzlInfo)
       })
     }
   }

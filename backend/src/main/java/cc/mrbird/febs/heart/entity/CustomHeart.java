@@ -1,5 +1,6 @@
 package cc.mrbird.febs.heart.entity;
 
+import cc.mrbird.febs.heart.controller.HeartBShzlxqController;
 import lombok.Data;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public class CustomHeart {
     private transient List<HeartBCsfc> fcInfo; //超声复查 8.2
     private transient List<HeartBCtfc> fcctInfo;//CT复查 8.3
     private transient  List<HeartBHyfc> fchyInfo; //化验复查 8.4
+    private transient  List<HeartBShzlxq> shzlxqsInfo;
+    private transient  HeartBShzl shzlInfo;
+    private transient  HeartBSqzl sqzlInfo;
 }
