@@ -192,7 +192,7 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="修改人")
     private Long modifyUserId;
 
-
+    private Integer displayIndex;
 
     public static final String ID ="id" ;
 

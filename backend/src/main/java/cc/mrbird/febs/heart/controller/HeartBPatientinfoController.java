@@ -30,10 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author viki
@@ -122,26 +119,61 @@ public class HeartBPatientinfoController extends BaseController {
         queryWrapper2.eq(HeartBCheck::getFileNo, fileNo);
         queryWrapper2.eq(HeartBCheck::getIsDeletemark, 1);
         List<HeartBCheck> checkInfo = this.iHeartBCheckService.list(queryWrapper2);
+        checkInfo.sort(new Comparator<HeartBCheck>() {
+            @Override
+            public int compare(HeartBCheck o1, HeartBCheck o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
 
         LambdaQueryWrapper<HeartBChecktwo> queryWrapper22 = new LambdaQueryWrapper<>();
         queryWrapper22.eq(HeartBChecktwo::getFileNo, fileNo);
         queryWrapper22.eq(HeartBChecktwo::getIsDeletemark, 1);
         List<HeartBChecktwo> checkTwoInfo = this.iHeartBChecktwoService.list(queryWrapper22);
 
+        checkTwoInfo.sort(new Comparator<HeartBChecktwo>() {
+            @Override
+            public int compare(HeartBChecktwo o1, HeartBChecktwo o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
         LambdaQueryWrapper<HeartBCheckthree> queryWrapper23 = new LambdaQueryWrapper<>();
         queryWrapper23.eq(HeartBCheckthree::getFileNo, fileNo);
         queryWrapper23.eq(HeartBCheckthree::getIsDeletemark, 1);
         List<HeartBCheckthree> checkThreeInfo = this.iHeartBCheckthreeService.list(queryWrapper23);
+
+        checkThreeInfo.sort(new Comparator<HeartBCheckthree>() {
+            @Override
+            public int compare(HeartBCheckthree o1, HeartBCheckthree o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
 
         LambdaQueryWrapper<HeartBCheckfour> queryWrapper24 = new LambdaQueryWrapper<>();
         queryWrapper24.eq(HeartBCheckfour::getFileNo, fileNo);
         queryWrapper24.eq(HeartBCheckfour::getIsDeletemark, 1);
         List<HeartBCheckfour> checkFourInfo = this.iHeartBCheckfourService.list(queryWrapper24);
 
+        checkFourInfo.sort(new Comparator<HeartBCheckfour>() {
+            @Override
+            public int compare(HeartBCheckfour o1, HeartBCheckfour o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
+
         LambdaQueryWrapper<HeartBCheckfive> queryWrapper25 = new LambdaQueryWrapper<>();
         queryWrapper25.eq(HeartBCheckfive::getFileNo, fileNo);
         queryWrapper25.eq(HeartBCheckfive::getIsDeletemark, 1);
         List<HeartBCheckfive> checkFiveInfo = this.iHeartBCheckfiveService.list(queryWrapper25);
+
+        checkFiveInfo.sort(new Comparator<HeartBCheckfive>() {
+            @Override
+            public int compare(HeartBCheckfive o1, HeartBCheckfive o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
 
 
         LambdaQueryWrapper<HeartBCs> queryWrapper3 = new LambdaQueryWrapper<>();
@@ -149,11 +181,26 @@ public class HeartBPatientinfoController extends BaseController {
         queryWrapper3.eq(HeartBCs::getFileNo, fileNo);
         List<HeartBCs> csInfo = this.iHeartBCsService.list(queryWrapper3);
 
+        csInfo.sort(new Comparator<HeartBCs>() {
+            @Override
+            public int compare(HeartBCs o1, HeartBCs o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
+
 
         LambdaQueryWrapper<HeartBCt> queryWrapper5 = new LambdaQueryWrapper<>();
         queryWrapper5.eq(HeartBCt::getIsDeletemark, 1);
         queryWrapper5.eq(HeartBCt::getFileNo, fileNo);
         List<HeartBCt> ctInfo = this.iHeartBCtService.list(queryWrapper5);
+
+        ctInfo.sort(new Comparator<HeartBCt>() {
+            @Override
+            public int compare(HeartBCt o1, HeartBCt o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
 
         LambdaQueryWrapper<HeartBCtout> queryWrapper6 = new LambdaQueryWrapper<>();
         queryWrapper6.eq(HeartBCtout::getFileNo, fileNo);
@@ -181,21 +228,46 @@ public class HeartBPatientinfoController extends BaseController {
         queryWrapper4.eq(HeartBCsfc::getIsDeletemark, 1);
         List<HeartBCsfc> csfcList = this.iHeartBCsfcService.list(queryWrapper4);
 
+        csfcList.sort(new Comparator<HeartBCsfc>() {
+            @Override
+            public int compare(HeartBCsfc o1, HeartBCsfc o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
 
         LambdaQueryWrapper<HeartBCtfc> queryWrapper10 = new LambdaQueryWrapper<>();
         queryWrapper10.eq(HeartBCtfc::getFileNo, fileNo);
         queryWrapper10.eq(HeartBCtfc::getIsDeletemark, 1);
         List<HeartBCtfc> ctfcList = this.iHeartBCtfcService.list(queryWrapper10);
 
+        ctfcList.sort(new Comparator<HeartBCtfc>() {
+            @Override
+            public int compare(HeartBCtfc o1, HeartBCtfc o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
+
         LambdaQueryWrapper<HeartBHyfc> queryWrapper11 = new LambdaQueryWrapper<>();
         queryWrapper11.eq(HeartBHyfc::getFileNo, fileNo);
         queryWrapper11.eq(HeartBHyfc::getIsDeletemark, 1);
         List<HeartBHyfc> heartBHyfcList = this.iHeartBHyfcService.list(queryWrapper11);
 
+        heartBHyfcList.sort(new Comparator<HeartBHyfc>() {
+            @Override
+            public int compare(HeartBHyfc o1, HeartBHyfc o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
         LambdaQueryWrapper<HeartBShzl> queryWrapper12 = new LambdaQueryWrapper<>();
         queryWrapper12.eq(HeartBShzl::getFileNo, fileNo);
         queryWrapper12.eq(HeartBShzl::getIsDeletemark, 1);
         HeartBShzl heartBShzlList = this.iHeartBShzlService.getOne(queryWrapper12);
+
+
+
 
         LambdaQueryWrapper<HeartBSqzl> queryWrapper13 = new LambdaQueryWrapper<>();
         queryWrapper13.eq(HeartBSqzl::getFileNo, fileNo);
@@ -206,6 +278,14 @@ public class HeartBPatientinfoController extends BaseController {
         queryWrapper14.eq(HeartBShzlxq::getFileNo, fileNo);
         queryWrapper14.eq(HeartBShzlxq::getIsDeletemark, 1);
         List<HeartBShzlxq> heartBShzlxqList = this.iHeartBShzlxqService.list(queryWrapper14);
+
+        heartBShzlxqList.sort(new Comparator<HeartBShzlxq>() {
+            @Override
+            public int compare(HeartBShzlxq o1, HeartBShzlxq o2) {
+
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
 
         CustomHeart heart = new CustomHeart();
         heart.setCheckInfo(checkInfo);
@@ -242,6 +322,7 @@ public class HeartBPatientinfoController extends BaseController {
 
             String fileNo = "";
             String name = "";
+            int dIndex=0;
             if (heart != null) {
                 if (heart.getPatientInfo() != null) {
                     HeartBPatientinfo heartBPatientinfo = heart.getPatientInfo();
@@ -261,6 +342,7 @@ public class HeartBPatientinfoController extends BaseController {
                 }
 
                 if (heart.getCheckInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheck> heartBCheckList = heart.getCheckInfo();
                     for (HeartBCheck check : heartBCheckList
                     ) {
@@ -268,11 +350,15 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+
+                        check.setDisplayIndex(dIndex);
                         this.iHeartBCheckService.createHeartBCheck(check);
+                        dIndex++;
                     }
 
                 }
                 if (heart.getCheckTwoInfo() != null) {
+                    dIndex=0;
                     List<HeartBChecktwo> heartBChecktwoList = heart.getCheckTwoInfo();
                     for (HeartBChecktwo check : heartBChecktwoList
                     ) {
@@ -280,11 +366,14 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setDisplayIndex(dIndex);
                         this.iHeartBChecktwoService.createHeartBChecktwo(check);
+                        dIndex++;
                     }
 
                 }
                 if (heart.getCheckThreeInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheckthree> heartBCheckthreeList = heart.getCheckThreeInfo();
                     for (HeartBCheckthree check : heartBCheckthreeList
                     ) {
@@ -292,11 +381,14 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setDisplayIndex(dIndex);
                         this.iHeartBCheckthreeService.createHeartBCheckthree(check);
+                        dIndex++;
                     }
 
                 }
                 if (heart.getCheckFourInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheckfour> heartBCheckfourList = heart.getCheckFourInfo();
                     for (HeartBCheckfour check : heartBCheckfourList
                     ) {
@@ -304,11 +396,14 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setDisplayIndex(dIndex);
                         this.iHeartBCheckfourService.createHeartBCheckfour(check);
+                        dIndex++;
                     }
 
                 }
                 if (heart.getCheckFiveInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheckfive> heartBCheckfiveList = heart.getCheckFiveInfo();
                     for (HeartBCheckfive check : heartBCheckfiveList
                     ) {
@@ -316,11 +411,14 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setDisplayIndex(dIndex);
                         this.iHeartBCheckfiveService.createHeartBCheckfive(check);
+                        dIndex++;
                     }
 
                 }
                 if (heart.getCsInfo() != null) {
+                    dIndex=0;
                     List<HeartBCs> heartBCsList = heart.getCsInfo();
                     for (HeartBCs heartBCs : heartBCsList
                     ) {
@@ -328,11 +426,14 @@ public class HeartBPatientinfoController extends BaseController {
                         heartBCs.setUsername(currentUser.getUsername());
                         heartBCs.setFileNo(fileNo);
                         heartBCs.setName(name);
+                        heartBCs.setDisplayIndex(dIndex);
                         this.iHeartBCsService.createHeartBCs(heartBCs);
+                        dIndex++;
                     }
 
                 }
                 if (heart.getCtInfo() != null) {
+                    dIndex=0;
                     List<HeartBCt> heartBCtList = heart.getCtInfo();
                     for (HeartBCt heartBCt : heartBCtList
                     ) {
@@ -340,7 +441,9 @@ public class HeartBPatientinfoController extends BaseController {
                         heartBCt.setUsername(currentUser.getUsername());
                         heartBCt.setFileNo(fileNo);
                         heartBCt.setName(name);
+                        heartBCt.setDisplayIndex(dIndex);
                         this.iHeartBCtService.createHeartBCt(heartBCt);
+                        dIndex++;
                     }
 
                 }
@@ -383,6 +486,7 @@ public class HeartBPatientinfoController extends BaseController {
                     this.iHeartBShzlService.createHeartBShzl(heartBShzl);
                 }
                 if (heart.getShzlxqsInfo() != null) {
+                    dIndex=0;
                     List<HeartBShzlxq> heartShzlxqsList = heart.getShzlxqsInfo();
                     for (HeartBShzlxq item : heartShzlxqsList
                     ) {
@@ -390,6 +494,8 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
 //                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
@@ -441,6 +547,8 @@ public class HeartBPatientinfoController extends BaseController {
                     this.iHeartBSurgicalService.createHeartBSurgical(heartBSurgical);
                 }
                 if (heart.getFcctInfo() != null) {
+
+                    dIndex=0;
                     List<HeartBCtfc> heartBCtfcList = heart.getFcctInfo();
                     for (HeartBCtfc item : heartBCtfcList
                     ) {
@@ -448,11 +556,14 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
                         this.iHeartBCtfcService.createHeartBCtfc(item);
                     }
 
                 }
                 if (heart.getFchyInfo() != null) {
+                    dIndex=0;
                     List<HeartBHyfc> heartBHyfcList = heart.getFchyInfo();
                     for (HeartBHyfc item : heartBHyfcList
                     ) {
@@ -460,11 +571,14 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
                         this.iHeartBHyfcService.createHeartBHyfc(item);
                     }
 
                 }
                 if (heart.getFcInfo() != null) {
+                    dIndex=0;
                     List<HeartBCsfc> heartBCsfcList = heart.getFcInfo();
                     for (HeartBCsfc item : heartBCsfcList
                     ) {
@@ -472,6 +586,8 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
                         this.iHeartBCsfcService.createHeartBCsfc(item);
                     }
 
@@ -498,6 +614,7 @@ public class HeartBPatientinfoController extends BaseController {
 
             String fileNo = "";
             String name = "";
+            int dIndex=0;
             if (heart != null) {
                 if (heart.getPatientInfo() != null) {
                     HeartBPatientinfo heartBPatientinfo = heart.getPatientInfo();
@@ -525,6 +642,10 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setCreateTime(new Date());
+                        check.setIsDeletemark(1);
+                        check.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCheck> queryWrapper_checkInfo = new LambdaQueryWrapper<>();
 //                        queryWrapper_checkInfo.eq(HeartBCheck::getFileNo, check.getFileNo());
 //                        queryWrapper_checkInfo.eq(HeartBCheck::getIsDeletemark, 1);
@@ -536,11 +657,13 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(check.getId() == null || check.getId().equals("")){
                             check.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCheckService.saveOrUpdate(check);
                     }
                 }
                 if (heart.getCheckTwoInfo() != null) {
+                    dIndex=0;
                     List<HeartBChecktwo> heartBChecktwoList = heart.getCheckTwoInfo();
                     for (HeartBChecktwo check : heartBChecktwoList
                     ) {
@@ -549,6 +672,10 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setCreateTime(new Date());
+                        check.setIsDeletemark(1);
+                        check.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBChecktwo> queryWrapper_checktwoInfo = new LambdaQueryWrapper<>();
 //                        queryWrapper_checktwoInfo.eq(HeartBChecktwo::getFileNo, check.getFileNo());
 //                        queryWrapper_checktwoInfo.eq(HeartBChecktwo::getIsDeletemark, 1);
@@ -560,11 +687,13 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(check.getId() == null || check.getId().equals("")){
                             check.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBChecktwoService.saveOrUpdate(check);
                     }
                 }
                 if (heart.getCheckThreeInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheckthree> heartBCheckthreeList = heart.getCheckThreeInfo();
                     for (HeartBCheckthree check : heartBCheckthreeList
                     ) {
@@ -573,6 +702,10 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setCreateTime(new Date());
+                        check.setIsDeletemark(1);
+                        check.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCheckthree> queryWrapper_checkthreeInfo = new LambdaQueryWrapper<>();
 ////                        queryWrapper_checkthreeInfo.eq(HeartBCheckthree::getFileNo, check.getFileNo());
 ////                        queryWrapper_checkthreeInfo.eq(HeartBCheckthree::getIsDeletemark, 1);
@@ -584,11 +717,13 @@ public class HeartBPatientinfoController extends BaseController {
 ////                        }
                         if(check.getId() == null || check.getId().equals("")){
                             check.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCheckthreeService.saveOrUpdate(check);
                     }
                 }
                 if (heart.getCheckFourInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheckfour> heartBCheckfourList = heart.getCheckFourInfo();
                     for (HeartBCheckfour check : heartBCheckfourList
                     ) {
@@ -597,6 +732,10 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setCreateTime(new Date());
+                        check.setIsDeletemark(1);
+                        check.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCheckfour> queryWrapper_checkfourInfo = new LambdaQueryWrapper<>();
 //                        queryWrapper_checkfourInfo.eq(HeartBCheckfour::getFileNo, check.getFileNo());
 //                        queryWrapper_checkfourInfo.eq(HeartBCheckfour::getIsDeletemark, 1);
@@ -608,11 +747,13 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(check.getId() == null || check.getId().equals("")){
                             check.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCheckfourService.saveOrUpdate(check);
                     }
                 }
                 if (heart.getCheckFiveInfo() != null) {
+                    dIndex=0;
                     List<HeartBCheckfive> heartBCheckfiveList = heart.getCheckFiveInfo();
                     for (HeartBCheckfive check : heartBCheckfiveList
                     ) {
@@ -621,6 +762,11 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setUsername(currentUser.getUsername());
                         check.setFileNo(fileNo);
                         check.setName(name);
+                        check.setCreateTime(new Date());
+                        check.setIsDeletemark(1);
+                        check.setDisplayIndex(dIndex);
+                        dIndex++;
+
 //                        LambdaQueryWrapper<HeartBCheckfive> queryWrapper_checkfiveInfo = new LambdaQueryWrapper<>();
 //                        queryWrapper_checkfiveInfo.eq(HeartBCheckfive::getFileNo, check.getFileNo());
 //                        queryWrapper_checkfiveInfo.eq(HeartBCheckfive::getIsDeletemark, 1);
@@ -638,6 +784,7 @@ public class HeartBPatientinfoController extends BaseController {
                 }
 
                 if (heart.getCsInfo() != null) {
+                    dIndex=0;
                     List<HeartBCs> heartBCsList = heart.getCsInfo();
                     for (HeartBCs heartBCs : heartBCsList
                     ) {
@@ -646,6 +793,10 @@ public class HeartBPatientinfoController extends BaseController {
                         heartBCs.setUsername(currentUser.getUsername());
                         heartBCs.setFileNo(fileNo);
                         heartBCs.setName(name);
+                        heartBCs.setCreateTime(new Date());
+                        heartBCs.setIsDeletemark(1);
+                        heartBCs.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCs> queryWrapper_HeartBCs = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBCs.eq(HeartBCs::getFileNo, fileNo);
 //                        queryWrapper_HeartBCs.eq(HeartBCs::getIsDeletemark, 1);
@@ -658,11 +809,13 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(heartBCs.getId() == null || heartBCs.getId().equals("")){
                             heartBCs.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCsService.saveOrUpdate(heartBCs);
                     }
                 }
                 if (heart.getCtInfo() != null) {
+                    dIndex=0;
                     List<HeartBCt> heartBCtList = heart.getCtInfo();
                     for (HeartBCt heartBCt : heartBCtList
                     ) {
@@ -670,6 +823,10 @@ public class HeartBPatientinfoController extends BaseController {
                         heartBCt.setUsername(currentUser.getUsername());
                         heartBCt.setFileNo(fileNo);
                         heartBCt.setName(name);
+                        heartBCt.setCreateTime(new Date());
+                        heartBCt.setIsDeletemark(1);
+                        heartBCt.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCt> queryWrapper_HeartBCt = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBCt.eq(HeartBCt::getFileNo, fileNo);
 //                        queryWrapper_HeartBCt.eq(HeartBCt::getIsDeletemark, 1);
@@ -681,6 +838,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(heartBCt.getId() == null || heartBCt.getId().equals("")){
                             heartBCt.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCtService.saveOrUpdate(heartBCt);
                     }
@@ -691,6 +849,8 @@ public class HeartBPatientinfoController extends BaseController {
                     heartBHospitalinfo.setUsername(currentUser.getUsername());
                     heartBHospitalinfo.setFileNo(fileNo);
                     heartBHospitalinfo.setName(name);
+                    heartBHospitalinfo.setCreateTime(new Date());
+                    heartBHospitalinfo.setIsDeletemark(1);
 //                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
 //                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
 //                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
@@ -702,6 +862,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                    }
                     if(heartBHospitalinfo.getId() == null || heartBHospitalinfo.getId().equals("")){
                         heartBHospitalinfo.setId(UUID.randomUUID().toString());
+
                     }
                     this.iHeartBHospitalinfoService.saveOrUpdate(heartBHospitalinfo);
                 }
@@ -712,6 +873,8 @@ public class HeartBPatientinfoController extends BaseController {
                     heartBSqzl.setUsername(currentUser.getUsername());
                     heartBSqzl.setFileNo(fileNo);
                     heartBSqzl.setName(name);
+                    heartBSqzl.setCreateTime(new Date());
+                    heartBSqzl.setIsDeletemark(1);
 //                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
 //                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
 //                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
@@ -723,6 +886,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                    }
                     if(heartBSqzl.getId() == null || heartBSqzl.getId().equals("")){
                         heartBSqzl.setId(UUID.randomUUID().toString());
+
                     }
                     this.iHeartBSqzlService.saveOrUpdate(heartBSqzl);
                 }
@@ -732,6 +896,8 @@ public class HeartBPatientinfoController extends BaseController {
                     heartBShzl.setUsername(currentUser.getUsername());
                     heartBShzl.setFileNo(fileNo);
                     heartBShzl.setName(name);
+                    heartBShzl.setCreateTime(new Date());
+                    heartBShzl.setIsDeletemark(1);
 //                    LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper_HeartBHospitalinfo = new LambdaQueryWrapper<>();
 //                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getFileNo, fileNo);
 //                    queryWrapper_HeartBHospitalinfo.eq(HeartBHospitalinfo::getIsDeletemark, 1);
@@ -743,10 +909,12 @@ public class HeartBPatientinfoController extends BaseController {
 //                    }
                     if(heartBShzl.getId() == null || heartBShzl.getId().equals("")){
                         heartBShzl.setId(UUID.randomUUID().toString());
+
                     }
                     this.iHeartBShzlService.saveOrUpdate(heartBShzl);
                 }
                 if (heart.getShzlxqsInfo() != null) {
+                    dIndex=0;
                     List<HeartBShzlxq> heartShzlxqsList = heart.getShzlxqsInfo();
                     for (HeartBShzlxq item : heartShzlxqsList
                     ) {
@@ -754,6 +922,10 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setCreateTime(new Date());
+                        item.setIsDeletemark(1);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
 //                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
@@ -765,6 +937,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(item.getId() == null || item.getId().equals("")){
                             item.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBShzlxqService.saveOrUpdate(item);
                     }
@@ -776,6 +949,8 @@ public class HeartBPatientinfoController extends BaseController {
                     heartBCtout.setUsername(currentUser.getUsername());
                     heartBCtout.setFileNo(fileNo);
                     heartBCtout.setName(name);
+                    heartBCtout.setCreateTime(new Date());
+                    heartBCtout.setIsDeletemark(1);
 //                    LambdaQueryWrapper<HeartBCtout> queryWrapper_HeartBCtout = new LambdaQueryWrapper<>();
 //                    queryWrapper_HeartBCtout.eq(HeartBCtout::getFileNo, fileNo);
 //                    queryWrapper_HeartBCtout.eq(HeartBCtout::getIsDeletemark, 1);
@@ -787,6 +962,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                    }
                     if(heartBCtout.getId() == null || heartBCtout.getId().equals("")){
                         heartBCtout.setId(UUID.randomUUID().toString());
+
                     }
                     this.iHeartBCtoutService.saveOrUpdate(heartBCtout);
                 }
@@ -796,6 +972,8 @@ public class HeartBPatientinfoController extends BaseController {
                     heartBSurgicalafter.setUsername(currentUser.getUsername());
                     heartBSurgicalafter.setFileNo(fileNo);
                     heartBSurgicalafter.setName(name);
+                    heartBSurgicalafter.setCreateTime(new Date());
+                    heartBSurgicalafter.setIsDeletemark(1);
 //                    LambdaQueryWrapper<HeartBSurgicalafter> queryWrapper_HeartBSurgicalafter = new LambdaQueryWrapper<>();
 //                    queryWrapper_HeartBSurgicalafter.eq(HeartBSurgicalafter::getFileNo, fileNo);
 //                    queryWrapper_HeartBSurgicalafter.eq(HeartBSurgicalafter::getIsDeletemark, 1);
@@ -807,6 +985,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                    }
                     if(heartBSurgicalafter.getId() == null || heartBSurgicalafter.getId().equals("")){
                         heartBSurgicalafter.setId(UUID.randomUUID().toString());
+
                     }
                     this.iHeartBSurgicalafterService.saveOrUpdate(heartBSurgicalafter);
                 }
@@ -816,6 +995,8 @@ public class HeartBPatientinfoController extends BaseController {
                     heartBSurgical.setUsername(currentUser.getUsername());
                     heartBSurgical.setFileNo(fileNo);
                     heartBSurgical.setName(name);
+                    heartBSurgical.setCreateTime(new Date());
+                    heartBSurgical.setIsDeletemark(1);
 //                    LambdaQueryWrapper<HeartBSurgical> queryWrapper_HeartBSurgical = new LambdaQueryWrapper<>();
 //                    queryWrapper_HeartBSurgical.eq(HeartBSurgical::getFileNo, fileNo);
 //                    queryWrapper_HeartBSurgical.eq(HeartBSurgical::getIsDeletemark, 1);
@@ -827,10 +1008,12 @@ public class HeartBPatientinfoController extends BaseController {
 //                    }
                     if(heartBSurgical.getId() == null || heartBSurgical.getId().equals("")){
                         heartBSurgical.setId(UUID.randomUUID().toString());
+
                     }
                     this.iHeartBSurgicalService.saveOrUpdate(heartBSurgical);
                 }
                 if (heart.getFcctInfo() != null) {
+                    dIndex=0;
                     List<HeartBCtfc> heartBCtfcList = heart.getFcctInfo();
                     for (HeartBCtfc item : heartBCtfcList
                     ) {
@@ -838,6 +1021,10 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setCreateTime(new Date());
+                        item.setIsDeletemark(1);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
 //                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
@@ -849,12 +1036,14 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(item.getId() == null || item.getId().equals("")){
                             item.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCtfcService.saveOrUpdate(item);
                     }
 
                 }
                 if (heart.getFchyInfo() != null) {
+                    dIndex=0;
                     List<HeartBHyfc> heartBHyfcList = heart.getFchyInfo();
                     for (HeartBHyfc item : heartBHyfcList
                     ) {
@@ -862,6 +1051,10 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setCreateTime(new Date());
+                        item.setIsDeletemark(1);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBHyfc> queryWrapper_HeartBHyfc = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBHyfc.eq(HeartBHyfc::getId, item.getId());
 //                        queryWrapper_HeartBHyfc.eq(HeartBHyfc::getIsDeletemark, 1);
@@ -873,6 +1066,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(item.getId() == null || item.getId().equals("")){
                             item.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBHyfcService.saveOrUpdate(item);
 
@@ -880,6 +1074,7 @@ public class HeartBPatientinfoController extends BaseController {
 
                 }
                 if (heart.getFcInfo() != null) {
+                    dIndex=0;
                     List<HeartBCsfc> heartBCsfcList = heart.getFcInfo();
                     for (HeartBCsfc item : heartBCsfcList
                     ) {
@@ -887,6 +1082,10 @@ public class HeartBPatientinfoController extends BaseController {
                         item.setUsername(currentUser.getUsername());
                         item.setFileNo(fileNo);
                         item.setName(name);
+                        item.setCreateTime(new Date());
+                        item.setIsDeletemark(1);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
 //                        LambdaQueryWrapper<HeartBCsfc> queryWrapper_HeartBCsfc = new LambdaQueryWrapper<>();
 //                        queryWrapper_HeartBCsfc.eq(HeartBCsfc::getId, item.getId());
 //                        queryWrapper_HeartBCsfc.eq(HeartBCsfc::getIsDeletemark, 1);
@@ -898,6 +1097,7 @@ public class HeartBPatientinfoController extends BaseController {
 //                        }
                         if(item.getId() == null || item.getId().equals("")){
                             item.setId(UUID.randomUUID().toString());
+
                         }
                         this.iHeartBCsfcService.saveOrUpdate(item);
 

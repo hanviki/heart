@@ -19,11 +19,17 @@
         :key="item.toString()"
       >
         <heartBShzlxq-info :ref="'fc'+item"></heartBShzlxq-info>
-        <a-icon
-          slot="extra"
-          type="close"
-          @click="e => handleClick(e,item)"
-        />
+        <a-popconfirm
+            placement="topLeft" 
+            slot="extra"
+            v-show="isEdit"
+            title="确定要删除吗?"
+            @confirm="e => handleClick(e,item)"
+            okText="确定"
+            cancelText="取消"
+          >
+            <a-icon @click.stop type="close"></a-icon>
+          </a-popconfirm>
       </a-collapse-panel>
     </a-collapse>
   </div>

@@ -196,7 +196,7 @@ private static final long serialVersionUID=1L;
     private Long modifyUserId;
 
 
-
+    private Integer displayIndex;
     public static final String ID ="id" ;
 
     public static final String USERNAME ="username" ;

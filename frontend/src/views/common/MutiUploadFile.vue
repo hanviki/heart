@@ -1,16 +1,16 @@
 <template>
-    <a-upload
-      accept=".png,.jpg"
-      :fileList="fileList"
-      :remove="handleRemove"
-      :beforeUpload="beforeUpload"
-      @change="handleChange"
-      :disabled="!isEdit"
-    >
-      <a-button  v-show="isEdit">
-        <a-icon type="upload" /> 选择图片
-      </a-button>
-    </a-upload>
+  <a-upload
+    accept=".png,.jpg"
+    :fileList="fileList"
+    :remove="handleRemove"
+    :beforeUpload="beforeUpload"
+    @change="handleChange"
+    :disabled="!isEdit"
+  >
+    <a-button v-show="isEdit">
+      <a-icon type="upload" /> 选择图片
+    </a-button>
+  </a-upload>
 </template>
   
   <script>
@@ -34,37 +34,51 @@ export default {
     }
   },
   watch: {
-     baseId: function () {
-       if(this.baseId!=''){
-            var _this = this;
-            _this.fetch(_this.baseId)
-        }
-     },
-     immediate:true, // watch侦听操作内的函数会立刻被执行
-     deep: true
- },
+    baseId: function () {
+      if (this.baseId != '') {
+        var _this = this;
+        _this.fetch(_this.baseId)
+      }
+    },
+    immediate: true, // watch侦听操作内的函数会立刻被执行
+    deep: true
+  },
   methods: {
     handleRemove (file) {
-      const index = this.fileList.indexOf(file)
-      const newFileList = this.fileList.slice()
-    console.info(newFileList[index].uid)
-     this.$delete('comFile/'+newFileList[index].uid).then((r) => {
-        newFileList.splice(index, 1)
-        this.fileList = newFileList
-        this.uploading = false
-        this.$message.success('删除成功.')
-      }).catch(() => {
-        this.uploading = false
-        this.$message.error('删除失败.')
+
+      let that = this
+      that.$confirm({
+        title: '确定删除所选中的附件?',
+        content: '当您点击确定按钮后，这些附件将会被彻底删除',
+        centered: true,
+        onOk () {
+          const index = that.fileList.indexOf(file)
+          const newFileList = that.fileList.slice()
+          console.info(newFileList[index].uid)
+          that.$delete('comFile/' + newFileList[index].uid).then((r) => {
+            newFileList.splice(index, 1)
+            that.fileList = newFileList
+            that.uploading = false
+            that.$message.success('删除成功.')
+          }).catch(() => {
+            that.uploading = false
+            that.$message.error('删除失败.')
+          })
+        },
+        onCancel () {
+          that.selectedRowKeys = []
+        }
       })
 
-     
+
+
+
     },
     onChange (date, dateString) {
       console.log(date, dateString);
     },
     beforeUpload (file) {
-      const isJPG =  (file.type === 'image/jpeg' || file.type === 'image/png')
+      const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png')
       console.info(file.type)
       if (!isJPG) {
         this.$message.error('请只上传pdf文件!')
@@ -84,16 +98,16 @@ export default {
       }
     },
     handleUpload () {
-      const { fileNow  } = this
+      const { fileNow } = this
       const formData = new FormData()
       formData.append('file', fileNow)
-      formData.append('baseId',this.baseId)
+      formData.append('baseId', this.baseId)
       this.uploading = true
 
       // You can use any AJAX library you like
       this.$upload('comFile/upload', formData).then((r) => {
         let comfile = r.data.data
-        this.fileList =[...this.fileList, comfile]
+        this.fileList = [...this.fileList, comfile]
         this.uploading = false
         this.$message.success('上传成功.')
       }).catch(() => {
@@ -102,11 +116,11 @@ export default {
       })
     },
     fetch (baseId) {
-      this.fileList=[]
+      this.fileList = []
       this.$get('comFile/getAllFiles/' + baseId).then((r) => {
         let data = r.data.data
         console.info(data)
-        if(data!=null) {
+        if (data != null) {
           this.fileList = [...data]
         }
       })
