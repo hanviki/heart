@@ -67,7 +67,7 @@ export default {
       that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
         var baseId = res.data.data
         that.listCsfc.push({ id: baseId })
-        this.activeKey = that.listCsfc.length
+        this.activeKey = baseId
       })
     },
     reset () {
