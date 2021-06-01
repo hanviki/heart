@@ -76,18 +76,6 @@
           登录
         </a-button>
       </a-form-item>
-      <div>
-        <a
-          style="float: right;margin-left:10px;"
-          @click="regist"
-        >注册账户</a>
-      </div>
-      <div>
-        <a
-          style="float: right;"
-          @click="open"
-        >账户查询</a>
-      </div>
      
     </a-form>
   </div>

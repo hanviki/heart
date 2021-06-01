@@ -87,6 +87,8 @@ public class HeartBPatientinfoController extends BaseController {
     public Map<String, Object> List(QueryRequest request, HeartBPatientinfo heartBPatientinfo) {
         User currentUser = FebsUtil.getCurrentUser();
         heartBPatientinfo.setUsername(currentUser.getUsername());
+        request.setSortField("createTime");
+        request.setSortOrder("descend");
         return getDataTable(this.iHeartBPatientinfoService.findHeartBPatientinfos(request, heartBPatientinfo));
     }
 
@@ -94,6 +96,8 @@ public class HeartBPatientinfoController extends BaseController {
     public Map<String, Object> ListDept(QueryRequest request, HeartBPatientinfo heartBPatientinfo) {
         User currentUser = FebsUtil.getCurrentUser();
         heartBPatientinfo.setUsername(currentUser.getUsername());
+        request.setSortField("createTime");
+        request.setSortOrder("descend");
         return getDataTable(this.iHeartBPatientinfoService.findHeartBPatientinfosDept(request, heartBPatientinfo, currentUser.getUserId().toString()));
     }
 

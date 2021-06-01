@@ -1,5 +1,10 @@
 <template>
   <a-card title="数据列表">
+      <a-button
+          type="primary"
+          ghost
+          @click="add"
+        >新增</a-button>
     <a-list
       class="demo-loadmore-list"
       :loading="loading"
@@ -23,33 +28,27 @@
         slot="renderItem"
         slot-scope="item, index"
       >
-      <a slot="actions" @click="edit(item)">编辑</a>
-        <a-list-item-meta>
-          <span slot="title">{{ item.fileNo }} </span>
-        </a-list-item-meta>
-
-        <a-form-item
-          v-bind="formItemLayout"
-          label="病案号"
-        >
-          {{item.fileNo}}
-        </a-form-item>
-
-        <a-form-item
-          v-bind="formItemLayout"
-          label="姓名"
-        >
-          {{item.name}}
-        </a-form-item>
-
-        <a-form-item
-          v-bind="formItemLayout"
-          label="年龄"
-        >
-          {{item.age}}
-        </a-form-item>
+        <a-card :title="`病案号${item.fileNo}`">
+          <a slot="extra" href="#" @click="edit(item)">编辑</a>
+          <a-form-item v-bind="formItemLayout"
+                    label="姓名">
+                       {{item.name}}
+                </a-form-item>
+                <a-form-item v-bind="formItemLayout"
+                    label="年龄">
+                       {{item.age}}
+                </a-form-item>
+        </a-card>
       </a-list-item>
     </a-list>
+    <!-- 新增字典 -->
+    <heartBPatientinfo-add
+      ref="heartBPatientinfoAdd"
+      @close="handleAddClose"
+      @success="handleAddSuccess"
+      :addVisiable="addVisiable"
+    >
+    </heartBPatientinfo-add>
      <heartBPatientinfo-edit
       ref="heartBPatientinfoEdit"
       @close="handleEditClose"
@@ -66,6 +65,7 @@ const formItemLayout = {
   wrapperCol: { span: 15 }
 }
 const pageSize = 10
+import HeartBPatientinfoAdd from './HeartBPatientinfoAdd'
 import HeartBPatientinfoEdit from './HeartBPatientinfoEdit'
 export default {
   data () {
@@ -78,9 +78,10 @@ export default {
       data: [],
       page: 1,
        editVisiable: false,
+       addVisiable: false,
     }
   },
-  components: { HeartBPatientinfoEdit },
+  components: { HeartBPatientinfoEdit, HeartBPatientinfoAdd },
   mounted () {
     this.fetch({
       pageNum: this.page,
@@ -95,6 +96,23 @@ export default {
         pageNum: this.page,
         pageSize: this.pageSize
       })
+    },
+    handleAddSuccess () {
+      this.addVisiable = false
+      this.$message.success('新增成功')
+      this.search()
+    },
+    handleAddClose () {
+      this.addVisiable = false
+    },
+    add () {
+      this.addVisiable = true
+      this.$refs.heartBPatientinfoAdd.getId()
+    },
+     handleEditSuccess () {
+      this.editVisiable = false
+      this.$message.success('修改成功')
+      this.search()
     },
      handleEditClose () {
       this.editVisiable = false

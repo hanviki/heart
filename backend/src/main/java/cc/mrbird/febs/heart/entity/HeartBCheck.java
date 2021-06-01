@@ -19,7 +19,7 @@ import cc.mrbird.febs.common.converter.*;
  * </p>
  *
  * @author viki
- * @since 2021-05-21
+ * @since 2021-05-28
  */
 
 @Excel("heart_b_check")
@@ -129,7 +129,14 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="修改人")
     private Long modifyUserId;
 
+    /**
+     * paixu
+     */
+        
+        @ExcelField(value ="paixu")
     private Integer displayIndex;
+
+
 
     public static final String ID ="id" ;
 
@@ -156,5 +163,7 @@ private static final long serialVersionUID=1L;
     public static final String CREATE_USER_ID ="CREATE_USER_ID" ;
 
     public static final String MODIFY_USER_ID ="MODIFY_USER_ID" ;
+
+    public static final String DISPLAY_INDEX ="display_index" ;
 
         }

@@ -13,13 +13,14 @@ import store from '../store'
 
 // 全局Router异常处理
 const originalPush = Router.prototype.push
-Router.prototype.push = function push (location) {
-  return originalPush.call(this, location).catch(err => { if (typeof err !== 'undefined')console.log(err) })
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => {
+    if (typeof err !== 'undefined') console.log(err)
+  })
 }
 Vue.use(Router)
 
-let constRouter = [
-  {
+let constRouter = [{
     path: '/login',
     name: '登录页',
     component: LoginView
@@ -45,7 +46,7 @@ let router = new Router({
   routes: constRouter
 })
 
-const whiteList = ['/login','/mobile/login', '/heart/info']
+const whiteList = ['/login', '/mobile/login', '/heart/info']
 
 let asyncRouter
 
@@ -58,13 +59,19 @@ router.beforeEach((to, from, next) => {
   let user = db.get('USER')
   let userRouter = get('USER_ROUTER')
   if (token.length && user) {
+    if (isMobile()) { //是手机端 直接进入列表页
+      next('/heart/info')
+    } 
+    else {
     if (!asyncRouter) {
       if (!userRouter) {
         request.get(`menu/${user.username}`).then((res) => {
           asyncRouter = res.data
           save('USER_ROUTER', asyncRouter)
           go(to, next)
-        }).catch(err => { console.error(err) })
+        }).catch(err => {
+          console.error(err)
+        })
       } else {
         asyncRouter = userRouter
         go(to, next)
@@ -72,31 +79,46 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
+  }
   } else {
-    if(store.state.setting.isMobile){
-    next('/mobile/login')
-    }
-    else {
+    if (isMobile()) {
+      next('/mobile/login')
+    } else {
       next('/login')
     }
   }
 })
 
-function go (to, next) {
+function go(to, next) {
   asyncRouter = filterAsyncRouter(asyncRouter)
   router.addRoutes(asyncRouter)
-  next({...to, replace: true})
+  next({
+    ...to,
+    replace: true
+  })
 }
 
-function save (name, data) {
+function save(name, data) {
   localStorage.setItem(name, JSON.stringify(data))
 }
 
-function get (name) {
+
+function get(name) {
   return JSON.parse(localStorage.getItem(name))
 }
 
-function filterAsyncRouter (routes) {
+function isMobile() {
+  if (
+    navigator.userAgent.match(
+      /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    )
+  ) {
+    return true
+  }
+  return false
+}
+
+function filterAsyncRouter(routes) {
   return routes.filter((route) => {
     let component = route.component
     if (component) {
@@ -124,7 +146,7 @@ function filterAsyncRouter (routes) {
   })
 }
 
-function view (path) {
+function view(path) {
   return function (resolve) {
     import(`@/views/${path}.vue`).then(mod => {
       resolve(mod)

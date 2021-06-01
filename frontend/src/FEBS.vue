@@ -1,9 +1,9 @@
 <template>
-  <a-locale-provider :locale="chinese">
+  <a-config-provider :locale="chinese">
     <div id="febs">
       <router-view />
     </div>
-  </a-locale-provider>
+  </a-config-provider>
 </template>
 
 <script>
