@@ -37,6 +37,20 @@
           style="width:100%;"
         />
       </a-form-item>
+      <a-form-item label="INR">
+        <a-input-number
+          placeholder="请输入INR"
+          v-decorator="['inr', {}]"
+          :precision="2"
+          style="width:100%;"
+        />
+      </a-form-item>
+       <a-form-item label="C反应蛋白">
+        <a-input
+          placeholder="请输入C反应蛋白"
+          v-decorator="['cfydb', {rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
     </a-form>
   </div>
 </template>
@@ -63,7 +77,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['d2jt', 'fdp', 'pt', 'aptt'])
+      let values = this.form.getFieldsValue(['d2jt', 'fdp', 'pt', 'aptt', 'inr','cfydb'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

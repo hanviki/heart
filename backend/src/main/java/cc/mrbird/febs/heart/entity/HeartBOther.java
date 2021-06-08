@@ -1,6 +1,5 @@
 package cc.mrbird.febs.heart.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -15,17 +14,17 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 肝肾功
+ * 其他
  * </p>
  *
  * @author viki
  * @since 2021-06-07
  */
 
-@Excel("heart_b_checkfour")
+@Excel("heart_b_other")
 @Data
 @Accessors(chain = true)
-public class HeartBCheckfour implements Serializable{
+public class HeartBOther implements Serializable{
 
 private static final long serialVersionUID=1L;
 
@@ -58,88 +57,11 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
-     * 血肌肝
+     * 图片类型
      */
         
-        @ExcelField(value ="血肌肝")
-    private BigDecimal xjg;
-
-    /**
-     * ALT
-     */
-        
-        @ExcelField(value ="ALT")
-    private BigDecimal alt;
-
-    /**
-     * AST
-     */
-        
-        @ExcelField(value ="AST")
-    private BigDecimal ast;
-
-    /**
-     * 总胆红素
-     */
-        
-        @ExcelField(value ="总胆红素")
-    private BigDecimal zdhs;
-
-    /**
-     * 直接胆红素
-     */
-        
-        @ExcelField(value ="直接胆红素")
-    private BigDecimal zjdhs;
-
-    /**
-     * 淀粉酶
-     */
-        
-        @ExcelField(value ="淀粉酶")
-    private BigDecimal dfm;
-
-    /**
-     * 肌酐
-     */
-        
-        @ExcelField(value ="肌酐")
-    private BigDecimal jg;
-
-    /**
-     * 尿素氮
-     */
-        
-        @ExcelField(value ="尿素氮")
-    private BigDecimal nsd;
-
-    /**
-     * 尿酸
-     */
-        
-        @ExcelField(value ="尿酸")
-    private BigDecimal ns;
-
-    /**
-     * 白蛋白
-     */
-        
-        @ExcelField(value ="白蛋白")
-    private BigDecimal bdb;
-
-    /**
-     * 胱仰素
-     */
-        
-        @ExcelField(value ="胱仰素")
-    private BigDecimal gysc;
-
-    /**
-     * 肾小球滤过率
-     */
-        
-        @ExcelField(value ="肾小球滤过率")
-    private String sxqlgl;
+        @ExcelField(value ="图片类型")
+    private String qtType;
 
     /**
      * 是否删除
@@ -202,29 +124,7 @@ private static final long serialVersionUID=1L;
 
     public static final String NAME ="name" ;
 
-    public static final String XJG ="xjg" ;
-
-    public static final String ALT ="alt" ;
-
-    public static final String AST ="ast" ;
-
-    public static final String ZDHS ="zdhs" ;
-
-    public static final String ZJDHS ="zjdhs" ;
-
-    public static final String DFM ="dfm" ;
-
-    public static final String JG ="jg" ;
-
-    public static final String NSD ="nsd" ;
-
-    public static final String NS ="ns" ;
-
-    public static final String BDB ="bdb" ;
-
-    public static final String GYSC ="gysc" ;
-
-    public static final String SXQLGL ="sxqlgl" ;
+    public static final String QT_TYPE ="qt_type" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

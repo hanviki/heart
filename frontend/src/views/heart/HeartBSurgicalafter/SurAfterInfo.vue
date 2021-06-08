@@ -138,6 +138,12 @@
           v-decorator="['shsfQtbfz', {rules:[{max:50,message:'最长不超过50'}]}]"
         />
       </a-form-item>
+       <a-form-item label="C反应蛋白">
+        <a-input
+          placeholder="请输入C反应蛋白"
+          v-decorator="['cfydb', {rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
     </a-form>
   </div>
 </template>
@@ -182,7 +188,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs','shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz'])
+      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs','shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz', 'cfydb'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

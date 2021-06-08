@@ -42,10 +42,10 @@
           ref="checkTwoInfo"
           :isEdit="true"
         ></checkTwo-info>
-        <checkThree-info
+        <!-- <checkThree-info
           ref="checkThreeInfo"
           :isEdit="true"
-        ></checkThree-info>
+        ></checkThree-info> -->
         <checkFour-info
           ref="checkFourInfo"
           :isEdit="true"
@@ -149,6 +149,13 @@
         <shzl-info ref="shzlInfo" :isEdit="true"></shzl-info>
         <shzlxq-info ref="shzlxqsInfo" :isEdit="true"></shzlxq-info>
       </a-tab-pane>
+       <a-tab-pane
+        key="11"
+        tab="其他"
+        force-render
+      >
+       <other-info ref="otherInfo"></other-info>
+      </a-tab-pane>
     </a-tabs>
     <div class="drawer-bootom-button">
       <a-popconfirm
@@ -188,6 +195,7 @@ import FchyInfo from '../HeartBHyfc/FchyInfoEdit' // 化验复查
 import ShzlInfo from '../HeartBShzl/HeartBShzlInfoEdit'
 import SqzlInfo from '../HeartBSqzl/HeartBSqzlInfoEdit'
 import ShzlxqInfo from '../HeartBShzlxq/HeartBShzlxqListInfoEdit'
+import OtherInfo from '../HeartBOther/HeartBOtherListInfoEdit'
 
 const formItemLayout = {
   labelCol: { span: 3 },
@@ -225,13 +233,14 @@ export default {
         fchyInfo: [],
         shzlxqsInfo: [],
         shzlInfo: {},
-        sqzlInfo: {}
+        sqzlInfo: {},
+        otherInfo: {}
       }
     }
   },
   components: {
     PatientInfo, HospitalInfo, CheckInfo, CheckTwoInfo, CheckThreeInfo, CheckFourInfo, CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
-    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo
+    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo, OtherInfo
   },
   methods: {
     reset () {
@@ -241,7 +250,7 @@ export default {
       //子页面清空form表单等.
       this.$refs.checkInfo.reset()
       this.$refs.checkTwoInfo.reset()
-      this.$refs.checkThreeInfo.reset()
+      // this.$refs.checkThreeInfo.reset()
       this.$refs.checkFourInfo.reset()
       this.$refs.checkFiveInfo.reset()
       this.$refs.patientInfo.reset()
@@ -257,6 +266,7 @@ export default {
       this.$refs.shzlxqsInfo.reset()
       this.$refs.shzlInfo.reset()
       this.$refs.sqzlInfo.reset()
+      this.$refs.otherInfo.reset()
     },
     callback (key) {
       this.activeKey = key
@@ -276,7 +286,7 @@ export default {
           this.loading = true
           this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields()
           this.heartBPatientinfo.checkTwoInfo = this.$refs.checkTwoInfo.setFields()
-          this.heartBPatientinfo.checkThreeInfo = this.$refs.checkThreeInfo.setFields()
+          // this.heartBPatientinfo.checkThreeInfo = this.$refs.checkThreeInfo.setFields()
           this.heartBPatientinfo.checkFourInfo = this.$refs.checkFourInfo.setFields()
           this.heartBPatientinfo.checkFiveInfo = this.$refs.checkFiveInfo.setFields()
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields()
@@ -292,6 +302,7 @@ export default {
           this.heartBPatientinfo.shzlxqsInfo = this.$refs.shzlxqsInfo.setFields() // 超声复查1
           this.heartBPatientinfo.shzlInfo = this.$refs.shzlInfo.setFields() // CT复查1
           this.heartBPatientinfo.sqzlInfo = this.$refs.sqzlInfo.setFields() // 化验复查  
+          this.heartBPatientinfo.otherInfo = this.$refs.otherInfo.setFields() // 化验复查  
 
           this.$put('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
@@ -309,7 +320,7 @@ export default {
         this.heartBPatientinfo = res.data.data
         this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)
         this.$refs.checkTwoInfo.setFormValues(this.heartBPatientinfo.checkTwoInfo)
-        this.$refs.checkThreeInfo.setFormValues(this.heartBPatientinfo.checkThreeInfo)
+        // this.$refs.checkThreeInfo.setFormValues(this.heartBPatientinfo.checkThreeInfo)
         this.$refs.checkFourInfo.setFormValues(this.heartBPatientinfo.checkFourInfo)
         this.$refs.checkFiveInfo.setFormValues(this.heartBPatientinfo.checkFiveInfo)
 
@@ -326,6 +337,7 @@ export default {
         this.$refs.shzlxqsInfo.setFormValues(this.heartBPatientinfo.shzlxqsInfo)
         this.$refs.shzlInfo.setFormValues(this.heartBPatientinfo.shzlInfo)
         this.$refs.sqzlInfo.setFormValues(this.heartBPatientinfo.sqzlInfo)
+        this.$refs.otherInfo.setFormValues(this.heartBPatientinfo.otherInfo)
       })
     }
   }

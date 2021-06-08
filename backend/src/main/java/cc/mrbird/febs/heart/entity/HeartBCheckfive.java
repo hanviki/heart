@@ -19,7 +19,7 @@ import cc.mrbird.febs.common.converter.*;
  * </p>
  *
  * @author viki
- * @since 2021-05-28
+ * @since 2021-06-07
  */
 
 @Excel("heart_b_checkfive")
@@ -86,6 +86,20 @@ private static final long serialVersionUID=1L;
     private BigDecimal aptt;
 
     /**
+     * INR
+     */
+        
+        @ExcelField(value ="INR")
+    private BigDecimal inr;
+
+    /**
+     * C反应蛋白
+     */
+        
+        @ExcelField(value ="C反应蛋白")
+    private String cfydb;
+
+    /**
      * 是否删除
      */
     @TableField("IS_DELETEMARK")
@@ -119,7 +133,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Long createUserId;
+    private long createUserId;
 
     /**
      * 修改人
@@ -127,7 +141,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Long modifyUserId;
+    private long modifyUserId;
 
     /**
      * 排序
@@ -153,6 +167,10 @@ private static final long serialVersionUID=1L;
     public static final String PT ="pt" ;
 
     public static final String APTT ="aptt" ;
+
+    public static final String INR ="inr" ;
+
+    public static final String CFYDB ="cfydb" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

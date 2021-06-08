@@ -21,21 +21,17 @@
           </a-radio>
         </a-radio-group>
       </a-form-item>
-      <a-form-item label="嗜睡">
-         <a-radio-group v-decorator="['shishui', {}]">
-          <a-radio value="是">
-           是
-          </a-radio>
-          <a-radio value="否">
-            否
-          </a-radio>
-        </a-radio-group>
+      <a-form-item label="意识状态">
+          <a-radio-group
+          v-decorator="['shishui', {}]"
+          :options="ysztOptions"
+        />
          <a-input
           placeholder="请输入嗜睡备注" 
           v-decorator="['shishuiNote', { }]"
         />
       </a-form-item>
-      <a-form-item label="模糊">
+      <!-- <a-form-item label="模糊">
         <a-radio-group v-decorator="['mohu', {}]">
           <a-radio value="是">
            是
@@ -90,7 +86,7 @@
           placeholder="请输入谵妄备注"
           v-decorator="['zhanwangNote', { }]"
         />
-      </a-form-item>
+      </a-form-item> -->
       <a-form-item label="有创机械通气时长">
         <a-input-number
           :precision="2"
@@ -237,6 +233,7 @@
 </template>
 
 <script>
+const ysztOptions = ['清楚', '嗜睡', '模糊', '昏睡', '昏迷', '镇静状态', '谵妄']
 export default {
   data () {
     return {
@@ -245,16 +242,17 @@ export default {
       csfcInfo: {
 
       },
+      ysztOptions,
       baseId: ''
     }
   },
   mounted () {
     // this.fetch()
     this.form.setFieldsValue({shishuiNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
-    this.form.setFieldsValue({mohuNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
-    this.form.setFieldsValue({hunshuiNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
-    this.form.setFieldsValue({hunmiNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
-    this.form.setFieldsValue({zhanwangNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
+    //this.form.setFieldsValue({mohuNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
+   // this.form.setFieldsValue({hunshuiNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
+   // this.form.setFieldsValue({hunmiNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
+   // this.form.setFieldsValue({zhanwangNote: '开始出现时间：术后    小时；持续时长：   （小时）'})
   },
   components: {},
   methods: {

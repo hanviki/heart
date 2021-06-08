@@ -80,6 +80,8 @@ public class HeartBPatientinfoController extends BaseController {
     public IHeartBShzlxqService iHeartBShzlxqService;
     @Autowired
     public IHeartBSqzlService iHeartBSqzlService;
+    @Autowired
+    public IHeartBOtherService iHeartBOtherService;
 
 
     @GetMapping
@@ -291,6 +293,19 @@ public class HeartBPatientinfoController extends BaseController {
             }
         });
 
+        LambdaQueryWrapper<HeartBOther> queryWrapper15 = new LambdaQueryWrapper<>();
+        queryWrapper15.eq(HeartBOther::getFileNo, fileNo);
+        queryWrapper15.eq(HeartBOther::getIsDeletemark, 1);
+        List<HeartBOther> heartBOtherList = this.iHeartBOtherService.list(queryWrapper15);
+
+        heartBOtherList.sort(new Comparator<HeartBOther>() {
+            @Override
+            public int compare(HeartBOther o1, HeartBOther o2) {
+
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
         CustomHeart heart = new CustomHeart();
         heart.setCheckInfo(checkInfo);
         heart.setCheckTwoInfo(checkTwoInfo);
@@ -310,6 +325,7 @@ public class HeartBPatientinfoController extends BaseController {
         heart.setShzlInfo(heartBShzlList);
         heart.setSqzlInfo(heartBSqzlList);
         heart.setShzlxqsInfo(heartBShzlxqList);
+        heart.setOtherInfo(heartBOtherList);
         return new FebsResponse().data(heart);
     }
 
@@ -516,7 +532,24 @@ public class HeartBPatientinfoController extends BaseController {
                     }
 
                 }
+                if (heart.getOtherInfo() != null) {
+                    dIndex=0;
+                    List<HeartBOther> heartBOthers = heart.getOtherInfo();
+                    for (HeartBOther item : heartBOthers
+                    ) {
+                        item.setCreateUserId(currentUser.getUserId());
+                        item.setUsername(currentUser.getUsername());
+                        item.setFileNo(fileNo);
+                        item.setName(name);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
+                        if(item.getId() == null || item.getId().equals("")){
+                            item.setId(UUID.randomUUID().toString());
+                        }
+                        this.iHeartBOtherService.createHeartBOther(item);
+                    }
 
+                }
 
                 if (heart.getHospitalInfo() != null) {
                     HeartBHospitalinfo heartBHospitalinfo = heart.getHospitalInfo();
@@ -947,6 +980,39 @@ public class HeartBPatientinfoController extends BaseController {
                     }
 
                 }
+
+                if (heart.getOtherInfo() != null) {
+                    dIndex=0;
+                    List<HeartBOther> heartBOtherList = heart.getOtherInfo();
+                    for (HeartBOther item : heartBOtherList
+                    ) {
+                        item.setCreateUserId(currentUser.getUserId());
+                        item.setUsername(currentUser.getUsername());
+                        item.setFileNo(fileNo);
+                        item.setName(name);
+                        item.setCreateTime(new Date());
+                        item.setIsDeletemark(1);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
+//                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
+//                        int count = this.iHeartBCtfcService.count(queryWrapper_HeartBCtfc);
+//                        if (count > 0) {
+//                            this.iHeartBCtfcService.updateHeartBCtfc(item);
+//                        } else {
+//                            this.iHeartBCtfcService.createHeartBCtfc(item);
+//                        }
+                        if(item.getId() == null || item.getId().equals("")){
+                            item.setId(UUID.randomUUID().toString());
+
+                        }
+                        this.iHeartBOtherService.saveOrUpdate(item);
+                    }
+
+                }
+
+
                 if (heart.getOutInfo() != null) {
                     HeartBCtout heartBCtout = heart.getOutInfo();
                     heartBCtout.setCreateUserId(currentUser.getUserId());

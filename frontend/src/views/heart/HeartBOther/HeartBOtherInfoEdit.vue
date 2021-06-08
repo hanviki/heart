@@ -1,57 +1,35 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-form-item label="D二聚体(mg/L)">
-        <a-input-number
-          placeholder="请输入D二聚体(mg/L)"
-          v-decorator="['d2jt', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
-      </a-form-item>
-      <a-form-item label="FDP(mg/L)">
-        <a-input-number
-          placeholder="请输入FDP(mg/L)"
-          v-decorator="['fdp', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
-      </a-form-item>
-      <a-form-item label="PT(s)">
-        <a-input-number
-          placeholder="请输入PT(s)"
-          v-decorator="['pt', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
-      </a-form-item>
-      <a-form-item label="APTT(s)">
-        <a-input-number
-          placeholder="请输入APTT(s)"
-          v-decorator="['aptt', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
-      </a-form-item>
-        <a-form-item label="INR">
-        <a-input-number
-          placeholder="请输入INR"
-          v-decorator="['inr', {}]"
-          :precision="2"
-          style="width:100%;"
-        />
-      </a-form-item>
-       <a-form-item label="C反应蛋白">
-        <a-input
-          placeholder="请输入C反应蛋白"
-          v-decorator="['cfydb', {rules:[{max:50,message:'最长不超过50'}]}]"
-        />
+        <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
+      <a-form-item
+        v-bind="formItemLayout"
+        label="图片类型"
+      >
+        <a-radio-group v-decorator="['qtType', {}]">
+          <a-radio value="心电图">
+           心电图
+          </a-radio>
+          <a-radio value="胸片">
+            胸片
+          </a-radio>
+           <a-radio value="MRI">
+            MRI
+          </a-radio>
+           <a-radio value="造影/心导管">
+            造影/心导管
+          </a-radio>
+           <a-radio value="肺功能">
+            肺功能
+          </a-radio>
+        </a-radio-group>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script>
+import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
 export default {
   props: {
@@ -74,7 +52,7 @@ export default {
   mounted () {
     this.setFormValues(this.checkInfo)
   },
-  components: {},
+ components: {MutiUploadFile} ,
   methods: {
     moment,
     reset () {
@@ -84,7 +62,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['d2jt', 'fdp', 'pt', 'aptt', 'inr', 'cfydb'])
+      let values = this.form.getFieldsValue(['qtType'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -97,7 +75,7 @@ export default {
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = [ 'd2jt', 'fdp', 'pt', 'aptt', 'inr', 'cfydb']
+      let fields = ['qtType']
       let fieldDates = []
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {

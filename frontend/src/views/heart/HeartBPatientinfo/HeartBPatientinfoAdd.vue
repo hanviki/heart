@@ -36,7 +36,7 @@
       >
         <check-info ref="checkInfo"></check-info>
         <checkTwo-info ref="checkTwoInfo"></checkTwo-info>
-        <checkThree-info ref="checkThreeInfo"></checkThree-info>
+        <!-- <checkThree-info ref="checkThreeInfo"></checkThree-info> -->
         <checkFour-info ref="checkFourInfo"></checkFour-info>
         <checkFive-info ref="checkFiveInfo"></checkFive-info>
       </a-tab-pane>
@@ -93,6 +93,13 @@
        <shzl-info ref="shzlInfo"></shzl-info>
        <shzlxq-info ref="shzlxqsInfo"></shzlxq-info>
       </a-tab-pane>
+       <a-tab-pane
+        key="11"
+        tab="其他"
+        force-render
+      >
+       <other-info ref="otherInfo"></other-info>
+      </a-tab-pane>
     </a-tabs>
     <div class="drawer-bootom-button">
       <a-popconfirm
@@ -130,6 +137,7 @@ import FchyInfo from '../HeartBHyfc/FchyInfo' // 化验复查
 import ShzlInfo from '../HeartBShzl/HeartBShzlInfo'
 import SqzlInfo from '../HeartBSqzl/HeartBSqzlInfo'
 import ShzlxqInfo from '../HeartBShzlxq/HeartBShzlxqListInfo'
+import OtherInfo from '../HeartBOther/HeartBOtherListInfo'
 
 const formItemLayout = {
   labelCol: { span: 3 },
@@ -167,13 +175,14 @@ export default {
         fchyInfo: [],
         shzlxqsInfo: [],
         shzlInfo: {},
-        sqzlInfo: {}
+        sqzlInfo: {},
+        otherInfo: {}
       }
     }
   },
   components: {
     PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
-    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo
+    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo, OtherInfo
   },
   methods: {
     callback (key) {
@@ -188,7 +197,7 @@ export default {
       //子页面清空form表单等.
       this.$refs.checkInfo.reset()
       this.$refs.checkTwoInfo.reset()
-      this.$refs.checkThreeInfo.reset()
+      // this.$refs.checkThreeInfo.reset()
       this.$refs.checkFourInfo.reset()
       this.$refs.checkFiveInfo.reset()
       this.$refs.patientInfo.reset()
@@ -204,14 +213,16 @@ export default {
       this.$refs.shzlxqsInfo.reset()
       this.$refs.shzlInfo.reset()
       this.$refs.sqzlInfo.reset()
+      this.$refs.otherInfo.reset()
     },
-    getId () {
+    getId () { //有附件的需要加
       setTimeout(() => {
         this.$refs.csInfo.getId()
         this.$refs.ctInfo.getId()
         this.$refs.outInfo.fetch()
         this.$refs.fcInfo.getId()
         this.$refs.fcctInfo.getId()
+        this.$refs.otherInfo.getId()
       }, 200);
     },
     onClose () {
@@ -230,7 +241,7 @@ export default {
           this.heartBPatientinfo.hospitalInfo = this.$refs.hospitalInfo.setFields() // 住院病历资料
           this.heartBPatientinfo.checkInfo = this.$refs.checkInfo.setFields() // 住院病历资料
           this.heartBPatientinfo.checkTwoInfo = this.$refs.checkTwoInfo.setFields()
-          this.heartBPatientinfo.checkThreeInfo = this.$refs.checkThreeInfo.setFields()
+          // this.heartBPatientinfo.checkThreeInfo = this.$refs.checkThreeInfo.setFields()
           this.heartBPatientinfo.checkFourInfo = this.$refs.checkFourInfo.setFields()
           this.heartBPatientinfo.checkFiveInfo = this.$refs.checkFiveInfo.setFields()
           this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields() // 超声1
@@ -243,7 +254,8 @@ export default {
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields() // 化验复查
           this.heartBPatientinfo.shzlxqsInfo = this.$refs.shzlxqsInfo.setFields() // 超声复查1
           this.heartBPatientinfo.shzlInfo = this.$refs.shzlInfo.setFields() // CT复查1
-          this.heartBPatientinfo.sqzlInfo = this.$refs.sqzlInfo.setFields() // 化验复查             
+          this.heartBPatientinfo.sqzlInfo = this.$refs.sqzlInfo.setFields() // 化验复查        
+          this.heartBPatientinfo.otherInfo = this.$refs.otherInfo.setFields() // 其他     
           this.$post('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {

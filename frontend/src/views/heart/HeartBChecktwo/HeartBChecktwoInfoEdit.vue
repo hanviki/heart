@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-form-item label="红细胞计数">
+      <a-form-item label="红细胞计数(T/L)">
         <a-input-number
           placeholder="请输入红细胞计数"
           v-decorator="['hxbjs', {}]"
@@ -9,7 +9,7 @@
           style="width:100%;"
         />
       </a-form-item>
-      <a-form-item label="血红蛋白">
+      <a-form-item label="血红蛋白(G/L)">
         <a-input-number
           placeholder="请输入血红蛋白"
           v-decorator="['xhdb', {}]"
@@ -17,7 +17,7 @@
           style="width:100%;"
         />
       </a-form-item>
-      <a-form-item label="白细胞计数">
+      <a-form-item label="白细胞计数(G/L)">
         <a-input-number
           placeholder="请输入白细胞计数"
           v-decorator="['bxbjs', {}]"
@@ -25,7 +25,7 @@
           style="width:100%;"
         />
       </a-form-item>
-      <a-form-item label="中性粒细胞百分比">
+      <a-form-item label="中性粒细胞百分比(%)">
         <a-input-number
           placeholder="请输入中性粒细胞百分比"
           v-decorator="['zxlxbbfb', {}]"
@@ -33,7 +33,7 @@
           style="width:100%;"
         />
       </a-form-item>
-      <a-form-item label="血小板计数">
+      <a-form-item label="血小板计数(G/L)">
         <a-input-number
           placeholder="请输入血小板计数"
           v-decorator="['xxbjs', {}]"

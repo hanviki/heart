@@ -139,6 +139,16 @@
           v-decorator="[ 'fiao2',{ }]"
         />
       </a-form-item>
+       <a-form-item
+        
+        label="SO2"
+      >
+        <a-input-number
+          :precision="2"
+          style="width:100%;"
+          v-decorator="[ 'so2',{ }]"
+        />
+      </a-form-item>
       <a-form-item
         
         label="备注"
@@ -176,7 +186,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'note'])
+      let values = this.form.getFieldsValue(['xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2','so2', 'note'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

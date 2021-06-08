@@ -5,6 +5,26 @@
           ghost
           @click="add"
         >新增</a-button>
+        <div>
+          <a-form-item
+                label="姓名"
+                :labelCol="{span: 8}"
+                :wrapperCol="{span: 15, offset: 1}"
+              >
+                <a-input v-model="queryParams.name" />
+              </a-form-item>
+              <a-form-item
+                label="档案号"
+                :labelCol="{span: 8}"
+                :wrapperCol="{span: 15, offset: 1}"
+              >
+                <a-input v-model="queryParams.fileNo" />
+              </a-form-item>
+               <a-button
+            type="primary"
+            @click="search"
+          >查询</a-button>
+        </div>
     <a-list
       class="demo-loadmore-list"
       :loading="loading"
@@ -76,6 +96,10 @@ export default {
       pageSize,
       showLoadingMore: true,
       data: [],
+      queryParams: {
+        fileNo: '',
+        name: ''
+      },
       page: 1,
        editVisiable: false,
        addVisiable: false,
@@ -95,6 +119,15 @@ export default {
       this.fetch({
         pageNum: this.page,
         pageSize: this.pageSize
+      })
+    },
+    search (){
+      this.data= []
+      this.page = 1
+      this.fetch({
+        pageNum: this.page,
+        pageSize: this.pageSize,
+        ...this.queryParams
       })
     },
     handleAddSuccess () {

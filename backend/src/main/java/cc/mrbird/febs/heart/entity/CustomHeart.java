@@ -32,4 +32,5 @@ public class CustomHeart {
     private transient  List<HeartBShzlxq> shzlxqsInfo;
     private transient  HeartBShzl shzlInfo;
     private transient  HeartBSqzl sqzlInfo;
+    private transient List<HeartBOther> otherInfo; //其他
 }

@@ -14,16 +14,23 @@
                     <result column="zdhs" property="zdhs"/>
                     <result column="zjdhs" property="zjdhs"/>
                     <result column="dfm" property="dfm"/>
+                    <result column="jg" property="jg"/>
+                    <result column="nsd" property="nsd"/>
+                    <result column="ns" property="ns"/>
+                    <result column="bdb" property="bdb"/>
+                    <result column="gysc" property="gysc"/>
+                    <result column="sxqlgl" property="sxqlgl"/>
                     <result column="IS_DELETEMARK" property="isDeletemark"/>
                     <result column="CREATE_TIME" property="createTime"/>
                     <result column="MODIFY_TIME" property="modifyTime"/>
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="display_index" property="displayIndex"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, xjg, alt, ast, zdhs, zjdhs, dfm, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, xjg, alt, ast, zdhs, zjdhs, dfm, jg, nsd, ns, bdb, gysc, sxqlgl, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
     <update id="updateHeartBCheckfour" parameterType="cc.mrbird.febs.heart.entity.HeartBCheckfour">
         update heart_b_checkfour
@@ -37,11 +44,18 @@
 <if test="zdhs != null">zdhs=#{zdhs},</if>
 <if test="zjdhs != null">zjdhs=#{zjdhs},</if>
 <if test="dfm != null">dfm=#{dfm},</if>
+<if test="jg != null">jg=#{jg},</if>
+<if test="nsd != null">nsd=#{nsd},</if>
+<if test="ns != null">ns=#{ns},</if>
+<if test="bdb != null">bdb=#{bdb},</if>
+<if test="gysc != null">gysc=#{gysc},</if>
+<if test="sxqlgl != null">sxqlgl=#{sxqlgl},</if>
 <if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
 <if test="createTime != null">CREATE_TIME=#{createTime},</if>
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="displayIndex != null">display_index=#{displayIndex},</if>
         </trim>
         where id=#{id}
     </update>

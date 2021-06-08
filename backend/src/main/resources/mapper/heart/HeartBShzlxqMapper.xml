@@ -20,6 +20,7 @@
                     <result column="lac" property="lac"/>
                     <result column="hb" property="hb"/>
                     <result column="fiao2" property="fiao2"/>
+            <result column="so2" property="so2"/>
                     <result column="note" property="note"/>
                     <result column="IS_DELETEMARK" property="isDeletemark"/>
                     <result column="CREATE_TIME" property="createTime"/>
@@ -30,7 +31,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, xqtype, ph, po2, pco2, k, na, ca, glu, be, lac, hb, fiao2, note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, xqtype, ph, po2, pco2, k, na, ca, glu, be, lac, hb, fiao2,so2, note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
     </sql>
     <update id="updateHeartBShzlxq" parameterType="cc.mrbird.febs.heart.entity.HeartBShzlxq">
         update heart_b_shzlxq
@@ -50,6 +51,7 @@
 <if test="lac != null">lac=#{lac},</if>
 <if test="hb != null">hb=#{hb},</if>
 <if test="fiao2 != null">fiao2=#{fiao2},</if>
+            <if test="so2 != null">so2=#{so2},</if>
 <if test="note != null">note=#{note},</if>
 <if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
 <if test="createTime != null">CREATE_TIME=#{createTime},</if>

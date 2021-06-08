@@ -16,11 +16,11 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 
+ * 术后
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-06-07
  */
 
 @Excel("heart_b_surgicalafter")
@@ -131,8 +131,8 @@ private static final long serialVersionUID=1L;
     /**
      * 随访日期
      */
-
-    @ExcelField(value ="随访日期", writeConverter = DateConverter.class)
+        
+        @ExcelField(value ="随访日期", writeConverter = DateConverter.class)
     private Date shsfDate;
     private transient String shsfDateFrom;
     private transient String shsfDateTo;
@@ -200,6 +200,13 @@ private static final long serialVersionUID=1L;
     private String shsfQtbfz;
 
     /**
+     * C反应蛋白
+     */
+        
+        @ExcelField(value ="C反应蛋白")
+    private String cfydb;
+
+    /**
      * 是否删除
      */
     @TableField("IS_DELETEMARK")
@@ -233,7 +240,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private Long createUserId;
+    private long createUserId;
 
     /**
      * 修改人
@@ -241,7 +248,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private Long modifyUserId;
+    private long modifyUserId;
 
 
 
@@ -273,6 +280,8 @@ private static final long serialVersionUID=1L;
 
     public static final String SHSF_ZS ="shsf_zs" ;
 
+    public static final String SHSF_DATE ="shsf_date" ;
+
     public static final String SHSF_SCZT ="shsf_sczt" ;
 
     public static final String SHSF_DEATH ="shsf_death" ;
@@ -288,6 +297,8 @@ private static final long serialVersionUID=1L;
     public static final String SHSF_XFJBSJ ="shsf_xfjbsj" ;
 
     public static final String SHSF_QTBFZ ="shsf_qtbfz" ;
+
+    public static final String CFYDB ="cfydb" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

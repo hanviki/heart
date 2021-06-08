@@ -47,7 +47,7 @@
           </a-radio>
         </a-radio-group>
       </a-form-item>
-      <a-form-item label="死亡原因">
+      <!-- <a-form-item label="死亡原因">
         <a-input
           placeholder="请输入死亡原因"
           v-decorator="['deathInfo',  {rules:[{max:100,message:'最长不超过100'}]}]"
@@ -64,7 +64,7 @@
           placeholder="请输入住院转归备注"
           v-decorator="['inRedirectnote',  {rules:[{max:100,message:'最长不超过100'}]}]"
         />
-      </a-form-item>
+      </a-form-item> -->
       <a-divider orientation="left" style="font-size:14px;">2.2.2、诊断</a-divider>
       <a-form-item label="夹层诊断（阜外分型）">
          <a-radio-group v-decorator="['jczd', {}]">
@@ -81,6 +81,22 @@
             D
           </a-radio>
         </a-radio-group>
+      </a-form-item>
+       <a-form-item label="夹层诊断（Stanford分层）">
+         <a-radio-group v-decorator="['inRedirectnote', {}]">
+          <a-radio value="A">
+           A
+          </a-radio>
+          <a-radio value="B">
+            B
+          </a-radio>
+        </a-radio-group>
+      </a-form-item>
+      <a-form-item label="其他">
+        <a-input
+          placeholder="请输入其他诊断"
+          v-decorator="['deathInfo',  {rules:[{max:100,message:'最长不超过100'}]}]"
+        />
       </a-form-item>
       <a-form-item label="高血压">
         <a-radio-group v-decorator="['gxy', {}]">
@@ -221,7 +237,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'swsj', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
+      let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
       if (typeof values !== 'undefined') {
           Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

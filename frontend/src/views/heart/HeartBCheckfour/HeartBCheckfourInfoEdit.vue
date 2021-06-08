@@ -86,7 +86,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm'])
+      let values = this.form.getFieldsValue(['xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm',  'jg' ,'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -99,8 +99,8 @@ export default {
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['id', 'username', 'fileNo', 'name', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'isDeletemark', 'createTime', 'modifyTime', 'createUserId', 'modifyUserId']
-      let fieldDates = ['createTime', 'modifyTime']
+      let fields = [ 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg' ,'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl']
+      let fieldDates = []
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)

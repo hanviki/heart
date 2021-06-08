@@ -141,6 +141,16 @@
       </a-form-item>
       <a-form-item
         
+        label="SO2"
+      >
+        <a-input-number
+          :precision="2"
+          style="width:100%;"
+          v-decorator="[ 'so2',{ }]"
+        />
+      </a-form-item>
+      <a-form-item
+        
         label="备注"
       >
         <a-input
@@ -180,7 +190,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'note'])
+      let values = this.form.getFieldsValue(['xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 's02', 'note'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -192,8 +202,8 @@ export default {
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['id', 'username', 'fileNo', 'name', 'xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'note', 'isDeletemark', 'createTime', 'modifyTime', 'createUserId', 'modifyUserId']
-      let fieldDates = ['createTime', 'modifyTime']
+      let fields = ['id', 'username', 'fileNo', 'name', 'xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'so2', 'note']
+      let fieldDates = []
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)

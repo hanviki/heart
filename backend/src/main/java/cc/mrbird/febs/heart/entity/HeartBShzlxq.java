@@ -142,6 +142,13 @@ private static final long serialVersionUID=1L;
     private BigDecimal fiao2;
 
     /**
+     * So2
+     */
+
+    @ExcelField(value ="SO2")
+    private BigDecimal so2;
+
+    /**
      * 备注
      */
         
@@ -225,6 +232,8 @@ private static final long serialVersionUID=1L;
     public static final String HB ="hb" ;
 
     public static final String FIAO2 ="fiao2" ;
+
+    public static final String SO2 ="so2" ;
 
     public static final String NOTE ="note" ;
 

@@ -2,7 +2,7 @@
   <div>
    <a-form :form="form">
       <a-form-item label="意识状态">
-        <a-checkbox-group
+        <a-radio-group
           v-decorator="['yszt', {}]"
           :options="ysztOptions"
         />

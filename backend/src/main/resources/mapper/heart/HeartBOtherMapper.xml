@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cc.mrbird.febs.heart.dao.HeartBCheckfiveMapper">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBOtherMapper">
 
         <!-- 通用查询映射结果 -->
-        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBCheckfive">
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBOther">
                     <id column="id" property="id"/>
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
-                    <result column="d2jt" property="d2jt"/>
-                    <result column="fdp" property="fdp"/>
-                    <result column="pt" property="pt"/>
-                    <result column="aptt" property="aptt"/>
-                    <result column="inr" property="inr"/>
-                    <result column="cfydb" property="cfydb"/>
+                    <result column="qt_type" property="qtType"/>
                     <result column="IS_DELETEMARK" property="isDeletemark"/>
                     <result column="CREATE_TIME" property="createTime"/>
                     <result column="MODIFY_TIME" property="modifyTime"/>
@@ -24,20 +19,15 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, d2jt, fdp, pt, aptt, inr, cfydb, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
+        id, username, file_no, name, qt_type, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
-    <update id="updateHeartBCheckfive" parameterType="cc.mrbird.febs.heart.entity.HeartBCheckfive">
-        update heart_b_checkfive
+    <update id="updateHeartBOther" parameterType="cc.mrbird.febs.heart.entity.HeartBOther">
+        update heart_b_other
         <trim prefix="set" suffixOverrides=",">
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
-<if test="d2jt != null">d2jt=#{d2jt},</if>
-<if test="fdp != null">fdp=#{fdp},</if>
-<if test="pt != null">pt=#{pt},</if>
-<if test="aptt != null">aptt=#{aptt},</if>
-<if test="inr != null">inr=#{inr},</if>
-<if test="cfydb != null">cfydb=#{cfydb},</if>
+<if test="qtType != null">qt_type=#{qtType},</if>
 <if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
 <if test="createTime != null">CREATE_TIME=#{createTime},</if>
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>

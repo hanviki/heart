@@ -27,6 +27,7 @@
                     <result column="shsf_xfjb" property="shsfXfjb"/>
                     <result column="shsf_xfjbsj" property="shsfXfjbsj"/>
                     <result column="shsf_qtbfz" property="shsfQtbfz"/>
+                    <result column="cfydb" property="cfydb"/>
                     <result column="IS_DELETEMARK" property="isDeletemark"/>
                     <result column="CREATE_TIME" property="createTime"/>
                     <result column="MODIFY_TIME" property="modifyTime"/>
@@ -36,7 +37,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, sh_ljfztqsj, sh_zcqgcg, sh_shicutime, sh_zcicu, sh_zcicutime, sh_shkxzx, sh_qtzcssyy, sh_shbfz, sh_note, shsf_zs,shsf_date, shsf_sczt, shsf_death, shsf_death_date, shsf_xxgzcgy, shsf_zcgysj, shsf_xfjb, shsf_xfjbsj, shsf_qtbfz, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, sh_ljfztqsj, sh_zcqgcg, sh_shicutime, sh_zcicu, sh_zcicutime, sh_shkxzx, sh_qtzcssyy, sh_shbfz, sh_note, shsf_zs, shsf_date, shsf_sczt, shsf_death, shsf_death_date, shsf_xxgzcgy, shsf_zcgysj, shsf_xfjb, shsf_xfjbsj, shsf_qtbfz, cfydb, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
     </sql>
     <update id="updateHeartBSurgicalafter" parameterType="cc.mrbird.febs.heart.entity.HeartBSurgicalafter">
         update heart_b_surgicalafter
@@ -54,7 +55,7 @@
 <if test="shShbfz != null">sh_shbfz=#{shShbfz},</if>
 <if test="shNote != null">sh_note=#{shNote},</if>
 <if test="shsfZs != null">shsf_zs=#{shsfZs},</if>
-            <if test="shsfDate != null">shsf_date=#{shsfDate},</if>
+<if test="shsfDate != null">shsf_date=#{shsfDate},</if>
 <if test="shsfSczt != null">shsf_sczt=#{shsfSczt},</if>
 <if test="shsfDeath != null">shsf_death=#{shsfDeath},</if>
 <if test="shsfDeathDate != null">shsf_death_date=#{shsfDeathDate},</if>
@@ -63,6 +64,7 @@
 <if test="shsfXfjb != null">shsf_xfjb=#{shsfXfjb},</if>
 <if test="shsfXfjbsj != null">shsf_xfjbsj=#{shsfXfjbsj},</if>
 <if test="shsfQtbfz != null">shsf_qtbfz=#{shsfQtbfz},</if>
+<if test="cfydb != null">cfydb=#{cfydb},</if>
 <if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
 <if test="createTime != null">CREATE_TIME=#{createTime},</if>
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
