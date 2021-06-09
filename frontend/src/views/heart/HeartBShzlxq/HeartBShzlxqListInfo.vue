@@ -7,6 +7,7 @@
     <a-button
       icon="plus"
       @click="AddCsfc"
+      v-show="isEdit"
     >
     </a-button>
     <a-collapse
@@ -38,6 +39,11 @@
 <script>
 import HeartBShzlxqInfo from './HeartBShzlxqInfo'
 export default {
+  props: {
+    isEdit: {
+      default: true
+    }
+  },
   data () {
     return {
       loading: false,

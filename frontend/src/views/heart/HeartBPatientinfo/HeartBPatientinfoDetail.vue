@@ -2,7 +2,7 @@
   <a-drawer
     title="查看资料"
     :maskClosable="false"
-    width="80%"
+    width="90%"
     placement="right"
     :closable="true"
     @close="onClose"
@@ -93,6 +93,28 @@
       >
         <fchy-info ref="fchyInfo" :isEdit="false"></fchy-info>
       </a-tab-pane> 
+      <a-tab-pane
+        key="12"
+        tab="术前资料"
+        force-render
+      >
+        <sqzl-info ref="sqzlInfo" :isEdit="false"></sqzl-info>
+      </a-tab-pane>
+      <a-tab-pane
+        key="13"
+        tab="术后资料"
+        force-render
+      >
+        <shzl-info ref="shzlInfo" :isEdit="false"></shzl-info>
+        <shzlxq-info ref="shzlxqsInfo" :isEdit="false"></shzlxq-info>
+      </a-tab-pane>
+       <a-tab-pane
+        key="14"
+        tab="其他"
+        force-render
+      >
+       <other-info ref="otherInfo" :isEdit="false"></other-info>
+      </a-tab-pane>
     </a-tabs>
   </a-drawer>
 </template>
@@ -114,6 +136,10 @@ import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit' // 术后
 import FcInfo from '../HeartBCsfc/FcInfoEdit' // 超声复查
 import FcctInfo from '../HeartBCtfc/FcctInfoEdit' // CT复查
 import FchyInfo from '../HeartBHyfc/FchyInfoEdit' // 化验复查
+import ShzlInfo from '../HeartBShzl/HeartBShzlInfoEdit'
+import SqzlInfo from '../HeartBSqzl/HeartBSqzlInfoEdit'
+import ShzlxqInfo from '../HeartBShzlxq/HeartBShzlxqListInfoEdit'
+import OtherInfo from '../HeartBOther/HeartBOtherListInfoEdit'
 
 const formItemLayout = {
   labelCol: { span: 3 },
@@ -149,12 +175,16 @@ export default {
         fcInfo: [],
         fcctInfo: [],
         fchyInfo: [],
+        shzlxqsInfo: [],
+        shzlInfo: {},
+        sqzlInfo: {},
+        otherInfo: {}
       }
     }
   },
    components: {
     PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
-    , FcctInfo, FchyInfo
+    , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo, OtherInfo
   },
   methods: {
     reset () {
@@ -177,6 +207,10 @@ export default {
       this.$refs.fcInfo.reset()
       this.$refs.fcctInfo.reset()
       this.$refs.fchyInfo.reset()
+      this.$refs.shzlxqsInfo.reset()
+      this.$refs.shzlInfo.reset()
+      this.$refs.sqzlInfo.reset()
+      this.$refs.otherInfo.reset()
     },
     callback (key) {
       this.activeKey = key
@@ -209,6 +243,10 @@ export default {
           this.heartBPatientinfo.fcInfo = this.$refs.fcInfo.setFields()
           this.heartBPatientinfo.fcctInfo = this.$refs.fcctInfo.setFields()
           this.heartBPatientinfo.fchyInfo = this.$refs.fchyInfo.setFields()
+          this.heartBPatientinfo.shzlxqsInfo = this.$refs.shzlxqsInfo.setFields()
+          this.heartBPatientinfo.shzlInfo = this.$refs.shzlInfo.setFields()
+          this.heartBPatientinfo.sqzlInfo = this.$refs.sqzlInfo.setFields()
+          this.heartBPatientinfo.otherInfo = this.$refs.otherInfo.setFields()
        
           this.$put('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
@@ -231,15 +269,19 @@ export default {
         this.$refs.checkFiveInfo.setFormValues(this.heartBPatientinfo.checkFiveInfo)
 
         this.$refs.patientInfo.setFormValues(this.heartBPatientinfo.patientInfo)
-         this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)
-         this.$refs.ctInfo.setFormValues(this.heartBPatientinfo.ctInfo)
-         this.$refs.hospitalInfo.setFormValues(this.heartBPatientinfo.hospitalInfo)
-         this.$refs.outInfo.setFormValues(this.heartBPatientinfo.outInfo)
-         this.$refs.surgicalInfo.setFormValues(this.heartBPatientinfo.surgicalInfo)
-         this.$refs.surAfterInfo.setFormValues(this.heartBPatientinfo.surAfterInfo)
-         this.$refs.fcInfo.setFormValues(this.heartBPatientinfo.fcInfo)
-         this.$refs.fcctInfo.setFormValues(this.heartBPatientinfo.fcctInfo)
-         this.$refs.fchyInfo.setFormValues(this.heartBPatientinfo.fchyInfo)
+        this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)
+        this.$refs.ctInfo.setFormValues(this.heartBPatientinfo.ctInfo)
+        this.$refs.hospitalInfo.setFormValues(this.heartBPatientinfo.hospitalInfo)
+        this.$refs.outInfo.setFormValues(this.heartBPatientinfo.outInfo)
+        this.$refs.surgicalInfo.setFormValues(this.heartBPatientinfo.surgicalInfo)
+        this.$refs.surAfterInfo.setFormValues(this.heartBPatientinfo.surAfterInfo)
+        this.$refs.fcInfo.setFormValues(this.heartBPatientinfo.fcInfo)
+        this.$refs.fcctInfo.setFormValues(this.heartBPatientinfo.fcctInfo)
+        this.$refs.fchyInfo.setFormValues(this.heartBPatientinfo.fchyInfo)
+        this.$refs.shzlxqsInfo.setFormValues(this.heartBPatientinfo.shzlxqsInfo)
+        this.$refs.shzlInfo.setFormValues(this.heartBPatientinfo.shzlInfo)
+        this.$refs.sqzlInfo.setFormValues(this.heartBPatientinfo.sqzlInfo)
+        this.$refs.otherInfo.setFormValues(this.heartBPatientinfo.otherInfo)
       })
     }
   }

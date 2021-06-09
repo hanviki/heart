@@ -184,7 +184,7 @@ private static final long serialVersionUID=1L;
      */
         
         @ExcelField(value ="无创辅助时间备注")
-    private BigDecimal wcfzsjNote;
+    private String wcfzsjNote;
 
     /**
      * 疼痛评分CPOT/NRS

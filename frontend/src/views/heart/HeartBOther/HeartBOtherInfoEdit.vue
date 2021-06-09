@@ -3,7 +3,6 @@
     <a-form :form="form">
         <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
       <a-form-item
-        v-bind="formItemLayout"
         label="图片类型"
       >
         <a-radio-group v-decorator="['qtType', {}]">

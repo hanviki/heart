@@ -103,7 +103,6 @@ public void updateHeartBOther(@Valid HeartBOther heartBOther)throws FebsExceptio
 
 @Log("删除")
 @DeleteMapping("/{ids}")
-@RequiresPermissions("heartBOther:delete")
 public void deleteHeartBOthers(@NotBlank(message = "{required}") @PathVariable String ids)throws FebsException{
         try{
         String[]arr_ids=ids.split(StringPool.COMMA);

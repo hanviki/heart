@@ -56,7 +56,9 @@ public IPage<HeartBShzl> findHeartBShzls(QueryRequest request, HeartBShzl heartB
 @Override
 @Transactional
 public void createHeartBShzl(HeartBShzl heartBShzl){
-        heartBShzl.setId(UUID.randomUUID().toString());
+        if(heartBShzl.getId() ==null) {
+                heartBShzl.setId(UUID.randomUUID().toString());
+        }
         heartBShzl.setCreateTime(new Date());
         heartBShzl.setIsDeletemark(1);
         this.save(heartBShzl);

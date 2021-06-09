@@ -365,7 +365,16 @@ export default {
               obj[key] = ''
             }
           } else {
-            obj[key] = checkInfo[key]
+            if(key=='manxingbing'){
+              if (checkInfo[key] !== '' && checkInfo[key] !== null) {
+                 obj[key] =JSON.parse(checkInfo[key])
+              }
+              else{
+                  obj[key] = ''
+              }
+            } else {
+              obj[key] = checkInfo[key]
+            }
           }
           this.form.setFieldsValue(obj)
         }
