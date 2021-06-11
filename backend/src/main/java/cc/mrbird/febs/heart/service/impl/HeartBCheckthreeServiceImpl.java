@@ -56,7 +56,7 @@ public IPage<HeartBCheckthree> findHeartBCheckthrees(QueryRequest request, Heart
 @Override
 @Transactional
 public void createHeartBCheckthree(HeartBCheckthree heartBCheckthree){
-        if(heartBCheckthree.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBCheckthree.getId())) {
                 heartBCheckthree.setId(UUID.randomUUID().toString());
         }
         heartBCheckthree.setCreateTime(new Date());

@@ -56,7 +56,7 @@ public IPage<HeartBHospitalinfo> findHeartBHospitalinfos(QueryRequest request, H
 @Override
 @Transactional
 public void createHeartBHospitalinfo(HeartBHospitalinfo heartBHospitalinfo){
-        if(heartBHospitalinfo.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBHospitalinfo.getId())) {
                 heartBHospitalinfo.setId(UUID.randomUUID().toString());
         }
         heartBHospitalinfo.setCreateTime(new Date());

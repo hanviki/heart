@@ -56,7 +56,7 @@ public IPage<HeartBCsfc> findHeartBCsfcs(QueryRequest request, HeartBCsfc heartB
 @Override
 @Transactional
 public void createHeartBCsfc(HeartBCsfc heartBCsfc){
-        if(heartBCsfc.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBCsfc.getId())) {
                 heartBCsfc.setId(UUID.randomUUID().toString());
         }
         heartBCsfc.setCreateTime(new Date());

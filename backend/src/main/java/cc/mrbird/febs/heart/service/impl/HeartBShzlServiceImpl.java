@@ -56,7 +56,7 @@ public IPage<HeartBShzl> findHeartBShzls(QueryRequest request, HeartBShzl heartB
 @Override
 @Transactional
 public void createHeartBShzl(HeartBShzl heartBShzl){
-        if(heartBShzl.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBShzl.getId())) {
                 heartBShzl.setId(UUID.randomUUID().toString());
         }
         heartBShzl.setCreateTime(new Date());

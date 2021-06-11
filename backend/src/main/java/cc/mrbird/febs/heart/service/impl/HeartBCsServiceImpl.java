@@ -56,7 +56,7 @@ public IPage<HeartBCs> findHeartBCss(QueryRequest request, HeartBCs heartBCs){
 @Override
 @Transactional
 public void createHeartBCs(HeartBCs heartBCs){
-        if(heartBCs.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBCs.getId())) {
                 heartBCs.setId(UUID.randomUUID().toString());
         }
         heartBCs.setCreateTime(new Date());

@@ -56,7 +56,7 @@ public IPage<HeartBCt> findHeartBCts(QueryRequest request, HeartBCt heartBCt){
 @Override
 @Transactional
 public void createHeartBCt(HeartBCt heartBCt){
-        if(heartBCt.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBCt.getId())) {
                 heartBCt.setId(UUID.randomUUID().toString());
         }
         heartBCt.setCreateTime(new Date());

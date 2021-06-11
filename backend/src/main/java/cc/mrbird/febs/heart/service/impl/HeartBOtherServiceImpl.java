@@ -57,7 +57,7 @@ public IPage<HeartBOther> findHeartBOthers(QueryRequest request, HeartBOther hea
 @Transactional
 public void createHeartBOther(HeartBOther heartBOther){
        // heartBOther.setId(UUID.randomUUID().toString());
-        if(heartBOther.getId() ==null) {
+        if(!StringUtils.isNotBlank(heartBOther.getId())) {
                 heartBOther.setId(UUID.randomUUID().toString());
         }
         heartBOther.setCreateTime(new Date());

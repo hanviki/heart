@@ -87,7 +87,7 @@ public IPage<HeartBPatientinfo> findHeartBPatientinfos(QueryRequest request, Hea
 @Override
 @Transactional
 public void createHeartBPatientinfo(HeartBPatientinfo heartBPatientinfo){
-        if(heartBPatientinfo.getId()==null) {
+        if(!StringUtils.isNotBlank(heartBPatientinfo.getId())) {
                 heartBPatientinfo.setId(UUID.randomUUID().toString());
         }
         heartBPatientinfo.setCreateTime(new Date());
