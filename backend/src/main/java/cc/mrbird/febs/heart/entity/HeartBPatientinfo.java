@@ -15,11 +15,11 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 
+ * 病人信息表
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_patientinfo")
@@ -130,6 +130,41 @@ private static final long serialVersionUID=1L;
     private transient String inCheckTo;
 
     /**
+     * 年
+     */
+        
+        @ExcelField(value ="年")
+    private Integer toYear;
+
+    /**
+     * 月
+     */
+        
+        @ExcelField(value ="月")
+    private Integer toMonth;
+
+    /**
+     * 日
+     */
+        
+        @ExcelField(value ="日")
+    private Integer toDay;
+
+    /**
+     * 小时
+     */
+        
+        @ExcelField(value ="小时")
+    private Integer toHour;
+
+    /**
+     * 分钟
+     */
+        
+        @ExcelField(value ="分钟")
+    private Integer toMinutes;
+
+    /**
      * 发病-就诊时间
      */
         
@@ -231,6 +266,13 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="修改人")
     private Long modifyUserId;
 
+    /**
+     * 主诉
+     */
+        
+        @ExcelField(value ="主诉")
+    private String zhusu;
+
 
 
     public static final String ID ="id" ;
@@ -261,6 +303,16 @@ private static final long serialVersionUID=1L;
 
     public static final String IN_CHECK ="in_check" ;
 
+    public static final String TO_YEAR ="to_year" ;
+
+    public static final String TO_MONTH ="to_month" ;
+
+    public static final String TO_DAY ="to_day" ;
+
+    public static final String TO_HOUR ="to_hour" ;
+
+    public static final String TO_MINUTES ="to_minutes" ;
+
     public static final String TO_CHECK ="to_check" ;
 
     public static final String PAIN_POS ="pain_pos" ;
@@ -286,5 +338,7 @@ private static final long serialVersionUID=1L;
     public static final String CREATE_USER_ID ="CREATE_USER_ID" ;
 
     public static final String MODIFY_USER_ID ="MODIFY_USER_ID" ;
+
+    public static final String ZHUSU ="zhusu" ;
 
         }

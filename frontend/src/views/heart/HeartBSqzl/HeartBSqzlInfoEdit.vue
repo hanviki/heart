@@ -311,8 +311,8 @@
 </template>
 
 <script>
-const ysztOptions = ['清楚', '嗜睡', '模糊', '昏睡', '昏迷', '镇静状态', '谵妄']
 import moment from 'moment'
+const ysztOptions = ['清楚', '嗜睡', '模糊', '昏睡', '昏迷', '镇静状态', '谵妄']
 export default {
   props: {
     isEdit: {
@@ -325,7 +325,7 @@ export default {
       form: this.$form.createForm(this),
       csfcInfo: {
       },
-      ysztOptions,
+      ysztOptions
     }
   },
   mounted () {
@@ -360,18 +360,12 @@ export default {
           if (fieldDates.indexOf(key) !== -1) {
             if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
-            if(key=='manxingbing'){
-              if (checkInfo[key] !== '' && checkInfo[key] !== null) {
-                 obj[key] =JSON.parse(checkInfo[key])
-              }
-              else{
-                  obj[key] = ''
-              }
+            if (key == 'manxingbing') {
+              obj[key] = checkInfo[key] == '' ? null : JSON.parse(checkInfo[key])
             } else {
               obj[key] = checkInfo[key]
             }
@@ -380,7 +374,7 @@ export default {
         }
       })
       this.csfcInfo = checkInfo
-    },
+    }
 
   }
 }

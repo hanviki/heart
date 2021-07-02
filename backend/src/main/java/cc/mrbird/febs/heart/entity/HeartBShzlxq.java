@@ -58,6 +58,15 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
+     * 检测时间
+     */
+
+    @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate;
+    private transient String checkDateFrom;
+    private transient String checkDateTo;
+
+    /**
      * 血气结果时间
      */
         
@@ -208,6 +217,8 @@ private static final long serialVersionUID=1L;
     public static final String FILE_NO ="file_no" ;
 
     public static final String NAME ="name" ;
+
+    public static final String CHECK_DATE ="check_date" ;
 
     public static final String XQTYPE ="xqtype" ;
 

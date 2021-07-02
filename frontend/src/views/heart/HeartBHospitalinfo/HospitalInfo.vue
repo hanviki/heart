@@ -81,6 +81,15 @@
             D
           </a-radio>
         </a-radio-group>
+        <a-tooltip placement="top">
+          <template slot="title" trigger="hover">
+            A 型： 仅局限于升主动脉的夹层， 夹层中止于无名动脉近端； <br>
+            B 型：夹层局限于胸降主动脉， 或延伸到腹主动脉； <br>
+            C 型： 夹层累及主动脉弓， 无论升主动脉和胸降主动脉是否受到累及。 Cp型： 夹层仅累及到主动脉弓近心侧的无名动脉和（或） 左颈总动脉； Cd 型： 夹层仅累及到主动脉弓远心侧的左锁骨下动脉和（或） 左颈总动脉； <br>
+            D 型： 夹层局限于膈肌水平以下的腹主动脉和（或） 髂动脉。
+          </template>
+          <a-icon type="question-circle" theme="twoTone" />
+        </a-tooltip>
       </a-form-item>
        <a-form-item label="夹层诊断（Stanford分层）">
          <a-radio-group v-decorator="['inRedirectnote', {}]">
@@ -115,7 +124,6 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item label="NYHA分级">
-        
          <a-radio-group v-decorator="['nyha', {}]">
           <a-radio value="Ⅰ">
            Ⅰ
@@ -159,7 +167,7 @@
       </a-form-item>
       <a-divider orientation="left" style="font-size:14px;">2.2.3、既往史</a-divider>
       <a-form-item label="主动脉瓣手术">
-         <a-radio-group v-decorator="['zdmbss', {}]">
+         <a-radio-group v-decorator="['zdmbss', {}]" @change="onZdmbssChange">
           <a-radio value="是">
            是
           </a-radio>
@@ -167,9 +175,14 @@
             否
           </a-radio>
         </a-radio-group>
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-if="isZdmbss"
+          v-decorator="['zdmbssDate', {}]"
+        />
       </a-form-item>
       <a-form-item label="全弓置换">
-         <a-radio-group v-decorator="['qgzh', {}]">
+         <a-radio-group v-decorator="['qgzh', {}]" @change="onQgzhChange">
           <a-radio value="是">
            是
           </a-radio>
@@ -177,8 +190,28 @@
             否
           </a-radio>
         </a-radio-group>
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-if="isQgzh"
+          v-decorator="['qgzhDate', {}]"
+        />
       </a-form-item>
-      <a-form-item label="其他主动干预">
+      <a-form-item label="夹层腔内修复术">
+         <a-radio-group v-decorator="['jcqnxfs', {}]" @change="onJcqnxfsChange">
+          <a-radio value="是">
+           是
+          </a-radio>
+          <a-radio value="否">
+            否
+          </a-radio>
+        </a-radio-group>
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-if="isJcqnxfs"
+          v-decorator="['jcqnxfsDate', {}]"
+        />
+      </a-form-item>
+      <a-form-item label="其他主动干预 (如 无 请填写 “-”)">
         <a-input
           placeholder="请输入其他主动干预"
           v-decorator="['qtzdgy',  {rules:[{max:50,message:'最长不超过50'}]}]"
@@ -190,7 +223,7 @@
           v-decorator="['sczdgysj', {}]"
         />
       </a-form-item>
-      <a-form-item label="主动脉疾病家族史">
+      <a-form-item label="主动脉疾病家族史 (如 无 请填写 “-”)">
         <a-input
           placeholder="请输入主动脉疾病家族史"
           v-decorator="['zdmjbjzs', {rules:[{max:50,message:'最长不超过50'}]}]"
@@ -228,6 +261,9 @@ export default {
       loading: false,
       form: this.$form.createForm(this),
       hospitalInfo: {},
+      isZdmbss: false,
+      isQgzh: false,
+      isJcqnxfs: false
     }
   },
   methods: {
@@ -235,15 +271,44 @@ export default {
       this.loading = false
       this.hospitalInfo = {}
       this.form.resetFields()
+      this.isZdmbss = false
+      this.isQgzh = false
+      this.isJcqnxfs = false
+    },
+    onZdmbssChange (e) {
+      console.log(e.target.value)
+      if (e.target.value === '是') {
+        this.isZdmbss = true
+      } else {
+        this.isZdmbss = false
+        this.form.setFieldsValue({ zdmbssDate: null })
+      }
+    },
+    onQgzhChange (e) {
+      console.log(e.target.value)
+      if (e.target.value === '是') {
+        this.isQgzh = true
+      } else {
+        this.isQgzh = false
+        this.form.setFieldsValue({ qgzhDate: null })
+      }
+    },
+    onJcqnxfsChange (e) {
+      console.log(e.target.value)
+      if (e.target.value === '是') {
+        this.isJcqnxfs = true
+      } else {
+        this.isJcqnxfs = false
+        this.form.setFieldsValue({ jcqnxfsDate: null })
+      }
     },
     setFields () {
-      let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
+      let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'zdmbssDate', 'qgzh', 'qgzhDate', 'jcqnxfs', 'jcqnxfsDate', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
       if (typeof values !== 'undefined') {
-          Object.keys(values).forEach(_key => {
+        Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.hospitalInfo[_key] = values[_key]
           }
-
         })
       }
       return this.hospitalInfo

@@ -18,6 +18,11 @@
                     <result column="address" property="address"/>
                     <result column="telphone" property="telphone"/>
                     <result column="in_check" property="inCheck"/>
+                    <result column="to_year" property="toYear"/>
+                    <result column="to_month" property="toMonth"/>
+                    <result column="to_day" property="toDay"/>
+                    <result column="to_hour" property="toHour"/>
+                    <result column="to_minutes" property="toMinutes"/>
                     <result column="to_check" property="toCheck"/>
                     <result column="pain_pos" property="painPos"/>
                     <result column="symptoms" property="symptoms"/>
@@ -31,11 +36,12 @@
                     <result column="MODIFY_TIME" property="modifyTime"/>
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="zhusu" property="zhusu"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, age, gender, height, weight, province, city, area, address, telphone, in_check, to_check, pain_pos, symptoms, other_symptoms, emergency, death_cause, death_date, emergency_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, age, gender, height, weight, province, city, area, address, telphone, in_check, to_year, to_month, to_day, to_hour, to_minutes, to_check, pain_pos, symptoms, other_symptoms, emergency, death_cause, death_date, emergency_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, zhusu
     </sql>
     <update id="updateHeartBPatientinfo" parameterType="cc.mrbird.febs.heart.entity.HeartBPatientinfo">
         update heart_b_patientinfo
@@ -53,6 +59,11 @@
 <if test="address != null">address=#{address},</if>
 <if test="telphone != null">telphone=#{telphone},</if>
 <if test="inCheck != null">in_check=#{inCheck},</if>
+<if test="toYear != null">to_year=#{toYear},</if>
+<if test="toMonth != null">to_month=#{toMonth},</if>
+<if test="toDay != null">to_day=#{toDay},</if>
+<if test="toHour != null">to_hour=#{toHour},</if>
+<if test="toMinutes != null">to_minutes=#{toMinutes},</if>
 <if test="toCheck != null">to_check=#{toCheck},</if>
 <if test="painPos != null">pain_pos=#{painPos},</if>
 <if test="symptoms != null">symptoms=#{symptoms},</if>
@@ -66,6 +77,7 @@
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="zhusu != null">zhusu=#{zhusu},</if>
         </trim>
         where id=#{id}
     </update>

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author viki
- * @since 2021-05-21
+ * @since 2021-06-22
  */
 public interface HeartBCsMapper extends BaseMapper<HeartBCs> {
         void updateHeartBCs(HeartBCs heartBCs);

@@ -207,15 +207,14 @@ export default {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (setAfterSurgicalInfo[key] !== ''&&setAfterSurgicalInfo[key] !== null) {
+            if (setAfterSurgicalInfo[key] !== '' && setAfterSurgicalInfo[key] !== null) {
               obj[key] = moment(setAfterSurgicalInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
-            if(key=='shShbfz'){
-              obj[key] =JSON.parse(setAfterSurgicalInfo[key])
+            if (key == 'shShbfz') {
+              obj[key] = setAfterSurgicalInfo[key] == '' ? null : JSON.parse(setAfterSurgicalInfo[key])
             } else {
               obj[key] = setAfterSurgicalInfo[key]
             }

@@ -1,7 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
-
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="红细胞计数(T/L)">
         <a-input-number
           placeholder="请输入红细胞计数"
@@ -68,13 +76,12 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs'])
+      let values = this.form.getFieldsValue(['checkDate', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       return this.csfcInfo

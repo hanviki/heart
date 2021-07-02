@@ -168,10 +168,9 @@ export default {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (csInfo[key] !== ''&&csInfo[key] !== null) {
+            if (csInfo[key] !== '' && csInfo[key] !== null) {
               obj[key] = moment(csInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {

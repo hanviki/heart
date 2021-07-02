@@ -19,7 +19,7 @@ import cc.mrbird.febs.common.converter.*;
  * </p>
  *
  * @author viki
- * @since 2021-06-07
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_checkfive")
@@ -56,6 +56,15 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="姓名")
     private String name;
+
+    /**
+     * 检测时间
+     */
+        
+        @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate;
+    private transient String checkDateFrom;
+    private transient String checkDateTo;
 
     /**
      * D二聚体
@@ -133,7 +142,7 @@ private static final long serialVersionUID=1L;
     @TableField("CREATE_USER_ID")
         
         @ExcelField(value ="创建人")
-    private long createUserId;
+    private Long createUserId;
 
     /**
      * 修改人
@@ -141,7 +150,7 @@ private static final long serialVersionUID=1L;
     @TableField("MODIFY_USER_ID")
         
         @ExcelField(value ="修改人")
-    private long modifyUserId;
+    private Long modifyUserId;
 
     /**
      * 排序
@@ -159,6 +168,8 @@ private static final long serialVersionUID=1L;
     public static final String FILE_NO ="file_no" ;
 
     public static final String NAME ="name" ;
+
+    public static final String CHECK_DATE ="check_date" ;
 
     public static final String D2JT ="d2jt" ;
 

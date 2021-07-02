@@ -1,6 +1,6 @@
 <template>
   <div>
-      <a-divider orientation="left" style="font-size:14px;">3. CT复查a</a-divider>
+      <a-divider orientation="left" style="font-size:14px;">3. CT复查</a-divider>
     <a-button
       icon="plus"
       @click="AddCtfc"

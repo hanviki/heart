@@ -19,12 +19,17 @@
         :key="item.toString()"
       >
         <heartBOther-info :ref="'fc'+item"></heartBOther-info>
-        <a-icon
-          slot="extra"
-          type="close"
-          @click="e => handleClick(e,item)"
-        />
-      </a-collapse-panel>
+        <a-popconfirm
+            placement="topLeft"
+            slot="extra"
+            title="确定要删除吗?"
+            @confirm="e => handleClick(e,item)"
+            okText="确定"
+            cancelText="取消"
+          >
+            <a-icon @click.stop type="close"></a-icon>
+	    </a-popconfirm>
+	    </a-collapse-panel>
     </a-collapse>
   </div>
 </template>

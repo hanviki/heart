@@ -3,6 +3,15 @@
     <a-form :form="form">
        <muti-uploadFile :baseId="baseId"></muti-uploadFile>
       <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
+      <a-form-item
         label="AVR"
       >
         <a-radio-group v-decorator="['avr', {}]">
@@ -51,7 +60,6 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item
-        
         label="室壁运动异常位置"
       >
         <a-input
@@ -60,7 +68,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="心包积液"
       >
         <a-radio-group v-decorator="['xbjy', {}]">
@@ -85,7 +92,6 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item
-        
         label="EF(%)"
       >
         <a-input-number
@@ -96,7 +102,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="左室舒张末内径(mm)"
       >
         <a-input-number
@@ -107,7 +112,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="主动脉闭环直径(mm)"
       >
         <a-input-number
@@ -118,7 +122,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="主动脉窦直径(mm)"
       >
         <a-input-number
@@ -129,7 +132,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="升主动脉直径(mm)"
       >
         <a-input-number
@@ -168,7 +170,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
+      let values = this.form.getFieldsValue(['checkDate', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

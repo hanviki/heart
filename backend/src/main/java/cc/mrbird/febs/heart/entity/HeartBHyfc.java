@@ -15,11 +15,11 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 
+ * 化验复查
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_hyfc")
@@ -56,6 +56,15 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="姓名")
     private String name;
+
+    /**
+     * 检测时间
+     */
+        
+        @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate;
+    private transient String checkDateFrom;
+    private transient String checkDateTo;
 
     /**
      * 肌红蛋白
@@ -276,8 +285,15 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="修改人")
     private Long modifyUserId;
 
-
+    /**
+     * 排序
+     */
+        
+        @ExcelField(value ="排序")
     private Integer displayIndex;
+
+
+
     public static final String ID ="id" ;
 
     public static final String USERNAME ="username" ;
@@ -285,6 +301,8 @@ private static final long serialVersionUID=1L;
     public static final String FILE_NO ="file_no" ;
 
     public static final String NAME ="name" ;
+
+    public static final String CHECK_DATE ="check_date" ;
 
     public static final String JHDB ="jhdb" ;
 
@@ -345,5 +363,7 @@ private static final long serialVersionUID=1L;
     public static final String CREATE_USER_ID ="CREATE_USER_ID" ;
 
     public static final String MODIFY_USER_ID ="MODIFY_USER_ID" ;
+
+    public static final String DISPLAY_INDEX ="display_index" ;
 
         }

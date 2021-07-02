@@ -1,6 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="血肌肝umol/L">
         <a-input-number
           placeholder="请输入血肌肝umol/L"
@@ -86,21 +95,20 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm',  'jg' ,'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl'])
+      let values = this.form.getFieldsValue(['checkDate', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb', 'gysc', 'sxqlgl'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       this.csfcInfo.id = this.baseId
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = [ 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg' ,'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl']
-      let fieldDates = []
+      let fields = ['checkDate', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb', 'gysc', 'sxqlgl']
+      let fieldDates = ['checkDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
@@ -108,8 +116,7 @@ export default {
           if (fieldDates.indexOf(key) !== -1) {
             if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
@@ -120,8 +127,7 @@ export default {
       })
       this.baseId = checkInfo.id
       this.csfcInfo = checkInfo
-    },
-
+    }
   }
 }
 </script>

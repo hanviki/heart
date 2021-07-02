@@ -8,6 +8,7 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
                     <result column="jhdb" property="jhdb"/>
                     <result column="jgdb" property="jgdb"/>
                     <result column="ckmb" property="ckmb"/>
@@ -38,11 +39,12 @@
                     <result column="MODIFY_TIME" property="modifyTime"/>
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="display_index" property="displayIndex"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, jhdb, jgdb, ckmb, cmjgdb, hxbjs, xhdb, bxbjs, zxlxbbfb, xxbjs, ph, rs, be, so2, po2, pco2, xjg, alt, ast, zdhs, zjdhs, dfm, d2jt, fdp, pt, aptt, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, check_date, jhdb, jgdb, ckmb, cmjgdb, hxbjs, xhdb, bxbjs, zxlxbbfb, xxbjs, ph, rs, be, so2, po2, pco2, xjg, alt, ast, zdhs, zjdhs, dfm, d2jt, fdp, pt, aptt, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
     <update id="updateHeartBHyfc" parameterType="cc.mrbird.febs.heart.entity.HeartBHyfc">
         update heart_b_hyfc
@@ -50,6 +52,7 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
 <if test="jhdb != null">jhdb=#{jhdb},</if>
 <if test="jgdb != null">jgdb=#{jgdb},</if>
 <if test="ckmb != null">ckmb=#{ckmb},</if>
@@ -80,6 +83,7 @@
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="displayIndex != null">display_index=#{displayIndex},</if>
         </trim>
         where id=#{id}
     </update>

@@ -12,6 +12,11 @@
                     <result column="ss_date" property="ssDate"/>
                     <result column="ss_dateend" property="ssDateend"/>
                     <result column="ss_doctor" property="ssDoctor"/>
+                    <result column="ss_assitant1" property="ssAssitant1"/>
+                    <result column="ss_assitant2" property="ssAssitant2"/>
+                    <result column="ss_assitant3" property="ssAssitant3"/>
+                    <result column="ss_assitant4" property="ssAssitant4"/>
+                    <result column="ss_assitant5" property="ssAssitant5"/>
                     <result column="ss_zdmssfs" property="ssZdmssfs"/>
                     <result column="ss_hbss" property="ssHbss"/>
                     <result column="ss_zdmdcx" property="ssZdmdcx"/>
@@ -25,6 +30,8 @@
                     <result column="ss_zdbywd" property="ssZdbywd"/>
                     <result column="ss_sdwtxhsj" property="ssSdwtxhsj"/>
                     <result column="ss_zdzcw" property="ssZdzcw"/>
+                    <result column="ttylx" property="ttylx"/>
+                    <result column="ttysyl" property="ttysyl"/>
                     <result column="IS_DELETEMARK" property="isDeletemark"/>
                     <result column="CREATE_TIME" property="createTime"/>
                     <result column="MODIFY_TIME" property="modifyTime"/>
@@ -34,7 +41,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, ss_note, ss_date, ss_dateend, ss_doctor, ss_zdmssfs, ss_hbss, ss_zdmdcx, ss_zdmbcx, ss_szsxl, ss_hxbsrl, ss_xjsrl, ss_xxbsrl, ss_cbptime, ss_zdmzdsj, ss_zdbywd, ss_sdwtxhsj, ss_zdzcw, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, ss_note, ss_date, ss_dateend, ss_doctor, ss_assitant1, ss_assitant2, ss_assitant3, ss_assitant4, ss_assitant5, ss_zdmssfs, ss_hbss, ss_zdmdcx, ss_zdmbcx, ss_szsxl, ss_hxbsrl, ss_xjsrl, ss_xxbsrl, ss_cbptime, ss_zdmzdsj, ss_zdbywd, ss_sdwtxhsj, ss_zdzcw, ttylx, ttysyl, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
     </sql>
     <update id="updateHeartBSurgical" parameterType="cc.mrbird.febs.heart.entity.HeartBSurgical">
         update heart_b_surgical
@@ -46,6 +53,11 @@
 <if test="ssDate != null">ss_date=#{ssDate},</if>
 <if test="ssDateend != null">ss_dateend=#{ssDateend},</if>
 <if test="ssDoctor != null">ss_doctor=#{ssDoctor},</if>
+<if test="ssAssitant1 != null">ss_assitant1=#{ssAssitant1},</if>
+<if test="ssAssitant2 != null">ss_assitant2=#{ssAssitant2},</if>
+<if test="ssAssitant3 != null">ss_assitant3=#{ssAssitant3},</if>
+<if test="ssAssitant4 != null">ss_assitant4=#{ssAssitant4},</if>
+<if test="ssAssitant5 != null">ss_assitant5=#{ssAssitant5},</if>
 <if test="ssZdmssfs != null">ss_zdmssfs=#{ssZdmssfs},</if>
 <if test="ssHbss != null">ss_hbss=#{ssHbss},</if>
 <if test="ssZdmdcx != null">ss_zdmdcx=#{ssZdmdcx},</if>
@@ -59,6 +71,8 @@
 <if test="ssZdbywd != null">ss_zdbywd=#{ssZdbywd},</if>
 <if test="ssSdwtxhsj != null">ss_sdwtxhsj=#{ssSdwtxhsj},</if>
 <if test="ssZdzcw != null">ss_zdzcw=#{ssZdzcw},</if>
+<if test="ttylx != null">ttylx=#{ttylx},</if>
+<if test="ttysyl != null">ttysyl=#{ttysyl},</if>
 <if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
 <if test="createTime != null">CREATE_TIME=#{createTime},</if>
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>

@@ -8,6 +8,7 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
                     <result column="d2jt" property="d2jt"/>
                     <result column="fdp" property="fdp"/>
                     <result column="pt" property="pt"/>
@@ -24,7 +25,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, d2jt, fdp, pt, aptt, inr, cfydb, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
+        id, username, file_no, name, check_date, d2jt, fdp, pt, aptt, inr, cfydb, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
     <update id="updateHeartBCheckfive" parameterType="cc.mrbird.febs.heart.entity.HeartBCheckfive">
         update heart_b_checkfive
@@ -32,6 +33,7 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
 <if test="d2jt != null">d2jt=#{d2jt},</if>
 <if test="fdp != null">fdp=#{fdp},</if>
 <if test="pt != null">pt=#{pt},</if>

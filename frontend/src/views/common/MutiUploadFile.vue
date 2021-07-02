@@ -29,6 +29,9 @@ export default {
     baseId: {
       default: ''
     },
+    refTab: {
+      default: null
+    },
     isEdit: {
       default: true
     }
@@ -102,6 +105,9 @@ export default {
       const formData = new FormData()
       formData.append('file', fileNow)
       formData.append('baseId', this.baseId)
+      if (this.refTab !== null) {
+        formData.append('refTab', this.refTab)
+      }
       this.uploading = true
 
       // You can use any AJAX library you like
@@ -117,7 +123,8 @@ export default {
     },
     fetch (baseId) {
       this.fileList = []
-      this.$get('comFile/getAllFiles/' + baseId).then((r) => {
+      let params = {baseId: baseId, refTab: this.refTab}
+      this.$get('comFile/getAllFiles', params).then((r) => {
         let data = r.data.data
         console.info(data)
         if (data != null) {

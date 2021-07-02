@@ -47,7 +47,7 @@
           </a-radio>
         </a-radio-group>
       </a-form-item>
-      <a-form-item label="死亡原因">
+      <!-- <a-form-item label="死亡原因">
         <a-input
           placeholder="请输入死亡原因"
           v-decorator="['deathInfo',  {rules:[{max:100,message:'最长不超过100'}]}]"
@@ -64,7 +64,7 @@
           placeholder="请输入住院转归备注"
           v-decorator="['inRedirectnote',  {rules:[{max:100,message:'最长不超过100'}]}]"
         />
-      </a-form-item>
+      </a-form-item> -->
       <a-divider orientation="left" style="font-size:14px;">2.2.2、诊断</a-divider>
       <a-form-item label="夹层诊断（阜外分型）">
          <a-radio-group v-decorator="['jczd', {}]">
@@ -81,6 +81,22 @@
             D
           </a-radio>
         </a-radio-group>
+      </a-form-item>
+       <a-form-item label="夹层诊断（Stanford分层）">
+         <a-radio-group v-decorator="['inRedirectnote', {}]">
+          <a-radio value="A">
+           A
+          </a-radio>
+          <a-radio value="B">
+            B
+          </a-radio>
+        </a-radio-group>
+      </a-form-item>
+      <a-form-item label="其他">
+        <a-input
+          placeholder="请输入其他诊断"
+          v-decorator="['deathInfo',  {rules:[{max:100,message:'最长不超过100'}]}]"
+        />
       </a-form-item>
       <a-form-item label="高血压">
         <a-radio-group v-decorator="['gxy', {}]">
@@ -99,7 +115,6 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item label="NYHA分级">
-        
          <a-radio-group v-decorator="['nyha', {}]">
           <a-radio value="Ⅰ">
            Ⅰ
@@ -143,7 +158,7 @@
       </a-form-item>
       <a-divider orientation="left" style="font-size:14px;">2.2.3、既往史</a-divider>
       <a-form-item label="主动脉瓣手术">
-         <a-radio-group v-decorator="['zdmbss', {}]">
+         <a-radio-group v-decorator="['zdmbss', {}]" @change="onZdmbssChange">
           <a-radio value="是">
            是
           </a-radio>
@@ -151,9 +166,14 @@
             否
           </a-radio>
         </a-radio-group>
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-if="isZdmbss"
+          v-decorator="['zdmbssDate', {}]"
+        />
       </a-form-item>
       <a-form-item label="全弓置换">
-         <a-radio-group v-decorator="['qgzh', {}]">
+         <a-radio-group v-decorator="['qgzh', {}]" @change="onQgzhChange">
           <a-radio value="是">
            是
           </a-radio>
@@ -161,8 +181,28 @@
             否
           </a-radio>
         </a-radio-group>
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-if="isQgzh"
+          v-decorator="['qgzhDate', {}]"
+        />
       </a-form-item>
-      <a-form-item label="其他主动干预">
+      <a-form-item label="夹层腔内修复术">
+         <a-radio-group v-decorator="['jcqnxfs', {}]" @change="onJcqnxfsChange">
+          <a-radio value="是">
+           是
+          </a-radio>
+          <a-radio value="否">
+            否
+          </a-radio>
+        </a-radio-group>
+        <a-date-picker
+          format='YYYY-MM-DD'
+          v-if="isJcqnxfs"
+          v-decorator="['jcqnxfsDate', {}]"
+        />
+      </a-form-item>
+      <a-form-item label="其他主动干预 (如 无 请填写 “-”)">
         <a-input
           placeholder="请输入其他主动干预"
           v-decorator="['qtzdgy',  {rules:[{max:50,message:'最长不超过50'}]}]"
@@ -174,7 +214,7 @@
           v-decorator="['sczdgysj', {}]"
         />
       </a-form-item>
-      <a-form-item label="主动脉疾病家族史">
+      <a-form-item label="主动脉疾病家族史 (如 无 请填写 “-”)">
         <a-input
           placeholder="请输入主动脉疾病家族史"
           v-decorator="['zdmjbjzs', {rules:[{max:50,message:'最长不超过50'}]}]"
@@ -212,6 +252,9 @@ export default {
       loading: false,
       form: this.$form.createForm(this),
       hospitalInfo: {},
+      isZdmbss: false,
+      isQgzh: false,
+      isJcqnxfs: false
     }
   },
   methods: {
@@ -220,34 +263,80 @@ export default {
       this.loading = false
       this.hospitalInfo = {}
       this.form.resetFields()
+      this.isZdmbss = false
+      this.isQgzh = false
+      this.isJcqnxfs = false
+    },
+    onZdmbssChange (e) {
+      if (e.target.value === '是') {
+        this.isZdmbss = true
+      } else {
+        this.isZdmbss = false
+        this.form.setFieldsValue({ zdmbssDate: null })
+      }
+    },
+    onQgzhChange (e) {
+      if (e.target.value === '是') {
+        this.isQgzh = true
+      } else {
+        this.isQgzh = false
+        this.form.setFieldsValue({ qgzhDate: null })
+      }
+    },
+    onJcqnxfsChange (e) {
+      if (e.target.value === '是') {
+        this.isJcqnxfs = true
+      } else {
+        this.isJcqnxfs = false
+        this.form.setFieldsValue({ jcqnxfsDate: null })
+      }
     },
     setFields () {
-      let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'swsj', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
+      let values = this.form.getFieldsValue(['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'zdmbssDate', 'qgzh', 'qgzhDate', 'jcqnxfs', 'jcqnxfsDate', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj'])
       if (typeof values !== 'undefined') {
-          Object.keys(values).forEach(_key => {
+        Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.hospitalInfo[_key] = values[_key]
           }
-
         })
       }
       return this.hospitalInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'swsj', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'qgzh', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj']
-      let fieldDates = ['inHospital', 'outHospital', 'swsj', 'sczdgysj']
+      let fields = ['zhusu', 'inHospital', 'outHospital', 'inRedirect', 'deathInfo', 'inRedirectnote', 'jczd', 'gxy', 'nyha', 'tnb', 'mfzhz', 'other', 'zdmbss', 'zdmbssDate', 'qgzh', 'qgzhDate', 'jcqnxfs', 'jcqnxfsDate', 'qtzdgy', 'sczdgysj', 'zdmjbjzs', 'xy', 'hj']
+      let fieldDates = ['inHospital', 'outHospital', 'sczdgysj', 'zdmbssDate', 'qgzhDate', 'jcqnxfsDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
+            if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
+            if (key === 'zdmbss' || key === 'qgzh' || key === 'jcqnxfs') {
+              if (key == 'zdmbss') {
+                if (checkInfo[key] !== '' && checkInfo[key] !== null && checkInfo[key] === '是') {
+                  this.isZdmbss = true
+                } else {
+                  this.isZdmbss = false
+                }
+              } else if (key === 'qgzh') {
+                if (checkInfo[key] !== '' && checkInfo[key] !== null && checkInfo[key] === '是') {
+                  this.isQgzh = true
+                } else {
+                  this.isQgzh = false
+                }
+              } else {
+                if (checkInfo[key] !== '' && checkInfo[key] !== null && checkInfo[key] === '是') {
+                  this.isJcqnxfs = true
+                } else {
+                  this.isJcqnxfs = false
+                }
+              }
+            }
             obj[key] = checkInfo[key]
           }
           this.form.setFieldsValue(obj)

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.heart.dao.HeartBChecksixMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cc.mrbird.febs.heart.entity.HeartBChecksix">
+                    <id column="id" property="id"/>
+                    <result column="username" property="username"/>
+                    <result column="file_no" property="fileNo"/>
+                    <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
+                    <result column="xqtype" property="xqtype"/>
+                    <result column="ph" property="ph"/>
+                    <result column="po2" property="po2"/>
+                    <result column="pco2" property="pco2"/>
+                    <result column="k" property="k"/>
+                    <result column="na" property="na"/>
+                    <result column="ca" property="ca"/>
+                    <result column="glu" property="glu"/>
+                    <result column="be" property="be"/>
+                    <result column="lac" property="lac"/>
+                    <result column="hb" property="hb"/>
+                    <result column="fiao2" property="fiao2"/>
+                    <result column="so2" property="so2"/>
+                    <result column="note" property="note"/>
+                    <result column="IS_DELETEMARK" property="isDeletemark"/>
+                    <result column="CREATE_TIME" property="createTime"/>
+                    <result column="MODIFY_TIME" property="modifyTime"/>
+                    <result column="CREATE_USER_ID" property="createUserId"/>
+                    <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="display_index" property="displayIndex"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        id, username, file_no, name, check_date, xqtype, ph, po2, pco2, k, na, ca, glu, be, lac, hb, fiao2, so2, note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
+    </sql>
+    <update id="updateHeartBChecksix" parameterType="cc.mrbird.febs.heart.entity.HeartBChecksix">
+        update heart_b_checksix
+        <trim prefix="set" suffixOverrides=",">
+<if test="username != null">username=#{username},</if>
+<if test="fileNo != null">file_no=#{fileNo},</if>
+<if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
+<if test="xqtype != null">xqtype=#{xqtype},</if>
+<if test="ph != null">ph=#{ph},</if>
+<if test="po2 != null">po2=#{po2},</if>
+<if test="pco2 != null">pco2=#{pco2},</if>
+<if test="k != null">k=#{k},</if>
+<if test="na != null">na=#{na},</if>
+<if test="ca != null">ca=#{ca},</if>
+<if test="glu != null">glu=#{glu},</if>
+<if test="be != null">be=#{be},</if>
+<if test="lac != null">lac=#{lac},</if>
+<if test="hb != null">hb=#{hb},</if>
+<if test="fiao2 != null">fiao2=#{fiao2},</if>
+<if test="so2 != null">so2=#{so2},</if>
+<if test="note != null">note=#{note},</if>
+<if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
+<if test="createTime != null">CREATE_TIME=#{createTime},</if>
+<if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
+<if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
+<if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="displayIndex != null">display_index=#{displayIndex},</if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

@@ -8,6 +8,7 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
                     <result column="jhdb" property="jhdb"/>
                     <result column="jgdb" property="jgdb"/>
                     <result column="ckmb" property="ckmb"/>
@@ -22,7 +23,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, jhdb, jgdb, ckmb, cmjgdb, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
+        id, username, file_no, name, check_date, jhdb, jgdb, ckmb, cmjgdb, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
     <update id="updateHeartBCheck" parameterType="cc.mrbird.febs.heart.entity.HeartBCheck">
         update heart_b_check
@@ -30,6 +31,7 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
 <if test="jhdb != null">jhdb=#{jhdb},</if>
 <if test="jgdb != null">jgdb=#{jgdb},</if>
 <if test="ckmb != null">ckmb=#{ckmb},</if>

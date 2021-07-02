@@ -21,9 +21,10 @@ public class CustomHeart {
     private transient  List<HeartBCheckthree> checkThreeInfo; //检验 3
     private transient  List<HeartBCheckfour> checkFourInfo; //检验 3
     private transient  List<HeartBCheckfive> checkFiveInfo; //检验 3
+    private transient  List<HeartBChecksix> checkSixInfo; //检验 3
     private transient List<HeartBCs> csInfo; //超声 4
     private transient List<HeartBCt> ctInfo; //术前CT 5
-    private transient HeartBCtout outInfo; //出院复查CT 6
+    private transient List<HeartBCtout> outInfo; //出院复查CT 6
     private transient HeartBSurgical surgicalInfo; //手术 7
     private transient  HeartBSurgicalafter  surAfterInfo;//术后 8
     private transient List<HeartBCsfc> fcInfo; //超声复查 8.2

@@ -87,10 +87,44 @@
           v-decorator="[ 'inCheck', {}]"
         />
       </a-form-item>
-      <a-form-item label="发病-就诊时间">
+      <a-form-item label="主诉">
         <a-input
-          placeholder="请输入发病-就诊时间"
-          v-decorator="['toCheck', {}]"
+          placeholder="请输入主诉"
+          v-decorator="['zhusu', {rules:[{max:100,message:'最长不超过100'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="发病-就诊时间">
+        年
+        <a-input-number
+          placeholder="年"
+          v-decorator="['toYear', {}]"
+          :precision="0"
+          :max="9999"
+          style="width:18%;"
+        />
+        &nbsp;&nbsp;月
+        <a-input-number
+          placeholder="月"
+          v-decorator="['toMonth', {}]"
+          :precision="0"
+          :max="12"
+          style="width:15%;"
+        />
+        &nbsp;&nbsp;日
+        <a-input-number
+          placeholder="日"
+          v-decorator="['toDay', {}]"
+          :precision="0"
+          :max="31"
+          style="width:15%;"
+        />
+        &nbsp;&nbsp;时
+        <a-input-number
+          placeholder="时"
+          v-decorator="['toHour', {}]"
+          :precision="0"
+          :max="24"
+          style="width:15%;"
         />
       </a-form-item>
       <a-form-item label="疼痛部位">
@@ -168,7 +202,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote'])
+      let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote', 'zhusu'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => { 
             if(values[_key]!==undefined){
@@ -201,22 +235,21 @@ export default {
       }
     },
   setFormValues ({ ...checkInfo }) {
-      let fields = ['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote']
+      let fields = ['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote', 'zhusu']
       let fieldDates = ['inCheck', 'deathDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== '' && checkInfo[key]!=null) {
+            if (checkInfo[key] !== '' && checkInfo[key] != null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
             if(key=='province' || key =='painPos' || key =='symptoms'){
-              obj[key] =JSON.parse(checkInfo[key])
+              obj[key] = checkInfo[key] == '' ? null : JSON.parse(checkInfo[key])
             }
             else if(key =='gender'){
                obj[key] = checkInfo[key]?'1':'0'

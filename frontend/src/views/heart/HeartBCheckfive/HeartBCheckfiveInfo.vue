@@ -1,10 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
-       <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >2.3.5、凝血功能</a-divider>
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="D二聚体(mg/L)">
         <a-input-number
           placeholder="请输入D二聚体(mg/L)"
@@ -77,13 +82,12 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['d2jt', 'fdp', 'pt', 'aptt', 'inr','cfydb'])
+      let values = this.form.getFieldsValue(['checkDate', 'd2jt', 'fdp', 'pt', 'aptt', 'inr', 'cfydb'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       return this.csfcInfo

@@ -1,7 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
-
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="PH">
         <a-input-number
           placeholder="请输入PH"
@@ -76,13 +84,12 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['ph', 'rs', 'be', 'so2', 'po2', 'pco2'])
+      let values = this.form.getFieldsValue(['checkDate', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       return this.csfcInfo

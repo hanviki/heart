@@ -8,6 +8,7 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
                     <result column="xqtype" property="xqtype"/>
                     <result column="ph" property="ph"/>
                     <result column="po2" property="po2"/>
@@ -31,7 +32,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, xqtype, ph, po2, pco2, k, na, ca, glu, be, lac, hb, fiao2,so2, note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, check_date, xqtype, ph, po2, pco2, k, na, ca, glu, be, lac, hb, fiao2,so2, note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
     </sql>
     <update id="updateHeartBShzlxq" parameterType="cc.mrbird.febs.heart.entity.HeartBShzlxq">
         update heart_b_shzlxq
@@ -39,6 +40,7 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
 <if test="xqtype != null">xqtype=#{xqtype},</if>
 <if test="ph != null">ph=#{ph},</if>
 <if test="po2 != null">po2=#{po2},</if>

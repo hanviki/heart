@@ -449,15 +449,14 @@ export default {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
+            if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
-            if(key=='ctJcljfw' || key =='ctZdmjctszx'){
-              obj[key] =JSON.parse(checkInfo[key])
+            if (key =='ctJcljfw' || key =='ctZdmjctszx'){
+              obj[key] = checkInfo[key] == '' ? null : JSON.parse(checkInfo[key])
             } else {
               obj[key] = checkInfo[key]
             }

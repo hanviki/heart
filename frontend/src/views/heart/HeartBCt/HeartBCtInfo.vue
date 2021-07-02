@@ -4,6 +4,15 @@
       <a-divider orientation="left" style="font-size:14px;">2.5.1、 直径测量</a-divider>
        <muti-uploadFile :baseId="baseId"></muti-uploadFile>
       <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
+      <a-form-item
         label="主动脉窦直径(mm)"
       >
         <a-input-number
@@ -168,8 +177,42 @@
         />
       </a-form-item>
        <a-divider orientation="left" style="font-size:14px;">2.5.2、夹层描述</a-divider>
+      <a-form-item label="夹层诊断（阜外分型）">
+         <a-radio-group v-decorator="['ctJcms', {}]">
+          <a-radio value="A">
+           A
+          </a-radio>
+          <a-radio value="B">
+            B
+          </a-radio>
+          <a-radio value="C">
+            C
+          </a-radio>
+          <a-radio value="D">
+            D
+          </a-radio>
+        </a-radio-group>
+        <a-tooltip placement="top">
+          <template slot="title" trigger="hover">
+            A 型： 仅局限于升主动脉的夹层， 夹层中止于无名动脉近端； <br>
+            B 型：夹层局限于胸降主动脉， 或延伸到腹主动脉； <br>
+            C 型： 夹层累及主动脉弓， 无论升主动脉和胸降主动脉是否受到累及。 Cp型： 夹层仅累及到主动脉弓近心侧的无名动脉和（或） 左颈总动脉； Cd 型： 夹层仅累及到主动脉弓远心侧的左锁骨下动脉和（或） 左颈总动脉； <br>
+            D 型： 夹层局限于膈肌水平以下的腹主动脉和（或） 髂动脉。
+          </template>
+          <a-icon type="question-circle" theme="twoTone" />
+        </a-tooltip>
+      </a-form-item>
+       <a-form-item label="夹层诊断（Stanford分层）">
+         <a-radio-group v-decorator="['ctStanford', {}]">
+          <a-radio value="A">
+           A
+          </a-radio>
+          <a-radio value="B">
+            B
+          </a-radio>
+        </a-radio-group>
+      </a-form-item>
       <a-form-item
-        
         label="主动脉夹层阜外分型"
       >
         <a-input
@@ -178,7 +221,6 @@
         />
       </a-form-item>
       <a-form-item
-        
         label="升主夹层病理"
       >
         <a-radio-group v-decorator="['ctSzjcbl', {}]">
@@ -418,7 +460,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['ctZdmdzj', 'ctSzdmzj', 'ctZdmgzj', 'ctXszdmzj', 'ctXzzdmzj', 'ctXxzdmzj', 'ctFzdmsdzj', 'ctFzdmxdzj', 'ctSzdmjqzj', 'ctZdmgjqzj', 'ctXsjqzj', 'ctXzjqzj', 'ctXxjqzj', 'ctFsjqzj', 'ctFxjqzj', 'ctZdmjcfwfx', 'ctSzjcbl', 'ctZdmgjqwz', 'ctZdxdbl', 'ctZdxdjqwz', 'ctFzdmsdbl', 'ctFzdmjqwz', 'ctSdmxjcbl', 'ctSxjqwz', 'ctYfpkwz', 'ctYfpkdx', 'ctQxhzdsyfzxg', 'ctWqqxqg', 'ctJcljfw', 'ctZdmjctszx', 'ctJqgxqg', 'ctNote'])
+      let values = this.form.getFieldsValue(['checkDate', 'ctJcms', 'ctStanford', 'ctZdmdzj', 'ctSzdmzj', 'ctZdmgzj', 'ctXszdmzj', 'ctXzzdmzj', 'ctXxzdmzj', 'ctFzdmsdzj', 'ctFzdmxdzj', 'ctSzdmjqzj', 'ctZdmgjqzj', 'ctXsjqzj', 'ctXzjqzj', 'ctXxjqzj', 'ctFsjqzj', 'ctFxjqzj', 'ctZdmjcfwfx', 'ctSzjcbl', 'ctZdmgjqwz', 'ctZdxdbl', 'ctZdxdjqwz', 'ctFzdmsdbl', 'ctFzdmjqwz', 'ctSdmxjcbl', 'ctSxjqwz', 'ctYfpkwz', 'ctYfpkdx', 'ctQxhzdsyfzxg', 'ctWqqxqg', 'ctJcljfw', 'ctZdmjctszx', 'ctJqgxqg', 'ctNote'])
       if (typeof values !== 'undefined') {
           Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

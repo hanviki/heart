@@ -1,5 +1,6 @@
 package cc.mrbird.febs.heart.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -14,11 +15,11 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 
+ * 住院病历资料
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_hospitalinfo")
@@ -105,10 +106,10 @@ private static final long serialVersionUID=1L;
     private transient String swsjTo;
 
     /**
-     * 住院转归备注
+     * 夹层诊断（Stanford分层）
      */
         
-        @ExcelField(value ="住院转归备注")
+        @ExcelField(value ="夹层诊断（Stanford分层）")
     private String inRedirectnote;
 
     /**
@@ -161,11 +162,45 @@ private static final long serialVersionUID=1L;
     private String zdmbss;
 
     /**
+     * 主动脉瓣手术时间
+     */
+        
+        @ExcelField(value ="主动脉瓣手术时间", writeConverter = DateConverter.class)
+    private Date zdmbssDate;
+    private transient String zdmbssDateFrom;
+    private transient String zdmbssDateTo;
+
+    /**
      * 全弓置换
      */
         
         @ExcelField(value ="全弓置换")
     private String qgzh;
+
+    /**
+     * 全弓置换时间
+     */
+        
+        @ExcelField(value ="全弓置换时间", writeConverter = DateConverter.class)
+    private Date qgzhDate;
+    private transient String qgzhDateFrom;
+    private transient String qgzhDateTo;
+
+    /**
+     * 夹层腔内修复术
+     */
+        
+        @ExcelField(value ="夹层腔内修复术")
+    private String jcqnxfs;
+
+    /**
+     * 夹层腔内修复术时间
+     */
+        
+        @ExcelField(value ="夹层腔内修复术时间", writeConverter = DateConverter.class)
+    private Date jcqnxfsDate;
+    private transient String jcqnxfsDateFrom;
+    private transient String jcqnxfsDateTo;
 
     /**
      * 其他主动干预
@@ -249,6 +284,7 @@ private static final long serialVersionUID=1L;
     private Long modifyUserId;
 
 
+
     public static final String ID ="id" ;
 
     public static final String USERNAME ="username" ;
@@ -285,7 +321,15 @@ private static final long serialVersionUID=1L;
 
     public static final String ZDMBSS ="zdmbss" ;
 
+    public static final String ZDMBSS_DATE ="zdmbss_date" ;
+
     public static final String QGZH ="qgzh" ;
+
+    public static final String QGZH_DATE ="qgzh_date" ;
+
+    public static final String JCQNXFS ="jcqnxfs" ;
+
+    public static final String JCQNXFS_DATE ="jcqnxfs_date" ;
 
     public static final String QTZDGY ="qtzdgy" ;
 

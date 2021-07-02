@@ -57,6 +57,8 @@ public class HeartBPatientinfoController extends BaseController {
     @Autowired
     public IHeartBCheckfiveService iHeartBCheckfiveService;
     @Autowired
+    public IHeartBChecksixService iHeartBChecksixService;
+    @Autowired
     public IHeartBCsfcService iHeartBCsfcService;
     @Autowired
     public IHeartBCsService iHeartBCsService;
@@ -181,6 +183,18 @@ public class HeartBPatientinfoController extends BaseController {
             }
         });
 
+        LambdaQueryWrapper<HeartBChecksix> queryWrapper26 = new LambdaQueryWrapper<>();
+        queryWrapper26.eq(HeartBChecksix::getFileNo, fileNo);
+        queryWrapper26.eq(HeartBChecksix::getIsDeletemark, 1);
+        List<HeartBChecksix> checkSixInfo = this.iHeartBChecksixService.list(queryWrapper26);
+
+        checkSixInfo.sort(new Comparator<HeartBChecksix>() {
+            @Override
+            public int compare(HeartBChecksix o1, HeartBChecksix o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
+
 
         LambdaQueryWrapper<HeartBCs> queryWrapper3 = new LambdaQueryWrapper<>();
         queryWrapper3.eq(HeartBCs::getIsDeletemark, 1);
@@ -211,7 +225,13 @@ public class HeartBPatientinfoController extends BaseController {
         LambdaQueryWrapper<HeartBCtout> queryWrapper6 = new LambdaQueryWrapper<>();
         queryWrapper6.eq(HeartBCtout::getFileNo, fileNo);
         queryWrapper6.eq(HeartBCtout::getIsDeletemark, 1);
-        HeartBCtout ctOutInfo = this.iHeartBCtoutService.getOne(queryWrapper6);
+        List<HeartBCtout> ctOutInfo = this.iHeartBCtoutService.list(queryWrapper6);
+        ctOutInfo.sort(new Comparator<HeartBCtout>() {
+            @Override
+            public int compare(HeartBCtout o1, HeartBCtout o2) {
+                return o1.getDisplayIndex().compareTo(o2.getDisplayIndex());
+            }
+        });
 
         LambdaQueryWrapper<HeartBHospitalinfo> queryWrapper7 = new LambdaQueryWrapper<>();
         queryWrapper7.eq(HeartBHospitalinfo::getFileNo, fileNo);
@@ -312,6 +332,7 @@ public class HeartBPatientinfoController extends BaseController {
         heart.setCheckThreeInfo(checkThreeInfo);
         heart.setCheckFourInfo(checkFourInfo);
         heart.setCheckFiveInfo(checkFiveInfo);
+        heart.setCheckSixInfo(checkSixInfo);
         heart.setCsInfo(csInfo);
         heart.setCtInfo(ctInfo);
         heart.setFcctInfo(ctfcList);
@@ -433,6 +454,21 @@ public class HeartBPatientinfoController extends BaseController {
                         check.setName(name);
                         check.setDisplayIndex(dIndex);
                         this.iHeartBCheckfiveService.createHeartBCheckfive(check);
+                        dIndex++;
+                    }
+
+                }
+                if (heart.getCheckSixInfo() != null) {
+                    dIndex=0;
+                    List<HeartBChecksix> heartBChecksixList = heart.getCheckSixInfo();
+                    for (HeartBChecksix check : heartBChecksixList
+                    ) {
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        check.setDisplayIndex(dIndex);
+                        this.iHeartBChecksixService.createHeartBChecksix(check);
                         dIndex++;
                     }
 
@@ -560,13 +596,41 @@ public class HeartBPatientinfoController extends BaseController {
                     this.iHeartBHospitalinfoService.createHeartBHospitalinfo(heartBHospitalinfo);
                 }
                 if (heart.getOutInfo() != null) {
-                    HeartBCtout heartBCtout = heart.getOutInfo();
-                    heartBCtout.setCreateUserId(currentUser.getUserId());
-                    heartBCtout.setUsername(currentUser.getUsername());
-                    heartBCtout.setFileNo(fileNo);
-                    heartBCtout.setName(name);
-                    this.iHeartBCtoutService.createHeartBCtout(heartBCtout);
+                    dIndex=0;
+                    List<HeartBCtout> heartBCtoutList = heart.getOutInfo();
+                    for (HeartBCtout item : heartBCtoutList
+                    ) {
+                        item.setCreateUserId(currentUser.getUserId());
+                        item.setUsername(currentUser.getUsername());
+                        item.setFileNo(fileNo);
+                        item.setName(name);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
+//                        LambdaQueryWrapper<HeartBCtfc> queryWrapper_HeartBCtfc = new LambdaQueryWrapper<>();
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getId, item.getId());
+//                        queryWrapper_HeartBCtfc.eq(HeartBCtfc::getIsDeletemark, 1);
+//                        int count = this.iHeartBCtfcService.count(queryWrapper_HeartBCtfc);
+//                        if (count > 0) {
+//                            this.iHeartBCtfcService.updateHeartBCtfc(item);
+//                        } else {
+//                            this.iHeartBCtfcService.createHeartBCtfc(item);
+//                        }
+                        if(item.getId() == null || item.getId().equals("")){
+                            item.setId(UUID.randomUUID().toString());
+                        }
+                        this.iHeartBCtoutService.createHeartBCtout(item);
+                    }
+
                 }
+
+//                if (heart.getOutInfo() != null) {
+//                    HeartBCtout heartBCtout = heart.getOutInfo();
+//                    heartBCtout.setCreateUserId(currentUser.getUserId());
+//                    heartBCtout.setUsername(currentUser.getUsername());
+//                    heartBCtout.setFileNo(fileNo);
+//                    heartBCtout.setName(name);
+//                    this.iHeartBCtoutService.createHeartBCtout(heartBCtout);
+//                }
                 if (heart.getSurAfterInfo() != null) {
                     HeartBSurgicalafter heartBSurgicalafter = heart.getSurAfterInfo();
                     heartBSurgicalafter.setCreateUserId(currentUser.getUserId());
@@ -820,6 +884,38 @@ public class HeartBPatientinfoController extends BaseController {
                     }
                 }
 
+                if (heart.getCheckSixInfo() != null) {
+                    dIndex=0;
+                    List<HeartBChecksix> heartBChecksixList = heart.getCheckSixInfo();
+                    for (HeartBChecksix check : heartBChecksixList
+                    ) {
+                        // HeartBCheck check = heart.getCheckInfo();
+                        check.setCreateUserId(currentUser.getUserId());
+                        check.setUsername(currentUser.getUsername());
+                        check.setFileNo(fileNo);
+                        check.setName(name);
+                        check.setCreateTime(new Date());
+                        check.setIsDeletemark(1);
+                        check.setDisplayIndex(dIndex);
+                        dIndex++;
+
+//                        LambdaQueryWrapper<HeartBCheckfive> queryWrapper_checkfiveInfo = new LambdaQueryWrapper<>();
+//                        queryWrapper_checkfiveInfo.eq(HeartBCheckfive::getFileNo, check.getFileNo());
+//                        queryWrapper_checkfiveInfo.eq(HeartBCheckfive::getIsDeletemark, 1);
+//                        int count = this.iHeartBCheckfiveService.count(queryWrapper_checkfiveInfo);
+//                        if (count > 0) {
+//                            this.iHeartBCheckfiveService.updateHeartBCheckfive(check);
+//                        } else {
+//                            this.iHeartBCheckfiveService.createHeartBCheckfive(check);
+//                        }
+                        if(check.getId() == null || check.getId().equals("")){
+                            check.setId(UUID.randomUUID().toString());
+                        }
+                        this.iHeartBChecksixService.saveOrUpdate(check);
+                    }
+                }
+
+
                 if (heart.getCsInfo() != null) {
                     dIndex=0;
                     List<HeartBCs> heartBCsList = heart.getCsInfo();
@@ -1011,31 +1107,51 @@ public class HeartBPatientinfoController extends BaseController {
                     }
 
                 }
-
-
                 if (heart.getOutInfo() != null) {
-                    HeartBCtout heartBCtout = heart.getOutInfo();
-                    heartBCtout.setCreateUserId(currentUser.getUserId());
-                    heartBCtout.setUsername(currentUser.getUsername());
-                    heartBCtout.setFileNo(fileNo);
-                    heartBCtout.setName(name);
-                    heartBCtout.setCreateTime(new Date());
-                    heartBCtout.setIsDeletemark(1);
-//                    LambdaQueryWrapper<HeartBCtout> queryWrapper_HeartBCtout = new LambdaQueryWrapper<>();
-//                    queryWrapper_HeartBCtout.eq(HeartBCtout::getFileNo, fileNo);
-//                    queryWrapper_HeartBCtout.eq(HeartBCtout::getIsDeletemark, 1);
-//                    int count = this.iHeartBCtoutService.count(queryWrapper_HeartBCtout);
-//                    if (count > 0) {
-//                        this.iHeartBCtoutService.updateHeartBCtout(heartBCtout);
-//                    } else {
-//                        this.iHeartBCtoutService.createHeartBCtout(heartBCtout);
-//                    }
-                    if(heartBCtout.getId() == null || heartBCtout.getId().equals("")){
-                        heartBCtout.setId(UUID.randomUUID().toString());
+                    dIndex=0;
+                    List<HeartBCtout> heartBCtoutList = heart.getOutInfo();
+                    for (HeartBCtout item : heartBCtoutList
+                    ) {
+                        item.setCreateUserId(currentUser.getUserId());
+                        item.setUsername(currentUser.getUsername());
+                        item.setFileNo(fileNo);
+                        item.setName(name);
+                        item.setCreateTime(new Date());
+                        item.setIsDeletemark(1);
+                        item.setDisplayIndex(dIndex);
+                        dIndex++;
+                        if(item.getId() == null || item.getId().equals("")){
+                            item.setId(UUID.randomUUID().toString());
 
+                        }
+                        this.iHeartBCtoutService.saveOrUpdate(item);
                     }
-                    this.iHeartBCtoutService.saveOrUpdate(heartBCtout);
+
                 }
+
+//                if (heart.getOutInfo() != null) {
+//                    HeartBCtout heartBCtout = heart.getOutInfo();
+//                    heartBCtout.setCreateUserId(currentUser.getUserId());
+//                    heartBCtout.setUsername(currentUser.getUsername());
+//                    heartBCtout.setFileNo(fileNo);
+//                    heartBCtout.setName(name);
+//                    heartBCtout.setCreateTime(new Date());
+//                    heartBCtout.setIsDeletemark(1);
+////                    LambdaQueryWrapper<HeartBCtout> queryWrapper_HeartBCtout = new LambdaQueryWrapper<>();
+////                    queryWrapper_HeartBCtout.eq(HeartBCtout::getFileNo, fileNo);
+////                    queryWrapper_HeartBCtout.eq(HeartBCtout::getIsDeletemark, 1);
+////                    int count = this.iHeartBCtoutService.count(queryWrapper_HeartBCtout);
+////                    if (count > 0) {
+////                        this.iHeartBCtoutService.updateHeartBCtout(heartBCtout);
+////                    } else {
+////                        this.iHeartBCtoutService.createHeartBCtout(heartBCtout);
+////                    }
+//                    if(heartBCtout.getId() == null || heartBCtout.getId().equals("")){
+//                        heartBCtout.setId(UUID.randomUUID().toString());
+//
+//                    }
+//                    this.iHeartBCtoutService.saveOrUpdate(heartBCtout);
+//                }
                 if (heart.getSurAfterInfo() != null) {
                     HeartBSurgicalafter heartBSurgicalafter = heart.getSurAfterInfo();
                     heartBSurgicalafter.setCreateUserId(currentUser.getUserId());

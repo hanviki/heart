@@ -90,10 +90,44 @@
           v-decorator="[ 'inCheck', {}]"
         />
       </a-form-item>
-      <a-form-item label="发病-就诊时间">
+      <a-form-item label="主诉">
         <a-input
-          placeholder="请输入发病-就诊时间"
-          v-decorator="['toCheck', {}]"
+          placeholder="请输入主诉"
+          v-decorator="['zhusu', {rules:[{max:100,message:'最长不超过100'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="发病-就诊时间">
+        年
+        <a-input-number
+          placeholder="年"
+          v-decorator="['toYear', {}]"
+          :precision="0"
+          :max="9999"
+          style="width:18%;"
+        />
+        &nbsp;&nbsp;月
+        <a-input-number
+          placeholder="月"
+          v-decorator="['toMonth', {}]"
+          :precision="0"
+          :max="12"
+          style="width:15%;"
+        />
+        &nbsp;&nbsp;日
+        <a-input-number
+          placeholder="日"
+          v-decorator="['toDay', {}]"
+          :precision="0"
+          :max="31"
+          style="width:15%;"
+        />
+        &nbsp;&nbsp;时
+        <a-input-number
+          placeholder="时"
+          v-decorator="['toHour', {}]"
+          :precision="0"
+          :max="24"
+          style="width:15%;"
         />
       </a-form-item>
       <a-form-item label="疼痛部位">
@@ -147,11 +181,14 @@
 </template>
 
 <script>
- import area from '../../../utils/chinaarea'
+import area from '../../../utils/chinaarea'
 const plainOptions = ['无/No', '胸前/Front chest', '胸背/Behind chest','腰背/Behind low back','腹部/Abdomen'];
 const symptomsOptions = ['下肢活动异常','下肢感觉异常','晕厥','精神状态异常','心包填塞症','心律失常','心肌缺血','肢体缺血','脑卒中','脊髓缺血','内脏缺血','无']
 
 export default {
+  mounted () {
+    // this.fetch()
+  },
   data () {
     return {
       loading: false,
@@ -193,7 +230,7 @@ export default {
       }
     },
     setFields () {
-      let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toCheck', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote'])
+      let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'zhusu', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => { 
             if(values[_key]!==undefined){

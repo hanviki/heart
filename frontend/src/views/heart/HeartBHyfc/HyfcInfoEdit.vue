@@ -1,6 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="肌红蛋白">
         <a-input-number
           placeholder="请输入肌红蛋白"
@@ -222,7 +231,7 @@
 </template>
 
 <script>
-
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -236,7 +245,7 @@ export default {
       default: {}
     },
   },
-   mounted () {
+  mounted () {
     this.setFormValues(this.checkInfo)
   },
   methods: {
@@ -247,7 +256,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt'])
+      let values = this.form.getFieldsValue(['checkDate', 'jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt'])
       if (typeof values !== 'undefined') {
 
         Object.keys(values).forEach(_key => {
@@ -260,17 +269,16 @@ export default {
       return this.hyfcInfo
     },
      setFormValues ({ ...checkInfo }) {
-      let fields = ['jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt']
-      let fieldDates = []
+      let fields = ['checkDate', 'jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'hxbjs', 'xhdb', 'bxbjs', 'zxlxbbfb', 'xxbjs', 'ph', 'rs', 'be', 'so2', 'po2', 'pco2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'd2jt', 'fdp', 'pt', 'aptt']
+      let fieldDates = ['checkDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-           if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
+            if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {

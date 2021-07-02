@@ -3,6 +3,15 @@
     <a-form :form="form">
        <muti-uploadFile :baseId="baseId"></muti-uploadFile>
       <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
+      <a-form-item
         label="AVR"
       >
         <a-radio-group v-decorator="['avr', {}]">
@@ -139,12 +148,6 @@
           style="width:100%;"
         />
       </a-form-item>
-      <a-form-item label="超声检查时间">
-        <a-date-picker
-          format='YYYY-MM-DD'
-          v-decorator="['csjcsj', {}]"
-        />
-      </a-form-item>
     </a-form>
   </div>
 </template>
@@ -174,7 +177,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj'])
+      let values = this.form.getFieldsValue(['checkDate', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmdzj', 'csjcsj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {

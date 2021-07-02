@@ -8,6 +8,7 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
                     <result column="file_namect" property="fileNamect"/>
                     <result column="file_pathct" property="filePathct"/>
                     <result column="ct_zdmdzj" property="ctZdmdzj"/>
@@ -41,17 +42,21 @@
                     <result column="ct_jcljfw" property="ctJcljfw"/>
                     <result column="ct_zdmjctszx" property="ctZdmjctszx"/>
                     <result column="ct_jqgxqg" property="ctJqgxqg"/>
+                    <result column="ct_jcms" property="ctJcms"/>
+                    <result column="ct_stanford" property="ctStanford"/>
+                    <result column="jc_note" property="jcNote"/>
                     <result column="ct_note" property="ctNote"/>
                     <result column="IS_DELETEMARK" property="isDeletemark"/>
                     <result column="CREATE_TIME" property="createTime"/>
                     <result column="MODIFY_TIME" property="modifyTime"/>
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="display_index" property="displayIndex"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, file_namect, file_pathct, ct_zdmdzj, ct_szdmzj, ct_zdmgzj, ct_xszdmzj, ct_xzzdmzj, ct_xxzdmzj, ct_fzdmsdzj, ct_fzdmxdzj, ct_szdmjqzj, ct_zdmgjqzj, ct_xsjqzj, ct_xzjqzj, ct_xxjqzj, ct_fsjqzj, ct_fxjqzj, ct_zdmjcfwfx, ct_szjcbl, ct_zdmgjqwz, ct_zdxdbl, ct_zdxdjqwz, ct_fzdmsdbl, ct_fzdmjqwz, ct_sdmxjcbl, ct_sxjqwz, ct_yfpkwz, ct_yfpkdx, ct_qxhzdsyfzxg, ct_wqqxqg, ct_jcljfw, ct_zdmjctszx, ct_jqgxqg, ct_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, check_date, file_namect, file_pathct, ct_zdmdzj, ct_szdmzj, ct_zdmgzj, ct_xszdmzj, ct_xzzdmzj, ct_xxzdmzj, ct_fzdmsdzj, ct_fzdmxdzj, ct_szdmjqzj, ct_zdmgjqzj, ct_xsjqzj, ct_xzjqzj, ct_xxjqzj, ct_fsjqzj, ct_fxjqzj, ct_zdmjcfwfx, ct_szjcbl, ct_zdmgjqwz, ct_zdxdbl, ct_zdxdjqwz, ct_fzdmsdbl, ct_fzdmjqwz, ct_sdmxjcbl, ct_sxjqwz, ct_yfpkwz, ct_yfpkdx, ct_qxhzdsyfzxg, ct_wqqxqg, ct_jcljfw, ct_zdmjctszx, ct_jqgxqg, ct_jcms, ct_stanford, jc_note, ct_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
     <update id="updateHeartBCt" parameterType="cc.mrbird.febs.heart.entity.HeartBCt">
         update heart_b_ct
@@ -59,6 +64,7 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
 <if test="fileNamect != null">file_namect=#{fileNamect},</if>
 <if test="filePathct != null">file_pathct=#{filePathct},</if>
 <if test="ctZdmdzj != null">ct_zdmdzj=#{ctZdmdzj},</if>
@@ -92,12 +98,16 @@
 <if test="ctJcljfw != null">ct_jcljfw=#{ctJcljfw},</if>
 <if test="ctZdmjctszx != null">ct_zdmjctszx=#{ctZdmjctszx},</if>
 <if test="ctJqgxqg != null">ct_jqgxqg=#{ctJqgxqg},</if>
+<if test="ctJcms != null">ct_jcms=#{ctJcms},</if>
+<if test="ctStanford != null">ct_stanford=#{ctStanford},</if>
+<if test="jcNote != null">jc_note=#{jcNote},</if>
 <if test="ctNote != null">ct_note=#{ctNote},</if>
 <if test="isDeletemark != null">IS_DELETEMARK=#{isDeletemark},</if>
 <if test="createTime != null">CREATE_TIME=#{createTime},</if>
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="displayIndex != null">display_index=#{displayIndex},</if>
         </trim>
         where id=#{id}
     </update>

@@ -138,11 +138,14 @@ public class ComFileController extends BaseController{
         ComFile comFile=this.iComFileService.getById(id);
         return comFile;
     }
-    @GetMapping("getAllFiles/{baseId}")
-    public FebsResponse getAll(@NotBlank(message = "{required}") @PathVariable String baseId) {
+    @GetMapping("getAllFiles")
+    public FebsResponse getAll(@NotBlank(message = "{required}") String baseId,String refTab) {
         LambdaQueryWrapper<ComFile> queryWrapper = new LambdaQueryWrapper<>();
         if (StringUtils.isNotBlank(baseId)) {
             queryWrapper.eq(ComFile::getRefTabId, baseId);
+        }
+        if (StringUtils.isNotBlank(refTab)) {
+            queryWrapper.eq(ComFile::getRefTabTable, refTab);
         }
         List<ComFile>  comFileList= this.iComFileService.list(queryWrapper);
 
@@ -164,7 +167,7 @@ public class ComFileController extends BaseController{
     }
 
     @PostMapping("upload")
-    public FebsResponse Upload(@RequestParam("file") MultipartFile file,@RequestParam("baseId") String baseId) throws FebsException {
+    public FebsResponse Upload(@RequestParam("file") MultipartFile file,@RequestParam("baseId") String baseId,String refTab) throws FebsException {
         if (file.isEmpty()) {
             throw new FebsException("空文件");
         }
@@ -188,6 +191,9 @@ public class ComFileController extends BaseController{
         cf.setCreateTime(new Date());
         cf.setClientName(fileName2);//客户端的名称
         cf.setServerName(fileName);
+        if(refTab!=null) {
+            cf.setRefTabTable(refTab);
+        }
         iComFileService.createComFile(cf);
         String fileUrl = febsProperties.getBaseUrl() + "/uploadFile/"  + fileName;
 

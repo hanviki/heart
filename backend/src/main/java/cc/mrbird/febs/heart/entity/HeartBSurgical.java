@@ -15,11 +15,11 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 
+ * 手术
  * </p>
  *
  * @author viki
- * @since 2021-05-06
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_surgical")
@@ -88,6 +88,41 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="手术医生姓名")
     private String ssDoctor;
+
+    /**
+     * 助手1
+     */
+        
+        @ExcelField(value ="助手1")
+    private String ssAssitant1;
+
+    /**
+     * 助手2
+     */
+        
+        @ExcelField(value ="助手2")
+    private String ssAssitant2;
+
+    /**
+     * 助手3
+     */
+        
+        @ExcelField(value ="助手3")
+    private String ssAssitant3;
+
+    /**
+     * 助手4
+     */
+        
+        @ExcelField(value ="助手4")
+    private String ssAssitant4;
+
+    /**
+     * 助手5
+     */
+        
+        @ExcelField(value ="助手5")
+    private String ssAssitant5;
 
     /**
      * 主动脉手术方式
@@ -181,6 +216,20 @@ private static final long serialVersionUID=1L;
     private BigDecimal ssZdzcw;
 
     /**
+     * 停跳液类型
+     */
+        
+        @ExcelField(value ="停跳液类型")
+    private String ttylx;
+
+    /**
+     * 停跳液使用量（ml）
+     */
+        
+        @ExcelField(value ="停跳液使用量（ml）")
+    private BigDecimal ttysyl;
+
+    /**
      * 是否删除
      */
     @TableField("IS_DELETEMARK")
@@ -242,6 +291,16 @@ private static final long serialVersionUID=1L;
 
     public static final String SS_DOCTOR ="ss_doctor" ;
 
+    public static final String SS_ASSITANT1 ="ss_assitant1" ;
+
+    public static final String SS_ASSITANT2 ="ss_assitant2" ;
+
+    public static final String SS_ASSITANT3 ="ss_assitant3" ;
+
+    public static final String SS_ASSITANT4 ="ss_assitant4" ;
+
+    public static final String SS_ASSITANT5 ="ss_assitant5" ;
+
     public static final String SS_ZDMSSFS ="ss_zdmssfs" ;
 
     public static final String SS_HBSS ="ss_hbss" ;
@@ -267,6 +326,10 @@ private static final long serialVersionUID=1L;
     public static final String SS_SDWTXHSJ ="ss_sdwtxhsj" ;
 
     public static final String SS_ZDZCW ="ss_zdzcw" ;
+
+    public static final String TTYLX ="ttylx" ;
+
+    public static final String TTYSYL ="ttysyl" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
 

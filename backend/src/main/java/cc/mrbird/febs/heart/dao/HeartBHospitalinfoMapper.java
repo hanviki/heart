@@ -10,11 +10,11 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author viki
- * @since 2021-05-18
+ * @since 2021-06-22
  */
 public interface HeartBHospitalinfoMapper extends BaseMapper<HeartBHospitalinfo> {
         void updateHeartBHospitalinfo(HeartBHospitalinfo heartBHospitalinfo);
 
-        @Delete("update heart_b_hospitalinfo set IS_DELETEMARK=0 where file_no=#{fileNo}")
+        @Delete("update heart_b_hospitalinfo set IS_DELETEMARK=0 where fileNo=#{fileNo}")
         void deleteByFileNo(@Param(value = "fileNo") String fileNo);
         }

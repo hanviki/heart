@@ -19,7 +19,7 @@ import cc.mrbird.febs.common.converter.*;
  * </p>
  *
  * @author viki
- * @since 2021-05-28
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_check")
@@ -56,6 +56,15 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="姓名")
     private String name;
+
+    /**
+     * 检测时间
+     */
+        
+        @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate;
+    private transient String checkDateFrom;
+    private transient String checkDateTo;
 
     /**
      * 肌红蛋白
@@ -145,6 +154,8 @@ private static final long serialVersionUID=1L;
     public static final String FILE_NO ="file_no" ;
 
     public static final String NAME ="name" ;
+
+    public static final String CHECK_DATE ="check_date" ;
 
     public static final String JHDB ="jhdb" ;
 

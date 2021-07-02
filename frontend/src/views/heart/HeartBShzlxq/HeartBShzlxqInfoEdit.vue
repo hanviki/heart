@@ -1,8 +1,16 @@
 <template>
   <div>
    <a-form :form="form">
+     <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item
-        
         label="血气结果"
       >
          <a-radio-group v-decorator="['xqtype', {}]">
@@ -190,7 +198,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'so2', 'note'])
+      let values = this.form.getFieldsValue(['checkDate', 'xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'so2', 'note'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -202,8 +210,8 @@ export default {
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['id', 'username', 'fileNo', 'name', 'xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'so2', 'note']
-      let fieldDates = []
+      let fields = ['id', 'username', 'fileNo', 'name', 'checkDate', 'xqtype', 'ph', 'po2', 'pco2', 'k', 'na', 'ca', 'glu', 'be', 'lac', 'hb', 'fiao2', 'so2', 'note']
+      let fieldDates = ['checkDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
@@ -211,8 +219,7 @@ export default {
           if (fieldDates.indexOf(key) !== -1) {
             if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {

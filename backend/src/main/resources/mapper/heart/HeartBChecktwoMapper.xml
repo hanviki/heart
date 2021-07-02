@@ -8,6 +8,7 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
                     <result column="hxbjs" property="hxbjs"/>
                     <result column="xhdb" property="xhdb"/>
                     <result column="bxbjs" property="bxbjs"/>
@@ -18,11 +19,12 @@
                     <result column="MODIFY_TIME" property="modifyTime"/>
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="display_index" property="displayIndex"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, hxbjs, xhdb, bxbjs, zxlxbbfb, xxbjs, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, check_date, hxbjs, xhdb, bxbjs, zxlxbbfb, xxbjs, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index
     </sql>
     <update id="updateHeartBChecktwo" parameterType="cc.mrbird.febs.heart.entity.HeartBChecktwo">
         update heart_b_checktwo
@@ -30,6 +32,7 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
 <if test="hxbjs != null">hxbjs=#{hxbjs},</if>
 <if test="xhdb != null">xhdb=#{xhdb},</if>
 <if test="bxbjs != null">bxbjs=#{bxbjs},</if>
@@ -40,6 +43,7 @@
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="displayIndex != null">display_index=#{displayIndex},</if>
         </trim>
         where id=#{id}
     </update>

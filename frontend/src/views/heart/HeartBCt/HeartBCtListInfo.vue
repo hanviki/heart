@@ -27,8 +27,8 @@
     </a-collapse>
   </div>
 </template>
-      
-      <script>
+
+<script>
 import CtfcInfo from './HeartBCtInfo'
 export default {
   data () {
@@ -61,11 +61,11 @@ export default {
       if (len === 0) {
         len = 1
       } else {
-        len = this.listFc[len -1] + 1
+        len = this.listFc[len - 1] + 1
       }
       this.listFc.push(len)
-      let val = this.listFc[this.listFc.length -1]
-      let name= this.refName + val
+      let val = this.listFc[this.listFc.length - 1]
+      let name = this.refName + val
       this.activeKey = val
       this.execId(name)
     },
@@ -76,14 +76,14 @@ export default {
     },
     getId () {
       for (let i = 0; i < this.listFc.length; i++) {
-        let name= this.refName + this.listFc[i]
+        let name = this.refName + this.listFc[i]
         console.info(name)
         // console.info((this.$refs[name])[0])\
         this.execId(name)
       }
     },
-    handleClick (event,item) {
-      event.stopPropagation();
+    handleClick (event, item) {
+      event.stopPropagation()
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()
       newList.splice(index, 1)
@@ -92,16 +92,14 @@ export default {
     setFields () {
       this.listCsfc = []
       for (let i = 0; i < this.listFc.length; i++) {
-          let name= this.refName + this.listFc[i]
-          console.info(name)
-         // console.info(this.$refs[name][0])
+        let name = this.refName + this.listFc[i]
+        console.info(name)
         this.listCsfc.push((this.$refs[name])[0].setFields())
       }
       return this.listCsfc
     }
   }
 }
-      </script>
-      
-      <style>
+</script>
+<style>
 </style>

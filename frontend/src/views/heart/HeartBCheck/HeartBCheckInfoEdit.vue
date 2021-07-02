@@ -1,6 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="肌红蛋白">
         <a-input-number
           placeholder="请输入肌红蛋白"
@@ -70,21 +79,20 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['jhdb', 'jgdb', 'ckmb', 'cmjgdb'])
+      let values = this.form.getFieldsValue(['checkDate', 'jhdb', 'jgdb', 'ckmb', 'cmjgdb'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       this.csfcInfo.id = this.baseId
       return this.csfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['id', 'username', 'fileNo', 'name', 'jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'isDeletemark', 'createTime', 'modifyTime', 'createUserId', 'modifyUserId']
-      let fieldDates = ['createTime', 'modifyTime']
+      let fields = ['id', 'username', 'fileNo', 'name', 'checkDate', 'jhdb', 'jgdb', 'ckmb', 'cmjgdb', 'isDeletemark', 'createTime', 'modifyTime', 'createUserId', 'modifyUserId']
+      let fieldDates = ['checkDate', 'createTime', 'modifyTime']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
@@ -92,8 +100,7 @@ export default {
           if (fieldDates.indexOf(key) !== -1) {
             if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {
@@ -104,8 +111,7 @@ export default {
       })
       this.baseId = checkInfo.id
       this.csfcInfo = checkInfo
-    },
-
+    }
   }
 }
 </script>

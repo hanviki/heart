@@ -3,6 +3,15 @@
     <a-form :form="form">
        <muti-uploadFile :baseId="baseId" :isEdit="isEdit"></muti-uploadFile>
       <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
+      <a-form-item
         label="AVR"
       >
         <a-radio-group v-decorator="['avr', {}]">
@@ -176,7 +185,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
+      let values = this.form.getFieldsValue(['checkDate', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
          Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -189,17 +198,16 @@ export default {
       return this.csInfo
     },
     setFormValues ({ ...csInfo }) {
-      let fields = ['avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
-      let fieldDates = []
+      let fields = ['checkDate', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
+      let fieldDates = ['checkDate']
       Object.keys(csInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (csInfo[key] !== ''&&csInfo[key] !== null) {
+            if (csInfo[key] !== '' && csInfo[key] !== null) {
               obj[key] = moment(csInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {

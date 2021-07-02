@@ -28,6 +28,36 @@
           v-decorator="['ssDoctor',{rules:[{max:50,message:'最长不超过50'}]}]"
         />
       </a-form-item>
+      <a-form-item label="医助1姓名">
+        <a-input
+          placeholder="请输入医助1姓名"
+          v-decorator="['ssAssitant1',{rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="医助2姓名">
+        <a-input
+          placeholder="请输入医助2姓名"
+          v-decorator="['ssAssitant2',{rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="医助3姓名">
+        <a-input
+          placeholder="请输入医助3姓名"
+          v-decorator="['ssAssitant3',{rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="医助4姓名">
+        <a-input
+          placeholder="请输入医助4姓名"
+          v-decorator="['ssAssitant4',{rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="医助5姓名">
+        <a-input
+          placeholder="请输入医助5姓名"
+          v-decorator="['ssAssitant5',{rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
       <a-form-item label="主动脉手术方式">
         <a-input
           placeholder="请输入主动脉手术方式"
@@ -100,6 +130,20 @@
           style="width:100%;"
         />
       </a-form-item>
+      <a-form-item label="停跳液类型">
+        <a-input
+          placeholder="请输入停跳液类型"
+          v-decorator="['ttylx',{rules:[{max:50,message:'最长不超过50'}]}]"
+        />
+      </a-form-item>
+      <a-form-item label="停跳液使用量">
+        <a-input-number
+          placeholder="请输入停跳液使用量"
+          v-decorator="['ttysyl', {}]"
+          :precision="2"
+          style="width:100%;"
+        />
+      </a-form-item>
       <a-form-item label="最低鼻咽温度">
         <a-input-number
           placeholder="请输入最低鼻咽温度"
@@ -145,7 +189,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw'])
+      let values = this.form.getFieldsValue(['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw', 'ssAssitant1', 'ssAssitant2', 'ssAssitant3', 'ssAssitant4', 'ssAssitant5', 'ttylx', 'ttysyl'])
       if (typeof values !== 'undefined') {
           Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -157,17 +201,16 @@ export default {
       return this.surgicalInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw']
+      let fields = ['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw', 'ssAssitant1', 'ssAssitant2', 'ssAssitant3', 'ssAssitant4', 'ssAssitant5', 'ttylx', 'ttysyl']
       let fieldDates = ['ssDate', 'ssDateend']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           let obj = {}
           if (fieldDates.indexOf(key) !== -1) {
-            if (checkInfo[key] !== ''&&checkInfo[key] !== null) {
+            if (checkInfo[key] !== '' && checkInfo[key] !== null) {
               obj[key] = moment(checkInfo[key])
-            }
-            else {
+            } else {
               obj[key] = ''
             }
           } else {

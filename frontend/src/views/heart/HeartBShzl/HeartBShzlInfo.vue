@@ -2,7 +2,10 @@
   <div>
     <a-form :form="form">
       <a-form-item label="手术时间">
-        <a-date-picker formate="YYYY-MM-DD" v-decorator="[ 'ssDate', { }]" />
+        <a-date-picker
+          :showTime="{ format: 'HH:mm' }"
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'ssDate', { }]" />
       </a-form-item>
       <a-form-item label="术后入住ICU总天数">
         <a-input-number

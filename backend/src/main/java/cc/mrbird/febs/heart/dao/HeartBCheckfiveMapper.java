@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author viki
- * @since 2021-06-07
+ * @since 2021-06-22
  */
 public interface HeartBCheckfiveMapper extends BaseMapper<HeartBCheckfive> {
         void updateHeartBCheckfive(HeartBCheckfive heartBCheckfive);

@@ -19,7 +19,7 @@ import cc.mrbird.febs.common.converter.*;
  * </p>
  *
  * @author viki
- * @since 2021-05-21
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_ct")
@@ -58,6 +58,15 @@ private static final long serialVersionUID=1L;
     private String name;
 
     /**
+     * 检测时间
+     */
+        
+        @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate;
+    private transient String checkDateFrom;
+    private transient String checkDateTo;
+
+    /**
      * CT图片名称
      */
         
@@ -70,7 +79,6 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="CT图片地址")
     private String filePathct;
-
 
     /**
      * 主动脉窦直径
@@ -290,6 +298,27 @@ private static final long serialVersionUID=1L;
     private String ctJqgxqg;
 
     /**
+     * 夹层诊断（阜外分型）
+     */
+        
+        @ExcelField(value ="夹层诊断（阜外分型）")
+    private String ctJcms;
+
+    /**
+     * stanford分型
+     */
+        
+        @ExcelField(value ="stanford分型")
+    private String ctStanford;
+
+    /**
+     * 夹层注解
+     */
+        
+        @ExcelField(value ="夹层注解")
+    private String jcNote;
+
+    /**
      * 备注
      */
         
@@ -340,7 +369,14 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="修改人")
     private Long modifyUserId;
 
+    /**
+     * 排序
+     */
+        
+        @ExcelField(value ="排序")
     private Integer displayIndex;
+
+
 
     public static final String ID ="id" ;
 
@@ -349,6 +385,8 @@ private static final long serialVersionUID=1L;
     public static final String FILE_NO ="file_no" ;
 
     public static final String NAME ="name" ;
+
+    public static final String CHECK_DATE ="check_date" ;
 
     public static final String FILE_NAMECT ="file_namect" ;
 
@@ -416,6 +454,12 @@ private static final long serialVersionUID=1L;
 
     public static final String CT_JQGXQG ="ct_jqgxqg" ;
 
+    public static final String CT_JCMS ="ct_jcms" ;
+
+    public static final String CT_STANFORD ="ct_stanford" ;
+
+    public static final String JC_NOTE ="jc_note" ;
+
     public static final String CT_NOTE ="ct_note" ;
 
     public static final String IS_DELETEMARK ="IS_DELETEMARK" ;
@@ -427,5 +471,7 @@ private static final long serialVersionUID=1L;
     public static final String CREATE_USER_ID ="CREATE_USER_ID" ;
 
     public static final String MODIFY_USER_ID ="MODIFY_USER_ID" ;
+
+    public static final String DISPLAY_INDEX ="display_index" ;
 
         }

@@ -15,11 +15,11 @@ import cc.mrbird.febs.common.converter.*;
 
 /**
  * <p>
- * 
+ * 出院复查CT6
  * </p>
  *
  * @author viki
- * @since 2021-04-29
+ * @since 2021-06-22
  */
 
 @Excel("heart_b_ctout")
@@ -56,6 +56,22 @@ private static final long serialVersionUID=1L;
         
         @ExcelField(value ="姓名")
     private String name;
+
+    /**
+     * 检测时间
+     */
+        
+        @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate;
+    private transient String checkDateFrom;
+    private transient String checkDateTo;
+
+    /**
+     * 病人状态
+     */
+        
+        @ExcelField(value ="病人状态")
+    private String brzt;
 
     /**
      * 出院复查图片名称
@@ -304,6 +320,178 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="修改人")
     private Long modifyUserId;
 
+    /**
+     * 排序
+     */
+        
+        @ExcelField(value ="排序")
+    private Integer displayIndex;
+
+    /**
+     * 检测时间
+     */
+        
+        @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate2;
+    private transient String checkDate2From;
+    private transient String checkDate2To;
+
+    /**
+     * 血肌肝
+     */
+        
+        @ExcelField(value ="血肌肝")
+    private BigDecimal xjg;
+
+    /**
+     * ALT
+     */
+        
+        @ExcelField(value ="ALT")
+    private BigDecimal alt;
+
+    /**
+     * AST
+     */
+        
+        @ExcelField(value ="AST")
+    private BigDecimal ast;
+
+    /**
+     * 总胆红素
+     */
+        
+        @ExcelField(value ="总胆红素")
+    private BigDecimal zdhs;
+
+    /**
+     * 直接胆红素
+     */
+        
+        @ExcelField(value ="直接胆红素")
+    private BigDecimal zjdhs;
+
+    /**
+     * 淀粉酶
+     */
+        
+        @ExcelField(value ="淀粉酶")
+    private BigDecimal dfm;
+
+    /**
+     * 肌酐
+     */
+        
+        @ExcelField(value ="肌酐")
+    private BigDecimal jg;
+
+    /**
+     * 尿素氮
+     */
+        
+        @ExcelField(value ="尿素氮")
+    private BigDecimal nsd;
+
+    /**
+     * 尿酸
+     */
+        
+        @ExcelField(value ="尿酸")
+    private BigDecimal ns;
+
+    /**
+     * 白蛋白
+     */
+        
+        @ExcelField(value ="白蛋白")
+    private BigDecimal bdb;
+
+    /**
+     * 胱仰素
+     */
+        
+        @ExcelField(value ="胱仰素")
+    private BigDecimal gysc;
+
+    /**
+     * 肾小球滤过率
+     */
+        
+        @ExcelField(value ="肾小球滤过率")
+    private String sxqlgl;
+
+    /**
+     * 检测时间
+     */
+
+    @ExcelField(value ="检测时间", writeConverter = DateConverter.class)
+    private Date checkDate3;
+    private transient String checkDate3From;
+    private transient String checkDate3To;
+
+    /**
+     * AVR
+     */
+        
+        @ExcelField(value ="AVR")
+    private String avr;
+
+    /**
+     * MVR
+     */
+        
+        @ExcelField(value ="MVR")
+    private String mvr;
+
+    /**
+     * 室壁运动异常位置
+     */
+        
+        @ExcelField(value ="室壁运动异常位置")
+    private String sbydycwz;
+
+    /**
+     * 心包积液
+     */
+        
+        @ExcelField(value ="心包积液")
+    private String xbjy;
+
+    /**
+     * EF
+     */
+        
+        @ExcelField(value ="EF")
+    private BigDecimal ef;
+
+    /**
+     * 左室舒张末内径
+     */
+        
+        @ExcelField(value ="左室舒张末内径")
+    private BigDecimal zsszwnj;
+
+    /**
+     * 主动脉闭环直径
+     */
+        
+        @ExcelField(value ="主动脉闭环直径")
+    private BigDecimal zdmbhzj;
+
+    /**
+     * 主动脉窦直径
+     */
+        
+        @ExcelField(value ="主动脉窦直径")
+    private BigDecimal zdmdzj;
+
+    /**
+     * 升主动脉直径
+     */
+        
+        @ExcelField(value ="升主动脉直径")
+    private BigDecimal szdmzj;
+
 
 
     public static final String ID ="id" ;
@@ -313,6 +501,10 @@ private static final long serialVersionUID=1L;
     public static final String FILE_NO ="file_no" ;
 
     public static final String NAME ="name" ;
+
+    public static final String CHECK_DATE ="check_date" ;
+
+    public static final String BRZT ="brzt" ;
 
     public static final String FCT_FILE_NAME ="fct_file_name" ;
 
@@ -381,5 +573,53 @@ private static final long serialVersionUID=1L;
     public static final String CREATE_USER_ID ="CREATE_USER_ID" ;
 
     public static final String MODIFY_USER_ID ="MODIFY_USER_ID" ;
+
+    public static final String DISPLAY_INDEX ="display_index" ;
+
+    public static final String CHECK_DATE2 ="check_date2" ;
+
+    public static final String XJG ="xjg" ;
+
+    public static final String ALT ="alt" ;
+
+    public static final String AST ="ast" ;
+
+    public static final String ZDHS ="zdhs" ;
+
+    public static final String ZJDHS ="zjdhs" ;
+
+    public static final String DFM ="dfm" ;
+
+    public static final String JG ="jg" ;
+
+    public static final String NSD ="nsd" ;
+
+    public static final String NS ="ns" ;
+
+    public static final String BDB ="bdb" ;
+
+    public static final String GYSC ="gysc" ;
+
+    public static final String SXQLGL ="sxqlgl" ;
+
+    public static final String CHECK_DATE3 ="check_date3" ;
+
+    public static final String AVR ="avr" ;
+
+    public static final String MVR ="mvr" ;
+
+    public static final String SBYDYCWZ ="sbydycwz" ;
+
+    public static final String XBJY ="xbjy" ;
+
+    public static final String EF ="ef" ;
+
+    public static final String ZSSZWNJ ="zsszwnj" ;
+
+    public static final String ZDMBHZJ ="zdmbhzj" ;
+
+    public static final String ZDMDZJ ="zdmdzj" ;
+
+    public static final String SZDMZJ ="szdmzj" ;
 
         }

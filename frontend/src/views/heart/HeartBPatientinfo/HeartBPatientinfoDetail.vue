@@ -36,6 +36,7 @@
         <checkThree-info ref="checkThreeInfo" :isEdit="false"></checkThree-info>
         <checkFour-info ref="checkFourInfo" :isEdit="false"></checkFour-info>
         <checkFive-info ref="checkFiveInfo" :isEdit="false"></checkFive-info>
+        <checkSix-info ref="checkSixInfo" :isEdit="false"></checkSix-info>
       </a-tab-pane>
      <a-tab-pane
         key="4"
@@ -51,13 +52,6 @@
       >
         <ct-info ref="ctInfo" :isEdit="false"></ct-info>
       </a-tab-pane>
-      <a-tab-pane
-        key="6"
-        tab="出院复查CT"
-        force-render
-      >
-        <out-info ref="outInfo" :isEdit="false"></out-info>
-      </a-tab-pane>
        <a-tab-pane
         key="7"
         tab="手术"
@@ -71,7 +65,14 @@
         force-render
       >
         <surAfter-info ref="surAfterInfo"></surAfter-info>
-      </a-tab-pane> 
+      </a-tab-pane>
+      <a-tab-pane
+        key="6"
+        tab="门诊复查"
+        force-render
+      >
+        <out-info ref="outInfo" :isEdit="false"></out-info>
+      </a-tab-pane>
       <a-tab-pane
         key="9"
         tab="超声复查"
@@ -95,14 +96,14 @@
       </a-tab-pane> 
       <a-tab-pane
         key="12"
-        tab="术前资料"
+        tab="护理部术前"
         force-render
       >
         <sqzl-info ref="sqzlInfo" :isEdit="false"></sqzl-info>
       </a-tab-pane>
       <a-tab-pane
         key="13"
-        tab="术后资料"
+        tab="护理部术后"
         force-render
       >
         <shzl-info ref="shzlInfo" :isEdit="false"></shzl-info>
@@ -127,10 +128,10 @@ import CheckTwoInfo from '../HeartBChecktwo/HeartBChecktwoListInfoEdit' // 检�
 import CheckThreeInfo from '../HeartBCheckthree/HeartBCheckthreeListInfoEdit' // 检验 3
 import CheckFourInfo from '../HeartBCheckfour/HeartBCheckfourListInfoEdit' // 检验 4
 import CheckFiveInfo from '../HeartBCheckfive/HeartBCheckfiveListInfoEdit' // 检验 5
-
+import CheckSixInfo from '../HeartBChecksix/HeartBChecksixListInfoEdit' // 检验 6
 import CsInfo from '../HeartBCs/HeartBCsListInfoEdit' // 超声
 import CtInfo from '../HeartBCt/HeartBCtListInfoEdit' // 术前CT
-import OutInfo from '../HeartBCtout/OutInfoEdit' // 出院复查CT
+import OutInfo from '../HeartBCtout/OutListInfoEdit' // 出院复查CT
 import SurgicalInfo from '../HeartBSurgical/SurgicalInfoEdit' // 手术
 import SurAfterInfo from '../HeartBSurgicalafter/SurAfterInfoEdit' // 术后
 import FcInfo from '../HeartBCsfc/FcInfoEdit' // 超声复查
@@ -167,6 +168,7 @@ export default {
         checkThreeInfo: {},
         checkFourInfo: {},
         checkFiveInfo: {},
+        checkSixInfo: {},
         csInfo: {},
         ctInfo: {},
         outInfo: {},
@@ -183,7 +185,7 @@ export default {
     }
   },
    components: {
-    PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
+    PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CheckSixInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
     , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo, OtherInfo
   },
   methods: {
@@ -197,6 +199,7 @@ export default {
       this.$refs.checkThreeInfo.reset()
       this.$refs.checkFourInfo.reset()
       this.$refs.checkFiveInfo.reset()
+      this.$refs.checkSixInfo.reset()
       this.$refs.patientInfo.reset()
       this.$refs.csInfo.reset()
       this.$refs.ctInfo.reset()
@@ -233,6 +236,7 @@ export default {
           this.heartBPatientinfo.checkThreeInfo = this.$refs.checkThreeInfo.setFields()
           this.heartBPatientinfo.checkFourInfo = this.$refs.checkFourInfo.setFields()
           this.heartBPatientinfo.checkFiveInfo = this.$refs.checkFiveInfo.setFields()
+          this.heartBPatientinfo.checkSixInfo = this.$refs.checkSixInfo.setFields()
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields()
           this.heartBPatientinfo.csInfo = this.$refs.csInfo.setFields()
           this.heartBPatientinfo.ctInfo = this.$refs.ctInfo.setFields()
@@ -262,12 +266,12 @@ export default {
     fetch (fileNo) {
       this.$get('heartBPatientinfo/all', { fileNo: fileNo }).then(res => {
         this.heartBPatientinfo = res.data.data
-        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)  
-        this.$refs.checkTwoInfo.setFormValues(this.heartBPatientinfo.checkTwoInfo)  
-        this.$refs.checkThreeInfo.setFormValues(this.heartBPatientinfo.checkThreeInfo)  
-        this.$refs.checkFourInfo.setFormValues(this.heartBPatientinfo.checkFourInfo)  
+        this.$refs.checkInfo.setFormValues(this.heartBPatientinfo.checkInfo)
+        this.$refs.checkTwoInfo.setFormValues(this.heartBPatientinfo.checkTwoInfo)
+        this.$refs.checkThreeInfo.setFormValues(this.heartBPatientinfo.checkThreeInfo)
+        this.$refs.checkFourInfo.setFormValues(this.heartBPatientinfo.checkFourInfo)
         this.$refs.checkFiveInfo.setFormValues(this.heartBPatientinfo.checkFiveInfo)
-
+        this.$refs.checkSixInfo.setFormValues(this.heartBPatientinfo.checkSixInfo)
         this.$refs.patientInfo.setFormValues(this.heartBPatientinfo.patientInfo)
         this.$refs.csInfo.setFormValues(this.heartBPatientinfo.csInfo)
         this.$refs.ctInfo.setFormValues(this.heartBPatientinfo.ctInfo)

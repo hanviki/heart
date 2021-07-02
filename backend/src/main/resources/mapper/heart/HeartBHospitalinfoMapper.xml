@@ -22,7 +22,11 @@
                     <result column="mfzhz" property="mfzhz"/>
                     <result column="other" property="other"/>
                     <result column="zdmbss" property="zdmbss"/>
+                    <result column="zdmbss_date" property="zdmbssDate"/>
                     <result column="qgzh" property="qgzh"/>
+                    <result column="qgzh_date" property="qgzhDate"/>
+                    <result column="jcqnxfs" property="jcqnxfs"/>
+                    <result column="jcqnxfs_date" property="jcqnxfsDate"/>
                     <result column="qtzdgy" property="qtzdgy"/>
                     <result column="sczdgysj" property="sczdgysj"/>
                     <result column="zdmjbjzs" property="zdmjbjzs"/>
@@ -37,7 +41,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, zhusu, in_hospital, out_hospital, in_redirect, death_info, swsj, in_redirectnote, jczd, gxy, nyha, tnb, mfzhz, other, zdmbss, qgzh, qtzdgy, sczdgysj, zdmjbjzs, xy, hj, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, zhusu, in_hospital, out_hospital, in_redirect, death_info, swsj, in_redirectnote, jczd, gxy, nyha, tnb, mfzhz, other, zdmbss, zdmbss_date, qgzh, qgzh_date, jcqnxfs, jcqnxfs_date, qtzdgy, sczdgysj, zdmjbjzs, xy, hj, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
     </sql>
     <update id="updateHeartBHospitalinfo" parameterType="cc.mrbird.febs.heart.entity.HeartBHospitalinfo">
         update heart_b_hospitalinfo
@@ -59,7 +63,11 @@
 <if test="mfzhz != null">mfzhz=#{mfzhz},</if>
 <if test="other != null">other=#{other},</if>
 <if test="zdmbss != null">zdmbss=#{zdmbss},</if>
+<if test="zdmbssDate != null">zdmbss_date=#{zdmbssDate},</if>
 <if test="qgzh != null">qgzh=#{qgzh},</if>
+<if test="qgzhDate != null">qgzh_date=#{qgzhDate},</if>
+<if test="jcqnxfs != null">jcqnxfs=#{jcqnxfs},</if>
+<if test="jcqnxfsDate != null">jcqnxfs_date=#{jcqnxfsDate},</if>
 <if test="qtzdgy != null">qtzdgy=#{qtzdgy},</if>
 <if test="sczdgysj != null">sczdgysj=#{sczdgysj},</if>
 <if test="zdmjbjzs != null">zdmjbjzs=#{zdmjbjzs},</if>

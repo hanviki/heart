@@ -1,10 +1,15 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-divider
-        orientation="left"
-        style="font-size:14px;"
-      >2.3.4、肝肾功</a-divider>
+      <a-form-item
+        label="检测时间"
+      >
+        <a-date-picker
+          showTime
+          format='YYYY-MM-DD HH:mm'
+          v-decorator="[ 'checkDate', {}]"
+        />
+      </a-form-item>
       <a-form-item label="血肌肝umol/L">
         <a-input-number
           placeholder="请输入血肌肝umol/L"
@@ -126,13 +131,12 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg' ,'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl'])
+      let values = this.form.getFieldsValue(['checkDate', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       return this.csfcInfo

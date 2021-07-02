@@ -8,6 +8,8 @@
                     <result column="username" property="username"/>
                     <result column="file_no" property="fileNo"/>
                     <result column="name" property="name"/>
+                    <result column="check_date" property="checkDate"/>
+                    <result column="brzt" property="brzt"/>
                     <result column="fct_file_name" property="fctFileName"/>
                     <result column="fct_file_path" property="fctFilePath"/>
                     <result column="fct_zjwdwz" property="fctZjwdwz"/>
@@ -42,11 +44,35 @@
                     <result column="MODIFY_TIME" property="modifyTime"/>
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
+                    <result column="display_index" property="displayIndex"/>
+                    <result column="check_date2" property="checkDate2"/>
+                    <result column="xjg" property="xjg"/>
+                    <result column="alt" property="alt"/>
+                    <result column="ast" property="ast"/>
+                    <result column="zdhs" property="zdhs"/>
+                    <result column="zjdhs" property="zjdhs"/>
+                    <result column="dfm" property="dfm"/>
+                    <result column="jg" property="jg"/>
+                    <result column="nsd" property="nsd"/>
+                    <result column="ns" property="ns"/>
+                    <result column="bdb" property="bdb"/>
+                    <result column="gysc" property="gysc"/>
+                    <result column="sxqlgl" property="sxqlgl"/>
+                    <result column="check_date3" property="checkDate3"/>
+                    <result column="avr" property="avr"/>
+                    <result column="mvr" property="mvr"/>
+                    <result column="sbydycwz" property="sbydycwz"/>
+                    <result column="xbjy" property="xbjy"/>
+                    <result column="ef" property="ef"/>
+                    <result column="zsszwnj" property="zsszwnj"/>
+                    <result column="zdmbhzj" property="zdmbhzj"/>
+                    <result column="zdmdzj" property="zdmdzj"/>
+                    <result column="szdmzj" property="szdmzj"/>
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, fct_file_name, fct_file_path, fct_zjwdwz, fct_dzj, fct_szmdzj, fct_zdmgzj, fct_xzdmsdzj, fct_xzdmsdjqxzzj, fct_xzdmzdzj, fct_xzdmzdjqzj, fct_xzdmxdzj, fct_xzdmxdjqzj, fct_fzdmsdzj, fct_fzdmsdjqzj, fct_fzdmxdzj, fct_fzdmxdjqzj, fct_jdwhkl, fct_ydwhkl, fct_szzwxz, fct_gbxz, fct_jqzg, fct_fqqzg, fct_zsmdzg, fct_ysmdzg, fct_zkzzg, fct_ykzzg, fct_rgxgycsm, fct_dmlykz, fct_zjycsm, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID
+        id, username, file_no, name, check_date, brzt, fct_file_name, fct_file_path, fct_zjwdwz, fct_dzj, fct_szmdzj, fct_zdmgzj, fct_xzdmsdzj, fct_xzdmsdjqxzzj, fct_xzdmzdzj, fct_xzdmzdjqzj, fct_xzdmxdzj, fct_xzdmxdjqzj, fct_fzdmsdzj, fct_fzdmsdjqzj, fct_fzdmxdzj, fct_fzdmxdjqzj, fct_jdwhkl, fct_ydwhkl, fct_szzwxz, fct_gbxz, fct_jqzg, fct_fqqzg, fct_zsmdzg, fct_ysmdzg, fct_zkzzg, fct_ykzzg, fct_rgxgycsm, fct_dmlykz, fct_zjycsm, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, display_index, check_date2, xjg, alt, ast, zdhs, zjdhs, dfm, jg, nsd, ns, bdb, gysc, sxqlgl, check_date3, avr, mvr, sbydycwz, xbjy, ef, zsszwnj, zdmbhzj, zdmdzj, szdmzj
     </sql>
     <update id="updateHeartBCtout" parameterType="cc.mrbird.febs.heart.entity.HeartBCtout">
         update heart_b_ctout
@@ -54,6 +80,8 @@
 <if test="username != null">username=#{username},</if>
 <if test="fileNo != null">file_no=#{fileNo},</if>
 <if test="name != null">name=#{name},</if>
+<if test="checkDate != null">check_date=#{checkDate},</if>
+<if test="brzt != null">brzt=#{brzt},</if>
 <if test="fctFileName != null">fct_file_name=#{fctFileName},</if>
 <if test="fctFilePath != null">fct_file_path=#{fctFilePath},</if>
 <if test="fctZjwdwz != null">fct_zjwdwz=#{fctZjwdwz},</if>
@@ -88,6 +116,30 @@
 <if test="modifyTime != null">MODIFY_TIME=#{modifyTime},</if>
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
+<if test="displayIndex != null">display_index=#{displayIndex},</if>
+<if test="checkDate2 != null">check_date2=#{checkDate2},</if>
+<if test="xjg != null">xjg=#{xjg},</if>
+<if test="alt != null">alt=#{alt},</if>
+<if test="ast != null">ast=#{ast},</if>
+<if test="zdhs != null">zdhs=#{zdhs},</if>
+<if test="zjdhs != null">zjdhs=#{zjdhs},</if>
+<if test="dfm != null">dfm=#{dfm},</if>
+<if test="jg != null">jg=#{jg},</if>
+<if test="nsd != null">nsd=#{nsd},</if>
+<if test="ns != null">ns=#{ns},</if>
+<if test="bdb != null">bdb=#{bdb},</if>
+<if test="gysc != null">gysc=#{gysc},</if>
+<if test="sxqlgl != null">sxqlgl=#{sxqlgl},</if>
+<if test="checkDate3 != null">check_date3=#{checkDate3},</if>
+<if test="avr != null">avr=#{avr},</if>
+<if test="mvr != null">mvr=#{mvr},</if>
+<if test="sbydycwz != null">sbydycwz=#{sbydycwz},</if>
+<if test="xbjy != null">xbjy=#{xbjy},</if>
+<if test="ef != null">ef=#{ef},</if>
+<if test="zsszwnj != null">zsszwnj=#{zsszwnj},</if>
+<if test="zdmbhzj != null">zdmbhzj=#{zdmbhzj},</if>
+<if test="zdmdzj != null">zdmdzj=#{zdmdzj},</if>
+<if test="szdmzj != null">szdmzj=#{szdmzj},</if>
         </trim>
         where id=#{id}
     </update>
