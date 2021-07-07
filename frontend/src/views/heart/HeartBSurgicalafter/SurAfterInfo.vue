@@ -10,6 +10,7 @@
           placeholder="请输入累计辅助通气时间(h)"
           v-decorator="['shLjfztqsj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -28,6 +29,7 @@
           placeholder="请输入术后ICU停留时间(天)"
           v-decorator="['shShicutime', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -46,6 +48,7 @@
           placeholder="请输入再次ICU停留时间（天）"
           v-decorator="['shZcicutime', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
 
@@ -75,7 +78,7 @@
       <a-form-item label="备注">
         <a-input
           placeholder="请输入备注"
-          v-decorator="['shNote',{rules:[{max:20,message:'最长不超过20'}]}]"
+          v-decorator="['shNote',{rules:[{max:50,message:'最长不超过50'}]}]"
         />
       </a-form-item>
       <a-divider
@@ -150,26 +153,26 @@
 
 <script>
 const pfOptions = [
-  '胸部切口感染',
-  '肺部感染',
-  '呼吸功能不全',
-  '气管切开',
-  '急性肾功能不全',
-  '肾脏血滤治疗',
-  '多系统衰竭',
-  '脑梗塞',
-  '脑出血',
-  '精神症状(如谵妄)',
-  '截瘫',
-  '偏瘫',
-  '软瘫',
-  '轻瘫',
-  '术后肝功能不全',
-  '胃肠道出血',
-  '肠梗阻',
-  '急性胰腺炎',
-  '心功能不全',
-  '凝血功能不全',
+  { label: '胸部切口感染', value: '胸部切口感染' },
+  { label: '肺部感染', value: '肺部感染' },
+  { label: '呼吸功能不全', value: '呼吸功能不全' },
+  { label: '气管切开', value: '气管切开' },
+  { label: '急性肾功能不全', value: '急性肾功能不全' },
+  { label: '肾脏血滤治疗', value: '肾脏血滤治疗' },
+  { label: '多系统衰竭', value: '多系统衰竭' },
+  { label: '脑梗塞', value: '脑梗塞' },
+  { label: '脑出血', value: '脑出血' },
+  { label: '精神症状(如谵妄)', value: '精神症状(如谵妄)' },
+  { label: '截瘫', value: '截瘫' },
+  { label: '偏瘫', value: '偏瘫' },
+  { label: '软瘫', value: '软瘫' },
+  { label: '轻瘫', value: '轻瘫' },
+  { label: '术后肝功能不全', value: '术后肝功能不全' },
+  { label: '胃肠道出血', value: '胃肠道出血' },
+  { label: '肠梗阻', value: '肠梗阻' },
+  { label: '急性胰腺炎', value: '急性胰腺炎' },
+  { label: '心功能不全', value: '心功能不全' },
+  { label: '凝血功能不全', value: '凝血功能不全' }
 ]
 
 export default {
@@ -188,7 +191,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs','shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz', 'cfydb'])
+      let values = this.form.getFieldsValue(['shLjfztqsj', 'shZcqgcg', 'shShicutime', 'shZcicu', 'shZcicutime', 'shShkxzx', 'shQtzcssyy', 'shShbfz', 'shNote', 'shsfZs', 'shsfDate', 'shsfSczt', 'shsfDeath', 'shsfDeathDate', 'shsfXxgzcgy', 'shsfZcgysj', 'shsfXfjb', 'shsfXfjbsj', 'shsfQtbfz', 'cfydb'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -197,7 +200,7 @@ export default {
         })
       }
       return this.surgicalInfo
-    },
+    }
   }
 }
 </script>

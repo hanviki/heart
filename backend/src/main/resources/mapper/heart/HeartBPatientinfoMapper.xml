@@ -37,11 +37,13 @@
                     <result column="CREATE_USER_ID" property="createUserId"/>
                     <result column="MODIFY_USER_ID" property="modifyUserId"/>
                     <result column="zhusu" property="zhusu"/>
+            <result column="createname" property="createname"/>
+
         </resultMap>
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-        id, username, file_no, name, age, gender, height, weight, province, city, area, address, telphone, in_check, to_year, to_month, to_day, to_hour, to_minutes, to_check, pain_pos, symptoms, other_symptoms, emergency, death_cause, death_date, emergency_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, zhusu
+        id, username, file_no, name, age, gender, height, weight, province, city, area, address, telphone, in_check, to_year, to_month, to_day, to_hour, to_minutes, to_check, pain_pos, symptoms, other_symptoms, emergency, death_cause, death_date, emergency_note, IS_DELETEMARK, CREATE_TIME, MODIFY_TIME, CREATE_USER_ID, MODIFY_USER_ID, zhusu, createname
     </sql>
     <update id="updateHeartBPatientinfo" parameterType="cc.mrbird.febs.heart.entity.HeartBPatientinfo">
         update heart_b_patientinfo
@@ -78,6 +80,7 @@
 <if test="createUserId != null">CREATE_USER_ID=#{createUserId},</if>
 <if test="modifyUserId != null">MODIFY_USER_ID=#{modifyUserId},</if>
 <if test="zhusu != null">zhusu=#{zhusu},</if>
+<if test="createname != null">createname=#{createname},</if>
         </trim>
         where id=#{id}
     </update>

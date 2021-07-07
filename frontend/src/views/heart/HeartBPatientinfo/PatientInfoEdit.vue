@@ -2,6 +2,16 @@
   <div>
     <a-form :form="form">
       <a-divider orientation="left" style="font-size:14px;">1.个人信息</a-divider>
+      <a-form-item label="录入人">
+        <a-input
+          placeholder="请输入录入人"
+          v-decorator="['createname', {
+              rules: [{ required: true, message: '录入人不能为空!' },{
+                max:50,message:'最长不超过50'
+            }]
+          }]"
+        />
+      </a-form-item>
       <a-form-item label="病案号" :validateStatus="validateStatus"
         :help="help">
         <a-input
@@ -65,7 +75,7 @@
        <a-cascader :options="options"  v-decorator="['province', {}]" />
        <a-input
           placeholder="请输入详细地址"
-          v-decorator="['address', {rules:[{max:200,message:'最长不超过200'} ]}]"
+          v-decorator="['address', {rules:[{max:100,message:'最长不超过100'} ]}]"
         />
       </a-form-item>
       <!-- <a-form-item label="详细地址">
@@ -136,27 +146,12 @@
       <a-form-item label="其他症状">
         <a-input
           placeholder="请输入其他症状"
-          v-decorator="['otherSymptoms', {}]"
+          v-decorator="['otherSymptoms', {rules:[{max:100,message:'最长不超过100'} ]}]"
         />
       </a-form-item>
       <a-form-item label="急诊转归">
-        <a-radio-group   v-decorator="['emergency', {}]">
-    <a-radio value="住院治疗">
-      住院治疗
-    </a-radio>
-    <a-radio value="急诊治疗期间死亡">
-      急诊治疗期间死亡
-    </a-radio>
-     <a-radio value="急诊保守治疗出院">
-      急诊保守治疗出院
-    </a-radio>
-     <a-radio value="放弃">
-      放弃
-    </a-radio>
-    <a-radio value="自动出院">
-      自动出院
-    </a-radio>
-  </a-radio-group>
+        <a-radio-group   v-decorator="['emergency', {}]" :options="emergencyOptions">
+      </a-radio-group>
       </a-form-item>
       <a-form-item label="死亡原因">
         <a-input
@@ -180,8 +175,31 @@
 <script>
 import moment from 'moment'
  import area from '../../../utils/chinaarea'
-const plainOptions = ['无/No', '胸前/Front chest', '胸背/Behind chest','腰背/Behind low back','腹部/Abdomen'];
-const symptomsOptions = ['下肢活动异常','下肢感觉异常','晕厥','精神状态异常','心包填塞症','心律失常','心肌缺血','肢体缺血','脑卒中','脊髓缺血','内脏缺血','无']
+const plainOptions = [
+    { label: '无/No', value: '无/No' },
+    { label: '胸前/Front chest', value: '胸前/Front chest' },
+    { label: '胸背/Behind chest', value: '胸背/Behind chest' },
+    { label: '腰背/Behind low back', value: '腰背/Behind low back' },
+    { label: '腹部/Abdomen', value: '腹部/Abdomen' }];
+const symptomsOptions = [
+  { label: '下肢活动异常', value: '下肢活动异常' },
+  { label: '下肢感觉异常', value: '下肢感觉异常' },
+  { label: '晕厥', value: '晕厥' },
+  { label: '精神状态异常', value: '精神状态异常' },
+  { label: '心包填塞症', value: '心包填塞症' },
+  { label: '心律失常', value: '心律失常' },
+  { label: '心肌缺血', value: '心肌缺血' },
+  { label: '肢体缺血', value: '肢体缺血' },
+  { label: '脑卒中', value: '脑卒中' },
+  { label: '脊髓缺血', value: '脊髓缺血' },
+  { label: '内脏缺血', value: '内脏缺血' },
+  { label: '无', value: '无' }];
+const emergencyOptions = [
+    { label: '住院治疗', value: '住院治疗' },
+    { label: '急诊治疗期间死亡', value: '急诊治疗期间死亡' },
+    { label: '急诊保守治疗出院', value: '急诊保守治疗出院' },
+    { label: '放弃', value: '放弃' },
+    { label: '自动出院', value: '自动出院' }];
 export default {
   data () {
     return {
@@ -192,7 +210,8 @@ export default {
       plainOptions,
       validateStatus: '',
       help: '',
-      symptomsOptions
+      symptomsOptions,
+      emergencyOptions
     }
   },
   methods: {
@@ -202,7 +221,7 @@ export default {
       this.form.resetFields()
     },
     setFields () {
-      let values = this.form.getFieldsValue(['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote', 'zhusu'])
+      let values = this.form.getFieldsValue(['createname', 'fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'city', 'area', 'address', 'telphone', 'inCheck', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote', 'zhusu'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => { 
             if(values[_key]!==undefined){
@@ -235,7 +254,7 @@ export default {
       }
     },
   setFormValues ({ ...checkInfo }) {
-      let fields = ['fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote', 'zhusu']
+      let fields = ['createname', 'fileNo', 'name', 'age', 'gender', 'height', 'weight', 'province', 'address', 'telphone', 'inCheck', 'toYear', 'toMonth', 'toDay', 'toHour', 'painPos', 'symptoms', 'otherSymptoms', 'emergency', 'deathCause', 'deathDate', 'emergencyNote', 'zhusu']
       let fieldDates = ['inCheck', 'deathDate']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {

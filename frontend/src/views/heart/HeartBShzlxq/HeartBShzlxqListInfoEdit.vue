@@ -25,7 +25,7 @@
           :checkInfo="item"
         ></heartBShzlxq-info>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -78,7 +78,7 @@ export default {
       this.listCsfc = []
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       let that = this
       that.$delete('heartBShzlxq/' + item.id).then(() => {
         that.$message.success('删除成功')
@@ -87,7 +87,6 @@ export default {
         newList.splice(index, 1)
         that.listCsfc = newList
       })
-
     },
     setFields () {
       let list = []
@@ -99,12 +98,11 @@ export default {
     },
     setFormValues (listCsfc) {
       let that = this
-     
-      if (listCsfc!=null&&listCsfc.length > 0) {
-           that.listCsfc = listCsfc
+      if (listCsfc != null && listCsfc.length > 0) {
+        that.listCsfc = listCsfc
         that.activeKey = listCsfc[0].id
       }
-    },
+    }
   }
 }
 </script>

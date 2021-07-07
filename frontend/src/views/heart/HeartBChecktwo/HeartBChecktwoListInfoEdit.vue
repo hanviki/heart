@@ -26,7 +26,7 @@
           :isEdit="isEdit"
         ></heartBChecktwo-infoEdit>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -79,7 +79,7 @@ export default {
       this.listCsfc = []
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       let that = this
       that.$delete('heartBChecktwo/' + item.id).then(() => {
         that.$message.success('删除成功')
@@ -88,14 +88,11 @@ export default {
         newList.splice(index, 1)
         that.listCsfc = newList
       })
-
     },
     setFields () {
       let list = []
       for (let i = 0; i < this.listCsfc.length; i++) {
         let name = 'fc' + i
-
-
         list.push((this.$refs[name])[0].setFields())
       }
       return list
@@ -106,7 +103,7 @@ export default {
       if (listCsfc.length > 0) {
         this.activeKey = listCsfc[0].id
       }
-    },
+    }
   }
 }
 </script>

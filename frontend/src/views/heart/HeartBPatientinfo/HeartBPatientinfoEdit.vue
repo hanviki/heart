@@ -168,11 +168,18 @@
         okText="确定"
         cancelText="取消"
       >
-        <a-button style="margin-right: .8rem">取消</a-button>
+        <a-button style="margin-right: 10px">取消</a-button>
       </a-popconfirm>
       <a-button
-        @click="handleSubmit"
+        @click="handleSubmit(0)"
         type="primary"
+        style="margin-right: .10rem"
+        :loading="loading"
+      >保存</a-button>
+      <a-button
+        @click="handleSubmit(1)"
+        type="primary"
+        style="margin-right: .10rem"
         :loading="loading"
       >提交</a-button>
     </div>
@@ -285,7 +292,7 @@ export default {
       this.reset()
       this.$emit('close')
     },
-    handleSubmit () {
+    handleSubmit (type) {
       this.$refs.patientInfo.handlefileNoBlur()
       this.$refs.patientInfo.form.validateFields((err, values) => {
         if (!err && this.validateStatus === 'success') {
@@ -314,8 +321,13 @@ export default {
           this.$put('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {
-            this.reset()
-            this.$emit('success')
+            if (type === 1) {
+              this.reset()
+              this.$emit('success')
+            } else {
+              this.loading = false
+              this.$message.success('修改成功')
+            }
           }).catch(() => {
             this.loading = false
           })

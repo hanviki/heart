@@ -25,6 +25,7 @@
           placeholder="请输入窦直径(mm)"
           v-decorator="['dzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -36,6 +37,7 @@
           placeholder="请输入升主脉动直径(mm)"
           v-decorator="['szmdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -47,6 +49,7 @@
           placeholder="请输入主动脉弓直径(mm)"
           v-decorator="['zdmgzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -58,6 +61,7 @@
           placeholder="请输入胸主动脉上段直径(mm)"
           v-decorator="['xzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -69,6 +73,7 @@
           placeholder="请输入胸主动脉上段假腔/血肿直径(mm)"
           v-decorator="['xzdmsdjqxzzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -80,6 +85,7 @@
           placeholder="请输入胸主动脉中段直径(mm)"
           v-decorator="['xzdmzdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -91,6 +97,7 @@
           placeholder="请输入胸主动脉中段假腔/血肿直径(mm)"
           v-decorator="['xzdmzdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -102,6 +109,7 @@
           placeholder="请输入胸主动脉下段直径(mm)"
           v-decorator="['xzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -113,6 +121,7 @@
           placeholder="请输入胸主动脉下段假腔/血肿直径(mm)"
           v-decorator="['xzdmxdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -124,6 +133,7 @@
           placeholder="请输入腹主动脉上段直径(mm)"
           v-decorator="['fzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -135,6 +145,7 @@
           placeholder="请输入腹主动脉上段假腔/血肿直径(mm)"
           v-decorator="['fzdmsdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -146,6 +157,7 @@
           placeholder="请输入腹主动脉下段直径(mm)"
           v-decorator="['fzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -157,6 +169,7 @@
           placeholder="请输入腹主动脉下段假腔/血肿直径(mm)"
           v-decorator="['fzdmxdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -347,42 +360,39 @@
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
 export default {
+  props: {
+    baseId: {
+      default: {}
+    }
+  },
   data () {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      ctfcInfo: {},
-      baseId: ''
+      ctfcInfo: {}
     }
   },
   mounted () {
     // this.fetch()
   },
-   components: {MutiUploadFile} ,
+  components: {MutiUploadFile},
   methods: {
     reset () {
       this.loading = false
       this.ctfcInfo = {}
       this.form.resetFields()
-      this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue([ 'ctDate', 'zjwdwzCode', 'dzj', 'szmdzj', 'zdmgzj', 'xzdmsdzj', 'xzdmsdjqxzzj', 'xzdmzdzj', 'xzdmzdjqzj', 'xzdmxdzj', 'xzdmxdjqzj', 'fzdmsdzj', 'fzdmsdjqzj', 'fzdmxdzj', 'fzdmxdjqzj', 'jdwhkl', 'ydwhkl', 'szzwxz', 'gbxz', 'jqzg', 'fqqzg', 'zsmdzg', 'ysmdzg', 'zkzzg', 'ykzzg', 'rgxgycsm', 'dmlykz', 'zjycsm'])
-     if (typeof values !== 'undefined') {
-          Object.keys(values).forEach(_key => {
+      let values = this.form.getFieldsValue(['ctDate', 'zjwdwzCode', 'dzj', 'szmdzj', 'zdmgzj', 'xzdmsdzj', 'xzdmsdjqxzzj', 'xzdmzdzj', 'xzdmzdjqzj', 'xzdmxdzj', 'xzdmxdjqzj', 'fzdmsdzj', 'fzdmsdjqzj', 'fzdmxdzj', 'fzdmxdjqzj', 'jdwhkl', 'ydwhkl', 'szzwxz', 'gbxz', 'jqzg', 'fqqzg', 'zsmdzg', 'ysmdzg', 'zkzzg', 'ykzzg', 'rgxgycsm', 'dmlykz', 'zjycsm'])
+      if (typeof values !== 'undefined') {
+        Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.ctfcInfo[_key] = values[_key]
           }
         })
       }
-      this.ctfcInfo.id= this.baseId
+      this.ctfcInfo.id = this.baseId
       return this.ctfcInfo
-    },
-    fetch () {
-       this.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
-          this.baseId =res.data.data
-       })
-       console.log('CT复查 Id 创建成功.')
     }
   }
 }

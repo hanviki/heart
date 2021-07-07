@@ -34,7 +34,7 @@
       <a-form-item label="支架末端位置(胸椎序号)">
         <a-input
           placeholder="请输入支架末端位置(胸椎序号)"
-          v-decorator="['fctZjwdwz', {rules:[{max:50,message:'最长不超过50'}]}]"
+          v-decorator="['fctZjwdwz', {rules:[{max:10,message:'最长不超过10'}]}]"
         />
       </a-form-item>
       <a-form-item label="窦直径(mm)">
@@ -42,6 +42,7 @@
           placeholder="请输入窦直径(mm)"
           v-decorator="['fctDzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -50,6 +51,7 @@
           placeholder="请输入升主脉动直径(mm)"
           v-decorator="['fctSzmdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -58,6 +60,7 @@
           placeholder="请输入主动脉弓直径(mm)"
           v-decorator="['fctZdmgzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -66,6 +69,7 @@
           placeholder="请输入胸主动脉上段直径(mm)"
           v-decorator="['fctXzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -74,6 +78,7 @@
           placeholder="请输入胸主动脉上段假腔/血肿直径(mm)"
           v-decorator="['fctXzdmsdjqxzzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -82,6 +87,7 @@
           placeholder="请输入胸主动脉中段直径(mm)"
           v-decorator="['fctXzdmzdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -90,6 +96,7 @@
           placeholder="请输入胸主动脉中段假腔/血肿直径(mm)"
           v-decorator="['fctXzdmzdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -98,6 +105,7 @@
           placeholder="请输入胸主动脉下段直径(mm)"
           v-decorator="['fctXzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -106,6 +114,7 @@
           placeholder="请输入胸主动脉下段假腔/血肿直径(mm)"
           v-decorator="['fctXzdmxdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -114,6 +123,7 @@
           placeholder="请输入腹主动脉上段直径(mm)"
           v-decorator="['fctFzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -122,6 +132,7 @@
           placeholder="请输入腹主动脉上段假腔/血肿直径(mm)"
           v-decorator="['fctFzdmsdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -130,6 +141,7 @@
           placeholder="请输入腹主动脉下段直径(mm)"
           v-decorator="['fctFzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -138,6 +150,7 @@
           placeholder="请输入腹主动脉下段假腔/血肿直径(mm)"
           v-decorator="['fctFzdmxdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -300,6 +313,7 @@
           placeholder="请输入血肌肝umol/L"
           v-decorator="['xjg', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -308,6 +322,7 @@
           placeholder="请输入ALT(U/L)"
           v-decorator="['alt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -316,6 +331,7 @@
           placeholder="请输入AST(U/L)"
           v-decorator="['ast', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -324,6 +340,7 @@
           placeholder="请输入总胆红素(umol/L)"
           v-decorator="['zdhs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -332,6 +349,7 @@
           placeholder="请输入直接胆红素"
           v-decorator="['zjdhs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -340,6 +358,7 @@
           placeholder="请输入淀粉酶(U)"
           v-decorator="['dfm', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -348,6 +367,7 @@
           placeholder="请输入肌酐(umol/L)"
           v-decorator="['jg', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -356,6 +376,7 @@
           placeholder="请输入尿素氮(umol/L)"
           v-decorator="['nsd', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -364,6 +385,7 @@
           placeholder="请输入尿酸(umol/L)"
           v-decorator="['ns', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -373,6 +395,7 @@
           placeholder="请输入白蛋白(g/L)"
           v-decorator="['bdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -381,6 +404,7 @@
           placeholder="请输入胱仰素C(Mg/L)"
           v-decorator="['gysc', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -407,49 +431,13 @@
       <a-form-item
         label="AVR"
       >
-        <a-radio-group v-decorator="['avr', {}]">
-          <a-radio value="无">
-            无
-          </a-radio>
-          <a-radio value="微量">
-            微量
-          </a-radio>
-          <a-radio value="少量">
-            少量
-          </a-radio>
-          <a-radio value="少中量">
-            少中量
-          </a-radio>
-          <a-radio value="中大量">
-            中大量
-          </a-radio>
-          <a-radio value="大量">
-            大量
-          </a-radio>
+        <a-radio-group v-decorator="['avr', {}]" :options="jlOptions">
         </a-radio-group>
       </a-form-item>
       <a-form-item
         label="MVR"
       >
-        <a-radio-group v-decorator="['mvr', {}]">
-          <a-radio value="无">
-            无
-          </a-radio>
-          <a-radio value="微量">
-            微量
-          </a-radio>
-          <a-radio value="少量">
-            少量
-          </a-radio>
-          <a-radio value="少中量">
-            少中量
-          </a-radio>
-          <a-radio value="中大量">
-            中大量
-          </a-radio>
-          <a-radio value="大量">
-            大量
-          </a-radio>
+        <a-radio-group v-decorator="['mvr', {}]" :options="jlOptions">
         </a-radio-group>
       </a-form-item>
       <a-form-item
@@ -463,25 +451,7 @@
       <a-form-item
         label="心包积液"
       >
-        <a-radio-group v-decorator="['xbjy', {}]">
-          <a-radio value="无">
-            无
-          </a-radio>
-          <a-radio value="微量">
-            微量
-          </a-radio>
-          <a-radio value="少量">
-            少量
-          </a-radio>
-          <a-radio value="少中量">
-            少中量
-          </a-radio>
-          <a-radio value="中大量">
-            中大量
-          </a-radio>
-          <a-radio value="大量">
-            大量
-          </a-radio>
+        <a-radio-group v-decorator="['xbjy', {}]" :options="jlOptions">
         </a-radio-group>
       </a-form-item>
       <a-form-item
@@ -491,6 +461,7 @@
           placeholder="请输入EF(%)"
           v-decorator="['ef', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -501,6 +472,7 @@
           placeholder="请输入左室舒张末内径(mm)"
           v-decorator="['zsszwnj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -511,6 +483,7 @@
           placeholder="请输入主动脉闭环直径(mm)"
           v-decorator="['zdmbhzj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -521,6 +494,7 @@
           placeholder="请输入主动脉窦直径(mm)"
           v-decorator="['zdmdzj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -531,6 +505,7 @@
           placeholder="请输入升主动脉直径(mm)"
           v-decorator="['szdmzj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -541,6 +516,13 @@
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
+const jlOptions = [
+  { label: '无', value: '无' },
+  { label: '微量', value: '微量' },
+  { label: '少量', value: '少量' },
+  { label: '少中量', value: '少中量' },
+  { label: '中大量', value: '中大量' },
+  { label: '大量', value: '大量' }]
 export default {
   props: {
     checkInfo: {
@@ -555,7 +537,8 @@ export default {
       loading: false,
       form: this.$form.createForm(this),
       ctfcInfo: {},
-      baseId: ''
+      baseId: '',
+      jlOptions
     }
   },
   components: {MutiUploadFile},
@@ -570,7 +553,7 @@ export default {
       this.baseId = ''
     },
     setFields () {
-      let values = this.form.getFieldsValue(['checkDate', 'brzt', 'fctFileName', 'fctFilePath', 'fctZjwdwz', 'fctDzj', 'fctSzmdzj', 'fctZdmgzj', 'fctXzdmsdzj', 'fctXzdmsdjqxzzj', 'fctXzdmzdzj', 'fctXzdmzdjqzj', 'fctXzdmxdzj', 'fctXzdmxdjqzj', 'fctFzdmsdzj', 'fctFzdmsdjqzj', 'fctFzdmxdzj', 'fctFzdmxdjqzj', 'fctJdwhkl', 'fctYdwhkl', 'fctSzzwxz', 'fctGbxz', 'fctJqzg', 'fctFqqzg', 'fctZsmdzg', 'fctYsmdzg', 'fctZkzzg', 'fctYkzzg', 'fctRgxgycsm', 'fctDmlykz', 'fctZjycsm', 'checkDate2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl', 'checkDate3', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
+      let values = this.form.getFieldsValue(['checkDate', 'brzt', 'fctFileName', 'fctFilePath', 'fctZjwdwz', 'fctDzj', 'fctSzmdzj', 'fctZdmgzj', 'fctXzdmsdzj', 'fctXzdmsdjqxzzj', 'fctXzdmzdzj', 'fctXzdmzdjqzj', 'fctXzdmxdzj', 'fctXzdmxdjqzj', 'fctFzdmsdzj', 'fctFzdmsdjqzj', 'fctFzdmxdzj', 'fctFzdmxdjqzj', 'fctJdwhkl', 'fctYdwhkl', 'fctSzzwxz', 'fctGbxz', 'fctJqzg', 'fctFqqzg', 'fctZsmdzg', 'fctYsmdzg', 'fctZkzzg', 'fctYkzzg', 'fctRgxgycsm', 'fctDmlykz', 'fctZjycsm', 'checkDate2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb', 'gysc', 'sxqlgl', 'checkDate3', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj'])
       if (typeof values !== 'undefined') {
         Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
@@ -581,7 +564,7 @@ export default {
       return this.ctfcInfo
     },
     setFormValues ({ ...checkInfo }) {
-      let fields = ['checkDate', 'brzt', 'fctFileName', 'fctFilePath', 'fctZjwdwz', 'fctDzj', 'fctSzmdzj', 'fctZdmgzj', 'fctXzdmsdzj', 'fctXzdmsdjqxzzj', 'fctXzdmzdzj', 'fctXzdmzdjqzj', 'fctXzdmxdzj', 'fctXzdmxdjqzj', 'fctFzdmsdzj', 'fctFzdmsdjqzj', 'fctFzdmxdzj', 'fctFzdmxdjqzj', 'fctJdwhkl', 'fctYdwhkl', 'fctSzzwxz', 'fctGbxz', 'fctJqzg', 'fctFqqzg', 'fctZsmdzg', 'fctYsmdzg', 'fctZkzzg', 'fctYkzzg', 'fctRgxgycsm', 'fctDmlykz', 'fctZjycsm', 'checkDate2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb' ,'gysc', 'sxqlgl', 'checkDate3', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
+      let fields = ['checkDate', 'brzt', 'fctFileName', 'fctFilePath', 'fctZjwdwz', 'fctDzj', 'fctSzmdzj', 'fctZdmgzj', 'fctXzdmsdzj', 'fctXzdmsdjqxzzj', 'fctXzdmzdzj', 'fctXzdmzdjqzj', 'fctXzdmxdzj', 'fctXzdmxdjqzj', 'fctFzdmsdzj', 'fctFzdmsdjqzj', 'fctFzdmxdzj', 'fctFzdmxdjqzj', 'fctJdwhkl', 'fctYdwhkl', 'fctSzzwxz', 'fctGbxz', 'fctJqzg', 'fctFqqzg', 'fctZsmdzg', 'fctYsmdzg', 'fctZkzzg', 'fctYkzzg', 'fctRgxgycsm', 'fctDmlykz', 'fctZjycsm', 'checkDate2', 'xjg', 'alt', 'ast', 'zdhs', 'zjdhs', 'dfm', 'jg', 'nsd', 'ns', 'bdb', 'gysc', 'sxqlgl', 'checkDate3', 'avr', 'mvr', 'sbydycwz', 'xbjy', 'ef', 'zsszwnj', 'zdmbhzj', 'zdmdzj', 'szdmzj']
       let fieldDates = ['checkDate', 'checkDate2', 'checkDate3']
       Object.keys(checkInfo).forEach((key) => {
         if (fields.indexOf(key) !== -1) {

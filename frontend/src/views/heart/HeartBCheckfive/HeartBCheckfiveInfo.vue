@@ -15,6 +15,7 @@
           placeholder="请输入D二聚体(mg/L)"
           v-decorator="['d2jt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -23,6 +24,7 @@
           placeholder="请输入FDP(mg/L)"
           v-decorator="['fdp', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -31,6 +33,7 @@
           placeholder="请输入PT(s)"
           v-decorator="['pt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -39,6 +42,7 @@
           placeholder="请输入APTT(s)"
           v-decorator="['aptt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -47,6 +51,7 @@
           placeholder="请输入INR"
           v-decorator="['inr', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>

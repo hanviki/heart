@@ -211,6 +211,9 @@ export default {
         title: '联系方式',
         dataIndex: 'telphone'
       }, {
+        title: '录入人',
+        dataIndex: 'createname'
+      }, {
         title: '操作',
         dataIndex: 'operation',
         scopedSlots: { customRender: 'operation' },
@@ -232,10 +235,15 @@ export default {
         this.queryParams.comments = ''
       }
     },
-    handleAddSuccess () {
+    handleAddSuccess (fileNo) {
       this.addVisiable = false
       this.$message.success('新增成功')
-      this.search()
+      // this.search()
+      console.log(fileNo)
+      setTimeout(() => {
+        this.$refs.heartBPatientinfoEdit.fetch(fileNo)
+        this.editVisiable = true
+      }, 100)
     },
     handleAddClose () {
       this.addVisiable = false

@@ -3,18 +3,18 @@
       <a-divider orientation="left" style="font-size:14px;">3. CT复查</a-divider>
     <a-button
       icon="plus"
-      @click="AddCtfc"
+      @click="AddPanel"
     >
     </a-button>
     <a-collapse v-model="activeKey" accordion>
       <a-collapse-panel
         :header="(index + 1)"
         v-for="(item,index) in listFc"
-        :key="item.toString()"
+        :key="item.id"
       >
-        <ctfc-info :ref="'fc'+item"></ctfc-info>
+        <ctfc-info :ref="'fc'+index" :baseId="item.id"></ctfc-info>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             title="确定要删除吗?"
             @confirm="e => handleClick(e,item)"
@@ -27,17 +27,15 @@
     </a-collapse>
   </div>
 </template>
-      
-      <script>
+<script>
 import CtfcInfo from './CtfcInfo'
 export default {
   data () {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      listFc: [1],
-      activeKey: '1',
-      baseId: '',
+      listFc: [],
+      activeKey: '',
       refName: 'fc',
       listCsfc: []
     }
@@ -49,41 +47,19 @@ export default {
     reset () {
       this.loading = false
       this.listCsfc = []
-      this.baseId = ''
-      this.listFc = [1]
-      setTimeout(() => {
-        (this.$refs[this.refName + '1'])[0].reset()
-      }, 200)
-      this.activeKey = '1'
+      this.listFc = []
+      this.activeKey = ''
     },
-    AddCtfc () {
-      let len = this.listFc.length
-      if (len === 0) {
-        len = 1
-      } else {
-        len = this.listFc[len -1] + 1
-      }
-      this.listFc.push(len)
-      let val = this.listFc[this.listFc.length -1]
-      let name= this.refName + val
-      this.activeKey = val
-      this.execId(name)
+    AddPanel () {
+      this.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
+        var baseId = res.data.data
+        this.listFc.push({ id: baseId })
+        this.activeKey = baseId
+        console.log('CT复查 Id 创建成功.')
+      })
     },
-    execId (name) {
-      setTimeout(() => {
-        (this.$refs[name])[0].fetch()
-      }, 200)
-    },
-    getId () {
-      for (let i = 0; i < this.listFc.length; i++) {
-        let name= this.refName + this.listFc[i]
-        console.info(name)
-        // console.info((this.$refs[name])[0])\
-        this.execId(name)
-      }
-    },
-    handleClick (event,item) {
-      event.stopPropagation();
+    handleClick (event, item) {
+      event.stopPropagation()
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()
       newList.splice(index, 1)
@@ -92,16 +68,15 @@ export default {
     setFields () {
       this.listCsfc = []
       for (let i = 0; i < this.listFc.length; i++) {
-          let name= this.refName + this.listFc[i]
-          console.info(name)
-         // console.info(this.$refs[name][0])
+        let name = this.refName + i
+        console.info(name)
+        // console.info(this.$refs[name][0])
         this.listCsfc.push((this.$refs[name])[0].setFields())
       }
       return this.listCsfc
     }
   }
 }
-      </script>
-      
-      <style>
+</script>
+ <style>
 </style>

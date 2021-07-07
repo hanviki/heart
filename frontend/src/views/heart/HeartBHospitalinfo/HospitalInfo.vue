@@ -23,28 +23,7 @@
         />
       </a-form-item>
       <a-form-item label="住院转归">
-        <a-radio-group v-decorator="['inRedirect', {}]">
-          <a-radio value="手术后死亡">
-            手术后死亡
-          </a-radio>
-          <a-radio value="手术后存活">
-            手术后存活
-          </a-radio>
-          <a-radio value="拟手术，术前死亡">
-            拟手术，术前死亡
-          </a-radio>
-          <a-radio value="保守治疗，住院期间死亡">
-            保守治疗，住院期间死亡
-          </a-radio>
-          <a-radio value="保守治疗，存活出院">
-            保守治疗，存活出院
-          </a-radio>
-           <a-radio value="术后放弃,自动出院">
-            术后放弃,自动出院
-          </a-radio>
-           <a-radio value="仍住院">
-            仍住院
-          </a-radio>
+        <a-radio-group v-decorator="['inRedirect', {}]" :options="inRedirectOptions">
         </a-radio-group>
       </a-form-item>
       <!-- <a-form-item label="死亡原因">
@@ -254,7 +233,14 @@
 </template>
 
 <script>
-
+const inRedirectOptions = [
+  {label: '手术后死亡', value: '手术后死亡'},
+  {label: '手术后存活', value: '手术后存活'},
+  {label: '拟手术，术前死亡', value: '拟手术，术前死亡'},
+  {label: '保守治疗，住院期间死亡', value: '保守治疗，住院期间死亡'},
+  {label: '保守治疗，存活出院', value: '保守治疗，存活出院'},
+  {label: '术后放弃,自动出院', value: '术后放弃,自动出院'},
+  {label: '仍住院', value: '仍住院'}]
 export default {
   data () {
     return {
@@ -263,7 +249,8 @@ export default {
       hospitalInfo: {},
       isZdmbss: false,
       isQgzh: false,
-      isJcqnxfs: false
+      isJcqnxfs: false,
+      inRedirectOptions
     }
   },
   methods: {

@@ -21,7 +21,7 @@
       >
         <heartBShzlxq-info :ref="'fc'+item"></heartBShzlxq-info>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -96,7 +96,7 @@ export default {
       }
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()
       newList.splice(index, 1)

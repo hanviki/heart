@@ -87,6 +87,7 @@
           placeholder="请输入术中失血量(ml)"
           v-decorator="['ssSzsxl', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -95,6 +96,7 @@
           placeholder="请输入红细胞输入量(U)"
           v-decorator="['ssHxbsrl', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -103,6 +105,7 @@
           placeholder="请输入血浆输入量(ml)"
           v-decorator="['ssXjsrl', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -111,6 +114,7 @@
           placeholder="请输入血小板输入量(治疗量)"
           v-decorator="['ssXxbsrl', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -119,6 +123,7 @@
           placeholder="请输入CBP时间(分钟)"
           v-decorator="['ssCbptime', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -127,20 +132,22 @@
           placeholder="请输入主动脉阻断时间(分钟)"
           v-decorator="['ssZdmzdsj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
       <a-form-item label="停跳液类型">
         <a-input
           placeholder="请输入停跳液类型"
-          v-decorator="['ttylx',{rules:[{max:50,message:'最长不超过50'}]}]"
+          v-decorator="['ttylx',{rules:[{max:20,message:'最长不超过20'}]}]"
         />
       </a-form-item>
-      <a-form-item label="停跳液使用量">
+      <a-form-item label="停跳液使用量(ml)">
         <a-input-number
-          placeholder="请输入停跳液使用量"
+          placeholder="请输入停跳液使用量(ml)"
           v-decorator="['ttysyl', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -149,6 +156,7 @@
           placeholder="请输入最低鼻咽温度"
           v-decorator="['ssZdbywd', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -157,14 +165,16 @@
           placeholder="请输入深低温停循环时间(分钟)"
           v-decorator="['ssSdwtxhsj', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
       <a-form-item label="最低直肠温(分钟)">
-        <a-input
+        <a-input-number
           placeholder="请输入最低直肠温(分钟)"
           v-decorator="['ssZdzcw', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -179,7 +189,7 @@ export default {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      surgicalInfo: {},
+      surgicalInfo: {}
     }
   },
   methods: {
@@ -191,11 +201,10 @@ export default {
     setFields () {
       let values = this.form.getFieldsValue(['ssNote', 'ssDate', 'ssDateend', 'ssDoctor', 'ssZdmssfs', 'ssHbss', 'ssZdmdcx', 'ssZdmbcx', 'ssSzsxl', 'ssHxbsrl', 'ssXjsrl', 'ssXxbsrl', 'ssCbptime', 'ssZdmzdsj', 'ssZdbywd', 'ssSdwtxhsj', 'ssZdzcw', 'ssAssitant1', 'ssAssitant2', 'ssAssitant3', 'ssAssitant4', 'ssAssitant5', 'ttylx', 'ttysyl'])
       if (typeof values !== 'undefined') {
-          Object.keys(values).forEach(_key => {
+        Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.surgicalInfo[_key] = values[_key]
           }
-
         })
       }
       return this.surgicalInfo

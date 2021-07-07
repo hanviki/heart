@@ -3,7 +3,7 @@
       <a-divider orientation="left" style="font-size:14px;">3. CT复查</a-divider>
     <a-button
       icon="plus"
-      @click="AddCtfc"
+      @click="AddPanel"
       v-show="isEdit"
     >
     </a-button>
@@ -16,7 +16,7 @@
       >
         <ctfc-info :ref="'fc'+index" :checkInfo="item" :isEdit="isEdit"></ctfc-info>
          <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -30,13 +30,12 @@
     </a-collapse>
   </div>
 </template>
-      
-      <script>
+<script>
 import CtfcInfo from './CtfcInfoEdit'
 export default {
   props: {
     isEdit: {
-        default: true
+      default: true
     }
   },
   data () {
@@ -59,16 +58,17 @@ export default {
       this.activeKey = '1'
       this.baseId = ''
     },
-    AddCtfc () {
-      let that =this
-      that.$get('comFile/getUid?time='+ new Date().getTime()).then(res => {
-           var  baseId =res.data.data
-           that.listCsfc.push({id: baseId})
-           this.activeKey = baseId
-       })
+    AddPanel () {
+      let that = this
+      that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
+        var baseId = res.data.data
+        that.listCsfc.push({id: baseId})
+        this.activeKey = baseId
+        console.log('CT复查 Id 创建成功.')
+      })
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       let that = this
       that.$delete('heartBCtfc/' + item.id).then(() => {
         that.$message.success('删除成功')
@@ -77,28 +77,26 @@ export default {
         newList.splice(index, 1)
         that.listCsfc = newList
       })
-
     },
     setFields () {
-     let list =[]
+      let list = []
       for (let i = 0; i < this.listCsfc.length; i++) {
-          let name= 'fc'+ i
-          console.info(name)
-         // console.info(this.$refs[name][0])
+        let name = 'fc' + i
+        console.info(name)
+        // console.info(this.$refs[name][0])
         list.push((this.$refs[name])[0].setFields())
       }
       return list
     },
-     setFormValues (listCsfc) {
-      let that =this
-      that.listCsfc =listCsfc
+    setFormValues (listCsfc) {
+      let that = this
+      that.listCsfc = listCsfc
       if (listCsfc.length > 0) {
         this.activeKey = listCsfc[0].id
       }
-    },
+    }
   }
 }
-      </script>
-      
-      <style>
+</script>
+<style>
 </style>

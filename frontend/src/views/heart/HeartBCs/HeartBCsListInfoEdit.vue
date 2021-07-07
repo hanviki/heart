@@ -6,7 +6,7 @@
     >4. 超声</a-divider>
     <a-button
       icon="plus"
-      @click="AddCsfc"
+      @click="AddPanel"
       v-show="isEdit"
     >
     </a-button>
@@ -26,7 +26,7 @@
           :isEdit="isEdit"
         ></csfc-info>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -40,8 +40,8 @@
     </a-collapse>
   </div>
 </template>
-      
-      <script>
+
+<script>
 import CsfcInfo from './HeartBCsInfoEdit.vue'
 export default {
   props: {
@@ -55,7 +55,6 @@ export default {
       form: this.$form.createForm(this),
       listFc: [],
       activeKey: '1',
-      baseId: '',
       listCsfc: []
     }
   },
@@ -63,23 +62,23 @@ export default {
     CsfcInfo
   },
   methods: {
-    AddCsfc () {
+    AddPanel () {
       let that = this
       that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
         var baseId = res.data.data
         that.listCsfc.push({ id: baseId })
         this.activeKey = baseId
+        console.log('超声 Id 创建成功.')
       })
     },
     reset () {
       this.loading = false
-      this.baseId = ''
       this.activeKey = '1'
       this.listFc = []
       this.listCsfc = []
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       let that = this
       that.$delete('heartBCs/' + item.id).then(() => {
         that.$message.success('删除成功')
@@ -88,7 +87,6 @@ export default {
         newList.splice(index, 1)
         that.listCsfc = newList
       })
-
     },
     setFields () {
       let list = []
@@ -106,10 +104,9 @@ export default {
       if (listCsfc.length > 0) {
         this.activeKey = listCsfc[0].id
       }
-    },
+    }
   }
 }
-      </script>
-      
-      <style>
+</script>
+ <style>
 </style>

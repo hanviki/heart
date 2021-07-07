@@ -23,28 +23,7 @@
         />
       </a-form-item>
       <a-form-item label="住院转归">
-        <a-radio-group v-decorator="['inRedirect', {}]">
-          <a-radio value="手术后死亡">
-            手术后死亡
-          </a-radio>
-          <a-radio value="手术后存活">
-            手术后存活
-          </a-radio>
-          <a-radio value="拟手术，术前死亡">
-            拟手术，术前死亡
-          </a-radio>
-          <a-radio value="保守治疗，住院期间死亡">
-            保守治疗，住院期间死亡
-          </a-radio>
-          <a-radio value="保守治疗，存活出院">
-            保守治疗，存活出院
-          </a-radio>
-           <a-radio value="术后放弃,自动出院">
-            术后放弃,自动出院
-          </a-radio>
-           <a-radio value="仍住院">
-            仍住院
-          </a-radio>
+        <a-radio-group v-decorator="['inRedirect', {}]" :options="inRedirectOptions">
         </a-radio-group>
       </a-form-item>
       <!-- <a-form-item label="死亡原因">
@@ -81,6 +60,15 @@
             D
           </a-radio>
         </a-radio-group>
+        <a-tooltip placement="top">
+          <template slot="title" trigger="hover">
+            A 型： 仅局限于升主动脉的夹层， 夹层中止于无名动脉近端； <br>
+            B 型：夹层局限于胸降主动脉， 或延伸到腹主动脉； <br>
+            C 型： 夹层累及主动脉弓， 无论升主动脉和胸降主动脉是否受到累及。 Cp型： 夹层仅累及到主动脉弓近心侧的无名动脉和（或） 左颈总动脉； Cd 型： 夹层仅累及到主动脉弓远心侧的左锁骨下动脉和（或） 左颈总动脉； <br>
+            D 型： 夹层局限于膈肌水平以下的腹主动脉和（或） 髂动脉。
+          </template>
+          <a-icon type="question-circle" theme="twoTone" />
+        </a-tooltip>
       </a-form-item>
        <a-form-item label="夹层诊断（Stanford分层）">
          <a-radio-group v-decorator="['inRedirectnote', {}]">
@@ -246,6 +234,14 @@
 
 <script>
 import moment from 'moment'
+const inRedirectOptions = [
+  {label: '手术后死亡', value: '手术后死亡'},
+  {label: '手术后存活', value: '手术后存活'},
+  {label: '拟手术，术前死亡', value: '拟手术，术前死亡'},
+  {label: '保守治疗，住院期间死亡', value: '保守治疗，住院期间死亡'},
+  {label: '保守治疗，存活出院', value: '保守治疗，存活出院'},
+  {label: '术后放弃,自动出院', value: '术后放弃,自动出院'},
+  {label: '仍住院', value: '仍住院'}]
 export default {
   data () {
     return {
@@ -254,7 +250,8 @@ export default {
       hospitalInfo: {},
       isZdmbss: false,
       isQgzh: false,
-      isJcqnxfs: false
+      isJcqnxfs: false,
+      inRedirectOptions
     }
   },
   methods: {

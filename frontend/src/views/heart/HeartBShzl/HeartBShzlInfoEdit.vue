@@ -10,6 +10,7 @@
       <a-form-item label="术后入住ICU总天数">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'icuDay',{ }]"
         />
@@ -31,7 +32,7 @@
         />
          <a-input
           placeholder="请输入嗜睡备注" 
-          v-decorator="['shishuiNote', { }]"
+          v-decorator="['shishuiNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
       <!-- <a-form-item label="模糊">
@@ -93,6 +94,7 @@
       <a-form-item label="有创机械通气时长">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'ycjxsc',{ }]"
         />
@@ -100,6 +102,7 @@
       <a-form-item label="无创辅助时间（天）">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'wcfzsjDay',{ }]"
         />
@@ -107,18 +110,20 @@
       <a-form-item label="无创辅助时间（小时）">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'wcfzsjHour',{ }]"
         />
       </a-form-item>
       <a-form-item label="无创辅助时间备注">
         <a-input
-          v-decorator="[ 'wcfzsjNote',{ }]"
+          v-decorator="[ 'wcfzsjNote',{rules:[{max:50,message:'最长不超过50'}]}]"
         />
       </a-form-item>
       <a-form-item label="疼痛评分CPOT/NRS">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'painScore',{ }]"
         />
@@ -126,6 +131,7 @@
       <a-form-item label="RASS评分">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'rass',{ }]"
         />
@@ -133,6 +139,7 @@
       <a-form-item label="GCS评分">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'gcs',{ }]"
         />
@@ -140,6 +147,7 @@
       <a-form-item label="Braden评分">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'braden',{ }]"
         />
@@ -147,6 +155,7 @@
       <a-form-item label="人工有创气道置管时间（小时）">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'rgcqdzHour',{ }]"
         />
@@ -167,6 +176,7 @@
       <a-form-item label="CVC留置时间（天）">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'cvc',{ }]"
         />
@@ -207,6 +217,7 @@
       <a-form-item label="营养评估（NRS2002）（分）">
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'nrs',{ }]"
         />

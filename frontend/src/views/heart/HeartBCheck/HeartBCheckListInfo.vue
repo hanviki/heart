@@ -18,7 +18,7 @@
       >
         <heartBCheck-info :ref="'fc'+item"></heartBCheck-info>
          <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             title="确定要删除吗?"
             @confirm="e => handleClick(e,item)"
@@ -86,8 +86,8 @@ export default {
         this.execId(name)
       }
     },
-    handleClick (event,item) {
-      event.stopPropagation();
+    handleClick (event, item) {
+      event.stopPropagation()
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()
       newList.splice(index, 1)

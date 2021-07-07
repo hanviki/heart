@@ -15,6 +15,7 @@
           placeholder="请输入血肌肝umol/L"
           v-decorator="['xjg', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -23,6 +24,7 @@
           placeholder="请输入ALT(U/L)"
           v-decorator="['alt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -31,6 +33,7 @@
           placeholder="请输入AST(U/L)"
           v-decorator="['ast', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -39,6 +42,7 @@
           placeholder="请输入总胆红素(umol/L)"
           v-decorator="['zdhs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -47,6 +51,7 @@
           placeholder="请输入直接胆红素"
           v-decorator="['zjdhs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -55,6 +60,7 @@
           placeholder="请输入淀粉酶(U)"
           v-decorator="['dfm', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -63,6 +69,7 @@
           placeholder="请输入肌酐(umol/L)"
           v-decorator="['jg', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -71,6 +78,7 @@
           placeholder="请输入尿素氮(umol/L)"
           v-decorator="['nsd', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -79,6 +87,7 @@
           placeholder="请输入尿酸(umol/L)"
           v-decorator="['ns', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -88,6 +97,7 @@
           placeholder="请输入白蛋白(g/L)"
           v-decorator="['bdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -96,6 +106,7 @@
           placeholder="请输入胱仰素C(Mg/L)"
           v-decorator="['gysc', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>

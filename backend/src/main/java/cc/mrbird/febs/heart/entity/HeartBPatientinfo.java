@@ -273,6 +273,12 @@ private static final long serialVersionUID=1L;
         @ExcelField(value ="主诉")
     private String zhusu;
 
+    /**
+     * 录入人
+     */
+
+    @ExcelField(value ="录入人")
+    private String createname;
 
 
     public static final String ID ="id" ;
@@ -340,5 +346,7 @@ private static final long serialVersionUID=1L;
     public static final String MODIFY_USER_ID ="MODIFY_USER_ID" ;
 
     public static final String ZHUSU ="zhusu" ;
+
+    public static final String CREATENAME ="createname" ;
 
         }

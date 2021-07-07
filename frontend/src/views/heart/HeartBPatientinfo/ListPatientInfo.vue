@@ -187,6 +187,9 @@ export default {
         title: '联系方式',
         dataIndex: 'telphone'
       }, {
+        title: '录入人',
+        dataIndex: 'createname'
+      }, {
         title: '操作',
         dataIndex: 'operation',
         scopedSlots: { customRender: 'operation' },

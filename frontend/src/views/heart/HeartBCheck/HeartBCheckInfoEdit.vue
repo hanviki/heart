@@ -15,6 +15,7 @@
           placeholder="请输入肌红蛋白"
           v-decorator="['jhdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -23,6 +24,7 @@
           placeholder="请输入肌钙蛋白"
           v-decorator="['jgdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -31,6 +33,7 @@
           placeholder="请输入CK-MB"
           v-decorator="['ckmb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -39,6 +42,7 @@
           placeholder="请输入超敏肌钙蛋白（optional）"
           v-decorator="['cmjgdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>

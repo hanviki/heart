@@ -159,6 +159,7 @@ export default {
       activeKey: '1',
       form: this.$form.createForm(this),
       validateStatus: '',
+      user: this.$store.state.account.user,
       heartBPatientinfo: {
         patientInfo: {},
         checkInfo: {},
@@ -184,7 +185,7 @@ export default {
     }
   },
   components: {
-    PatientInfo, HospitalInfo, CheckInfo,CheckTwoInfo,CheckThreeInfo,CheckFourInfo,CheckFiveInfo, CheckSixInfo,CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
+    PatientInfo, HospitalInfo, CheckInfo, CheckTwoInfo, CheckThreeInfo, CheckFourInfo, CheckFiveInfo, CheckSixInfo, CsInfo, CtInfo, OutInfo, SurgicalInfo, SurAfterInfo, FcInfo
     , FcctInfo, FchyInfo, ShzlInfo, SqzlInfo, ShzlxqInfo, OtherInfo
   },
   methods: {
@@ -197,7 +198,7 @@ export default {
       this.activeKey = '1'
       this.heartBPatientinfo = {}
       // this.form.resetFields()
-      //子页面清空form表单等.
+      // 子页面清空form表单等.
       this.$refs.checkInfo.reset()
       this.$refs.checkTwoInfo.reset()
       // this.$refs.checkThreeInfo.reset()
@@ -219,15 +220,16 @@ export default {
       this.$refs.sqzlInfo.reset()
       this.$refs.otherInfo.reset()
     },
-    getId () { //有附件的需要加
+    getId () { // 有附件的需要加
       setTimeout(() => {
-        this.$refs.csInfo.getId()
-        this.$refs.ctInfo.getId()
-        this.$refs.outInfo.getId()
-        this.$refs.fcInfo.getId()
-        this.$refs.fcctInfo.getId()
-        this.$refs.otherInfo.getId()
-      }, 200);
+        this.$refs.patientInfo.setFormValues(this.user)
+        this.$refs.csInfo.AddPanel() // HeartBCs/HeartBCsListInfo
+        this.$refs.ctInfo.AddPanel() // HeartBCt/HeartBCtListInfo
+        this.$refs.outInfo.AddPanel() // HeartBCtout/OutListInfo
+        this.$refs.fcInfo.AddPanel() // HeartBCsfc/FcInfo
+        this.$refs.fcctInfo.AddPanel() // HeartBCtfc/FcctInfo
+        this.$refs.otherInfo.AddPanel() // HeartBOther/HeartBOtherListInfo
+      }, 200)
     },
     onClose () {
       this.reset()
@@ -236,9 +238,9 @@ export default {
     checkFileNo (validateStatus) {
       this.validateStatus = validateStatus
     },
-        handleSubmit () {
-          this.$refs.patientInfo.handlefileNoBlur()
-        this.$refs.patientInfo.form.validateFields((err, values) => {
+    handleSubmit () {
+      this.$refs.patientInfo.handlefileNoBlur()
+      this.$refs.patientInfo.form.validateFields((err, values) => {
         if (!err && this.validateStatus === 'success') {
           this.heartBPatientinfo = {}
           this.heartBPatientinfo.patientInfo = this.$refs.patientInfo.setFields() // 个人信息
@@ -264,8 +266,8 @@ export default {
           this.$post('heartBPatientinfo', {
             data: JSON.stringify(this.heartBPatientinfo)
           }).then(() => {
+            this.$emit('success', this.heartBPatientinfo.patientInfo.fileNo)
             this.reset()
-            this.$emit('success')
           }).catch(() => {
             this.loading = false
           })

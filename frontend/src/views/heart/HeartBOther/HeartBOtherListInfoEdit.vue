@@ -6,7 +6,7 @@
     >其他</a-divider>
     <a-button
       icon="plus"
-      @click="AddCsfc"
+      @click="AddPanel"
       v-show="isEdit"
     >
     </a-button>
@@ -26,7 +26,7 @@
           :isEdit="isEdit"
         ></heartBOther-infoEdit>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -63,12 +63,13 @@ export default {
     HeartBOtherInfoEdit
   },
   methods: {
-    AddCsfc () {
+    AddPanel () {
       let that = this
       that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
         var baseId = res.data.data
         that.listCsfc.push({ id: baseId })
         this.activeKey = baseId
+        console.log('其他 Id 创建成功.')
       })
     },
     reset () {
@@ -79,7 +80,7 @@ export default {
       this.listCsfc = []
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       let that = this
       that.$delete('heartBOther/' + item.id).then(() => {
         that.$message.success('删除成功')
@@ -88,26 +89,22 @@ export default {
         newList.splice(index, 1)
         that.listCsfc = newList
       })
-
     },
     setFields () {
       let list = []
       for (let i = 0; i < this.listCsfc.length; i++) {
         let name = 'fc' + i
-
-
         list.push((this.$refs[name])[0].setFields())
       }
       return list
     },
     setFormValues (listCsfc) {
       let that = this
-     
-      if (listCsfc!=null&&listCsfc.length > 0) {
-           that.listCsfc = listCsfc
+      if (listCsfc != null && listCsfc.length > 0) {
+        that.listCsfc = listCsfc
         that.activeKey = listCsfc[0].id
       }
-    },
+    }
   }
 }
 </script>

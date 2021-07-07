@@ -5,22 +5,7 @@
       <a-form-item
         label="图片类型"
       >
-         <a-radio-group v-decorator="['qtType', {}]">
-          <a-radio value="心电图">
-           心电图
-          </a-radio>
-          <a-radio value="胸片">
-            胸片
-          </a-radio>
-           <a-radio value="MRI">
-            MRI
-          </a-radio>
-           <a-radio value="造影/心导管">
-            造影/心导管
-          </a-radio>
-           <a-radio value="肺功能">
-            肺功能
-          </a-radio>
+         <a-radio-group v-decorator="['qtType', {}]" :options="tpOptions">
         </a-radio-group>
       </a-form-item>
     </a-form>
@@ -29,7 +14,18 @@
 
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
+const tpOptions = [
+  { label: '心电图', value: '心电图' },
+  { label: '胸片', value: '胸片' },
+  { label: 'MRI', value: 'MRI' },
+  { label: '造影/心导管', value: '造影/心导管' },
+  { label: '肺功能', value: '肺功能' }]
 export default {
+  props: {
+    baseId: {
+      default: {}
+    }
+  },
   data () {
     return {
       loading: false,
@@ -37,19 +33,18 @@ export default {
       csfcInfo: {
 
       },
-      baseId: ''
+      tpOptions
     }
   },
   mounted () {
     // this.fetch()
   },
- components: {MutiUploadFile} ,
+  components: {MutiUploadFile},
   methods: {
     reset () {
       this.loading = false
       this.csfcInfo = {}
       this.form.resetFields()
-      this.baseId = ''
     },
     setFields () {
       let values = this.form.getFieldsValue(['qtType'])
@@ -58,17 +53,10 @@ export default {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       this.csfcInfo.id = this.baseId
       return this.csfcInfo
-    },
-    fetch () {
-      this.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
-        this.baseId = res.data.data
-      })
-     // console.log('CsfcInfo Id 创建成功.')
     }
   }
 }

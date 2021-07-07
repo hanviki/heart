@@ -6,7 +6,7 @@
     >2. 超声复查</a-divider>
     <a-button
       icon="plus"
-      @click="AddCsfc"
+      @click="AddPanel"
       v-show="isEdit"
     >
     </a-button>
@@ -26,7 +26,7 @@
           :isEdit="isEdit"
         ></csfc-info>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             v-show="isEdit"
             title="确定要删除吗?"
@@ -40,8 +40,7 @@
     </a-collapse>
   </div>
 </template>
-      
-      <script>
+<script>
 import CsfcInfo from './CsfcInfoEdit.vue'
 export default {
   props: {
@@ -63,12 +62,13 @@ export default {
     CsfcInfo
   },
   methods: {
-    AddCsfc () {
+    AddPanel () {
       let that = this
       that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
         var baseId = res.data.data
         that.listCsfc.push({ id: baseId })
         this.activeKey = baseId
+        console.log('超声复查 Id 创建成功.')
       })
     },
     reset () {
@@ -79,7 +79,7 @@ export default {
       this.listCsfc = []
     },
     handleClick (event, item) {
-      event.stopPropagation();
+      event.stopPropagation()
       let that = this
       that.$delete('heartBCsfc/' + item.id).then(() => {
         that.$message.success('删除成功')
@@ -88,7 +88,6 @@ export default {
         newList.splice(index, 1)
         that.listCsfc = newList
       })
-
     },
     setFields () {
       let list = []
@@ -109,7 +108,6 @@ export default {
     },
   }
 }
-      </script>
-      
-      <style>
+</script>
+<style>
 </style>

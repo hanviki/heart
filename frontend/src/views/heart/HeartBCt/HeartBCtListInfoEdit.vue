@@ -3,7 +3,7 @@
     <a-divider orientation="left" style="font-size:14px;">5 术前CT</a-divider>
     <a-button
       icon="plus"
-      @click="AddCtfc"
+      @click="AddPanel"
       v-show="isEdit"
     >
     </a-button>
@@ -59,12 +59,13 @@ export default {
       this.activeKey = '1'
       this.baseId = ''
     },
-    AddCtfc () {
+    AddPanel () {
       let that = this
       that.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
         var baseId = res.data.data
         that.listCsfc.push({id: baseId})
         this.activeKey = baseId
+        console.log('术前CT Id 创建成功.')
       })
     },
     handleClick (event, item) {

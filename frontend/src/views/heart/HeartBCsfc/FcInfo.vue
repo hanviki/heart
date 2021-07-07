@@ -3,18 +3,18 @@
       <a-divider orientation="left" style="font-size:14px;">2. 超声复查</a-divider>
     <a-button
       icon="plus"
-      @click="AddCsfc"
+      @click="AddPanel"
     >
     </a-button>
     <a-collapse v-model="activeKey" accordion>
       <a-collapse-panel
         :header="(index + 1)"
         v-for="(item,index) in listFc"
-        :key="item.toString()"
+        :key="item.id"
       >
-        <csfc-info :ref="'fc'+item"></csfc-info>
+        <csfc-info :ref="'fc'+index" :baseId="item.id"></csfc-info>
         <a-popconfirm
-            placement="topLeft" 
+            placement="topLeft"
             slot="extra"
             title="确定要删除吗?"
             @confirm="e => handleClick(e,item)"
@@ -27,18 +27,16 @@
     </a-collapse>
   </div>
 </template>
-      
-      <script>
+<script>
 import CsfcInfo from './CsfcInfo.vue'
 export default {
   data () {
     return {
       loading: false,
       form: this.$form.createForm(this),
-      listFc: [1],
-      activeKey: '1',
+      listFc: [],
+      activeKey: '',
       refName: 'fc',
-      baseId: '',
       listCsfc: []
     }
   },
@@ -48,42 +46,20 @@ export default {
   methods: {
     reset () {
       this.loading = false
-      this.baseId =''
       this.listCsfc = []
-      this.listFc = [1]
-      setTimeout(() => {
-        (this.$refs[this.refName + '1'])[0].reset()
-      }, 200)
-      this.activeKey = '1'
+      this.listFc = []
+      this.activeKey = ''
     },
-    AddCsfc () {
-      let len = this.listFc.length
-      if (len === 0) {
-        len = 1
-      } else {
-        len = this.listFc[len -1] + 1
-      }
-      this.listFc.push(len)
-      let val = this.listFc[this.listFc.length -1]
-      let name= this.refName+ val
-      this.activeKey = val
-      this.execId(name)
+    AddPanel () {
+      this.$get('comFile/getUid?time=' + new Date().getTime()).then(res => {
+        var baseId = res.data.data
+        this.listFc.push({ id: baseId })
+        this.activeKey = baseId
+        console.log('超声复查 Id 创建成功.')
+      })
     },
-    execId (name) {
-      setTimeout(() => {
-        (this.$refs[name])[0].fetch()
-      }, 200)
-    },
-    getId () {
-      for (let i = 0; i < this.listFc.length; i++) {
-        let name= this.refName+ this.listFc[i]
-        console.info(name)
-        // console.info((this.$refs[name])[0])\
-        this.execId(name)
-      }
-    },
-    handleClick (event,item) {
-      event.stopPropagation();
+    handleClick (event, item) {
+      event.stopPropagation()
       const index = this.listFc.indexOf(item)
       const newList = this.listFc.slice()
       newList.splice(index, 1)
@@ -92,16 +68,15 @@ export default {
     setFields () {
       this.listCsfc = []
       for (let i = 0; i < this.listFc.length; i++) {
-          let name= this.refName+ this.listFc[i]
-          console.info(name)
-         // console.info((this.$refs[name])[0])
+        let name = this.refName + i
+        console.info(name)
+        // console.info((this.$refs[name])[0])
         this.listCsfc.push((this.$refs[name])[0].setFields())
       }
       return this.listCsfc
     }
   }
 }
-      </script>
-      
-      <style>
+</script>
+<style>
 </style>

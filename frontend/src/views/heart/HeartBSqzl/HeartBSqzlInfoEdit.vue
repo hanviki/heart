@@ -72,7 +72,7 @@
         </a-radio-group>
         <a-input
           placeholder="请输入排便备注"
-          v-decorator="['paibianNote', { }]"
+          v-decorator="['paibianNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
       <a-form-item label="辅助排便">
@@ -121,8 +121,8 @@
 
         </a-radio-group>
         <a-input
-          placeholder="请输入过敏史备注"
-          v-decorator="['guominshiNote', { }]"
+          placeholder="请输入过敏史（药物）备注"
+          v-decorator="['guominshiNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
       <a-form-item label="过敏史（食物）">
@@ -137,8 +137,8 @@
 
         </a-radio-group>
         <a-input
-          placeholder="请输入过敏史备注"
-          v-decorator="['gmsSwNote', { }]"
+          placeholder="请输入过敏史（食物）备注"
+          v-decorator="['gmsSwNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
 
@@ -154,7 +154,7 @@
         </a-radio-group>
         <a-input
           placeholder="请输入吸烟史时间（几年）"
-          v-decorator="['xiyanshiNote', { }]"
+          v-decorator="['xiyanshiNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
       <a-form-item label="饮酒史">
@@ -196,7 +196,7 @@
         </a-checkbox-group>
         <a-input
           placeholder="请输入其他慢性病"
-          v-decorator="['manxingbingNote', { }]"
+          v-decorator="['manxingbingNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
       <a-divider
@@ -206,7 +206,7 @@
       <a-form-item label="Barthel指数">
         <a-input
           placeholder="请输入Barthel指数"
-          v-decorator="['barthel', { }]"
+          v-decorator="['barthel', {rules:[{max:20,message:'最长不超过20'} ]}]"
         />
         <span>a重度依赖（≤40分）b中度依赖（41-60分）c轻度依赖（61-99分） d无需依赖（100分）</span>
       </a-form-item>
@@ -217,7 +217,7 @@
       <a-form-item label="Braden评分">
         <a-input
           placeholder="请输入Braden评分"
-          v-decorator="['braden', { }]"
+          v-decorator="['braden', {rules:[{max:20,message:'最长不超过20'} ]}]"
         />
         <span>a低风险（15-18）b中风险（13-14）c高风险（10-12）d极高风险（≤9）</span>
       </a-form-item>
@@ -239,7 +239,7 @@
       <a-form-item label="Caprini评分">
         <a-input
           placeholder="请输入Caprini评分"
-          v-decorator="['caprini', { }]"
+          v-decorator="['caprini', {rules:[{max:10,message:'最长不超过10'} ]}]"
         />
         <span>a极低风险（0分）b低度风险（1-2分）c中度风险（3-4）d高度风险（≥5分）</span>
       </a-form-item>
@@ -250,13 +250,13 @@
       <a-form-item label="首次出现疼痛到现在的时长（小时）">
         <a-input
           placeholder="请输入疼痛时长"
-          v-decorator="['painTime', { }]"
+          v-decorator="['painTime', {rules:[{max:10,message:'最长不超过10'} ]}]"
         />
       </a-form-item>
       <a-form-item label="疼痛评分">
         <a-input
           placeholder="请输入疼痛评分"
-          v-decorator="['painScore', { }]"
+          v-decorator="['painScore', {rules:[{max:10,message:'最长不超过10'} ]}]"
         />
         <span>（如果为0分，没有处理；如果疼痛，疼痛处理后再次复评）</span>
         <span>a无痛（0分）b轻微痛（1-3分）c比较痛（4-6分）d非常痛（7-9分）e剧痛（10分）</span>
@@ -280,13 +280,13 @@
       <a-form-item label="疼痛处理备注">
         <a-input
           placeholder="请输入疼痛处理，具体药物+方式"
-          v-decorator="['painHadlenote', { }]"
+          v-decorator="['painHadlenote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
       <a-form-item label="疼痛处理后再次评分">
         <a-input
           placeholder="请输入疼痛处理后再次评分"
-          v-decorator="['painScoreAgain', { }]"
+          v-decorator="['painScoreAgain', {rules:[{max:10,message:'最长不超过10'} ]}]"
         />
       </a-form-item>
       <a-divider
@@ -296,14 +296,14 @@
       <a-form-item label="营养风险筛查评估（NRS2002）">
         <a-input
           placeholder="请输入营养风险筛查评估（NRS2002）"
-          v-decorator="['yingyangfxsc', { }]"
+          v-decorator="['yingyangfxsc', {rules:[{max:10,message:'最长不超过10'} ]}]"
         />
       </a-form-item>
       <span>a无风险 b低度风险 c中度风险 d高度风险</span>
       <a-form-item label="营养风险筛查评估备注">
         <a-input
           placeholder="请输入营养风险筛查评估备注"
-          v-decorator="['yingyangfxscNote', { }]"
+          v-decorator="['yingyangfxscNote', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
     </a-form>

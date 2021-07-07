@@ -16,6 +16,7 @@
           placeholder="请输入窦直径(mm)"
           v-decorator="['dzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -24,6 +25,7 @@
           placeholder="请输入升主脉动直径(mm)"
           v-decorator="['szmdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -32,6 +34,7 @@
           placeholder="请输入主动脉弓直径(mm)"
           v-decorator="['zdmgzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -40,6 +43,7 @@
           placeholder="请输入胸主动脉上段直径(mm)"
           v-decorator="['xzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -48,6 +52,7 @@
           placeholder="请输入胸主动脉上段假腔/血肿直径(mm)"
           v-decorator="['xzdmsdjqxzzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -56,6 +61,7 @@
           placeholder="请输入胸主动脉中段直径(mm)"
           v-decorator="['xzdmzdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -64,6 +70,7 @@
           placeholder="请输入胸主动脉中段假腔/血肿直径(mm)"
           v-decorator="['xzdmzdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -72,6 +79,7 @@
           placeholder="请输入胸主动脉下段直径(mm)"
           v-decorator="['xzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -80,6 +88,7 @@
           placeholder="请输入胸主动脉下段假腔/血肿直径(mm)"
           v-decorator="['xzdmxdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -88,6 +97,7 @@
           placeholder="请输入腹主动脉上段直径(mm)"
           v-decorator="['fzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -96,6 +106,7 @@
           placeholder="请输入腹主动脉上段假腔/血肿直径(mm)"
           v-decorator="['fzdmsdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -104,6 +115,7 @@
           placeholder="请输入腹主动脉下段直径(mm)"
           v-decorator="['fzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -112,6 +124,7 @@
           placeholder="请输入腹主动脉下段假腔/血肿直径(mm)"
           v-decorator="['fzdmxdjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -299,7 +312,6 @@ export default {
           if (values[_key] !== undefined) {
             this.ctfcInfo[_key] = values[_key]
           }
-
         })
       }
       this.ctfcInfo.id = this.baseId
@@ -326,7 +338,7 @@ export default {
       })
       this.baseId = checkInfo.id
       this.ctfcInfo = checkInfo
-    },
+    }
   }
 }
 </script>

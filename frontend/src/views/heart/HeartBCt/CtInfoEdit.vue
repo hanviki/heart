@@ -14,6 +14,7 @@
           placeholder="请输入主动脉窦直径(mm)"
           v-decorator="['ctZdmdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -25,6 +26,7 @@
           placeholder="请输入升主动脉直径(mm)"
           v-decorator="['ctSzdmzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -36,6 +38,7 @@
           placeholder="请输入主动脉弓直径(mm)"
           v-decorator="['ctZdmgzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -47,6 +50,7 @@
           placeholder="请输入胸上主动脉直径(mm)"
           v-decorator="['ctXszdmzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -58,6 +62,7 @@
           placeholder="请输入胸中主动脉直径(mm)"
           v-decorator="['ctXzzdmzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -69,6 +74,7 @@
           placeholder="请输入胸下主动脉直径(mm)"
           v-decorator="['ctXxzdmzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -80,6 +86,7 @@
           placeholder="请输入腹主动脉上段直径(mm)"
           v-decorator="['ctFzdmsdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -91,6 +98,7 @@
           placeholder="请输入腹主动脉下段直径(mm)"
           v-decorator="['ctFzdmxdzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -102,6 +110,7 @@
           placeholder="请输入升主动脉假腔直径(mm)"
           v-decorator="['ctSzdmjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -113,6 +122,7 @@
           placeholder="请输入主动脉弓假腔直径(mm)"
           v-decorator="['ctZdmgjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -124,6 +134,7 @@
           placeholder="请输入胸上假腔直径(mm)"
           v-decorator="['ctXsjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -135,6 +146,7 @@
           placeholder="请输入胸中假腔直径(mm)"
           v-decorator="['ctXzjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -146,6 +158,7 @@
           placeholder="请输入胸下假腔直径(mm)"
           v-decorator="['ctXxjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -157,6 +170,7 @@
           placeholder="请输入腹上假腔直径(mm)"
           v-decorator="['ctFsjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -168,6 +182,7 @@
           placeholder="请输入腹下假腔直径(mm)"
           v-decorator="['ctFxjqzj', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -324,6 +339,7 @@
           placeholder="请输入原发破口大小(mm)"
           v-decorator="['ctYfpkdx', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -388,22 +404,38 @@
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
-const jcOptions = ['右无交界', '左无交界', '左右交界', '无窦', '右窦', '左窦', '右冠', '左冠',
-  '无名', '右颈总', '右锁下', '左颈总', '左锁骨下',
-  '腹腔干', '肠系膜上', '左肾脉动', '右肾脉动', '左髂脉动', '右髂脉动']
+const jcOptions = [
+  { label: '右无交界', value: '右无交界' },
+  { label: '左无交界', value: '左无交界' },
+  { label: '左右交界', value: '左右交界' },
+  { label: '无窦', value: '无窦' },
+  { label: '右窦', value: '右窦' },
+  { label: '左窦', value: '左窦' },
+  { label: '右冠', value: '右冠' },
+  { label: '左冠', value: '左冠' },
+  { label: '无名', value: '无名' },
+  { label: '右颈总', value: '右颈总' },
+  { label: '右锁下', value: '右锁下' },
+  { label: '左颈总', value: '左颈总' },
+  { label: '左锁骨下', value: '左锁骨下' },
+  { label: '腹腔干', value: '腹腔干' },
+  { label: '肠系膜上', value: '肠系膜上' },
+  { label: '左肾脉动', value: '左肾脉动' },
+  { label: '右肾脉动', value: '右肾脉动' },
+  { label: '左髂脉动', value: '左髂脉动' },
+  { label: '右髂脉动', value: '右髂脉动' }]
 const zdmOptions = [
-  '云雾征',
-  '纵膈血肿',
-  '心包积液/血',
-  '胸腔积液/血',
-  '肺渗出',
-  '胃肠胀气',
-  '升主动脉离断'
-]
+  { label: '云雾征', value: '云雾征' },
+  { label: '纵膈血肿', value: '纵膈血肿' },
+  { label: '心包积液/血', value: '心包积液/血' },
+  { label: '胸腔积液/血', value: '胸腔积液/血' },
+  { label: '肺渗出', value: '肺渗出' },
+  { label: '胃肠胀气', value: '胃肠胀气' },
+  { label: '升主动脉离断', value: '升主动脉离断' }]
 export default {
   props: {
     isEdit: {
-        default: true
+      default: true
     }
   },
   data () {
@@ -416,9 +448,8 @@ export default {
       baseId: ''
     }
   },
-  components: {MutiUploadFile} ,
+  components: {MutiUploadFile},
   mounted () {
-   // this.fetch()
   },
   methods: {
     moment,
@@ -431,14 +462,13 @@ export default {
     setFields () {
       let values = this.form.getFieldsValue(['ctZdmdzj', 'ctSzdmzj', 'ctZdmgzj', 'ctXszdmzj', 'ctXzzdmzj', 'ctXxzdmzj', 'ctFzdmsdzj', 'ctFzdmxdzj', 'ctSzdmjqzj', 'ctZdmgjqzj', 'ctXsjqzj', 'ctXzjqzj', 'ctXxjqzj', 'ctFsjqzj', 'ctFxjqzj', 'ctZdmjcfwfx', 'ctSzjcbl', 'ctZdmgjqwz', 'ctZdxdbl', 'ctZdxdjqwz', 'ctFzdmsdbl', 'ctFzdmjqwz', 'ctSdmxjcbl', 'ctSxjqwz', 'ctYfpkwz', 'ctYfpkdx', 'ctQxhzdsyfzxg', 'ctWqqxqg', 'ctJcljfw', 'ctZdmjctszx', 'ctJqgxqg', 'ctNote'])
       if (typeof values !== 'undefined') {
-          Object.keys(values).forEach(_key => {
+        Object.keys(values).forEach(_key => {
           if (values[_key] !== undefined) {
             this.ctInfo[_key] = values[_key]
           }
-
         })
       }
-     this.ctInfo.id =this.baseId
+      this.ctInfo.id = this.baseId
       return this.ctInfo
     },
     setFormValues ({ ...checkInfo }) {
@@ -455,8 +485,8 @@ export default {
               obj[key] = ''
             }
           } else {
-            if (key =='ctJcljfw' || key =='ctZdmjctszx'){
-              obj[key] = checkInfo[key] == '' ? null : JSON.parse(checkInfo[key])
+            if (key === 'ctJcljfw' || key === 'ctZdmjctszx') {
+              obj[key] = checkInfo[key] === '' ? null : JSON.parse(checkInfo[key])
             } else {
               obj[key] = checkInfo[key]
             }

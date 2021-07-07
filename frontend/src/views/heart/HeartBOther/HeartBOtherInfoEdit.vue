@@ -5,22 +5,7 @@
       <a-form-item
         label="图片类型"
       >
-        <a-radio-group v-decorator="['qtType', {}]">
-          <a-radio value="心电图">
-           心电图
-          </a-radio>
-          <a-radio value="胸片">
-            胸片
-          </a-radio>
-           <a-radio value="MRI">
-            MRI
-          </a-radio>
-           <a-radio value="造影/心导管">
-            造影/心导管
-          </a-radio>
-           <a-radio value="肺功能">
-            肺功能
-          </a-radio>
+        <a-radio-group v-decorator="['qtType', {}]" :options="tpOptions">
         </a-radio-group>
       </a-form-item>
     </a-form>
@@ -30,6 +15,12 @@
 <script>
 import MutiUploadFile from '../../common/MutiUploadFile'
 import moment from 'moment'
+const tpOptions = [
+  { label: '心电图', value: '心电图' },
+  { label: '胸片', value: '胸片' },
+  { label: 'MRI', value: 'MRI' },
+  { label: '造影/心导管', value: '造影/心导管' },
+  { label: '肺功能', value: '肺功能' }]
 export default {
   props: {
     isEdit: {
@@ -45,13 +36,14 @@ export default {
       form: this.$form.createForm(this),
       csfcInfo: {
       },
-      baseId: ''
+      baseId: '',
+      tpOptions
     }
   },
   mounted () {
     this.setFormValues(this.checkInfo)
   },
- components: {MutiUploadFile} ,
+  components: {MutiUploadFile},
   methods: {
     moment,
     reset () {
@@ -67,7 +59,6 @@ export default {
           if (values[_key] !== undefined) {
             this.csfcInfo[_key] = values[_key]
           }
-
         })
       }
       this.csfcInfo.id = this.baseId
@@ -94,8 +85,7 @@ export default {
       })
       this.baseId = checkInfo.id
       this.csfcInfo = checkInfo
-    },
-
+    }
   }
 }
 </script>

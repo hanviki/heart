@@ -15,6 +15,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'ph',{}]"
         />
@@ -24,6 +25,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'po2',{}]"
         />
@@ -33,6 +35,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'pco2',{}]"
         />
@@ -42,6 +45,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'k',{}]"
         />
@@ -51,6 +55,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'na',{}]"
         />
@@ -60,6 +65,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'ca',{}]"
         />
@@ -69,6 +75,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'glu',{}]"
         />
@@ -78,6 +85,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'be',{}]"
         />
@@ -87,6 +95,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'lac',{}]"
         />
@@ -96,6 +105,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'hb',{}]"
         />
@@ -105,6 +115,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'fiao2',{}]"
         />
@@ -114,6 +125,7 @@
       >
         <a-input-number
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
           v-decorator="[ 'so2',{}]"
         />
@@ -123,7 +135,7 @@
       >
         <a-input
           placeholder="请输入备注"
-          v-decorator="['note', {}]"
+          v-decorator="['note', {rules:[{max:50,message:'最长不超过50'} ]}]"
         />
       </a-form-item>
     </a-form>

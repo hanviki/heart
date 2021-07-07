@@ -15,6 +15,7 @@
           placeholder="请输入肌红蛋白"
           v-decorator="['jhdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -23,6 +24,7 @@
           placeholder="请输入肌钙蛋白"
           v-decorator="['jgdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -31,6 +33,7 @@
           placeholder="请输入CK-MB"
           v-decorator="['ckmb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -39,6 +42,7 @@
           placeholder="请输入超敏肌钙蛋白（optional）"
           v-decorator="['cmjgdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -51,6 +55,7 @@
           placeholder="请输入红细胞计数"
           v-decorator="['hxbjs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -59,6 +64,7 @@
           placeholder="请输入血红蛋白"
           v-decorator="['xhdb', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -67,6 +73,7 @@
           placeholder="请输入白细胞计数"
           v-decorator="['bxbjs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -75,6 +82,7 @@
           placeholder="请输入中性粒细胞百分比"
           v-decorator="['zxlxbbfb', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -83,6 +91,7 @@
           placeholder="请输入血小板计数"
           v-decorator="['xxbjs', {}]"
           :precision="0"
+          :max="99999999"
           style="width:100%;"
         />
       </a-form-item>
@@ -95,6 +104,7 @@
           placeholder="请输入PH"
           v-decorator="['ph', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -103,6 +113,7 @@
           placeholder="请输入乳酸"
           v-decorator="['rs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -111,6 +122,7 @@
           placeholder="请输入BE"
           v-decorator="['be', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -119,6 +131,7 @@
           placeholder="请输入SO2"
           v-decorator="['so2', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -127,6 +140,7 @@
           placeholder="请输入PO2"
           v-decorator="['po2', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -135,6 +149,7 @@
           placeholder="请输入PCO2"
           v-decorator="['pco2', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -147,6 +162,7 @@
           placeholder="请输入血肌肝umol/L"
           v-decorator="['xjg', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -155,6 +171,7 @@
           placeholder="请输入ALT(U/L)"
           v-decorator="['alt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -163,6 +180,7 @@
           placeholder="请输入AST(U/L)"
           v-decorator="['ast', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -171,6 +189,7 @@
           placeholder="请输入总胆红素(umol/L)"
           v-decorator="['zdhs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -179,6 +198,7 @@
           placeholder="请输入直接胆红素"
           v-decorator="['zjdhs', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -187,6 +207,7 @@
           placeholder="请输入淀粉酶(U)"
           v-decorator="['dfm', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -199,6 +220,7 @@
           placeholder="请输入D二聚体(mg/L)"
           v-decorator="['d2jt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -207,6 +229,7 @@
           placeholder="请输入FDP(mg/L)"
           v-decorator="['fdp', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -215,6 +238,7 @@
           placeholder="请输入PT(s)"
           v-decorator="['pt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>
@@ -223,6 +247,7 @@
           placeholder="请输入APTT(s)"
           v-decorator="['aptt', {}]"
           :precision="2"
+          :max="99999999.99"
           style="width:100%;"
         />
       </a-form-item>

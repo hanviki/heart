@@ -7,7 +7,7 @@ moment.locale('zh-cn')
 
 // 统一配置
 let FEBS_REQUEST = axios.create({
- // baseURL: 'http://3978l36o99.zicp.vip:12873/',
+//  baseURL: 'http://3978l36o99.zicp.vip:12873/',
   baseURL: 'http://localhost:1088/',
   responseType: 'json',
   validateStatus (status) {
